@@ -5,6 +5,7 @@ le gros tuto pour apprendre Backbone.js
 
 Cet ouvrage va traiter au moins les points suivants :
 
+- 00-Préambule & Remerciements
 - 01-Présentation
 - 02-Prérequis : jQuery & Underscore
 - 03-Premiers contacts avec Backbone
