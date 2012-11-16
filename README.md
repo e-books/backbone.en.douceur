@@ -25,4 +25,4 @@ Soyez patient, l'ensemble des chapitres sera publié avant fin décembre. J'ai j
 
 Un pdf sera généré à chaque mise à jour (j'utilise Pandoc).
 
-Toute aide est la bienvenue, tant pour les corrections, les conseils, les ajouts que pour la mise en forme (je vous avoue que le paramétrage d'un template latex pour générer un pdf me rend chèvre, mais le résultat est déjà correcte).
+Toute aide est la bienvenue, tant pour les corrections, les conseils, les ajouts que pour la mise en forme (je vous avoue que le paramétrage d'un template latex pour générer un pdf me rend chèvre, mais le résultat est déjà correct).
