@@ -1,15 +1,14 @@
-backbone.en.douceur
-===================
+###[Télécharger le pdf (v° alpha)](https://github.com/downloads/k33g/backbone.en.douceur/backbone.en.douceur.pdf)
 
-le gros tuto pour apprendre Backbone.js
+###[Voir le code source](https://github.com/k33g/backbone.en.douceur)
 
 Cet ouvrage va traiter au moins les points suivants :
 
-- 00-Préambule & Remerciements
-- 01-Présentation
-- 02-Prérequis : jQuery & Underscore
-- 03-Premiers contacts avec Backbone
-- 04-Le modèle objet de Backbone
+- 00-Préambule & Remerciements *(publié)*
+- 01-Présentation *(publié)*
+- 02-Prérequis : jQuery & Underscore *(publié)*
+- 03-Premiers contacts avec Backbone *(publié)*
+- 04-Le modèle objet de Backbone *(publié)*
 - 05-Il nout faut un serveur & Principes REST
 - 06-Les Modèles & Collections en détail
 - 07-Les Vues & Templating
