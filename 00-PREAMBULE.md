@@ -15,3 +15,9 @@ Je tiens à remercier très fortement et tout particulièrement, pour leur écou
 - Laurène GIBAUD (Éditions Eyrolles - Secteur Informatique)
 
 
+Remerciements aussi pour :
+
+- [ehsavoie](https://github.com/ehsavoie) : 1ère pull request ;)
+
+
+

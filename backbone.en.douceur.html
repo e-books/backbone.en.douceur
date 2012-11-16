@@ -1,0 +1,864 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+  <link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+<body>
+<div id="TOC">
+<ul>
+<li><a href="#préambule"><span class="toc-section-number">1</span> Préambule</a></li>
+<li><a href="#présentation-de-backbone-rappels-mvc"><span class="toc-section-number">2</span> Présentation de Backbone &amp; rappels MVC</a><ul>
+<li><a href="#backbone-webapps-mvc"><span class="toc-section-number">2.1</span> Backbone ? Webapps ? MVC ?</a><ul>
+<li><a href="#quest-ce-quune-webapp"><span class="toc-section-number">2.1.1</span> Qu’est-ce qu’une “Webapp” ?</a></li>
+<li><a href="#petit-rappel-mvc"><span class="toc-section-number">2.1.2</span> Petit rappel : MVC ?</a></li>
+</ul></li>
+<li><a href="#backbone-mvc"><span class="toc-section-number">2.2</span> Backbone &amp; MVC</a></li>
+<li><a href="#pourquoi-jai-choisi-backbone"><span class="toc-section-number">2.3</span> Pourquoi j’ai choisi Backbone ?</a></li>
+</ul></li>
+<li><a href="#tout-de-suite-les-mains-dans-le-cambouis"><span class="toc-section-number">3</span> Tout de suite “les mains dans le cambouis”</a><ul>
+<li><a href="#prérequis-les-dépendances-de-backbone"><span class="toc-section-number">3.1</span> Prérequis : les dépendances de Backbone</a></li>
+<li><a href="#outils-de-développement"><span class="toc-section-number">3.2</span> Outils de développement</a><ul>
+<li><a href="#ide-editeur"><span class="toc-section-number">3.2.1</span> IDE (Editeur)</a></li>
+<li><a href="#navigateur"><span class="toc-section-number">3.2.2</span> Navigateur</a></li>
+</ul></li>
+<li><a href="#initialisation-de-notre-projet-de-travail"><span class="toc-section-number">3.3</span> Initialisation de notre projet de travail</a><ul>
+<li><a href="#installation"><span class="toc-section-number">3.3.1</span> Installation</a></li>
+<li><a href="#préparons-notre-page-html"><span class="toc-section-number">3.3.2</span> Préparons notre page HTML</a></li>
+</ul></li>
+<li><a href="#jouons-avec-jquery"><span class="toc-section-number">3.4</span> Jouons avec jQuery</a><ul>
+<li><a href="#jouons-avec-notre-page-en-mode-commande"><span class="toc-section-number">3.4.1</span> &quot;Jouons&quot; avec notre page en mode commande</a><ul>
+<li><a href="#saisissons-nos-1ères-commandes"><span class="toc-section-number">3.4.1.1</span> Saisissons nos 1ères commandes :</a></li>
+<li><a href="#modifions-laspect-de-notre-page-dynamiquement"><span class="toc-section-number">3.4.1.2</span> Modifions l’aspect de notre page dynamiquement :</a></li>
+<li><a href="#allons-plus-loin"><span class="toc-section-number">3.4.1.3</span> Allons plus loin …</a></li>
+</ul></li>
+<li><a href="#les-évènements"><span class="toc-section-number">3.4.2</span> Les évènements</a></li>
+<li><a href="#quelques-bonnes-pratiques"><span class="toc-section-number">3.4.3</span> Quelques bonnes pratiques</a><ul>
+<li><a href="#pensez-performances"><span class="toc-section-number">3.4.3.1</span> Pensez performances :</a></li>
+<li><a href="#soyez-sûr-que-les-éléments-de-votre-page-sont-tous-chargés"><span class="toc-section-number">3.4.3.2</span> Soyez sûr que les éléments de votre page sont tous chargés :</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#jouons-avec-underscore"><span class="toc-section-number">3.5</span> Jouons avec Underscore</a><ul>
+<li><a href="#quelques-exemples-dutilisations"><span class="toc-section-number">3.5.1</span> Quelques exemples d'utilisations</a><ul>
+<li><a href="#tableaux-et-collections"><span class="toc-section-number">3.5.1.1</span> Tableaux et Collections :</a></li>
+<li><a href="#templating"><span class="toc-section-number">3.5.1.2</span> Templating :</a></li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li><a href="#er-contact-avec-backbone"><span class="toc-section-number">4</span> 1er contact … avec Backbone</a><ul>
+<li><a href="#ère-application-backbone"><span class="toc-section-number">4.1</span> 1ère application Backbone</a><ul>
+<li><a href="#préparons-notre-page"><span class="toc-section-number">4.1.1</span> Préparons notre page</a></li>
+</ul></li>
+<li><a href="#le-modèle-article"><span class="toc-section-number">4.2</span> Le Modèle “Article”</a></li>
+<li><a href="#la-collection-darticles"><span class="toc-section-number">4.3</span> La Collection d’Articles</a></li>
+<li><a href="#vue-et-template"><span class="toc-section-number">4.4</span> Vue et Template</a><ul>
+<li><a href="#quavons-nous-fait"><span class="toc-section-number">4.4.1</span> Qu’avons-nous fait ?</a></li>
+</ul></li>
+<li><a href="#un-dernier-tour-de-magie-pour-clôturer-le-chapitre-dinitiation-binding"><span class="toc-section-number">4.5</span> Un dernier tour de magie pour clôturer le chapitre d’initiation : “binding”</a><ul>
+<li><a href="#que-venons-nous-de-faire"><span class="toc-section-number">4.5.1</span> Que venons-nous de faire ?</a></li>
+<li><a href="#oh-la-vilaine-erreur"><span class="toc-section-number">4.5.2</span> Oh la vilaine erreur !!!</a></li>
+</ul></li>
+<li><a href="#code-final-de-lexemple"><span class="toc-section-number">4.6</span> Code final de l'exemple</a></li>
+</ul></li>
+</ul>
+</div>
+<h1 id="préambule"><a href="#TOC"><span class="header-section-number">1</span> Préambule</a></h1>
+<p>J'ai eu la prétention d'écrire un livre, et sur Backbone en plus ! En fait il n'existe peu de littérature française spécialisée sur des frameworks, qui plus est des framework javascript, alors que nos amis anglo-saxons écrivent sur Dart, Coffeescript, Backbone, etc. ... Au départ ce &quot;bouquin&quot; est un projet un peu fou, puisque j'ai même contacté les éditions Eyrolles (quand je vous disais que j'étais prétentieux ;) ). Et ils ont été d'accord ! Alors vous vous demandez pourquoi, finalement je publie ça de manière open source ?</p>
+<p>Eh bien, écrire un livre est un travail de longue haleine, qui doit se faire dans la durée. D'un autre côté, les technologies, tout particulièrement ce qui gravite autour de javascript, progressent et changent à une allure vertigineuse. Mon constat est que, si je veux écrire tout ce que j'ai en tête, cela ne finira jamais, ou bien le contenu n'aura plus d'intérêt (obsolète) et qu'il me semble plus approprié de livrer déjà ce que j'ai &quot;gratté&quot; et de transformer ce livre en projet open-source.</p>
+<p>Ainsi, ceux qui souhaite se mettre à Backbone, peuvent commencer dès maintenant (même si on ne m'a pas attendu, j'imagine qu'un peu de documentation en français devrait faire des heureux). Pour les autres s'ils souhaitent compléter, corriger, modifier, discuter, je me tiens à leur disposition. C'est pour cela que j'ai publier le contenu sur Github = ainsi vous avez l'opportunité de faire des pull requests (proposer des modifications) sur le contenu, ou créer des issues pour donner votre avis.</p>
+<p>Je vous attends, j'espère que cela vous sera utile. Je m'adresse à tous les publics (les plus forts n'apprendront rien, mais peuvent contribuer). Ceux qui connaissent déjà Backbone peuvent directement passer au chapitre 04.</p>
+<p>Je tiens à remercier très fortement et tout particulièrement, pour leur écoute, leurs conseils et leur relecture :</p>
+<ul>
+<li>Muriel SHANSEIFAN (Éditions Eyrolles - Responsable éditoriales du secteur informatique)</li>
+<li>Laurène GIBAUD (Éditions Eyrolles - Secteur Informatique)</li>
+</ul>
+<p>Remerciements aussi pour :</p>
+<ul>
+<li><a href="https://github.com/ehsavoie">ehsavoie</a> : 1ère pull request ;)</li>
+</ul>
+<h1 id="présentation-de-backbone-rappels-mvc"><a href="#TOC"><span class="header-section-number">2</span> Présentation de Backbone &amp; rappels MVC</a></h1>
+<blockquote>
+<p><em>Sommaire</em></p>
+</blockquote>
+<blockquote>
+<blockquote>
+<ul>
+<li><em>A quoi sert Backbone.js ?</em></li>
+<li><em>Qu’est-ce qu’une « Webapp » ?</em></li>
+<li><em>Petit rappel à propos de MVC</em></li>
+</ul>
+</blockquote>
+</blockquote>
+<blockquote>
+<p><em>Où nous allons voir pourquoi Backbone existe et quels sont les grands principes qu’il met en œuvre.</em></p>
+</blockquote>
+<p>Ce chapitre est très court, il présente les origines de Backbone.js, le pourquoi de son utilisation, et enfin un rappel sur le patron de conception Modèle-Vue-Contrôleur, essentiel pour la bonne compréhension du framework.</p>
+<h2 id="backbone-webapps-mvc"><a href="#TOC"><span class="header-section-number">2.1</span> Backbone ? Webapps ? MVC ?</a></h2>
+<p>Backbone est un framework javascript dédié à la création de <strong>Webapps</strong> en mode <strong>&quot;Single Page Application&quot;</strong>. Il implémente le pattern MVC (L'acronyme signifie : Model View Controller / Modèle Vue Contrôleur) mais, et c'est là qu'est la nouveauté, côté client, plus précisément au sein de votre navigateur. Il reproduit les mécanismes des frameworks MVC côté serveur tels Ruby on Rails, CakePHP, Play!&gt;Framework, ASP.Net MVC (avec Razor), ... Backbone a été écrit par Jeremy Ashkenas (le papa de Coffeescript et de Underscore) à l’origine pour ses propres besoin lors du développement du site DocumentCloud (<a href="http://www.documentcloud.org/home">http://www.documentcloud.org/home</a>). Son idée était de créer un framework qui permette de structurer ses développements en s’appuyant justement sur MVC. Mais avant toute chose, faisons quelques petits rappels (ou découvertes ?).</p>
+<h3 id="quest-ce-quune-webapp"><a href="#TOC"><span class="header-section-number">2.1.1</span> Qu’est-ce qu’une “Webapp” ?</a></h3>
+<p>Une “Webapp” n’a pas la même vocation qu’un site web même si les technologies mises en œuvre sont les mêmes. Elle a une réelle valeur applicative (gestion de catalogue produits, utilitaires, clients mails, agenda, etc. …) contrairement au site web qui le plus souvent est un medium de communication (journaux, blogs, etc. …). Assez rapidement, les technologies web ont été détournées pour tenter de remplacer les applications de gestion “client-riche” classique. Imaginez, le rêve des DSI : plus de déploiement, tout se passe dans le navigateur. Cependant, c’était sans compter les utilisateurs. Je me souviens avoir vu une gestion de catalogue il y a une dizaine d’années, en ASP 3 ou à chaque création d’article, il fallait attendre que toute la liste des articles se recharge. Ce qui avant en mode texte (sous dos) prenait 1 minute, venait de prendre 3 à 5 minutes dans la vue : 3 à 5 fois plus de temps ! Bravo la productivité ! Ensuite les technologies se sont cherchées longtemps pour tenter de remédier à ce problème : apparition des applets java, des ActiveX et là on commençait à retomber dans les travers de déploiements compliqués. Puis il y eu Flash, Flex et Silverlight, pas mal du tout il faut l’avouer, mais parallèlement le moteur javascript avait évolué, les navigateurs aussi et avec l’avènement du triptyque HTML5 – CSS3 – Javascript, un nouveau concept est apparu : la “Single Page Application” (probablement boosté par les mobiles et les tablettes … et Steve Jobs refusant que Flash/Air/Flex &amp; Java s’installent sur l’iPhone &amp; l’iPad). Mais qu’est donc une “Single Page Application” ? Il existe moult définitions, je vais donc vous donner la mienne, ensuite ce sera à vous de vous construire votre vision de “l’application web monopage”.</p>
+<p>Une &quot;Single Page Application est une application web qui embarque tous les éléments nécessaires à son fonctionnement dans une seule page HTML. Les scripts javascript liés seront chargés en même temps. Ensuite l’application web chargera les ressources nécessaires (généralement des données, des images …) à la demande en utilisant Ajax évitant ainsi tout rechargement de page et procurant une expérience utilisateur proche de celle que nous connaissions en mode “client-serveur”, voire meilleure dans certains cas. Ces webapps nouvelle génération peuvent aussi fonctionner offline en profitant des possibilités des derniers navigateurs (localstorage).</p>
+<blockquote>
+<blockquote>
+<p><strong>Remarque</strong> <em>: ce qui est amusant, c’est que dès 1999 ou 2000, Microsoft avait déjà introduit cette possibilité avec Internet Explorer 4 qui intégrait une applet Java (si si !) qui permettait de faire du Remote Protocol Call d’une page html vers le serveur sans recharger la page et en s’abonnant en javascript à l’évènement de retour (à vérifier, c’est loin, tout ça). Mais ce fut éclipsé par l’apparente simplicité de mise en œuvre des ActiveX (Flash était alors utilisée principalement pour de l’animation, mais permettait aussi ce genre d’artifice).</em></p>
+</blockquote>
+</blockquote>
+<p>Tout ça c’est bien beau, mais vous savez comme moi qu’un code HTML+JS (+CSS) peut rapidement devenir un plat de spaghettis impossible à maintenir, pour les autres mais pour vous aussi (retournez dans votre code 6 mois plus tard ;)). Il faut donc s’astreindre à des règles et s’équiper des bons outils afin de se faciliter la tâche, ne pas avoir à réinventer la poudre à chaque fois et pouvoir coder des applications robustes facilement modifiables (faciles à corriger, faciles à faire évoluer). Et si en plus vous pouvez vous faire plaisir …</p>
+<p>C’est de ce constat qu’est parti Jeremy Ashkenas, et c’est en mettant en pratique les préceptes depuis longtemps éprouvés de MVC qu’il a conçu Backbone, pour répondre à une problématique existante, ce qui le rend d’autant plus légitime. Rafraîchissons donc un peu notre mémoire à propos de MVC.</p>
+<blockquote>
+<blockquote>
+<p><strong>Remarque</strong> <em>: pour les lecteurs qui ne connaitraient pas ce concept, ne refermez pas le livre tout de suite, vous verrez avec les exemples pratiques que le concept est simple et facilement assimilable. Donc si les quelques paragraphes théoriques qui suivent vous semblent obscurs, je vous promet que dans quelques chapitres vous aurez tout compris.</em></p>
+</blockquote>
+</blockquote>
+<h3 id="petit-rappel-mvc"><a href="#TOC"><span class="header-section-number">2.1.2</span> Petit rappel : MVC ?</a></h3>
+<p>MVC un pattern (modèle) de programmation utilisé pour développer des applications de manière structurée et organisée. Le pattern MVC, comme tous les patterns, cadre votre façon de développer. Son objectif particulier est de séparer les responsabilités de vos &quot;bouts&quot; de codes en les regroupant selon 3 rôles (responsabilités), donc le modèle, la vue et le contrôleur. Détaillons-les :</p>
+<ul>
+<li><strong>la vue</strong> : c'est l'IHM (Interface Homme-Machine), ce qui va apparaitre à l'écran de l'utilisateur. Elle va recevoir des infos du contrôleur (&quot;affiche moi ça !&quot;), elle va envoyer des infos au contrôleur (&quot;on m'a cliquée dessus, il me faut la liste des clients&quot;)</li>
+<li><strong>le contrôleur</strong> : c'est lui donc qui reçoit des infos de la vue, qui va aller récupérer des données métiers chez le modèle (&quot;j'ai besoin pour la vue de la liste des clients&quot;), et va les renvoyer à la vue et éventuellement appliquer des traitements à ces données avant de les renvoyer.</li>
+<li><strong>le modèle</strong> : c'est votre objet client, fournisseur, utilisateur, ... avec toute la mécanique qui sert à les sauvegarder, les retrouver, modifier, supprimer ...</li>
+</ul>
+<blockquote>
+<blockquote>
+<p><strong>AVERTISSEMENT 1</strong> <em>: C’est la lisibilité qui importe. Il peut y avoir des interprétations différentes du modèle MVC quant aux responsabilités de ses composants. Par exemple, est-ce le modèle qui se sauvegarde lui-même ou est-ce un contrôleur qui se chargera de la persistance ? Peu importe (ce sont des querelles de chapelle), gardons juste à l'esprit qu'il y a trois grands modes de classement de nos objets et que l'important c'est d'avoir un code propre, structuré et maintenable (Dans 6 mois, vous devez être capables de relire votre code).</em></p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p><strong>AVERTISSEMENT 2</strong> <em>: La difficulté n’est plus de mise. A l'attention des réfugiés de STRUTS. Mon &quot;1er contact&quot; avec MVC a été avec STRUTS. J'ai trouvé l'expérience peu concluante (expérience développeur désastreuse) et je suis retourné faire de l'ASP.Net &quot;à la souris&quot; (c'était avant 2005). Si certains d'entre vous se sont éloignés de la technique et ont des velléités de s'y remettre mais sont effrayés par MVC, je les rassure tout de suite, les développeurs nous ont enfin &quot;concoctés&quot; des frameworks simples et faciles à mettre en œuvre tels :</em></p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<ul>
+<li><em>ASP.Net MVC avec le moteur de template Razor</em></li>
+<li><em>Play!&gt;Framework</em></li>
+<li><em>Express.js (avec nodeJS)</em></li>
+<li><em>Et beaucoup d'autres</em></li>
+</ul>
+</blockquote>
+</blockquote>
+<p><em>Backbone.js respecte ce principe. Donc n'ayez pas peur, cela va être facile ;)</em></p>
+<p>L'interprétation de MVC par Backbone est un peu particulière et les développeurs Java, .Net, PHP, Ruby, Python etc. ... pourraient être surpris. Mais, passons donc à quelques explications.</p>
+<h2 id="backbone-mvc"><a href="#TOC"><span class="header-section-number">2.2</span> Backbone &amp; MVC</a></h2>
+<p>Backbone &quot;embarque&quot; plusieurs composants qui vont nous permettre d'organiser notre webapp selon les &quot;préceptes&quot; MVC et simplifier les communications avec le serveur (avec le code applicatif côté serveur).</p>
+<p>Voyons l'interprétation que fait Backbone du modèle MVC :</p>
+<ul>
+<li>Le composant <strong>Modèle</strong> (selon Backbone : <code>Backbone.Model</code>) représente les données qui vont interagir avec votre code &quot;backend&quot; (côté serveur) via des requêtes Ajax. Ceux sont eux qui auront la responsabilité de la logique métier et de la validations des données.</li>
+<li>Le composant <strong>Vue</strong> (selon Backbone : <code>Backbone.View</code>) n'est pas complètement une vue au sens où on l'entend habituellement (couche présentation). Dans le cas qui nous intéresse, la &quot;vraie&quot; vue est un fragment de code &quot;natif&quot; HTML dans la page web qui s'affiche dans le navigateur (il y a donc plusieurs vues dans une même page). Et <code>Backbone.View</code> est en fait un <strong>Contrôleur de vues</strong> (1) (vous verrez, ce sera plus facile à appréhender en le codant) qui va ordonnancer les évènements et interaction au sein de la page web.</li>
+</ul>
+<blockquote>
+<blockquote>
+<p><em>(1) : c'est une interprétation très personnelle, c'est discutable, je reste à votre disposition</em></p>
+</blockquote>
+</blockquote>
+<p>Pour résumer, avec un parallèle avec du MVC dit &quot;classique&quot;, nous avons :</p>
+<ul>
+<li>Modèle : <code>Backbone.Model</code></li>
+<li>Vue : le code HTML</li>
+<li>Contrôleur (de vues) : <code>Backbone.View</code></li>
+</ul>
+<p><strong>Mais ce n'est pas fini !</strong> Backbone apporte 3 composants supplémentaires :</p>
+<ul>
+<li>Le composant <strong>Routeur</strong> : <code>Backbone.Router</code>, qui écoute/surveille les changements d'URL (dans la barre d'url du navigateur, lors d'un clic sur un lien, ...) et qui fait le lien avec les <code>Backbone.Model(s)</code> et les <code>Backbone.View(s)</code>.</li>
+<li>Le composant <strong>Collection</strong> : <code>Backbone.Collection</code>, des collections de modèles avec des méthodes pour &quot;travailler&quot; avec ceux-ci (each, filter, map, ...)</li>
+<li>et enfin le petit dernier, mais non des moindres, Le composant de <strong>Synchronisation</strong> <code>Backbone.sync</code>, que l'on pourrait comparer à une couche middleware, qui va permettre à nos modèles de communiquer avec le serveur. C'est <code>Backbone.sync</code> qui va faire les requêtes Ajax au serveur et &quot;remonter&quot; les résultats aux modèles.</li>
+</ul>
+<p><img src="RSRC/01_01_MVC.png" alt="Figure 1-1. MVC Vision &quot;Back-End&quot;" /> </p>
+<p><strong><em>Figure 1-1. MVC Vision &quot;Back-End&quot;</em></strong></p>
+<p><img src="RSRC/01_02_MVC.png" alt="Figure 1-2. MVC Vision &quot;Front-End&quot;" /> </p>
+<p><strong><em>Figure 1-2. MVC Vision &quot;Front-End&quot;</em></strong></p>
+<h2 id="pourquoi-jai-choisi-backbone"><a href="#TOC"><span class="header-section-number">2.3</span> Pourquoi j’ai choisi Backbone ?</a></h2>
+<pre><code>//TODO:</code></pre>
+<p>Tout ceci vous paraît bien théorique ? Alors passons tout de suite à la pratique.</p>
+<h1 id="tout-de-suite-les-mains-dans-le-cambouis"><a href="#TOC"><span class="header-section-number">3</span> Tout de suite “les mains dans le cambouis”</a></h1>
+<blockquote>
+<p><em>Sommaire</em></p>
+</blockquote>
+<blockquote>
+<blockquote>
+<ul>
+<li><em>Les prérequis &amp; IDE pour faire fonctionner Backbone</em></li>
+<li><em>jQuery en 15 minutes</em></li>
+<li><em>Underscore.js en 10 minutes</em></li>
+</ul>
+</blockquote>
+</blockquote>
+<blockquote>
+<p><em>Où nous allons lister les éléments nécessaires pour installer Backbone et commencer à développer avec.</em></p>
+</blockquote>
+<p>Le plus frustrant lorsque l'on débute la lecture d'un ouvrage informatique dans l'optique de s'auto former c'est que l'on est obligé de lire de nombreux chapitres avant de pouvoir commencer à s'y mettre. Je vais donc tenter de vous faire faire un 1er tour de Backbone.js en 20 minutes pour que vous en saisissiez rapidement la &quot;substantifique moelle&quot;. Mais avant d’utiliser Backbone, quelques prérequis sont nécessaires.  </p>
+<h2 id="prérequis-les-dépendances-de-backbone"><a href="#TOC"><span class="header-section-number">3.1</span> Prérequis : les dépendances de Backbone</a></h2>
+<p>Backbone a besoin au minimum de deux autres frameworks javascript pour fonctionner :</p>
+<ul>
+<li><strong>Underscore.js</strong> par le créateur de Backbone. Underscore est un ensemble d'outils qui permettent d'étendre javascript et qui vont vous faciliter la vie dans la gestion des Collections, Arrays, Objects, ... mais aussi vous permettre de faire du templating (nous verrons ce que c'est plus loin). Le gros avantage d'Underscore; c'est qu'il fonctionne quel que soit votre navigateur (comme Backbone). Underscore est une dépendance de Backbone, il est donc indispensable.</li>
+<li><strong>jQuery</strong>, qui est un framework dédié à la manipulation des éléments de votre page HTML (on parlera du DOM, Document Object Model) mais aussi aux appels de type Ajax (nécessaire pour &quot;discuter&quot; avec le serveur). On peut dire que jQuery est un DSL (Domain Specific Language) pour le DOM. jQuery n'est pas indispensable pour faire fonctionner Backbone, mais il va grandement nous faciliter la vie dans la création de nos Webapps et va nous garantir le fonctionnement de notre code quel que soit le navigateur.</li>
+</ul>
+<p>Nous verrons dans quelques chapitres qu'il est tout à fait possible de &quot;marier&quot; d'autres frameworks javascript à Backbone pour :</p>
+<ul>
+<li>faire du templating (certains peuvent trouver la fonctionnalité de template d'Underscore limitée)</li>
+<li>gérer la persistance locale (localstorage du navigateur)</li>
+<li>...</li>
+</ul>
+<blockquote>
+<blockquote>
+<p><strong>Remarque :</strong> <em>Il est possible d'utiliser Zepto.js à la place de jQuery, Zepto fonctionne à l'identique de jQuery mais il est dédié principalement aux navigateurs mobiles et est beaucoup plus léger que jQuery (avantageux sur un mobile), cependant vous n'avez plus la garantie que votre code fonctionne dans d'autres navigateurs (Zepto &quot;marchera&quot; très bien sous Chrome, Safari et Firefox).</em></p>
+</blockquote>
+</blockquote>
+<h2 id="outils-de-développement"><a href="#TOC"><span class="header-section-number">3.2</span> Outils de développement</a></h2>
+<h3 id="ide-editeur"><a href="#TOC"><span class="header-section-number">3.2.1</span> IDE (Editeur)</a></h3>
+<p>Pour coder choisissez l'éditeur de code avec lequel vous vous sentez le plus à l'aise. Ils ont tous leurs spécificités, ils sont gratuits, open-source ou payants. Certains &quot;puristes&quot; utilisent même Vim ou Emacs. Je vous en livre ici quelques-uns que j'ai trouvé agréables à utiliser si vous n'avez pas déjà fait votre choix :</p>
+<ul>
+<li>Mon préféré mais payant : Webstorm de chez IntelliJ, il possède des fonctionnalités de refactoring très utiles (existe sous Windows, Linux et OSX)</li>
+<li>Dans le même esprit et gratuit : Netbeans, il propose un éditeur HTML/Javascript très pertinent quant à la qualité de votre code (existe sous Windows, Linux et OSX)</li>
+<li>Textmate (payant) un éditeur de texte avec colorisation syntaxique, un classique sous OSX</li>
+<li>SublimeText (payant) un peu l'équivalent de Textmate mais toutes plateformes</li>
+<li>Un bon compromis est KomodoEdit dans sa version communauté (donc non payant) et qui lui aussi fonctionne sur toutes les plateformes.</li>
+<li>Apatana fourni aussi un bo@n IDE dédié Javascript sur une base Eclipse, mais je trouve qui propose finalement trop de fonctionnalités (comme Eclipse), et personnellement je m’y perds.</li>
+</ul>
+<p>Vous voyez, il y en a pour tous les goûts. En ce qui me concerne j'utilise essentiellement Webstorm ou SublimeText.</p>
+<h3 id="navigateur"><a href="#TOC"><span class="header-section-number">3.2.2</span> Navigateur</a></h3>
+<p>Le navigateur le plus agréable, selon moi, à utiliser pour faire du développement Web est certainement Chrome (C'est un avis très personnel, donc amis utilisateurs de Firefox ne m'en veuillez pas). En effet Chrome propose une console d'administration particulièrement puissante. C'est ce que je vais utiliser, rien ne vous empêche d'utiliser votre navigateur préféré. Par contre, que cela ne vous dispense pas d'aller tester régulièrement votre code sous d'autres navigateurs.</p>
+<h2 id="initialisation-de-notre-projet-de-travail"><a href="#TOC"><span class="header-section-number">3.3</span> Initialisation de notre projet de travail</a></h2>
+<p>Maintenant que nous sommes “outillés” (un éditeur de code et un navigateur) nous allons pouvoir initialiser notre environnement de développement.</p>
+<h3 id="installation"><a href="#TOC"><span class="header-section-number">3.3.1</span> Installation</a></h3>
+<ul>
+<li>Créer un répertoire de travail <code>backbone001</code></li>
+<li>Créer ensuite un sous-répertoire <code>libs</code> avec un sous-répertoire <code>vendors</code></li>
+</ul>
+<p>Nous copierons les frameworks javascript dans <code>vendors</code>.</p>
+<ul>
+<li>Téléchargez <strong>Backbone</strong> : <a href="http://documentcloud.github.com/backbone/">http://documentcloud.github.com/backbone/</a></li>
+<li>Téléchargez <strong>Underscore</strong> : <a href="http://documentcloud.github.com/underscore/">http://documentcloud.github.com/underscore/</a></li>
+</ul>
+<blockquote>
+<blockquote>
+<p><strong>CONSEIL</strong> <em>: Utilisez les version non minifiées des fichiers. Il est toujours intéressant de pouvoir lire le code source des frameworks lorsqu'ils sont bien documentés, ce qui est le cas de Backbone et Underscore, n'hésitez pas à aller mettre le nez dedans, c'est instructif et ces 2 frameworks sont très lisibles, même pour des débutants.</em></p>
+</blockquote>
+</blockquote>
+<ul>
+<li>Téléchargez <strong>jQuery</strong> : <a href="http://jquery.com/">http://jquery.com/</a></li>
+</ul>
+<p>Nous allons aussi récupérer le framework css <strong>TwitterBootstrap</strong> qui nous permettra de faire de &quot;jolies&quot; pages sans effort. Ce n'est pas du tout obligatoire, mais c'est toujours plus satisfaisant d'avoir une belle page d'exemple. : <a href="http://twitter.github.com/bootstrap/">http://twitter.github.com/bootstrap/</a>. Téléchargez <code>bootstrap.zip</code>, &quot;dé-zippez&quot; le fichier et copiez le répertoire <code>bootstrap</code> dans votre répertoire <code>vendors</code>.</p>
+<h3 id="préparons-notre-page-html"><a href="#TOC"><span class="header-section-number">3.3.2</span> Préparons notre page HTML</a></h3>
+<p>A la racine de votre répertoire de travail, créez une page index.html avec le code suivant :</p>
+<pre class="sourceCode html"><code class="sourceCode html">    <span class="dt">&lt;!DOCTYPE </span>html<span class="dt">&gt;</span>
+    <span class="kw">&lt;html&gt;</span>
+    <span class="kw">&lt;head&gt;</span>
+        <span class="kw">&lt;meta</span><span class="ot"> http-equiv=</span><span class="st">&quot;Content-Type&quot;</span><span class="ot"> content=</span><span class="st">&quot;text/html; charset=utf-8&quot;</span><span class="kw">&gt;</span>
+        <span class="kw">&lt;title&gt;</span>Backbone<span class="kw">&lt;/title&gt;</span>
+
+        <span class="co">&lt;!-- === Styles Twitter Bootstrap --&gt;</span>
+        <span class="kw">&lt;link</span><span class="ot"> href=</span><span class="st">&quot;libs/vendors/bootstrap/css/bootstrap.css&quot;</span><span class="ot"> rel=</span><span class="st">&quot;stylesheet&quot;</span><span class="kw">&gt;</span>
+        <span class="kw">&lt;link</span><span class="ot"> href=</span><span class="st">&quot;libs/vendors/bootstrap/css/bootstrap-responsive.css&quot;</span><span class="ot"> rel=</span><span class="st">&quot;stylesheet&quot;</span><span class="kw">&gt;</span>
+    <span class="kw">&lt;/head&gt;</span>
+
+    <span class="co">&lt;!-- === ici votre IHM === --&gt;</span>
+    <span class="kw">&lt;body&gt;</span>
+
+
+    <span class="kw">&lt;/body&gt;</span>
+    <span class="co">&lt;!-- === Références aux Frameworks === --&gt;</span>
+    <span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">&quot;libs/vendors/jquery-1.7.2.js&quot;</span><span class="kw">&gt;&lt;/script&gt;</span>
+    <span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">&quot;libs/vendors/underscore.js&quot;</span><span class="kw">&gt;&lt;/script&gt;</span>
+    <span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">&quot;libs/vendors/backbone.js&quot;</span><span class="kw">&gt;&lt;/script&gt;</span>
+
+    <span class="co">&lt;!-- === ici votre code applicatif === --&gt;</span>
+    <span class="kw">&lt;script&gt;</span>
+
+    <span class="kw">&lt;/script&gt;</span>
+    <span class="kw">&lt;/html&gt;</span></code></pre>
+<p>A ce niveau vous devriez avoir un squelette de projet fonctionnel avec l'arborescence suivante :</p>
+<p><img src="RSRC/02_01_ARBO.png" alt="Arborecsence" /><br /></p>
+<p>Les deux paragraphes qui suivent ne sont que pour ceux d'entre vous qui ne connaissent ni <strong>jQuery</strong> ni <strong>Underscore</strong>. Ces paragraphes n'ont pas la prétention de vous apprendre ces outils, mais vous donneront les bases nécessaires pour vous en servir, pour comprendre leur utilité et pour vous donner envie d'aller plus loin. Les autres (ceux qui connaissent déjà), passez directement au <strong>§ &quot;1er contact … avec Backbone&quot;</strong>.</p>
+<h2 id="jouons-avec-jquery"><a href="#TOC"><span class="header-section-number">3.4</span> Jouons avec jQuery</a></h2>
+<p>JQuery est un framework javascript initialement crée par John Resig qui vous permet de prendre le contrôle de votre page HTML. Voyons tout de suite comment nous en servir. Dans notre toute nouvelle page <code>index.html</code>, préparons un peu notre bac à sable et saisissons le code suivant :</p>
+<pre class="sourceCode html"><code class="sourceCode html">    <span class="dt">&lt;!DOCTYPE </span>html<span class="dt">&gt;</span>
+    <span class="kw">&lt;html&gt;</span>
+    <span class="kw">&lt;head&gt;</span>
+        <span class="kw">&lt;meta</span><span class="ot"> http-equiv=</span><span class="st">&quot;Content-Type&quot;</span><span class="ot"> content=</span><span class="st">&quot;text/html; charset=utf-8&quot;</span><span class="kw">&gt;</span>
+        <span class="kw">&lt;title&gt;</span>Backbone<span class="kw">&lt;/title&gt;</span>
+
+        <span class="co">&lt;!-- === Styles Twitter Bootstrap --&gt;</span>
+        <span class="kw">&lt;link</span><span class="ot"> href=</span><span class="st">&quot;libs/vendors/bootstrap/css/bootstrap.css&quot;</span><span class="ot"> rel=</span><span class="st">&quot;stylesheet&quot;</span><span class="kw">&gt;</span>
+
+        <span class="co">&lt;!-- === à insérer entre les 2 &lt;link&gt; === --&gt;</span>
+        <span class="kw">&lt;style&gt;</span>
+            body <span class="kw">{</span>
+                <span class="kw">padding-top:</span> <span class="dt">60px</span><span class="kw">;</span> <span class="co">/* </span>60<span class="co">px pour mettre un peu d</span>&#39;<span class="co">espace entre la barre de titre et le contenu */</span>
+                <span class="kw">padding-bottom:</span> <span class="dt">40px</span><span class="kw">;</span>
+            <span class="kw">}</span>
+        <span class="kw">&lt;/style&gt;</span>
+
+        <span class="kw">&lt;link</span><span class="ot"> href=</span><span class="st">&quot;libs/vendors/bootstrap/css/bootstrap-responsive.css&quot;</span><span class="ot"> rel=</span><span class="st">&quot;stylesheet&quot;</span><span class="kw">&gt;</span>
+
+    <span class="kw">&lt;/head&gt;</span>
+
+    <span class="co">&lt;!-- === ici votre IHM === --&gt;</span>
+    <span class="kw">&lt;body&gt;</span>
+        <span class="co">&lt;!--</span>
+<span class="co">           les classe css &quot;navbar navbar-fixed-top&quot;, &quot;navbar-inner&quot;, &quot;container&quot;, &quot;brand&quot;, &quot;hero-unit&quot;</span>
+<span class="co">           viennent de la feuille de style &quot;twitter bootstrap &quot;</span>
+<span class="co">        --&gt;</span>
+        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;navbar navbar-fixed-top&quot;</span><span class="kw">&gt;</span>
+            <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;navbar-inner&quot;</span><span class="kw">&gt;</span>
+                <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;container&quot;</span><span class="kw">&gt;</span>
+                    <span class="kw">&lt;a</span><span class="ot"> class=</span><span class="st">&quot;brand&quot;</span><span class="kw">&gt;</span>Mon Blog<span class="kw">&lt;/a&gt;</span>
+                <span class="kw">&lt;/div&gt;</span>
+            <span class="kw">&lt;/div&gt;</span>
+        <span class="kw">&lt;/div&gt;</span>
+
+        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;container&quot;</span><span class="kw">&gt;</span>
+
+            <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;hero-unit&quot;</span><span class="kw">&gt;</span>
+                <span class="kw">&lt;h1&gt;</span>Backbone rocks !!!<span class="kw">&lt;/h1&gt;</span>
+                <span class="kw">&lt;p&gt;</span>
+                    &quot;Ma vie mon oeuvre&quot;
+                <span class="kw">&lt;/p&gt;</span>
+            <span class="kw">&lt;/div&gt;</span>
+
+            <span class="kw">&lt;div</span><span class="ot"> id=</span><span class="st">&quot;articles_box&quot;</span><span class="kw">&gt;</span>
+
+                <span class="kw">&lt;h1</span><span class="ot"> id=</span><span class="st">&quot;current_articles_title&quot;</span><span class="kw">&gt;</span>les articles du blogs<span class="kw">&lt;/h1&gt;</span>
+
+                <span class="kw">&lt;ul</span><span class="ot"> id=</span><span class="st">&quot;current_articles_list&quot;</span><span class="kw">&gt;</span>
+                    <span class="kw">&lt;li&gt;</span>Backbone et les modèles<span class="kw">&lt;/li&gt;</span>
+                    <span class="kw">&lt;li&gt;</span>Backbone et les vues<span class="kw">&lt;/li&gt;</span>
+                    <span class="kw">&lt;li&gt;</span>Backbone : mais y a-t-il vraiment un contrôleur dans l&#39;avion ?<span class="kw">&lt;/li&gt;</span>
+                <span class="kw">&lt;/ul&gt;</span>
+
+                <span class="kw">&lt;h1</span><span class="ot"> id=</span><span class="st">&quot;next_articles_title&quot;</span><span class="kw">&gt;</span>les articles à venir<span class="kw">&lt;/h1&gt;</span>
+
+                <span class="kw">&lt;ul</span><span class="ot"> id=</span><span class="st">&quot;next_articles_list&quot;</span><span class="kw">&gt;</span>
+                    <span class="kw">&lt;li&gt;</span>Backbone et le localstorage<span class="kw">&lt;/li&gt;</span>
+                    <span class="kw">&lt;li&gt;</span>Backbone.sync : comment ça marche<span class="kw">&lt;/li&gt;</span>
+                <span class="kw">&lt;/ul&gt;</span>
+
+            <span class="kw">&lt;/div&gt;</span>
+        <span class="kw">&lt;/div&gt;</span>
+
+    <span class="kw">&lt;/body&gt;</span>
+    <span class="co">&lt;!-- === Références aux Frameworks === --&gt;</span>
+    <span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">&quot;libs/vendors/jquery-1.7.2.js&quot;</span><span class="kw">&gt;&lt;/script&gt;</span>
+    <span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">&quot;libs/vendors/underscore.js&quot;</span><span class="kw">&gt;&lt;/script&gt;</span>
+    <span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">&quot;libs/vendors/backbone.js&quot;</span><span class="kw">&gt;&lt;/script&gt;</span>
+
+    <span class="co">&lt;!-- === ici votre code applicatif === --&gt;</span>
+    <span class="kw">&lt;script&gt;</span>
+
+    <span class="kw">&lt;/script&gt;</span>
+    <span class="kw">&lt;/html&gt;</span></code></pre>
+<p>Une fois votre page terminée, sauvegardez là et ouvrez là dans votre navigateur préféré (qui je le rappelle, pour des raisons purement pédagogique est Chrome) :</p>
+<p><img src="RSRC/02_02_PAGE.png" alt="Page" /><br /> Notez au passage la qualité graphique de votre page ;), tout ça sans trop d'efforts, grâce à TwitterBootstrap.</p>
+<h3 id="jouons-avec-notre-page-en-mode-commande"><a href="#TOC"><span class="header-section-number">3.4.1</span> &quot;Jouons&quot; avec notre page en mode commande</a></h3>
+<p>Dans un premier temps, ouvrez la console de Chrome (ou Safari) : faite un clic droit sur la page et sélectionner &quot;Inspect Element&quot; (ou &quot;Inspecter l'élément). Pour les aficionados de Firefox : utilisez les menus : Tools/Web Developer/Web Console. Vous devriez obtenir ceci (cliquez sur le bouton &quot;Console&quot; si nécessaire :</p>
+<p><img src="RSRC/02_03_CONSOLE.png" alt="Console" /><br /></p>
+<h4 id="saisissons-nos-1ères-commandes"><a href="#TOC"><span class="header-section-number">3.4.1.1</span> Saisissons nos 1ères commandes :</a></h4>
+<p>Je voudrais la liste de mes titres <code>&lt;H1&gt;</code> : dans la console, saisir : <code>$('h1')</code>, validez, et vous obtenez un tableau (Array au sens javascript) des nodes html de type <code>&lt;H1&gt;</code> présentes dans votre page html :</p>
+<p><img src="RSRC/02_04_JQUERY.png" alt="jQuery" /><br /></p>
+<p>Je voudrais le texte du titre <code>&lt;H1&gt;</code> dont l'id est <code>&quot;current_articles_title&quot;</code> : dans la console, saisir : <code>$('#current_articles_title').text()</code>. L'identifiant étant unique, en fait le type de la node est peu important :</p>
+<p><img src="RSRC/02_05_JQUERY.png" alt="jQuery" /><br /></p>
+<p>Mais comment dois-je faire pour avoir le texte du premier <code>&lt;H1&gt;</code> de ma page, il n'a pas d'id ?!?. Tout simplement, en utilisant la commande suivante : <code>$('h1').first().text()</code> :</p>
+<p><img src="RSRC/02_06_JQUERY.png" alt="jQuery" /><br /></p>
+<h4 id="modifions-laspect-de-notre-page-dynamiquement"><a href="#TOC"><span class="header-section-number">3.4.1.2</span> Modifions l’aspect de notre page dynamiquement :</a></h4>
+<p>Les commandes sont toujours à saisir dans la console du navigateur. Je voudrais :</p>
+<ul>
+<li>changer le titre de mon blog : <code>$('h1').first().text(&quot;Backbone c'est top !&quot;)</code>, attention pensez bien au <code>first()</code> sinon vous allez changer tous les textes de tous les <code>H1</code> de la page.</li>
+<li>récupérer le code HTML de la &quot;boîte de titre&quot; (le div avec la classe css : <code>class=&quot;hero-unit&quot;</code>) : <code>$('[class=&quot;hero-unit&quot;]').html()</code>, notez bien que <code>$('[class=&quot;hero-unit&quot;]').text()</code> ne retourne pas le même résultat. On peut aussi écrire ceci plus simplement : <code>$('.hero-unit').html()</code> : le <code>&quot;.&quot;</code> correspond à une classe css, comme le <code>&quot;#&quot;</code> permet de rechercher un élément par son id.</li>
+<li>changer les couleurs de police et de fond de tous les tags H1 : <code>$('h1').css(&quot;color&quot;,&quot;white&quot;).css(&quot;background-color&quot;,&quot;black&quot;)</code>, vous voyez que vous pouvez faire des appels chaînés, mais une autre possibilité serait la suivante : <code>$('h1').css({color:&quot;yellow&quot;, backgroundColor:&quot;green&quot;})</code></li>
+</ul>
+<p><img src="RSRC/02_07_JQUERY.png" alt="jQuery" /><br /> <img src="RSRC/02_08_JQUERY.png" alt="jQuery" /><br /></p>
+<h4 id="allons-plus-loin"><a href="#TOC"><span class="header-section-number">3.4.1.3</span> Allons plus loin …</a></h4>
+<p>Je voudrais :</p>
+<ul>
+<li>la valeur de l'id de la deuxième liste (<code>UL</code>) : <code>$('ul').eq(1).attr(&quot;id&quot;)</code>, je cherche la liste d'index 1 (le 1er élément possède l'index 0).</li>
+<li>parcourir les lignes (<code>LI</code>) de la liste dont l'id est <code>&quot;next_articles_list&quot;</code> et obtenir leur texte : <code>$('#next_articles_list').find('li').each(function (index) { console.log( $(this).text() ); })</code></li>
+<li>ajouter une nouvelle ligne à la 2ème liste : <code>$('&lt;li&gt;Templating et Backbone&lt;/li&gt;').appendTo('#next_articles_list')</code></li>
+<li>cacher la 1ère liste : <code>$('#current_articles_list').hide()</code></li>
+<li>l'afficher à nouveau : <code>$('#current_articles_list').show()</code></li>
+<li>la cacher à nouveau, mais &quot;doucement&quot; : <code>$('#current_articles_list').hide('slow')</code></li>
+<li>l'afficher à nouveau, mais &quot;rapidement&quot; : <code>$('#current_articles_list').show('fast')</code></li>
+</ul>
+<p><img src="RSRC/02_09_JQUERY.png" alt="jQuery" /><br /></p>
+<h3 id="les-évènements"><a href="#TOC"><span class="header-section-number">3.4.2</span> Les évènements</a></h3>
+<pre><code>//À traiter</code></pre>
+<h3 id="quelques-bonnes-pratiques"><a href="#TOC"><span class="header-section-number">3.4.3</span> Quelques bonnes pratiques</a></h3>
+<h4 id="pensez-performances"><a href="#TOC"><span class="header-section-number">3.4.3.1</span> Pensez performances :</a></h4>
+<p>Si vous devez utiliser plusieurs fois le même élément de votre page : par exemple <code>$('#current_articles_list')</code>, sachez qu'à chaque fois jQuery &quot;interroge&quot; le DOM. Pour des raisons de performances, il est conseillé d'affecter le résultat de la sélection à une variable que vous réutiliserez ensuite. De cette manière, le DOM n'est interrogé qu'une seule fois. Vous pouvez tester ceci dans la console :</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="kw">var</span> currArtList = $(<span class="ch">&#39;#current_articles_list&#39;</span>); 
+    <span class="kw">currArtList</span>.<span class="fu">hide</span>(<span class="ch">&#39;slow&#39;</span>); 
+    <span class="kw">currArtList</span>.<span class="fu">show</span>(<span class="ch">&#39;fast&#39;</span>);</code></pre>
+<h4 id="soyez-sûr-que-les-éléments-de-votre-page-sont-tous-chargés"><a href="#TOC"><span class="header-section-number">3.4.3.2</span> Soyez sûr que les éléments de votre page sont tous chargés :</a></h4>
+<p>Il est intéressant (indispensable) d'avoir la garantie que son code javascript n'est exécuté qu'une seule fois la page HTML chargée dans son entièreté, surtout si ce code accède à des éléments du DOM. jQuery a une fonction pour ça : <code>$(document).ready(handler)</code> ou encore plus court : <code>$(handler)</code> où <code>handler</code> est une fonction. Mettez ce code dans la balise <code>&lt;script&gt;</code> de votre page <code>index.html</code> :</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="kw">console</span>.<span class="fu">log</span>(<span class="st">&quot;est-ce que le DOM est chargé ??? &quot;</span>, $(<span class="ch">&#39;#current_articles_list&#39;</span>)); 
+    $(<span class="kw">function</span> (){ 
+        <span class="kw">console</span>.<span class="fu">log</span>(<span class="st">&quot;je suis sûr que le DOM est chargé &quot;</span>, $(<span class="ch">&#39;#current_articles_list&#39;</span>)); 
+    });</code></pre>
+<p>Puis ouvrez la page dans votre navigateur et activez la console :</p>
+<p><img src="RSRC/02_10_JQUERY.png" alt="jQuery" /><br /></p>
+<p>Il semble que tous les éléments soient chargés correctement avec ou sans l’utilisation de la méthode <code>ready()</code> de jQuery. Vous avez du remarquer que j'avais déplacé mon code javascript et les références aux autres code javascript &quot;en bas de ma page&quot;. Maintenant, déplacez <code>&lt;script src=&quot;libs/vendors/jquery-1.7.2.js&quot;&gt;&lt;/script&gt;</code> et le code source que nous avons écrit au niveau du header (balise <code>&lt;head&gt;</code>) de la page, ce qui est plus &quot;classique&quot; et rechargez la page :</p>
+<p><img src="RSRC/02_11_JQUERY.png" alt="jQuery" /><br /></p>
+<p>Et là on voit bien qu'au 1er appel <code>$('#current_articles_list')</code> jQuery ne trouve rien, puis une fois le DOM chargé, jQuery trouve la liste. J'ai mis mes codes en bas de page, pour des raisons de performances et c'est pour ça que cela &quot;semblait&quot; fonctionner même à l'extérieur de <code>$(document).ready(handler)</code>, les éléments se chargeant plus rapidement, mais ça ne garantit rien, tout particulièrement lorsque votre page n’est plus en local. Donc n'oubliez jamais d'exécuter votre code au bon moment grâce à <code>$(document).ready(handler)</code>, ... Et remettez quand même votre code en bas de page ;).</p>
+<p>Vous venez de voir une infime partie des possibilités de jQuery, mais cela vous donne déjà un aperçu et vous permet de commencer à jouer avec et aller plus loin. jQuery permet aussi de faire des requêtes AJAX (http) vers des serveurs web, mais nous verrons cela un peu plus tard.</p>
+<pre><code>//TODO: traiter la notion d’id versus la notion de name</code></pre>
+<h2 id="jouons-avec-underscore"><a href="#TOC"><span class="header-section-number">3.5</span> Jouons avec Underscore</a></h2>
+<p>Underscore est un framework javascript (par le créateur de Backbone) qui apporte de nombreuses fonctionnalités pour faire des traitements sur des tableaux de valeurs (Array) , des collections (tableaux d'objet). Certaines de ces fonctionnalités existent en javascript, mais uniquement dans sa dernière version, alors qu'avec Underscore vous aurez la garantie qu'elles s'exécutent sur tous les navigateurs. Mais Underscore, ce sont aussi des fonctionnalités autour des fonctions et des objets (là aussi, le framework vous procure les possibilités de la dernière version de javascript quel que soit votre navigateur ... ou presque, je n'ai pas testé sous IE6) et autres utilitaires, tels le templating. Je vous engage à aller sur le site, la documentation est particulièrement bien faite.</p>
+<h3 id="quelques-exemples-dutilisations"><a href="#TOC"><span class="header-section-number">3.5.1</span> Quelques exemples d'utilisations</a></h3>
+<p>Backbone utilise et encapsule de nombreuses fonctionnalités d'Underscore (Collection, modèle objet, ...) donc vous n'aurez pas forcément l'obligation d'utiliser Underscore directement. Je vous livre cependant quelques exemples, car cette puissante librairie peut vous aider sur d'autres projets pas forcément dédiés Backbone. Pour les tester, nous continuons avec la console de notre navigateur (toujours avec notre page index.html).</p>
+<h4 id="tableaux-et-collections"><a href="#TOC"><span class="header-section-number">3.5.1.1</span> Tableaux et Collections :</a></h4>
+<p>Commencez par saisir ceci :</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="kw">var</span> buddies = [],
+        bob = { <span class="dt">name </span>: <span class="st">&quot;Bob Morane&quot;</span>, <span class="dt">age </span>: <span class="dv">32</span> },
+        sam = { <span class="dt">name </span>: <span class="st">&quot;Sammy&quot;</span>, <span class="dt">age </span>: <span class="dv">43</span> },
+        tom = { <span class="dt">name </span>: <span class="st">&quot;Tommy&quot;</span>, <span class="dt">age </span>: <span class="dv">25</span> };
+    <span class="kw">buddies</span>.<span class="fu">push</span>(bob, sam, tom);</code></pre>
+<p>Nous avons donc un tableau de 3 objets :</p>
+<p><img src="RSRC/02_12_UNDERSCORE.png" alt="Underscore" /><br /></p>
+<p>Je souhaite maintenant parcourir le tableau d’objets et afficher les informations de chacun d’eux. Pour cela utilisez la commande <code>each()</code> de la manière suivante :</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="kw">_</span>.<span class="fu">each</span>(buddies, <span class="kw">function</span> (buddy) { 
+        <span class="kw">console</span>.<span class="fu">log</span> (<span class="kw">buddy</span>.<span class="fu">name</span>, <span class="kw">buddy</span>.<span class="fu">age</span>); 
+    });</code></pre>
+<p>Et vous obtiendrez ceci :</p>
+<p><img src="RSRC/02_13_UNDERSCORE.png" alt="Underscore" /><br /></p>
+<p>Je voudrais maintenant les “buddies” dont l’âge est inférieur à 43 ans. Nous allons utiliser la commande <code>filter()</code> :</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="kw">_</span>.<span class="fu">filter</span>(buddies, <span class="kw">function</span> (filteredBuddies) { 
+        <span class="kw">return</span> <span class="kw">filteredBuddies</span>.<span class="fu">age</span> &lt; <span class="dv">43</span>; 
+    });</code></pre>
+<p>Et nous obtenons bien :</p>
+<p><img src="RSRC/02_14_UNDERSCORE.png" alt="Underscore" /><br /></p>
+<h4 id="templating"><a href="#TOC"><span class="header-section-number">3.5.1.2</span> Templating :</a></h4>
+<p>Je vous en parle maintenant, car ce &quot;bijou&quot; va nous servir très rapidement. Je voudrais générer une liste au sens HTML (<code>&lt;ul&gt;&lt;li&gt;&lt;/li&gt;&lt;/ul&gt;</code>) à partir de mon tableau d'objets buddies. Nous allons donc créer une variable “template” (un peu comme une page JSP ou ASP) :</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="kw">var</span> templateList =
+    <span class="st">&quot;&lt;ul&gt; &lt;% _.each(buddies, function (buddy) { %&gt;\</span>
+    &lt;li&gt;&lt;%= <span class="kw">buddy</span>.<span class="fu">name</span> %&gt; : &lt;%= <span class="kw">buddy</span>.<span class="fu">age</span> %&gt; &lt;/li&gt;\
+    &lt;% }); %&gt;\
+    &lt;/ul&gt;<span class="st">&quot;;</span></code></pre>
+<p>Que nous utiliserons de cette façon (nous passons à la méthode le template et les données):</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="kw">_</span>.<span class="fu">template</span>(templateList, buddies);</code></pre>
+<p>Pour le résultat suivant :</p>
+<p><img src="RSRC/02_15_UNDERSCORE.png" alt="Underscore" /><br /></p>
+<p>Voilà, nous avons fait un rapide tour d’horizon des éléments qui nous seront nécessaires par la suite. Nous pouvons enfin commencer.</p>
+<h1 id="er-contact-avec-backbone"><a href="#TOC"><span class="header-section-number">4</span> 1er contact … avec Backbone</a></h1>
+<blockquote>
+<p><em>Sommaire</em></p>
+</blockquote>
+<blockquote>
+<blockquote>
+<ul>
+<li><em>Premier modèle</em></li>
+<li><em>Première collection</em></li>
+<li><em>Première vue &amp; premier template</em></li>
+</ul>
+</blockquote>
+</blockquote>
+<blockquote>
+<p><em>Nous allons faire un premier exemple Backbone pas à pas, même sans connaître le framework. Cela va permettre de « désacraliser » la bête et de mettre un peu de liant avec tout ce que nous avons vu précédemment. Puis nous passerons dans le détail tous les composants de Backbone dans les chapitres qui suivront.</em></p>
+</blockquote>
+<p>Voilà, il est temps de s'y mettre. L'application que nous allons réaliser avec Backbone tout au long de cet ouvrage va être un Blog, auquel nous ajouterons au fur et à mesure des fonctionnalités pour finalement le transformer en CMS (Content Management System). Je vous l'accorde ce n'est pas très original, mais cela répond à des problématiques classiques (récurrentes ?) dans notre vie &quot;d'informaticien&quot; et cela a le mérite d'avoir un aspect pratique et utile. Notre point de départ va être un blog que nous agrémenterons de fonctionnalités au fil des chapitres.</p>
+<h2 id="ère-application-backbone"><a href="#TOC"><span class="header-section-number">4.1</span> 1ère application Backbone</a></h2>
+<p>Nous allons faire ici un exemple très rapide, sans forcément entrer dans le détail ni mettre en œuvre les bonnes pratiques d'organisation de code. Cet exercice est là pour démontrer la simplicité d'utilisation, et le code devrait être suffisamment simple pour se passer d'explications. Donc, &quot;pas de panique !&quot;, laissez-vous guider, dans <strong>15 minutes</strong> vous aurez une 1ère ébauche.</p>
+<h3 id="préparons-notre-page"><a href="#TOC"><span class="header-section-number">4.1.1</span> Préparons notre page</a></h3>
+<p>Nous allons utiliser notre même page <code>index.html</code>, mais faisons un peu de ménage à l'intérieur avant de commencer :</p>
+<pre class="sourceCode html"><code class="sourceCode html">    <span class="dt">&lt;!DOCTYPE </span>html<span class="dt">&gt;</span>
+    <span class="kw">&lt;html&gt;</span>
+    <span class="kw">&lt;head&gt;</span>
+        <span class="kw">&lt;meta</span><span class="ot"> http-equiv=</span><span class="st">&quot;Content-Type&quot;</span><span class="ot"> content=</span><span class="st">&quot;text/html; charset=utf-8&quot;</span><span class="kw">&gt;</span>
+        <span class="kw">&lt;title&gt;</span>Backbone<span class="kw">&lt;/title&gt;</span>
+        <span class="kw">&lt;link</span><span class="ot"> href=</span><span class="st">&quot;libs/vendors/bootstrap/css/bootstrap.css&quot;</span><span class="ot"> rel=</span><span class="st">&quot;stylesheet&quot;</span><span class="kw">&gt;</span>
+
+        <span class="kw">&lt;style&gt;</span>
+            body <span class="kw">{</span>
+                <span class="kw">padding-top:</span> <span class="dt">60px</span><span class="kw">;</span> 
+                <span class="kw">padding-bottom:</span> <span class="dt">40px</span><span class="kw">;</span>
+            <span class="kw">}</span>
+        <span class="kw">&lt;/style&gt;</span>
+
+        <span class="kw">&lt;link</span><span class="ot"> href=</span><span class="st">&quot;libs/vendors/bootstrap/css/bootstrap-responsive.css&quot;</span><span class="ot"> rel=</span><span class="st">&quot;stylesheet&quot;</span><span class="kw">&gt;</span>
+
+    <span class="kw">&lt;/head&gt;</span>
+
+    <span class="kw">&lt;body&gt;</span>
+        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;navbar navbar-fixed-top&quot;</span><span class="kw">&gt;</span>
+            <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;navbar-inner&quot;</span><span class="kw">&gt;</span>
+                <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;container&quot;</span><span class="kw">&gt;</span>
+                    <span class="kw">&lt;a</span><span class="ot"> class=</span><span class="st">&quot;brand&quot;</span><span class="kw">&gt;</span>Mon Blog<span class="kw">&lt;/a&gt;</span>
+                <span class="kw">&lt;/div&gt;</span>
+            <span class="kw">&lt;/div&gt;</span>
+        <span class="kw">&lt;/div&gt;</span>
+
+        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;container&quot;</span><span class="kw">&gt;</span>
+
+            <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;hero-unit&quot;</span><span class="kw">&gt;</span>
+                <span class="kw">&lt;h1&gt;</span>Backbone rocks !!!<span class="kw">&lt;/h1&gt;</span>
+            <span class="kw">&lt;/div&gt;</span>
+
+
+        <span class="kw">&lt;/div&gt;</span>
+
+    <span class="kw">&lt;/body&gt;</span>
+    <span class="co">&lt;!-- === Références aux Frameworks === --&gt;</span>
+    <span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">&quot;libs/vendors/jquery-1.7.2.js&quot;</span><span class="kw">&gt;&lt;/script&gt;</span>
+    <span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">&quot;libs/vendors/underscore.js&quot;</span><span class="kw">&gt;&lt;/script&gt;</span>
+    <span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">&quot;libs/vendors/backbone.js&quot;</span><span class="kw">&gt;&lt;/script&gt;</span>
+
+    <span class="kw">&lt;script&gt;</span>
+        $(<span class="kw">function</span> (){
+
+        });
+    <span class="kw">&lt;/script&gt;</span>
+    <span class="kw">&lt;/html&gt;</span></code></pre>
+<p>L'essentiel de notre travail va se passer dans la balise <code>&lt;script&gt;&lt;/script&gt;</code> en bas de page. De quoi avons-nous besoin dans un blog ?</p>
+<ul>
+<li>Des articles : un ensemble d'articles (ou &quot;posts&quot;), généralement écrits par une seule personne (le blog est personnel, c'est en lui donnant des fonctionnalités multi-utilisateurs que nous nous dirigerons doucement vers un CMS).</li>
+<li>Des commentaires : Il est de bon ton de permettre aux lecteurs du blog de pouvoir commenter les articles.</li>
+</ul>
+<p>Pour le moment nous allons nous concentrer uniquement sur les articles, notre objectif sera le suivant : &quot;Afficher une liste d'articles sur la page principale&quot;.</p>
+<h2 id="le-modèle-article"><a href="#TOC"><span class="header-section-number">4.2</span> Le Modèle “Article”</a></h2>
+<p>Dans la balise <code>&lt;script&gt;&lt;/script&gt;</code> saisissez le code suivant :</p>
+<p><u>Définition d’un modèle Article</u></p>
+<pre class="sourceCode html"><code class="sourceCode html">    <span class="kw">&lt;script&gt;</span>
+
+        $(<span class="kw">function</span> (){
+            <span class="co">//permettra d</span>&#39;<span class="co">accéder à nos variables en mode console</span>
+            <span class="kw">window</span>.<span class="fu">blog</span> = {}; 
+
+            <span class="co">/*</span>--- Modèle article ---<span class="co">*/</span>
+
+            <span class="co">// une </span>&quot;<span class="co">sorte</span>&quot;<span class="co"> de classe Article</span>
+            <span class="kw">blog</span>.<span class="fu">Article</span> = <span class="kw">Backbone.Model</span>.<span class="fu">extend</span>({
+                <span class="co">//les valeurs par défaut d</span>&#39;<span class="co">un article</span>
+                <span class="dt">defaults </span>: { 
+                    <span class="dt">title </span>: <span class="st">&quot;titre</span> <span class="st">de</span> <span class="st">l</span>&#39;<span class="st">article&quot;</span>,
+                    <span class="dt">content </span>: <span class="st">&quot;contenu</span> <span class="st">de</span> <span class="st">l</span>&#39;<span class="st">article&quot;</span>,
+                    <span class="dt">publicationDate </span>: <span class="kw">new</span> <span class="kw">Date</span>()
+                },
+                <span class="co">// s</span>&#39;<span class="co">exécute à la création d</span>&#39;<span class="co">un article</span>
+                <span class="dt">initialize </span>: <span class="kw">function</span> () { 
+                    <span class="kw">console</span>.<span class="fu">log</span> (<span class="st">&quot;Création</span> <span class="st">d</span>&#39;<span class="st">un</span> <span class="st">nouvel</span> <span class="st">article&quot;</span>)
+                }
+            });
+
+        });
+
+    <span class="kw">&lt;/script&gt;</span></code></pre>
+<p>Sauvegarder, relancer dans le navigateur, et allez dans la console :</p>
+<ul>
+<li>Pour créer un nouvel article : tapez la commande <code>myFirstArticle = new blog.Article()</code></li>
+<li>Pour &quot;voir&quot; le titre de l'article : tapez la commande <code>myFirstArticle.get(&quot;title&quot;)</code></li>
+<li>Pour &quot;voir&quot; le contenu de l'article : tapez la commande <code>myFirstArticle.get(&quot;content&quot;)</code></li>
+<li>Pour changer le titre de l'article : tapez la commande <code>myFirstArticle.set(&quot;title&quot;,&quot;MON TITRE&quot;)</code> ou <code>myFirstArticle.set({title : &quot;MON TITRE&quot;})</code></li>
+<li>Pour changer simultanément le titre et le contenu : tapez la commande <code>myFirstArticle.set({title : &quot;MON TITRE ...&quot;, content : &quot;blablabla&quot;})</code></li>
+<li>Pour créer un article directement avec un titre et du contenu : tapez la commande <code>mySecondArticle = new blog.Article({title : &quot;MON AUTRE ARTICLE&quot;, content : &quot;lore ipsum ...&quot;})</code></li>
+</ul>
+<p><img src="RSRC/03_01_BB.png" alt="BB" /><br /></p>
+<p>Vous venez donc de voir que nous avons définis le modèle article “un peu” comme une classe qui hériterait (<code>extend</code>) de la classe <code>Backbone.Model</code>, que nous lui avons défini des valeurs par défauts (<code>defaults</code>), et affecté une méthode d’initialisation (<code>initialize</code>). Et qu’il existe un système de getter et de setter un peu particulier (<code>model.get(property_name)</code>, <code>model.set(property_name, value)</code>), mais nous verrons ultérieurement dans le détail comment fonctionnent les modèles.</p>
+<blockquote>
+<blockquote>
+<p><strong>Remarque</strong> <em>: le modèle de programmation de Javascript est bien orienté objet, mais n’est pas orienté “classe” comme peut l’être par exemple Java. Cela peut déstabiliser au départ, mais je vous engage à lire [REF VERS ARTICLE] à ce propos.</em></p>
+</blockquote>
+</blockquote>
+<h2 id="la-collection-darticles"><a href="#TOC"><span class="header-section-number">4.3</span> La Collection d’Articles</a></h2>
+<p>Nous allons maintenant définir une collection qui nous aidera à gérer nos articles. Donc, à la suite du modèle Article saisissez le code suivant :</p>
+<p><u>Définition d’une collection d’articles</u></p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="co">/*--- Collection d&#39;articles ---*/</span>
+
+    <span class="kw">blog</span>.<span class="fu">ArticlesCollection</span> = <span class="kw">Backbone.Collection</span>.<span class="fu">extend</span>({
+        <span class="dt">model </span>: <span class="kw">blog</span>.<span class="fu">Article</span>,
+        <span class="dt">initialize </span>: <span class="kw">function</span> () {
+            <span class="kw">console</span>.<span class="fu">log</span> (<span class="st">&quot;Création d&#39;une collection d&#39;articles&quot;</span>)
+        }
+    });</code></pre>
+<blockquote>
+<blockquote>
+<p><strong>Notez</strong> <em>qu'il faut bien préciser le type de modèle adressé par la collection (on pourrait dire que la collection est typée).</em></p>
+</blockquote>
+</blockquote>
+<p>Sauvegarder, relancer dans le navigateur, et retournez à nouveau dans la console et saisissez les commandes suivantes :</p>
+<ul>
+<li><p>Création de la collection :</p>
+<pre><code>listeArticles = new blog.ArticlesCollection()</code></pre></li>
+<li><p>Ajout d’articles à la collection :</p>
+<pre><code>listeArticles.add(new blog.Article({ title : &quot;titre1&quot;, content : &quot;contenu1&quot; }))
+listeArticles.add(new blog.Article({ title : &quot;titre2&quot;, content : &quot;contenu2&quot; }))
+listeArticles.add(new blog.Article({ title : &quot;titre3&quot;, content : &quot;contenu3&quot; }))</code></pre></li>
+</ul>
+<p>Nous venons donc d'ajouter 3 articles à notre collection,</p>
+<ul>
+<li>Si vous tapez la commande <code>listeArticles.models</code> vous obtiendrez un tableau de modèles</li>
+<li>Si vous souhaitez obtenir le titre du 2ème article de la collection, tapez : <code>listeArticles.models[1].get(&quot;title&quot;)</code></li>
+<li>vous souhaitez parcourir les articles de la collection et afficher leur titre : <code>listeArticles.each(function(article){ console.log (article.get(&quot;title&quot;)); });</code></li>
+</ul>
+<blockquote>
+<blockquote>
+<p>Cela vous rappelle quelque chose ? Le <code>each</code> de Backbone est implémenté grâce à Underscore.</p>
+</blockquote>
+</blockquote>
+<p><img src="RSRC/03_02_BB.png" alt="BB" /><br /></p>
+<p><strong>Maintenant que nous avons de quoi gérer nos données, il est temps de les afficher dans notre page HTML.</strong></p>
+<h2 id="vue-et-template"><a href="#TOC"><span class="header-section-number">4.4</span> Vue et Template</a></h2>
+<p>Avant toute chose, allons ajouter dans notre code javascript (en bas de la page HTML) le bout de code qui va créer les articles et la collection d'articles pour nous éviter de tout re-saisir à chaque fois. Donc après le code de la collection, ajoutez ceci :</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="co">/*--- bootstrap ---*/</span>
+    <span class="kw">blog</span>.<span class="fu">listeArticles</span> = <span class="kw">new</span> <span class="kw">blog</span>.<span class="fu">ArticlesCollection</span>();
+
+    <span class="kw">blog.listeArticles</span>.<span class="fu">add</span>(<span class="kw">new</span> <span class="kw">blog</span>.<span class="fu">Article</span>({ <span class="dt">title </span>: <span class="st">&quot;titre1&quot;</span>, <span class="dt">content </span>: <span class="st">&quot;contenu1&quot;</span> }));
+    <span class="kw">blog.listeArticles</span>.<span class="fu">add</span>(<span class="kw">new</span> <span class="kw">blog</span>.<span class="fu">Article</span>({ <span class="dt">title </span>: <span class="st">&quot;titre2&quot;</span>, <span class="dt">content </span>: <span class="st">&quot;contenu2&quot;</span> }));
+    <span class="kw">blog.listeArticles</span>.<span class="fu">add</span>(<span class="kw">new</span> <span class="kw">blog</span>.<span class="fu">Article</span>({ <span class="dt">title </span>: <span class="st">&quot;titre3&quot;</span>, <span class="dt">content </span>: <span class="st">&quot;contenu3&quot;</span> }));
+    <span class="kw">blog.listeArticles</span>.<span class="fu">add</span>(<span class="kw">new</span> <span class="kw">blog</span>.<span class="fu">Article</span>({ <span class="dt">title </span>: <span class="st">&quot;titre4&quot;</span>, <span class="dt">content </span>: <span class="st">&quot;contenu4&quot;</span> }));
+    <span class="kw">blog.listeArticles</span>.<span class="fu">add</span>(<span class="kw">new</span> <span class="kw">blog</span>.<span class="fu">Article</span>({ <span class="dt">title </span>: <span class="st">&quot;titre5&quot;</span>, <span class="dt">content </span>: <span class="st">&quot;contenu5&quot;</span> }));</code></pre>
+<p>Ensuite dans le code html, ajoutons le template de notre vue et le div dans lequel les données seront affichées :</p>
+<pre class="sourceCode html"><code class="sourceCode html">    <span class="er">&lt;</span>% _.each(articles, function(article) { %&gt;
+    <span class="kw">&lt;h1&gt;</span><span class="er">&lt;</span>%= article.title %&gt;<span class="kw">&lt;/h1&gt;</span>
+    <span class="kw">&lt;h6&gt;</span><span class="er">&lt;</span>%= article.publicationDate %&gt;<span class="kw">&lt;/h6&gt;</span>
+    <span class="kw">&lt;p&gt;</span><span class="er">&lt;</span>%= article.content %&gt;<span class="kw">&lt;/p&gt;</span>
+    <span class="er">&lt;</span>% }); %&gt;</code></pre>
+<p>donc :</p>
+<pre class="sourceCode html"><code class="sourceCode html">    <span class="kw">&lt;body&gt;</span>
+
+        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;navbar navbar-fixed-top&quot;</span><span class="kw">&gt;</span>
+            <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;navbar-inner&quot;</span><span class="kw">&gt;</span>
+                <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;container&quot;</span><span class="kw">&gt;</span>
+                    <span class="kw">&lt;a</span><span class="ot"> class=</span><span class="st">&quot;brand&quot;</span><span class="kw">&gt;</span>Mon Blog<span class="kw">&lt;/a&gt;</span>
+                <span class="kw">&lt;/div&gt;</span>
+            <span class="kw">&lt;/div&gt;</span>
+        <span class="kw">&lt;/div&gt;</span>
+
+        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;container&quot;</span><span class="kw">&gt;</span>
+
+            <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;hero-unit&quot;</span><span class="kw">&gt;</span>
+                <span class="kw">&lt;h1&gt;</span>Backbone rocks !!!<span class="kw">&lt;/h1&gt;</span>
+            <span class="kw">&lt;/div&gt;</span>
+
+            <span class="co">&lt;!-- ìci notre template --&gt;</span>
+            <span class="kw">&lt;script</span><span class="ot"> type=</span><span class="st">&quot;text/template&quot;</span><span class="ot"> id=</span><span class="st">&quot;articles-collection-template&quot;</span><span class="kw">&gt;</span>
+
+                &lt;% <span class="kw">_</span>.<span class="fu">each</span>(articles, <span class="kw">function</span>(article) { %&gt;
+                &lt;h1&gt;&lt;%= <span class="kw">article</span>.<span class="fu">title</span> %&gt;&lt;/h1&gt;
+                &lt;h6&gt;&lt;%= <span class="kw">article</span>.<span class="fu">publicationDate</span> %&gt;&lt;/h6&gt;
+                &lt;p&gt;&lt;%= <span class="kw">article</span>.<span class="fu">content</span> %&gt;&lt;/p&gt;
+                &lt;% }); %&gt;
+
+            <span class="kw">&lt;/script&gt;</span>
+            <span class="co">&lt;!-- les données seront affichées ici --&gt;</span>
+            <span class="kw">&lt;div</span><span class="ot"> id=</span><span class="st">&quot;articles-collection-container&quot;</span><span class="kw">&gt;&lt;/div&gt;</span>
+
+        <span class="kw">&lt;/div&gt;</span>
+
+    <span class="kw">&lt;/body&gt;</span></code></pre>
+<p>Puis dans le code javascript, à la suite du code de la collection et avant le code de chargement des données (bootstrap), ajoutez le code de la vue Backbone :</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="co">/*--- Vues ---*/</span>
+    <span class="kw">blog</span>.<span class="fu">ArticlesView</span> = <span class="kw">Backbone.View</span>.<span class="fu">extend</span>({
+        <span class="dt">el </span>: $(<span class="st">&quot;#articles-collection-container&quot;</span>),
+
+        <span class="dt">initialize </span>: <span class="kw">function</span> () {
+            <span class="kw">this</span>.<span class="fu">template</span> = <span class="kw">_</span>.<span class="fu">template</span>($(<span class="st">&quot;#articles-collection-template&quot;</span>).<span class="fu">html</span>());
+        },
+
+        <span class="dt">render </span>: <span class="kw">function</span> () {
+            <span class="kw">var</span> renderedContent = <span class="kw">this</span>.<span class="fu">template</span>({ <span class="dt">articles </span>: <span class="kw">this</span>.<span class="fu">collection</span>.<span class="fu">toJSON</span>() });
+            $(<span class="kw">this</span>.<span class="fu">el</span>).<span class="fu">html</span>(renderedContent);
+            <span class="kw">return</span> <span class="kw">this</span>;
+        }
+    });</code></pre>
+<h3 id="quavons-nous-fait"><a href="#TOC"><span class="header-section-number">4.4.1</span> Qu’avons-nous fait ?</a></h3>
+<p>Eh bien, nous avons défini une vue avec :</p>
+<ul>
+<li>Une propriété <code>el</code> (pour élément) à laquelle on “attache” le <code>&lt;div&gt;</code> dont l’id est <code>“articles-collection-container”</code>. C’est dans ce <code>&lt;div&gt;</code> que seront affichés les articles</li>
+<li>Une méthode <code>initialize</code>, qui affecte une méthode <code>template()</code> à l’instance de la vue en lui précisant que nous utiliserons le modèle de code html définit dans le <code>&lt;div&gt;</code> dont l’id est <code>“articles-collection-template”</code></li>
+<li>Une méthode <code>render</code>, qui va passer les données en paramètre à la méthode <code>template()</code> puis les afficher dans la page</li>
+</ul>
+<p>Sauvegarder, relancer dans le navigateur, et retournez encore dans la console pour saisir les commandes suivantes :</p>
+<ul>
+<li>Pour instancier une vue : <code>articlesView = new blog.ArticlesView({ collection : blog.listeArticles })</code> à laquelle nous passons la collection d’articles en paramètre</li>
+<li>Pour afficher les données : <code>articlesView.render()</code></li>
+</ul>
+<p><strong>Et là la &quot;magie&quot; de Backbone s'opère, vos articles s'affichent instantanément dans votre page :</strong> :)</p>
+<p><img src="RSRC/03_03_BB.png" alt="BB" /><br /></p>
+<blockquote>
+<blockquote>
+<p><strong>Remarque</strong> : Notez bien que la collection doit être transformée en chaîne JSON pour être interprétée dans le template ( <code>this.template({ articles : this.collection.toJSON() })</code> ) et que nous avons nommé le paramètre <code>articles</code> pour faire le lien avec le template ( <code>_.each(articles, function(article) {}</code> ).</p>
+</blockquote>
+</blockquote>
+<h2 id="un-dernier-tour-de-magie-pour-clôturer-le-chapitre-dinitiation-binding"><a href="#TOC"><span class="header-section-number">4.5</span> Un dernier tour de magie pour clôturer le chapitre d’initiation : “binding”</a></h2>
+<p>A la fin de la méthode <code>initialize</code> de la vue, ajoutez le code suivant :</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="co">/*--- binding ---*/</span>
+    <span class="kw">_</span>.<span class="fu">bindAll</span>(<span class="kw">this</span>, <span class="ch">&#39;render&#39;</span>);
+
+    <span class="kw">this</span>.<span class="fu">collection</span>.<span class="fu">bind</span>(<span class="ch">&#39;change&#39;</span>, <span class="kw">this</span>.<span class="fu">render</span>);
+    <span class="kw">this</span>.<span class="fu">collection</span>.<span class="fu">bind</span>(<span class="ch">&#39;add&#39;</span>, <span class="kw">this</span>.<span class="fu">render</span>);
+    <span class="kw">this</span>.<span class="fu">collection</span>.<span class="fu">bind</span>(<span class="ch">&#39;remove&#39;</span>, <span class="kw">this</span>.<span class="fu">render</span>);
+    <span class="co">/*---------------*/</span></code></pre>
+<h3 id="que-venons-nous-de-faire"><a href="#TOC"><span class="header-section-number">4.5.1</span> Que venons-nous de faire ?</a></h3>
+<p>Nous venons &quot;d'expliquer&quot; à Backbone, qu'à chaque changement dans la collection, la vue doit rafraîchir son contenu. <code>_.bindAll</code> est une méthode d'Underscore (<a href="http://documentcloud.github.com/underscore/#bind">http://documentcloud.github.com/underscore/#bind</a>) qui permet de conserver le contexte initial, c'est à dire : quel que soit &quot;l'endroit&quot; d'où l'on appelle la méthode <code>render</code>, ce sera bien l'instance de la vue (attachée à <code>this</code>) qui sera utilisée.</p>
+<pre><code>//TODO: à expliquer plus simplement</code></pre>
+<p>Une dernière fois, sauvegarder, relancer le navigateur, et retournez encore dans la console pour saisir les commandes suivantes :</p>
+<ul>
+<li>Création de la vue : <code>articlesView = new blog.ArticlesView({ collection : blog.listeArticles })</code></li>
+<li>Afficher les données : <code>articlesView.render()</code></li>
+<li>Ajouter un nouvel article à la collection : <code>blog.listeArticles.add(new blog.Article({title:&quot;Hello&quot;, content:&quot;Hello World&quot;}))</code></li>
+</ul>
+<p><strong>Et là, magique ! : L’affichage s'est actualisé tout seul :</strong></p>
+<h3 id="oh-la-vilaine-erreur"><a href="#TOC"><span class="header-section-number">4.5.2</span> Oh la vilaine erreur !!!</a></h3>
+<p>Si vous avez bien suivi, j'ai fait une grossière erreur (je l’ai laissé volontairement, car c'est une erreur que j'ai déjà faite, et il n'est donc pas impossible que d'autres la fassent), la date de publication ne change pas ! En effet, je l'affecte dans les valeurs par défaut qui ne sont &quot;settées&quot; qu'une seule et unique fois lors de la définition de la &quot;pseudo&quot; classe <code>Backbone.Model</code>. Il faut donc initialiser la date de publication lors de l'instanciation du modèle, et ce dans la méthode <code>initialize()</code>. Modifiez donc le code du modèle de la manière suivante :</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="co">/*--- Modèle article ---*/</span>
+
+    <span class="kw">blog</span>.<span class="fu">Article</span> = <span class="kw">Backbone.Model</span>.<span class="fu">extend</span>({ <span class="co">// une &quot;sorte&quot; de classe Article</span>
+        <span class="dt">defaults </span>: { <span class="co">//les valeurs par défaut d&#39;un article</span>
+            <span class="dt">title </span>: <span class="st">&quot;titre de l&#39;article&quot;</span>,
+            <span class="dt">content </span>: <span class="st">&quot;contenu de l&#39;article&quot;</span>,
+            <span class="co">//publicationDate : null</span>
+        },
+        <span class="dt">initialize </span>: <span class="kw">function</span> () { <span class="co">// s&#39;exécute à la création d&#39;un article</span>
+            <span class="kw">console</span>.<span class="fu">log</span> (<span class="st">&quot;Création d&#39;un nouvel article&quot;</span>);
+            <span class="kw">this</span>.<span class="fu">set</span>(<span class="st">&quot;publicationDate&quot;</span>,<span class="kw">new</span> <span class="kw">Date</span>());
+        }
+    });</code></pre>
+<p>Refaites les manipulations précédentes, et là (si vous avez laissez suffisamment de temps entre la création des articles), vous pourrez noter que la date est bien mise à jour :</p>
+<p><img src="RSRC/03_04_BB.png" alt="BB" /><br /> <img src="RSRC/03_05_BB.png" alt="BB" /><br /></p>
+<blockquote>
+<blockquote>
+<p><strong>Remarque</strong> : la propriété date n’existe plus dans les valeurs par défaut, elle est créée à l’instanciation du modèle lors de l’appel de <code>this.set(&quot;publicationDate&quot;,new Date())</code> dans la méthode <code>initialize</code>. De la même manière, vous pouvez créer à la volée des propriétés “à posteriori” pour les instances des modèles.</p>
+</blockquote>
+</blockquote>
+<p><strong>Et voilà, l’initiation est terminée. Nous allons pouvoir passer “aux choses sérieuses” et découvrir jusqu’où nous pouvons “pousser” Backbone.</strong></p>
+<h2 id="code-final-de-lexemple"><a href="#TOC"><span class="header-section-number">4.6</span> Code final de l'exemple</a></h2>
+<p>Le code final de votre page devrait ressembler à ceci :</p>
+<pre class="sourceCode html"><code class="sourceCode html">    <span class="dt">&lt;!DOCTYPE </span>html<span class="dt">&gt;</span>
+    <span class="kw">&lt;html&gt;</span>
+    <span class="kw">&lt;head&gt;</span>
+        <span class="kw">&lt;meta</span><span class="ot"> http-equiv=</span><span class="st">&quot;Content-Type&quot;</span><span class="ot"> content=</span><span class="st">&quot;text/html; charset=utf-8&quot;</span><span class="kw">&gt;</span>
+        <span class="kw">&lt;title&gt;</span>Backbone<span class="kw">&lt;/title&gt;</span>
+        <span class="kw">&lt;link</span><span class="ot"> href=</span><span class="st">&quot;libs/vendors/bootstrap/css/bootstrap.css&quot;</span><span class="ot"> rel=</span><span class="st">&quot;stylesheet&quot;</span><span class="kw">&gt;</span>
+        <span class="kw">&lt;style&gt;</span>
+            body <span class="kw">{</span>
+                <span class="kw">padding-top:</span> <span class="dt">60px</span><span class="kw">;</span>
+                <span class="kw">padding-bottom:</span> <span class="dt">40px</span><span class="kw">;</span>
+            <span class="kw">}</span>
+        <span class="kw">&lt;/style&gt;</span>
+        <span class="kw">&lt;link</span><span class="ot"> href=</span><span class="st">&quot;libs/vendors/bootstrap/css/bootstrap-responsive.css&quot;</span><span class="ot"> rel=</span><span class="st">&quot;stylesheet&quot;</span><span class="kw">&gt;</span>
+    <span class="kw">&lt;/head&gt;</span>
+
+    <span class="kw">&lt;body&gt;</span>
+
+        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;navbar navbar-fixed-top&quot;</span><span class="kw">&gt;</span>
+            <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;navbar-inner&quot;</span><span class="kw">&gt;</span>
+                <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;container&quot;</span><span class="kw">&gt;</span>
+                    <span class="kw">&lt;a</span><span class="ot"> class=</span><span class="st">&quot;brand&quot;</span><span class="kw">&gt;</span>Mon Blog<span class="kw">&lt;/a&gt;</span>
+                <span class="kw">&lt;/div&gt;</span>
+            <span class="kw">&lt;/div&gt;</span>
+        <span class="kw">&lt;/div&gt;</span>
+
+        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;container&quot;</span><span class="kw">&gt;</span>
+
+            <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;hero-unit&quot;</span><span class="kw">&gt;</span>
+                <span class="kw">&lt;h1&gt;</span>Backbone rocks !!!<span class="kw">&lt;/h1&gt;</span>
+            <span class="kw">&lt;/div&gt;</span>
+
+            <span class="co">&lt;!-- Template d&#39;affichage des articles --&gt;</span>
+            <span class="kw">&lt;script</span><span class="ot"> type=</span><span class="st">&quot;text/template&quot;</span><span class="ot"> id=</span><span class="st">&quot;articles-collection-template&quot;</span><span class="kw">&gt;</span>
+
+                &lt;% <span class="kw">_</span>.<span class="fu">each</span>(articles, <span class="kw">function</span>(article) { %&gt;
+                &lt;h1&gt;&lt;%= <span class="kw">article</span>.<span class="fu">title</span> %&gt;&lt;/h1&gt;
+                &lt;h6&gt;&lt;%= <span class="kw">article</span>.<span class="fu">publicationDate</span> %&gt;&lt;/h6&gt;
+                &lt;p&gt;&lt;%= <span class="kw">article</span>.<span class="fu">content</span> %&gt;&lt;/p&gt;
+                &lt;% }); %&gt;
+
+            <span class="kw">&lt;/script&gt;</span>
+            <span class="co">&lt;!-- div où seront affichés les articles --&gt;</span>
+            <span class="kw">&lt;div</span><span class="ot"> id=</span><span class="st">&quot;articles-collection-container&quot;</span><span class="kw">&gt;&lt;/div&gt;</span>
+
+        <span class="kw">&lt;/div&gt;</span>
+
+    <span class="kw">&lt;/body&gt;</span>
+    <span class="co">&lt;!-- === Frameworks === --&gt;</span>
+    <span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">&quot;libs/vendors/jquery-1.7.2.js&quot;</span><span class="kw">&gt;&lt;/script&gt;</span>
+    <span class="co">&lt;!--&lt;script src=&quot;libs/vendors/bootstrap/js/bootstrap.js&quot;&gt;&lt;/script&gt;--&gt;</span>
+    <span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">&quot;libs/vendors/underscore.js&quot;</span><span class="kw">&gt;&lt;/script&gt;</span>
+    <span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">&quot;libs/vendors/backbone.js&quot;</span><span class="kw">&gt;&lt;/script&gt;</span>
+
+    <span class="co">&lt;!-- === code applicatif === --&gt;</span>
+    <span class="kw">&lt;script&gt;</span>
+
+        $(<span class="kw">function</span> (){
+            <span class="kw">window</span>.<span class="fu">blog</span> = {};
+
+            <span class="co">/*</span>--- Modèle article ---<span class="co">*/</span>
+
+            <span class="kw">blog</span>.<span class="fu">Article</span> = <span class="kw">Backbone.Model</span>.<span class="fu">extend</span>({
+                <span class="dt">defaults </span>: {
+                    <span class="dt">title </span>: <span class="st">&quot;titre</span> <span class="st">de</span> <span class="st">l</span>&#39;<span class="st">article&quot;</span>,
+                    <span class="dt">content </span>: <span class="st">&quot;contenu</span> <span class="st">de</span> <span class="st">l</span>&#39;<span class="st">article&quot;</span>,
+                },
+                <span class="dt">initialize </span>: <span class="kw">function</span> () {
+                    <span class="kw">console</span>.<span class="fu">log</span> (<span class="st">&quot;Création</span> <span class="st">d</span>&#39;<span class="st">un</span> <span class="st">nouvel</span> <span class="st">article&quot;</span>);
+                    <span class="kw">this</span>.<span class="fu">set</span>(<span class="st">&quot;publicationDate&quot;</span>,<span class="kw">new</span> <span class="kw">Date</span>());
+                }
+            });
+
+            <span class="co">/*</span>--- Collection d&#39;articles ---<span class="co">*/</span>
+
+            <span class="kw">blog</span>.<span class="fu">ArticlesCollection</span> = <span class="kw">Backbone.Collection</span>.<span class="fu">extend</span>({
+                <span class="dt">model </span>: <span class="kw">blog</span>.<span class="fu">Article</span>,
+                <span class="dt">initialize </span>: <span class="kw">function</span> () {
+                    <span class="kw">console</span>.<span class="fu">log</span> (<span class="st">&quot;Création</span> <span class="st">d</span>&#39;<span class="st">une</span> <span class="st">collection</span> <span class="st">d</span>&#39;<span class="st">articles&quot;</span>)
+                }
+            });
+
+            <span class="co">/*</span>--- Vues ---<span class="co">*/</span>
+            <span class="kw">blog</span>.<span class="fu">ArticlesView</span> = <span class="kw">Backbone.View</span>.<span class="fu">extend</span>({
+
+                <span class="dt">el </span>: $(<span class="st">&quot;</span>#<span class="st">articles</span>-<span class="st">collection</span>-<span class="st">container&quot;</span>),
+
+                <span class="dt">initialize </span>: <span class="kw">function</span> () {
+                    <span class="kw">this</span>.<span class="fu">template</span> = <span class="kw">_</span>.<span class="fu">template</span>($(<span class="st">&quot;</span>#<span class="st">articles</span>-<span class="st">collection</span>-<span class="st">template&quot;</span>).<span class="fu">html</span>());
+
+                    <span class="co">/*</span>--- binding ---<span class="co">*/</span>
+                    <span class="kw">_</span>.<span class="fu">bindAll</span>(<span class="kw">this</span>, <span class="ch">&#39;render&#39;</span>);
+
+                    <span class="kw">this</span>.<span class="fu">collection</span>.<span class="fu">bind</span>(<span class="ch">&#39;change&#39;</span>, <span class="kw">this</span>.<span class="fu">render</span>);
+                    <span class="kw">this</span>.<span class="fu">collection</span>.<span class="fu">bind</span>(<span class="ch">&#39;add&#39;</span>, <span class="kw">this</span>.<span class="fu">render</span>);
+                    <span class="kw">this</span>.<span class="fu">collection</span>.<span class="fu">bind</span>(<span class="ch">&#39;remove&#39;</span>, <span class="kw">this</span>.<span class="fu">render</span>);
+                    <span class="co">/*</span>---------------<span class="co">*/</span>
+                },
+
+                <span class="dt">render </span>: <span class="kw">function</span> () {
+                    <span class="kw">var</span> renderedContent = <span class="kw">this</span>.<span class="fu">template</span>({ <span class="dt">articles </span>: <span class="kw">this</span>.<span class="fu">collection</span>.<span class="fu">toJSON</span>() });
+                    $(<span class="kw">this</span>.<span class="fu">el</span>).<span class="fu">html</span>(renderedContent);
+                    <span class="kw">return</span> <span class="kw">this</span>;
+                }
+            });
+
+            <span class="co">/*</span>--- bootstrap ---<span class="co">*/</span>
+            <span class="kw">blog</span>.<span class="fu">listeArticles</span> = <span class="kw">new</span> <span class="kw">blog</span>.<span class="fu">ArticlesCollection</span>();
+
+            <span class="kw">blog.listeArticles</span>.<span class="fu">add</span>(<span class="kw">new</span> <span class="kw">blog</span>.<span class="fu">Article</span>({ <span class="dt">title </span>: <span class="st">&quot;titre1&quot;</span>, <span class="dt">content </span>: <span class="st">&quot;contenu1&quot;</span> }));
+            <span class="kw">blog.listeArticles</span>.<span class="fu">add</span>(<span class="kw">new</span> <span class="kw">blog</span>.<span class="fu">Article</span>({ <span class="dt">title </span>: <span class="st">&quot;titre2&quot;</span>, <span class="dt">content </span>: <span class="st">&quot;contenu2&quot;</span> }));
+            <span class="kw">blog.listeArticles</span>.<span class="fu">add</span>(<span class="kw">new</span> <span class="kw">blog</span>.<span class="fu">Article</span>({ <span class="dt">title </span>: <span class="st">&quot;titre3&quot;</span>, <span class="dt">content </span>: <span class="st">&quot;contenu3&quot;</span> }));
+            <span class="kw">blog.listeArticles</span>.<span class="fu">add</span>(<span class="kw">new</span> <span class="kw">blog</span>.<span class="fu">Article</span>({ <span class="dt">title </span>: <span class="st">&quot;titre4&quot;</span>, <span class="dt">content </span>: <span class="st">&quot;contenu4&quot;</span> }));
+            <span class="kw">blog.listeArticles</span>.<span class="fu">add</span>(<span class="kw">new</span> <span class="kw">blog</span>.<span class="fu">Article</span>({ <span class="dt">title </span>: <span class="st">&quot;titre5&quot;</span>, <span class="dt">content </span>: <span class="st">&quot;contenu5&quot;</span> }));
+
+        });
+    <span class="kw">&lt;/script&gt;</span>
+    <span class="kw">&lt;/html&gt;</span></code></pre>
+</body>
+</html>
