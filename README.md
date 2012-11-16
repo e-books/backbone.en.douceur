@@ -1,6 +1,6 @@
 <hr>
 
-###[Télécharger le pdf (v° alpha)](https://github.com/downloads/k33g/backbone.en.douceur/backbone.en.douceur.pdf)
+###[Télécharger le pdf (v° alpha)](https://github.com/downloads/k33g/backbone.en.douceur/backbone.en.douceur.pdf) *(4 chapitres)*
 
 ###[Voir le code source](https://github.com/k33g/backbone.en.douceur)
 
