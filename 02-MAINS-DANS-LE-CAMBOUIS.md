@@ -38,7 +38,7 @@ Pour coder choisissez l'éditeur de code avec lequel vous vous sentez le plus à
 - Textmate (payant) un éditeur de texte avec colorisation syntaxique, un classique sous OSX
 - SublimeText (payant) un peu l'équivalent de Textmate mais toutes plateformes
 - Un bon compromis est KomodoEdit dans sa version communauté (donc non payant) et qui lui aussi fonctionne sur toutes les plateformes.
-- Apatana fourni aussi un bo@n IDE dédié Javascript sur une base Eclipse, mais je trouve qui propose finalement trop de fonctionnalités (comme Eclipse), et personnellement je m’y perds.
+- Apatana fourni aussi un bon IDE dédié Javascript sur une base Eclipse, mais je trouve qui propose finalement trop de fonctionnalités (comme Eclipse), et personnellement je m’y perds.
 
 Vous voyez, il y en a pour tous les goûts. En ce qui me concerne j'utilise essentiellement Webstorm ou SublimeText.
 
@@ -125,7 +125,8 @@ Dans notre toute nouvelle page `index.html`, préparons un peu notre bac à sabl
 	    <!-- === à insérer entre les 2 <link> === -->
 	    <style>
 	        body {
-	            padding-top: 60px; /* 60px pour mettre un peu d'espace entre la barre de titre et le contenu */
+	            padding-top: 60px; 
+	            /* 60px pour mettre un peu d'espace entre la barre de titre et le contenu */
 	            padding-bottom: 40px;
 	        }
 	    </style>
@@ -137,7 +138,8 @@ Dans notre toute nouvelle page `index.html`, préparons un peu notre bac à sabl
 	<!-- === ici votre IHM === -->
 	<body>
 	    <!--
-	       les classe css "navbar navbar-fixed-top", "navbar-inner", "container", "brand", "hero-unit"
+	       les classe css "navbar navbar-fixed-top", "navbar-inner", "container", 
+	       "brand", "hero-unit"
 	       viennent de la feuille de style "twitter bootstrap "
 	    -->
 	    <div class="navbar navbar-fixed-top">
@@ -230,9 +232,14 @@ Je voudrais :
 
 - changer le titre de mon blog : `$('h1').first().text("Backbone c'est top !")`, attention pensez bien au `first()` sinon vous allez changer tous les textes de tous les `H1` de la page.
 - récupérer le code HTML de la "boîte de titre" (le div avec la classe css : `class="hero-unit"`) : `$('[class="hero-unit"]').html()`, notez bien que `$('[class="hero-unit"]').text()` ne retourne pas le même résultat. On peut aussi écrire ceci plus simplement : `$('.hero-unit').html()` : le `"."` correspond à une classe css, comme le `"#"` permet de rechercher un élément par son id.
-- changer les couleurs de police et de fond de tous les tags H1 : `$('h1').css("color","white").css("background-color","black")`, vous voyez que vous pouvez faire des appels chaînés, mais une autre possibilité serait la suivante : `$('h1').css({color:"yellow", backgroundColor:"green"})`
+- changer les couleurs de police et de fond de tous les tags H1 : 
+
+       `$('h1').css("color","white").css("background-color","black")`, vous voyez que vous pouvez faire des appels chaînés, mais une autre possibilité serait la suivante : 
+
+			$('h1').css({color:"yellow", backgroundColor:"green"})
 
 ![jQuery](RSRC/02_07_JQUERY.png)\
+
 
 ![jQuery](RSRC/02_08_JQUERY.png)\
 
@@ -244,7 +251,10 @@ Je voudrais :
 
 - la valeur de l'id de la deuxième liste (`UL`) : `$('ul').eq(1).attr("id")`, je cherche la liste d'index 1 (le 1er élément possède l'index 0).
 - parcourir les lignes (`LI`) de la liste dont l'id est `"next_articles_list"` et obtenir leur texte : `$('#next_articles_list').find('li').each(function (index) { console.log( $(this).text() ); })`
-- ajouter une nouvelle ligne à la 2ème liste : `$('<li>Templating et Backbone</li>').appendTo('#next_articles_list')`
+- ajouter une nouvelle ligne à la 2ème liste : 
+
+        $('<li>Templating et Backbone</li>').appendTo('#next_articles_list')
+
 - cacher la 1ère liste : `$('#current_articles_list').hide()`
 - l'afficher à nouveau : `$('#current_articles_list').show()`
 - la cacher à nouveau, mais "doucement" : `$('#current_articles_list').hide('slow')`
@@ -255,7 +265,7 @@ Je voudrais :
 
 ###Les évènements
 
-	//À traiter
+	//À traiter ...
 
 ###Quelques bonnes pratiques
 
@@ -358,13 +368,13 @@ Et nous obtenons bien :
 
 Je vous en parle maintenant, car ce "bijou" va nous servir très rapidement. Je voudrais générer une liste au sens HTML (`<ul><li></li></ul>`) à partir de mon tableau d'objets buddies. Nous allons donc créer une variable “template” (un peu comme une page JSP ou ASP) :
 
-```javascript
+
     var templateList =
     "<ul> <% _.each(buddies, function (buddy) { %>\
     <li><%= buddy.name %> : <%= buddy.age %> </li>\
     <% }); %>\
     </ul>";
-```
+
 
 Que nous utiliserons de cette façon (nous passons à la méthode le template et les données):
 

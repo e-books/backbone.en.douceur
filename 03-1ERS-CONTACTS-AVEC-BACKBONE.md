@@ -441,7 +441,9 @@ Le code final de votre page devrait ressembler à ceci :
 	            },
 
 	            render : function () {
-	                var renderedContent = this.template({ articles : this.collection.toJSON() });
+	                var renderedContent = this.template({ 
+	                	articles : this.collection.toJSON() 
+	                });
 	                $(this.el).html(renderedContent);
 	                return this;
 	            }
@@ -450,11 +452,21 @@ Le code final de votre page devrait ressembler à ceci :
 	        /*--- bootstrap ---*/
 	        blog.listeArticles = new blog.ArticlesCollection();
 
-	        blog.listeArticles.add(new blog.Article({ title : "titre1", content : "contenu1" }));
-	        blog.listeArticles.add(new blog.Article({ title : "titre2", content : "contenu2" }));
-	        blog.listeArticles.add(new blog.Article({ title : "titre3", content : "contenu3" }));
-	        blog.listeArticles.add(new blog.Article({ title : "titre4", content : "contenu4" }));
-	        blog.listeArticles.add(new blog.Article({ title : "titre5", content : "contenu5" }));
+	        blog.listeArticles.add(new blog.Article({ 
+	        	title : "titre1", content : "contenu1" 
+	        }));
+	        blog.listeArticles.add(new blog.Article({ 
+	        	title : "titre2", content : "contenu2" 
+	        }));
+	        blog.listeArticles.add(new blog.Article({ 
+	        	title : "titre3", content : "contenu3" 
+	        }));
+	        blog.listeArticles.add(new blog.Article({ 
+	        	title : "titre4", content : "contenu4" 
+	        }));
+	        blog.listeArticles.add(new blog.Article({ 
+	        	title : "titre5", content : "contenu5" 
+	        }));
 
 	    });
 	</script>

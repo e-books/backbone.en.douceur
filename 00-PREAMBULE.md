@@ -1,4 +1,4 @@
-#Préambule
+#Préambule & Remerciements
 
 J'ai eu la prétention d'écrire un livre, et sur Backbone en plus ! En fait il n'existe peu de littérature française spécialisée sur des frameworks, qui plus est des framework javascript, alors que nos amis anglo-saxons écrivent sur Dart, Coffeescript, Backbone, etc. ...
 Au départ ce "bouquin" est un projet un peu fou, puisque j'ai même contacté les éditions Eyrolles (quand je vous disais que j'étais prétentieux ;) ). Et ils ont été d'accord ! Alors vous vous demandez pourquoi, finalement je publie ça de manière open source ?
@@ -20,4 +20,6 @@ Remerciements aussi pour :
 - [ehsavoie](https://github.com/ehsavoie) : 1ère pull request ;)
 
 
+##Avertissement
 
+Cet ouvrage est destiné à être purement éducatif. donc dès fois le code n'est pas fait dans les "règles de l'art", mais plutôt avec une "vision" pédagogique. Désolé donc pour les puristes, mais à priori vous n'êtes pas la cible ;). Cependant, je serais ravi de pouvoir inclure vos remarques et bonnes pratiques sous forme de notes dans chacun des chapitres. Donc à vos pull-requests !

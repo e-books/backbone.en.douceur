@@ -8,21 +8,21 @@
 
 Cet ouvrage va traiter au moins les points suivants :
 
-- 00-Préambule & Remerciements *(publié)*
-- 01-Présentation *(publié)*
-- 02-Prérequis : jQuery & Underscore *(publié)*
-- 03-Premiers contacts avec Backbone *(publié)*
-- 04-Le modèle objet de Backbone *(publié)*
-- 05-Il nout faut un serveur & Principes REST
-- 06-Les Modèles & Collections en détail
-- 07-Les Vues & Templating
-- 08-Le Routeur
-- 09-Organiser son code
-- 10-Backbone.Sync
-- 11-Backbone & Coffeescript
-- 12-Autres frameworks MVC
-- 13-Backbone & Typescript
-- 14-Ressources
+- 01-Préambule & Remerciements *(publié)*
+- 02-Présentation *(publié)*
+- 03-Prérequis : jQuery & Underscore *(publié)*
+- 04-Premiers contacts avec Backbone *(publié)*
+- 05-Le modèle objet de Backbone *(publié)*
+- 06-Il nout faut un serveur & Principes REST *(publié)*
+- 07-Les Modèles & Collections en détail
+- 08-Les Vues & Templating
+- 09-Le Routeur
+- 10-Organiser son code
+- 11-Backbone.Sync
+- 12-Backbone & Coffeescript
+- 13-Autres frameworks MVC
+- 14-Backbone & Typescript
+- 15-Ressources
 
 Soyez patient, l'ensemble des chapitres sera publié avant fin décembre. J'ai juste besoin d'un peu de temps entre ma vie de famille, ma vie pro et ma vie de geek.
 
