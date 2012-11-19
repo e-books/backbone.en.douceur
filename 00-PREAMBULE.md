@@ -18,6 +18,7 @@ Je tiens à remercier très fortement et tout particulièrement, pour leur écou
 Remerciements aussi pour :
 
 - [ehsavoie](https://github.com/ehsavoie) : 1ère pull request ;)
+- [lodennan](https://github.com/lodennan)
 
 
 ##Avertissement
