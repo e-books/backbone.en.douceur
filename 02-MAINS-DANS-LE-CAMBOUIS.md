@@ -33,7 +33,7 @@ Nous verrons dans quelques chapitres qu'il est tout à fait possible de "marier"
 
 Pour coder choisissez l'éditeur de code avec lequel vous vous sentez le plus à l'aise. Ils ont tous leurs spécificités, ils sont gratuits, open-source ou payants. Certains "puristes" utilisent même Vim ou Emacs. Je vous en livre ici quelques-uns que j'ai trouvé agréables à utiliser si vous n'avez pas déjà fait votre choix :
 
-- Mon préféré mais payant : Webstorm de chez IntelliJ, il possède des fonctionnalités de refactoring très utiles (existe sous Windows, Linux et OSX)
+- Mon préféré mais payant : WebStorm de chez JetBrains, il possède des fonctionnalités de refactoring très utiles (existe sous Windows, Linux et OSX)
 - Dans le même esprit et gratuit : Netbeans, il propose un éditeur HTML/Javascript très pertinent quant à la qualité de votre code (existe sous Windows, Linux et OSX)
 - Textmate (payant) un éditeur de texte avec colorisation syntaxique, un classique sous OSX
 - SublimeText (payant) un peu l'équivalent de Textmate mais toutes plateformes
