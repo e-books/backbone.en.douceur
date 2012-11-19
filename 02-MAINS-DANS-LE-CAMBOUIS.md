@@ -38,9 +38,9 @@ Pour coder choisissez l'éditeur de code avec lequel vous vous sentez le plus à
 - Textmate (payant) un éditeur de texte avec colorisation syntaxique, un classique sous OSX
 - SublimeText (payant) un peu l'équivalent de Textmate mais toutes plateformes
 - Un bon compromis est KomodoEdit dans sa version communauté (donc non payant) et qui lui aussi fonctionne sur toutes les plateformes.
-- Apatana fourni aussi un bon IDE dédié Javascript sur une base Eclipse, mais je trouve qui propose finalement trop de fonctionnalités (comme Eclipse), et personnellement je m’y perds.
+- Aptana fourni aussi un bon IDE dédié Javascript sur une base Eclipse, mais je trouve qu'il propose finalement trop de fonctionnalités (comme Eclipse), et personnellement je m’y perds.
 
-Vous voyez, il y en a pour tous les goûts. En ce qui me concerne j'utilise essentiellement Webstorm ou SublimeText.
+Vous voyez, il y en a pour tous les goûts. En ce qui me concerne j'utilise essentiellement WebStorm ou SublimeText.
 
 ###Navigateur
 
@@ -100,7 +100,7 @@ A la racine de votre répertoire de travail, créez une page index.html avec le 
 	</html>
 ```
 
-A ce niveau vous devriez avoir un squelette de projet fonctionnel avec l'arborescence suivante :
+A ce niveau, vous devriez avoir un squelette de projet fonctionnel avec l'arborescence suivante :
 
 ![Arborecsence](RSRC/02_01_ARBO.png)\
 
