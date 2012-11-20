@@ -34,4 +34,14 @@ pandoc -s --toc --latex-engine=xelatex --template=latex.template.tex -N \
 	07-VUES-ET-TEMPLATING.md
 
 
-
+#Epub version
+pandoc -S --epub-metadata=epub-metadata.xml -o backbone.en.douceur.epub \
+	epub-title.txt \
+	00-PREAMBULE.md \
+	01-PRESENTATION.md \
+	02-MAINS-DANS-LE-CAMBOUIS.md \
+	03-1ERS-CONTACTS-AVEC-BACKBONE.md \
+	04-LE-MODELE-OBJET-DE-BACKBONE.md \
+	05-IL-NOUS-FAUT-UN-SERVEUR.md \
+	06-MODELES-ET-COLLECTIONS.md \
+	07-VUES-ET-TEMPLATING.md
