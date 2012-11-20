@@ -1,6 +1,6 @@
 <hr>
 
-###Les Modèles & les Collections sont arrivés : [Télécharger le pdf (v° alpha du 20/11/2012)](https://github.com/downloads/k33g/backbone.en.douceur/backbone.en.douceur.20121120.pdf) *(7 chapitres)*
+###[Les Modèles & les Collections sont arrivés : Télécharger le pdf (v° alpha du 20/11/2012)](https://github.com/downloads/k33g/backbone.en.douceur/backbone.en.douceur.20121120.pdf) *(7 chapitres)*
 
 ###[Voir le code source](https://github.com/k33g/backbone.en.douceur)
 
