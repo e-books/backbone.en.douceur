@@ -82,7 +82,7 @@ Pour le moment nous allons nous concentrer uniquement sur les articles, notre ob
 
 Dans la balise `<script></script>` saisissez le code suivant :
 
-<u>Définition d’un modèle Article</u>
+*Définition d’un modèle Article :*
 
 ```html
 	<script>
@@ -133,7 +133,7 @@ Vous venez donc de voir que nous avons définis le modèle article “un peu” 
 
 Nous allons maintenant définir une collection qui nous aidera à gérer nos articles. Donc, à la suite du modèle Article saisissez le code suivant :
 
-<u>Définition d’une collection d’articles</u>
+*Définition d’une collection d’articles :*
 
 ```javascript
 	/*--- Collection d'articles ---*/

@@ -116,6 +116,36 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <li><a href="#supprimer-un-enregistrement"><span class="toc-section-number">6.4.6</span> Supprimer un enregistrement</a></li>
 </ul></li>
 </ul></li>
+<li><a href="#les-modèles-et-les-collections-en-détail"><span class="toc-section-number">7</span> Les modèles et les collections en détail</a><ul>
+<li><a href="#fonctionnement-général"><span class="toc-section-number">7.1</span> Fonctionnement général</a></li>
+<li><a href="#modèles"><span class="toc-section-number">7.2</span> Modèles</a><ul>
+<li><a href="#définition-du-modèle"><span class="toc-section-number">7.2.1</span> Définition du modèle</a></li>
+<li><a href="#getters-et-setters"><span class="toc-section-number">7.2.2</span> Getters et Setters</a></li>
+<li><a href="#structure-dun-modèle"><span class="toc-section-number">7.2.3</span> Structure d'un modèle</a></li>
+<li><a href="#méthodes-crud-du-modèle"><span class="toc-section-number">7.2.4</span> Méthodes “CRUD” du modèle</a><ul>
+<li><a href="#méthodes-save-création-mise-à-jour"><span class="toc-section-number">7.2.4.1</span> Méthodes save() : création &amp; mise à jour<br /></a></li>
+<li><a href="#méthode-fetch-retrouver-un-modèle"><span class="toc-section-number">7.2.4.2</span> Méthode fetch() : retrouver un modèle<br /></a></li>
+<li><a href="#méthode-destroy-supprimer-un-modèle-du-serveur"><span class="toc-section-number">7.2.4.3</span> Méthode destroy() : supprimer un modèle du serveur<br /></a></li>
+</ul></li>
+<li><a href="#evénements"><span class="toc-section-number">7.2.5</span> Evénements</a></li>
+<li><a href="#constructeur-initialize"><span class="toc-section-number">7.2.6</span> Constructeur : initialize</a></li>
+<li><a href="#augmenter-le-modèle-ajouter-des-valeurs-par-défaut-et-des-méthodes-au-modèle"><span class="toc-section-number">7.2.7</span> “Augmenter” le modèle : ajouter des valeurs par défaut et des méthodes au modèle</a></li>
+<li><a href="#comment-détecter-quun-modèle-a-été-changé-par-quelquun-dautre"><span class="toc-section-number">7.2.8</span> Comment détecter qu’un modèle a été changé par quelqu’un d’autre ?</a></li>
+</ul></li>
+<li><a href="#collections"><span class="toc-section-number">7.3</span> Collections</a><ul>
+<li><a href="#comment-ajouter-des-modèles-à-une-collection"><span class="toc-section-number">7.3.1</span> Comment ajouter des modèles à une collection</a></li>
+<li><a href="#parcourir-les-modèles-dune-collection"><span class="toc-section-number">7.3.2</span> Parcourir les modèles d’une collection</a></li>
+<li><a href="#filtrer-les-modèles-dune-collection"><span class="toc-section-number">7.3.3</span> Filtrer les modèles d’une collection</a></li>
+<li><a href="#trouver-le-1er-modèle-dune-collection-correspondant-à-un-critère"><span class="toc-section-number">7.3.4</span> Trouver le 1er modèle d’une collection correspondant à un critère</a></li>
+<li><a href="#autres-méthodes-de-la-collection"><span class="toc-section-number">7.3.5</span> Autres méthodes de la collection</a></li>
+</ul></li>
+<li><a href="#les-collections-parlent-au-serveur"><span class="toc-section-number">7.4</span> Les collections “parlent” au serveur</a><ul>
+<li><a href="#charger-les-données"><span class="toc-section-number">7.4.1</span> Charger les données</a></li>
+<li><a href="#requêtes"><span class="toc-section-number">7.4.2</span> Requêtes</a></li>
+</ul></li>
+<li><a href="#evénements-1"><span class="toc-section-number">7.5</span> Evénements</a></li>
+</ul></li>
+<li><a href="#vues-templating"><span class="toc-section-number">8</span> Vues &amp; Templating</a></li>
 </ul>
 </div>
 <h1 id="préambule-remerciements"><a href="#TOC"><span class="header-section-number">1</span> Préambule &amp; Remerciements</a></h1>
@@ -131,6 +161,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <p>Remerciements aussi pour :</p>
 <ul>
 <li><a href="https://github.com/ehsavoie">ehsavoie</a> : 1ère pull request ;)</li>
+<li><a href="https://github.com/lodennan">lodennan</a></li>
 </ul>
 <h2 id="avertissement"><a href="#TOC"><span class="header-section-number">1.1</span> Avertissement</a></h2>
 <p>Cet ouvrage est destiné à être purement éducatif. donc dès fois le code n'est pas fait dans les &quot;règles de l'art&quot;, mais plutôt avec une &quot;vision&quot; pédagogique. Désolé donc pour les puristes, mais à priori vous n'êtes pas la cible ;). Cependant, je serais ravi de pouvoir inclure vos remarques et bonnes pratiques sous forme de notes dans chacun des chapitres. Donc à vos pull-requests !</p>
@@ -266,14 +297,14 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <h3 id="ide-editeur"><a href="#TOC"><span class="header-section-number">3.2.1</span> IDE (Editeur)</a></h3>
 <p>Pour coder choisissez l'éditeur de code avec lequel vous vous sentez le plus à l'aise. Ils ont tous leurs spécificités, ils sont gratuits, open-source ou payants. Certains &quot;puristes&quot; utilisent même Vim ou Emacs. Je vous en livre ici quelques-uns que j'ai trouvé agréables à utiliser si vous n'avez pas déjà fait votre choix :</p>
 <ul>
-<li>Mon préféré mais payant : Webstorm de chez IntelliJ, il possède des fonctionnalités de refactoring très utiles (existe sous Windows, Linux et OSX)</li>
+<li>Mon préféré mais payant : WebStorm de chez JetBrains, il possède des fonctionnalités de refactoring très utiles (existe sous Windows, Linux et OSX)</li>
 <li>Dans le même esprit et gratuit : Netbeans, il propose un éditeur HTML/Javascript très pertinent quant à la qualité de votre code (existe sous Windows, Linux et OSX)</li>
 <li>Textmate (payant) un éditeur de texte avec colorisation syntaxique, un classique sous OSX</li>
 <li>SublimeText (payant) un peu l'équivalent de Textmate mais toutes plateformes</li>
 <li>Un bon compromis est KomodoEdit dans sa version communauté (donc non payant) et qui lui aussi fonctionne sur toutes les plateformes.</li>
-<li>Apatana fourni aussi un bon IDE dédié Javascript sur une base Eclipse, mais je trouve qui propose finalement trop de fonctionnalités (comme Eclipse), et personnellement je m’y perds.</li>
+<li>Aptana fourni aussi un bon IDE dédié Javascript sur une base Eclipse, mais je trouve qu'il propose finalement trop de fonctionnalités (comme Eclipse), et personnellement je m’y perds.</li>
 </ul>
-<p>Vous voyez, il y en a pour tous les goûts. En ce qui me concerne j'utilise essentiellement Webstorm ou SublimeText.</p>
+<p>Vous voyez, il y en a pour tous les goûts. En ce qui me concerne j'utilise essentiellement WebStorm ou SublimeText.</p>
 <h3 id="navigateur"><a href="#TOC"><span class="header-section-number">3.2.2</span> Navigateur</a></h3>
 <p>Le navigateur le plus agréable, selon moi, à utiliser pour faire du développement Web est certainement Chrome (C'est un avis très personnel, donc amis utilisateurs de Firefox ne m'en veuillez pas). En effet Chrome propose une console d'administration particulièrement puissante. C'est ce que je vais utiliser, rien ne vous empêche d'utiliser votre navigateur préféré. Par contre, que cela ne vous dispense pas d'aller tester régulièrement votre code sous d'autres navigateurs.</p>
 <h2 id="initialisation-de-notre-projet-de-travail"><a href="#TOC"><span class="header-section-number">3.3</span> Initialisation de notre projet de travail</a></h2>
@@ -325,7 +356,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
 
     <span class="kw">&lt;/script&gt;</span>
     <span class="kw">&lt;/html&gt;</span></code></pre>
-<p>A ce niveau vous devriez avoir un squelette de projet fonctionnel avec l'arborescence suivante :</p>
+<p>A ce niveau, vous devriez avoir un squelette de projet fonctionnel avec l'arborescence suivante :</p>
 <p><img src="RSRC/02_01_ARBO.png" alt="Arborecsence" /><br /></p>
 <p>Les deux paragraphes qui suivent ne sont que pour ceux d'entre vous qui ne connaissent ni <strong>jQuery</strong> ni <strong>Underscore</strong>. Ces paragraphes n'ont pas la prétention de vous apprendre ces outils, mais vous donneront les bases nécessaires pour vous en servir, pour comprendre leur utilité et pour vous donner envie d'aller plus loin. Les autres (ceux qui connaissent déjà), passez directement au <strong>§ &quot;1er contact … avec Backbone&quot;</strong>.</p>
 <h2 id="jouons-avec-jquery"><a href="#TOC"><span class="header-section-number">3.4</span> Jouons avec jQuery</a></h2>
@@ -578,7 +609,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <p>Pour le moment nous allons nous concentrer uniquement sur les articles, notre objectif sera le suivant : &quot;Afficher une liste d'articles sur la page principale&quot;.</p>
 <h2 id="le-modèle-article"><a href="#TOC"><span class="header-section-number">4.2</span> Le Modèle “Article”</a></h2>
 <p>Dans la balise <code>&lt;script&gt;&lt;/script&gt;</code> saisissez le code suivant :</p>
-<p><u>Définition d’un modèle Article</u></p>
+<p><em>Définition d’un modèle Article :</em></p>
 <pre class="sourceCode html"><code class="sourceCode html">    <span class="kw">&lt;script&gt;</span>
 
         $(<span class="kw">function</span> (){
@@ -622,7 +653,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
 </blockquote>
 <h2 id="la-collection-darticles"><a href="#TOC"><span class="header-section-number">4.3</span> La Collection d’Articles</a></h2>
 <p>Nous allons maintenant définir une collection qui nous aidera à gérer nos articles. Donc, à la suite du modèle Article saisissez le code suivant :</p>
-<p><u>Définition d’une collection d’articles</u></p>
+<p><em>Définition d’une collection d’articles :</em></p>
 <pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="co">/*--- Collection d&#39;articles ---*/</span>
 
     <span class="kw">blog</span>.<span class="fu">ArticlesCollection</span> = <span class="kw">Backbone.Collection</span>.<span class="fu">extend</span>({
@@ -1545,5 +1576,415 @@ npm install express</code></pre>
 <p><strong>Remarque</strong> <em>: Vous avez remarqué que l’url dans le cas de la création, la sauvegarde, et la suppression d’un modèle, ne changeait pas. Ce qui fait la distinction c’est le verbe http (GET, POST, PUT, DELETE).</em></p>
 </blockquote>
 </blockquote>
+<h1 id="les-modèles-et-les-collections-en-détail"><a href="#TOC"><span class="header-section-number">7</span> Les modèles et les collections en détail</a></h1>
+<blockquote>
+<p><em>Sommaire</em></p>
+</blockquote>
+<blockquote>
+<blockquote>
+<ul>
+<li><em>Fonctionnement général</em></li>
+<li><em>Les modèles</em></li>
+<li><em>Les collections</em></li>
+</ul>
+</blockquote>
+</blockquote>
+<blockquote>
+<p><em>Nous allons voir comment définir nos modèles, jouer avec, interagir avec le serveur. Nous allons étudier l’intérêt d’une collection de modèles. <strong>Attention, pas un gramme d’HTML</strong> (ou presque) dans ce chapitre, nous faisons tout en « mode commande », pour l’HTML il faudra patienter jusqu’au chapitre sur les Vues.</em></p>
+</blockquote>
+<p>Dans une application « de gestion », les modèles sont le cœur de l’application, ils représentent des concepts « informatisés » de la « vraie vie » : Les articles d’un catalogue, le client d’une entreprise, … Ils peuvent avoir des interactions entre eux : un client a plusieurs facture, la commande d’un fournisseur ; … Nous avons là 4 modèles : client, facture, fournisseur, commande … sans parler des articles de la facture et de la commande. D’ailleurs en parlant d’article, on pense catalogue, et dans notre cas le catalogue pourrait être une collection d’articles. Et tout cela doit être sauvegardé, doit pouvoir être retrouvé facilement, etc. … Mais voyons donc le fonctionnement intrinsèque des modèles et collections de Backbone.</p>
+<h2 id="fonctionnement-général"><a href="#TOC"><span class="header-section-number">7.1</span> Fonctionnement général</a></h2>
+<p>Un modèle Backbone (<code>Backbone.Model</code>) représente une entité unique (une instance du modèle), par exemple nous avons la définition du modèle « Client », et si Bob est un client, alors c’est une instance de client. En général, il est lié à une vue (un composant d’affichage) qui changera (modifiera son affichage) lorsque que le modèle changera. Mais les changements du modèle sont aussi synchronisés avec le serveur. La synchronisation avec le serveur se fait avec la méthode <code>Backbone.sync()</code>, à chaque fois qu’un modèle fait une opération « CRUD », <code>Backbone.sync()</code> est appelée pour « discuter » avec le serveur (pour le moment cela va fonctionner tout seul, mais nous reviendrons plus tard à Backbone.sync() pour comprendre son fonctionnement et même modifier celui-ci).</p>
+<blockquote>
+<blockquote>
+<p><strong>Remarque</strong> : l’acronyme CRUD signifie Create, Read, Update, Delete (Créer, Lire, Mettre à jour, Supprimer). Si vous faites le lien avec le chapitre précédent, lorsque nous allons sauvegarder un nouveau modèle, ce sera une création et une requête de type POST sera envoyée au serveur, dans le cas de la lecture ce sera une requête de type GET, PUT pour les mises à jour de modèles et enfin DELETE pour la suppression. Et c’est la méthode Backbone.sync() qui va se charger de faire la bonne requête au serveur en fonction de l’action du modèle.</p>
+</blockquote>
+</blockquote>
+<p>La collection Backbone (<code>Backbone.Collection</code>) sert à stocker (en mémoire) un ensemble de modèles de même type. Elle permettra de les trier par exemple, les filtrer, etc. ... Elle aussi est généralement liée à une vue et permet de « récupérer » un ensemble de modèles en provenance du serveur. Là aussi, c’est <code>Backbone.sync()</code> qui s’occupe de faire le travail.</p>
+<h2 id="modèles"><a href="#TOC"><span class="header-section-number">7.2</span> Modèles</a></h2>
+<p>Si vous avez bien suivi les chapitres précédents vous devez disposer d’un squelette d’application et « client » et « serveur ». Nous allons donc, dans un premier temps définir notre modèle en javascript, puis nous le manipulerons directement dans la console du navigateur. Vous pouvez d’ores et déjà lancer la partie serveur avec la commande <code>node app.js</code> (ou <code>nodemon app.js</code>).</p>
+<h3 id="définition-du-modèle"><a href="#TOC"><span class="header-section-number">7.2.1</span> Définition du modèle</a></h3>
+<p>Ouvrez la page <code>index.html</code> du répertoire <code>public</code> et à l’intérieur de la fonction de chargement (<code>$(function(){})</code>) vous allez saisir le code de votre premier modèle :</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    $(<span class="kw">function</span> (){
+
+        <span class="kw">window</span>.<span class="fu">Post</span> = <span class="kw">Backbone.Model</span>.<span class="fu">extend</span>({
+            <span class="dt">urlRoot </span>:<span class="st">&quot;/blogposts&quot;</span>
+
+        });
+
+    });</code></pre>
+<p>Cela fait peu de code mais nous avons déjà une « mécanique utilisable » avec un grand nombre de possibilités. Nous avons donc un modèle <code>Post</code> pour lequel nous avons juste précisé l’url (<code>urlRoot</code>) à appeler (<code>par Backbone.sync</code>) lors d’actions/traitement de type « CRUD ». En effet un modèle « arrive » avec entre autres les méthodes suivantes : <code>save</code> (pour créer et sauvegarder), <code>fetch</code> (pour lire des données en provenance du serveur) et <code>destroy</code> (pour supprimer le modèle du serveur).</p>
+<blockquote>
+<blockquote>
+<p><strong>Remarque</strong> : j'ai préfixé <code>Post</code> par <code>window</code> pour y avoir accès en tant que variable globale (dans ma console par exemple).</p>
+</blockquote>
+</blockquote>
+<p>Nous n’avons pas défini de « champs » comme on peut le faire en java, nous allons voir qu’il existe diverses manières de le faire.</p>
+<p>Lancez votre navigateur et connectez-vous sur <a href="http://localhost:3000">http://localhost:3000</a> (la page <code>index.html</code>est chargée par défaut si on ne le précise pas) et ouvrez votre console (celle du navigateur).</p>
+<p>Puis saisissez ceci dans la console (et validez) :</p>
+<p><em>Nouvelle instance d'un modèle &quot;Post&quot; :</em></p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="kw">var</span> message = <span class="kw">new</span> Post({
+        <span class="dt">title </span>: <span class="st">&quot;Premier Message&quot;</span>,
+        <span class="dt">message </span>: <span class="st">&quot;Apprendre Backbone, c&#39;est facile&quot;</span>,
+        <span class="dt">author </span>: <span class="st">&quot;@K33G_ORG&quot;</span>
+    });</code></pre>
+<p>Nous avons maintenant une instance d’un modèle, jouons avec. Vous avez noté que la définition des champs du modèle (<code>title, message, author</code>) se fait à l’instanciation du modèle, personnellement je trouve ce la pratique et très lisible (un début programmation fonctionnelle), mais je comprends que cela puisse perturber (nous verrons comment faire autrement si vous le souhaitez).</p>
+<blockquote>
+<blockquote>
+<p><strong>Remarque (importante)</strong> : la propriété <code>urlRoot</code> du modèle n’est utile que si l’on se « sert » d’un modèle hors d’une collection de modèles (le modèle est indépendant), sinon, si le modèle appartient à une collection est qu’il n’a pas de propriété urlRoot renseignée, il « utilise » la propriété <code>url</code> de la collection à laquelle il appartient.</p>
+</blockquote>
+</blockquote>
+<h3 id="getters-et-setters"><a href="#TOC"><span class="header-section-number">7.2.2</span> Getters et Setters</a></h3>
+<p>Pour lire ou modifier les valeurs des propriétés de notre message, le réflexe serait pour par exemple obtenir la valeur du titre de taper la commande <code>message.title</code>, et bien cela ne fonctionne pas ! Backbone a une mécanique différente, si vous souhaitez obtenir la valeur du titre il faudra taper la commande <code>message.get(&quot;title&quot;)</code> et pour la modifier <code>message.set(&quot;title&quot;, &quot;mon nouveau titre&quot;)</code> ou <code>message.set({title : &quot;mon nouveau titre&quot;})</code>, cette dernière notation permet de changer plusieurs propriétés en une seule passe. Cela peut surprendre mais cela a beaucoup d’avantages d’utiliser des méthodes plutôt qu’une simple affectation, on peut ainsi s’abonner aux changements des valeurs pour déclencher automatiquement un traitement (comme le rafraichissement d’une vue par exemple). Faites donc l’exercice dans la console :</p>
+<p><img src="RSRC/06_01_MODS.png" alt="BB" /><br /></p>
+<h3 id="structure-dun-modèle"><a href="#TOC"><span class="header-section-number">7.2.3</span> Structure d'un modèle</a></h3>
+<p>Mais allons voir comment est structuré un modèle : dans la console, tapez <code>message</code> (notre instance de modèle <code>Post</code>) et déroulez la structure « child » (child pour instance de modèle) :</p>
+<p><img src="RSRC/06_02_MODS.png" alt="BB" /><br /></p>
+<p>Vous notez que les propriétés de notre modèle sont contenues dans un objet <code>attributes</code> (c’est pour cela que nous n’y avons pas accès directement et que l'on utilise <code>get</code> et <code>set</code>).</p>
+<h3 id="méthodes-crud-du-modèle"><a href="#TOC"><span class="header-section-number">7.2.4</span> Méthodes “CRUD” du modèle</a></h3>
+<h4 id="méthodes-save-création-mise-à-jour"><a href="#TOC"><span class="header-section-number">7.2.4.1</span> Méthodes save() : création &amp; mise à jour<br /></a></h4>
+<p>Saisissez le code javascript ci-dessous dans la console du navigateur. Cela va déclancher une requête ajax vers le serveur pour sauvegarder votre modèle (instance de modèle). Si tout se passe bien, c’est la méthode <code>success()</code> qui est appelée.</p>
+<p><em>Appel de la méthode save() du modèle :</em></p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="kw">message</span>.<span class="fu">save</span>({},{
+        <span class="dt">success </span>: <span class="kw">function</span>() {
+            <span class="kw">console</span>.<span class="fu">log</span>(<span class="st">&quot;message sauvegardé.&quot;</span>);
+        },
+        <span class="dt">error </span>: <span class="kw">function</span>() {
+            <span class="kw">console</span>.<span class="fu">log</span>(<span class="st">&quot;oupss&quot;</span>);
+        }
+    });</code></pre>
+<p><img src="RSRC/06_03_MODS.png" alt="BB" /><br /></p>
+<p>Vous pouvez noter au passage que côté serveur, c’est bien une méthode de type POST qui a été faite et qu’un modèle a été créé en base de données.</p>
+<p><img src="RSRC/06_04_MODS.png" alt="BB" /><br /></p>
+<p>Si dans la console du navigateur, vous saisissez <code>message</code> (notre modèle) et validez, vous aurez l’opportunité de pouvoir dérouler l’ensemble des membres (propriétés et méthodes) de message. Vous noterez l’apparition de la propriété <code>id</code>, avec une valeur (valeur unique qui a été affectée par le serveur).</p>
+<p><img src="RSRC/06_05_MODS.png" alt="BB" /><br /> Modifions maintenant le modèle en cours et sauvegardons le :</p>
+<p><em>Appel de la méthode save() du modèle :</em></p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="kw">message</span>.<span class="fu">save</span>({
+            <span class="dt">title </span>: <span class="st">&quot;=== PREMIER MESSAGE ===”,</span>
+            <span class="dt">message </span>: <span class="st">&quot;Je m&#39;amuse avec Backbone.js&quot;</span>
+        },{
+            <span class="dt">success </span>: <span class="kw">function</span>() {
+                <span class="kw">console</span>.<span class="fu">log</span>(<span class="st">&quot;message sauvegardé.&quot;</span>);
+            },
+            <span class="dt">error </span>: <span class="kw">function</span>() {
+                <span class="kw">console</span>.<span class="fu">log</span>(<span class="st">&quot;oupss&quot;</span>);
+            }
+    });</code></pre>
+<p>Ce qui est équivalent à ceci (nous avons juste utilisé un raccourci) :</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="kw">message</span>.<span class="fu">set</span>({
+        <span class="dt">title </span>: <span class="st">&quot;=== PREMIER MESSAGE ===”,</span>
+        <span class="dt">message </span>: <span class="st">&quot;Je m&#39;amuse avec Backbone.js&quot;</span>
+    });
+
+    <span class="kw">message</span>.<span class="fu">save</span>({},{
+        <span class="dt">success </span>: <span class="kw">function</span>() {
+            <span class="kw">console</span>.<span class="fu">log</span>(<span class="st">&quot;message sauvegardé.&quot;</span>);
+        },
+        <span class="dt">error </span>: <span class="kw">function</span>() {
+            <span class="kw">console</span>.<span class="fu">log</span>(<span class="st">&quot;oupss&quot;</span>);
+        }
+    });</code></pre>
+<p>Et vous obtiendrez :</p>
+<p><img src="RSRC/06_06_MODS.png" alt="BB" /><br /></p>
+<p>Cette fois ci, côté serveur, la requête ajax a été détectée comme une requête de type <code>PUT</code>, donc une requête de mise à jour du modèle.</p>
+<p><img src="RSRC/06_07_MODS.png" alt="BB" /><br /></p>
+<h4 id="méthode-fetch-retrouver-un-modèle"><a href="#TOC"><span class="header-section-number">7.2.4.2</span> Méthode fetch() : retrouver un modèle<br /></a></h4>
+<p>Notez bien le numéro d’id affecté par le serveur (dans notre exemple : “17f0v3jv”, attention c’est une valeur aléatoire unique affectée par le serveur) et raffraichissez votre page dans le navigateur (le modèle <code>message</code> disparaît donc de la mémoire).</p>
+<p>Créons maintenant une nouvelle fois un modèle avec simplement comme champ, un id prenant la valeur de la clé du modèle sauvegardé en base :</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="kw">var</span> message = <span class="kw">new</span> Post({<span class="dt">id</span>:<span class="st">&quot;17f0v3jv&quot;</span>});</code></pre>
+<p>Puis appelons à nouveau la méthode <code>fetch()</code> du modèle :</p>
+<p><em>Appel de la méthode fetch() pour charger les données du serveur :</em></p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="kw">message</span>.<span class="fu">fetch</span>({
+        <span class="dt">success </span>: <span class="kw">function</span>(model) {
+            <span class="kw">console</span>.<span class="fu">log</span>(<span class="st">&quot;message retrouvé.&quot;</span>);
+            <span class="kw">console</span>.<span class="fu">log</span>(<span class="kw">model</span>.<span class="fu">get</span>(<span class="st">&quot;title&quot;</span>), <span class="kw">model</span>.<span class="fu">get</span>(<span class="st">&quot;message&quot;</span>));
+            <span class="kw">console</span>.<span class="fu">log</span>(<span class="kw">message</span>.<span class="fu">get</span>(<span class="st">&quot;title&quot;</span>), <span class="kw">message</span>.<span class="fu">get</span>(<span class="st">&quot;message&quot;</span>));
+        },
+        <span class="dt">error </span>: <span class="kw">function</span>() {
+            <span class="kw">console</span>.<span class="fu">log</span>(<span class="st">&quot;oupss&quot;</span>);
+        }
+    });</code></pre>
+<p>Nous récupérons bien les données du modèle sauvegardé :</p>
+<p><img src="RSRC/06_08_MODS.png" alt="BB" /><br /></p>
+<p>Et côté serveur, on peut vérifier le message affiché dans le terminal : nous avons bien une requête de type <code>GET</code> avec en paramètre la clé unique (identifiant) du modèle.</p>
+<h4 id="méthode-destroy-supprimer-un-modèle-du-serveur"><a href="#TOC"><span class="header-section-number">7.2.4.3</span> Méthode destroy() : supprimer un modèle du serveur<br /></a></h4>
+<p>Le principe est le même que pour la méthode <code>fetch()</code>, à partir d’un modèle en cours d’utilisation ou un nouveau modèle créé avec un id existant, il suffit ensuite d’appeler la méthode <code>destroy()</code> du modèle pour le supprimer de la base de données :</p>
+<p><em>Appel de la méthode destroy() :</em></p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="kw">var</span> message = <span class="kw">new</span> Post({<span class="dt">id</span>:<span class="st">&quot;17f0v3jv&quot;</span>});
+    <span class="kw">message</span>.<span class="fu">destroy</span>({<span class="dt">success</span>:<span class="kw">function</span>(){ <span class="kw">console</span>.<span class="fu">log</span>(<span class="st">&quot;supprimé&quot;</span>);}})</code></pre>
+<p><img src="RSRC/06_09_MODS.png" alt="BB" /><br /></p>
+<p>Et côté serveur, nous avons bien une requête de type <code>DELETE</code> avec en paramètre la clé unique (identifiant) du modèle :</p>
+<p><img src="RSRC/06_10_MODS.png" alt="BB" /><br /></p>
+<h3 id="evénements"><a href="#TOC"><span class="header-section-number">7.2.5</span> Evénements</a></h3>
+<p>Il est possible de “s’abonner” aux changements effectués sur un modèle grâce à la méthode <code>on()</code> (anciennement <code>bind()</code>) de l’instance du modèle :</p>
+<p><em>Abonnement à un événement avec la méthode on() :</em></p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="kw">message</span>.<span class="fu">on</span>(<span class="st">&quot;change&quot;</span>, <span class="kw">function</span>(){
+        <span class="kw">console</span>.<span class="fu">log</span>(<span class="st">&quot;quelque chose a changé&quot;</span>);
+        <span class="kw">if</span> (<span class="kw">message</span>.<span class="fu">hasChanged</span>(<span class="st">&quot;title&quot;</span>)) {
+            <span class="kw">console</span>.<span class="fu">log</span>(<span class="st">&quot;vous avez changé le titre : &quot;</span>, <span class="kw">message</span>.<span class="fu">get</span>(<span class="st">&quot;title&quot;</span>));
+            <span class="kw">console</span>.<span class="fu">log</span>(<span class="st">&quot;l&#39;ancien titre est : &quot;</span>,<span class="kw">message</span>.<span class="fu">previous</span>(<span class="st">&quot;title&quot;</span>));
+        }
+
+    });</code></pre>
+<p>Nous venons de nous abonner aux changements de valeurs des champs de l’instance de modèle <code>message</code>. C’est à dire que nous serons notifiés dès qu’une valeur d’un champ de <code>message</code> est modifiée :</p>
+<p><img src="RSRC/06_11_MODS.png" alt="BB" /><br /></p>
+<p>Vous pouvez aussi &quot;écouter&quot; les changements spécifiques à un attribut bien particulier de cette façon :</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="kw">message</span>.<span class="fu">on</span>(<span class="st">&quot;change:message&quot;</span>, <span class="kw">function</span>(){
+        <span class="kw">console</span>.<span class="fu">log</span>(<span class="st">&quot;le message a changé :&quot;</span>, <span class="kw">this</span>.<span class="fu">get</span>(<span class="st">&quot;message&quot;</span>));
+    })</code></pre>
+<p><img src="RSRC/06_12_MODS.png" alt="BB" /><br /></p>
+<p>On s’apperçoit que les abonnements se cumulent. Ce que nous venons de faire n’est par contre valable que pour une instance de modèle de type Post. Comment faire pour que cela soit valable pour tous les Posts ? En utilisant le constructeur du modèle, ou plus spécifiquement la méthode <code>initialize()</code> qui est appelée par le constructeur du modèle.</p>
+<pre><code>//TODO: parler de off()</code></pre>
+<h3 id="constructeur-initialize"><a href="#TOC"><span class="header-section-number">7.2.6</span> Constructeur : initialize</a></h3>
+<p>Retournez modifier le code de notre modèle dans la page <code>index.html</code> du répertoire <code>public</code> :</p>
+<p><em>Méthode initialize() et utilisation de on() :</em></p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="kw">window</span>.<span class="fu">Post</span> = <span class="kw">Backbone.Model</span>.<span class="fu">extend</span>({
+        <span class="dt">urlRoot </span>:<span class="st">&quot;/blogposts&quot;</span>,
+
+        <span class="dt">initialize </span>: <span class="kw">function</span> () {
+            <span class="kw">this</span>.<span class="fu">on</span>(<span class="st">&quot;change:message&quot;</span>, <span class="kw">function</span>(){
+                <span class="kw">console</span>.<span class="fu">log</span>(<span class="st">&quot;le message a changé :&quot;</span>, <span class="kw">this</span>.<span class="fu">get</span>(<span class="st">&quot;message&quot;</span>));
+            });
+            <span class="kw">this</span>.<span class="fu">on</span>(<span class="st">&quot;change:title&quot;</span>, <span class="kw">function</span>(){
+                <span class="kw">console</span>.<span class="fu">log</span>(<span class="st">&quot;le titre a changé :&quot;</span>, <span class="kw">this</span>.<span class="fu">get</span>(<span class="st">&quot;title&quot;</span>));
+            });
+        }
+
+    });</code></pre>
+<p>Nous venons d’expliquer que pour chacun des modèles de type <code>Post</code>, si son titre ou son message change, alors nous sommes notifiés. Rechargez votre page, et rappelez par un <code>fetch</code> votre modèle (les données du serveur) :</p>
+<p><img src="RSRC/06_13_MODS.png" alt="BB" /><br /></p>
+<p>Mais vous pouvez essayer avec un nouveau Post :</p>
+<p><img src="RSRC/06_14_MODS.png" alt="BB" /><br /></p>
+<h3 id="augmenter-le-modèle-ajouter-des-valeurs-par-défaut-et-des-méthodes-au-modèle"><a href="#TOC"><span class="header-section-number">7.2.7</span> “Augmenter” le modèle : ajouter des valeurs par défaut et des méthodes au modèle</a></h3>
+<p>Vous pouvez éprouver le besoin de coder de manière plus classique (à la java), nous allons en profiter pour ajouter des getters et des setters “à l’ancienne” ainsi que des valeurs par défaut au modèle :</p>
+<p><em>Ajouts de propriétés et de méthodes au model :</em></p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="kw">window</span>.<span class="fu">Post</span> = <span class="kw">Backbone.Model</span>.<span class="fu">extend</span>({
+        <span class="dt">urlRoot </span>:<span class="st">&quot;/blogposts&quot;</span>,
+
+        <span class="co">/* valeurs par défaut du modèle */</span>
+        <span class="dt">defaults </span>: {
+            <span class="dt">title </span>: <span class="st">&quot;???&quot;</span>,
+            <span class="dt">message </span>: <span class="st">&quot;...&quot;</span>,
+            <span class="dt">author </span>: <span class="st">&quot;John Doe&quot;</span>
+        },
+
+        <span class="dt">initialize </span>: <span class="kw">function</span> () {
+            <span class="kw">this</span>.<span class="fu">on</span>(<span class="st">&quot;change:message&quot;</span>, <span class="kw">function</span>(){
+                <span class="kw">console</span>.<span class="fu">log</span>(<span class="st">&quot;le message a changé :&quot;</span>, <span class="kw">this</span>.<span class="fu">get</span>(<span class="st">&quot;message&quot;</span>));
+            });
+            <span class="kw">this</span>.<span class="fu">on</span>(<span class="st">&quot;change:title&quot;</span>, <span class="kw">function</span>(){
+                <span class="kw">console</span>.<span class="fu">log</span>(<span class="st">&quot;le titre a changé :&quot;</span>, <span class="kw">this</span>.<span class="fu">get</span>(<span class="st">&quot;title&quot;</span>));
+            });
+        },
+
+        <span class="co">/* les getters et les setters à l&#39;ancienne */</span>
+        <span class="dt">getTitle </span>: <span class="kw">function</span> () {
+            <span class="kw">return</span> <span class="kw">this</span>.<span class="fu">get</span>(<span class="st">&quot;title&quot;</span>);
+        },
+        <span class="dt">setTitle </span>: <span class="kw">function</span> (value) {
+            <span class="kw">this</span>.<span class="fu">set</span>(<span class="st">&quot;title&quot;</span>, value);
+        },
+        <span class="dt">getMessage </span>: <span class="kw">function</span> () {
+            <span class="kw">return</span> <span class="kw">this</span>.<span class="fu">get</span>(<span class="st">&quot;message&quot;</span>);
+        },
+        <span class="dt">setMessage </span>: <span class="kw">function</span> (value) {
+            <span class="kw">this</span>.<span class="fu">set</span>(<span class="st">&quot;message&quot;</span>, value);
+        },
+        <span class="dt">getAuthor </span>: <span class="kw">function</span> () {
+            <span class="kw">return</span> <span class="kw">this</span>.<span class="fu">get</span>(<span class="st">&quot;author&quot;</span>);
+        },
+        <span class="dt">setAuthor </span>: <span class="kw">function</span> (value) {
+            <span class="kw">this</span>.<span class="fu">set</span>(<span class="st">&quot;author&quot;</span>, value);
+        }
+
+    });</code></pre>
+<p>Que nous pouvons utiliser de la manière suivante :</p>
+<p><img src="RSRC/06_15_MODS.png" alt="BB" /><br /> ###Validation</p>
+<pre><code>//TODO: à faire</code></pre>
+<h3 id="comment-détecter-quun-modèle-a-été-changé-par-quelquun-dautre"><a href="#TOC"><span class="header-section-number">7.2.8</span> Comment détecter qu’un modèle a été changé par quelqu’un d’autre ?</a></h3>
+<p>Dans la “rubrique trucs &amp; astuces”, il est possible de détecter un changement effectué côté serveur (cet exemple est à titre démonstratif et mérite d’être optimisé ou d’utiliser d’autres moyens tels les websockets par exemple).Tapez ceci dans la console de votre navigateur :</p>
+<p><em>Appel de la méthode fetch() à intervalles réguliers :</em></p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="kw">var</span> message = <span class="kw">new</span> Post({<span class="dt">id</span>:<span class="st">&quot;17f0v3jv&quot;</span>});
+
+    setInterval(<span class="kw">function</span>(){
+        <span class="kw">message</span>.<span class="fu">fetch</span>();
+    },<span class="dv">1000</span>)</code></pre>
+<p>Nous venons de créer un nouveau <code>Post</code>, en lui renseignant son id (car nous savons qu’il existe côté serveur) et demandons à javascript d’aller chercher les données toutes les 1000 millisecondes (donc toutes les 1 secondes).</p>
+<p>Ensuite, ouvrez un autre navigateur (par exemple FireFox) et connectez-vous sur <a href="http://localhost:3000">http://localhost:3000</a>, puis dans la console de ce navigateur tapez ceci :</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="kw">var</span> message = <span class="kw">new</span> Post({<span class="dt">id</span>:<span class="st">&quot;17f0v3jv&quot;</span>});
+    <span class="kw">message</span>.<span class="fu">set</span>({<span class="dt">title</span>:<span class="st">&quot;LE TITRE DU 1ER MESSAGE&quot;</span>});</code></pre>
+<p>puis sauvegardez :</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="kw">message</span>.<span class="fu">save</span>()</code></pre>
+<p>Et dans la console du précédent navigateur, vous allez voir s’afficher un message expliquant que le modèle a changé. La méthode <code>change()</code> que nous avons définie dans <code>initialize</code> est aussi appelée/déclenchée lorsque que Backbone détecte un changement (lors d’un <code>fetch()</code>) entre les données clientes et les données serveurs :</p>
+<p><img src="RSRC/06_16_MODS.png" alt="BB" /><br /></p>
+<p>Pour le moment nous avons fait le tour de l’essentiel du fonctionnement des modèles (je vous engage cependant à lire la documentation de Backbone (<a href="http://backbonejs.org/#Model">http://backbonejs.org/#Model</a>), pour en découvrir toutes les possibilités). Passons donc aux collections.</p>
+<h2 id="collections"><a href="#TOC"><span class="header-section-number">7.3</span> Collections</a></h2>
+<p>Changeons à nouveau le code de notre modèle dans notre page <code>index.html</code> :</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="kw">window</span>.<span class="fu">Post</span> = <span class="kw">Backbone.Model</span>.<span class="fu">extend</span>({
+        <span class="dt">urlRoot </span>:<span class="st">&quot;/blogposts&quot;</span>
+
+    });</code></pre>
+<p>Puis définissons une collection : <code>Backbone.Collection</code></p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="kw">window</span>.<span class="fu">Posts</span> = <span class="kw">Backbone.Collection</span>.<span class="fu">extend</span>({
+        <span class="dt">url </span>:<span class="st">&quot;/blogposts&quot;</span>,
+        <span class="dt">model </span>: Post
+
+    });</code></pre>
+<p>Nous avons précisé une url pour les collections (c’est ce qui sera utilisé lorsque nous ferons des requêtes au serveur), et le type de modèle de la collection. Et rechargeons notre page, pour une nouvelle fois passer en mode commande (et donc ouvrir la console du navigateur).</p>
+<h3 id="comment-ajouter-des-modèles-à-une-collection"><a href="#TOC"><span class="header-section-number">7.3.1</span> Comment ajouter des modèles à une collection</a></h3>
+<p>Tout d’abord, il faut créer(instancier) une nouvelle collection :</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="kw">var</span> postsList = <span class="kw">new</span> Posts();</code></pre>
+<p>Puis créer(instancier) 3 nouveaux modèles Post :</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="kw">var</span> post1 = <span class="kw">new</span> Post({<span class="dt">title</span>:<span class="st">&quot;Titre Post1&quot;</span>, <span class="dt">message</span>:<span class="st">&quot;message 1&quot;</span>})
+    <span class="kw">var</span> post2 = <span class="kw">new</span> Post({<span class="dt">title</span>:<span class="st">&quot;Titre Post2&quot;</span>, <span class="dt">message</span>:<span class="st">&quot;message 2&quot;</span>})
+    <span class="kw">var</span> post3 = <span class="kw">new</span> Post({<span class="dt">title</span>:<span class="st">&quot;Titre Post3&quot;</span>, <span class="dt">message</span>:<span class="st">&quot;message 3&quot;</span>})</code></pre>
+<p>Que vous pouvez ajouter à la collection de cette manière :</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="kw">postsList</span>.<span class="fu">add</span>(post1)</code></pre>
+<p>Ou de cette façon :</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="kw">postsList</span>.<span class="fu">add</span>([post2, post3])</code></pre>
+<p>Il est possible de créer directement un modèle dans la collection de cette façon :</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="kw">postsList</span>.<span class="fu">add</span>(<span class="kw">new</span> Post({<span class="dt">title</span>:<span class="st">&quot;Titre Post4&quot;</span>, <span class="dt">message</span>:<span class="st">&quot;message 4&quot;</span>}))</code></pre>
+<p>ou de cette manière :</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="kw">postsList</span>.<span class="fu">create</span>({<span class="dt">title</span>:<span class="st">&quot;Titre Post5&quot;</span>, <span class="dt">message</span>:<span class="st">&quot;message 5&quot;</span>})</code></pre>
+<p>Et enfin, saisissez ceci :</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="kw">postsList</span>.<span class="fu">models</span></code></pre>
+<p>Et vous obtenez un tableau des 5 modèles de la collection :</p>
+<p><img src="RSRC/06_17_MODS.png" alt="BB" /><br /></p>
+<p>Et vous pouvez accéder aux modèles et à leurs propriétés par exemple de cette façon-ci :</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="kw">postsList</span>.<span class="fu">models</span>[<span class="dv">0</span>].<span class="fu">get</span>(<span class="st">&quot;title&quot;</span>)</code></pre>
+<p>Ou bien de cette manière :</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="kw">postsList</span>.<span class="fu">at</span>(<span class="dv">0</span>).<span class="fu">get</span>(<span class="st">&quot;title&quot;</span>)</code></pre>
+<p><code>at()</code> utilise le numéro d’index du modèle dans la collection.</p>
+<p>Ou bien comme ceci :</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="kw">postsList</span>.<span class="fu">get</span>(<span class="st">&quot;3chk57hl&quot;</span>).<span class="fu">get</span>(<span class="st">&quot;title&quot;</span>)</code></pre>
+<p><code>get()</code> utilise le numéro d’id affecté (par le serveur) au modèle lorsqu’il est sauvegardé.</p>
+<p>Ou encore :</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="kw">postsList</span>.<span class="fu">getByCid</span>(<span class="st">&quot;c18&quot;</span>).<span class="fu">get</span>(<span class="st">&quot;title&quot;</span>)</code></pre>
+<p><code>getByCid()</code> utilise la propriété cid du modèle automatiquement affectée lorsqu’il est créé/instancié (new), cela peut être pratique pour les modèles qui ne sont pas encore sauvegardés et qui donc n’ont pas encore d’id.</p>
+<h3 id="parcourir-les-modèles-dune-collection"><a href="#TOC"><span class="header-section-number">7.3.2</span> Parcourir les modèles d’une collection</a></h3>
+<p>Les collections Backbone dispose d’une méthode <code>each()</code> (issue de la librairie Underscore.js) qui permet de parcourir chacun des éléments de la collection et de faire un traitement pour chacun de ces éléments. Par exemple, nous souhaitons afficher le titre de chacun des Posts de la collection, pour cela saisissez le code suivant dans la console :</p>
+<p><em>Appel de la méthode each() :</em></p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="kw">postsList</span>.<span class="fu">each</span>(<span class="kw">function</span>(post){
+        <span class="kw">console</span>.<span class="fu">log</span>(<span class="kw">post</span>.<span class="fu">get</span>(<span class="st">&quot;title&quot;</span>));
+    })</code></pre>
+<p>Vous obtiendrez le résultat suivant :</p>
+<p><img src="RSRC/06_18_MODS.png" alt="BB" /><br /></p>
+<h3 id="filtrer-les-modèles-dune-collection"><a href="#TOC"><span class="header-section-number">7.3.3</span> Filtrer les modèles d’une collection</a></h3>
+<p>De la même façon que <code>each()</code> il existe une méthode <code>filter()</code> (toujours issue de Underscore.js) qui permet de retourner l’ensemble des modèles d’une collection répondant à un critère. Dans l’exemple ci-dessous je souhaite obtenir la liste des modèles dont le titre se termine par un chiffre supérieur à 3 :</p>
+<p><em>Appel de la méthode filter() :</em></p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="kw">var</span> somePosts = <span class="kw">postsList</span>.<span class="fu">filter</span>(<span class="kw">function</span>(post){
+        <span class="kw">return</span> <span class="fu">parseInt</span>(<span class="kw">post</span>.<span class="fu">get</span>(<span class="st">&quot;title&quot;</span>)[<span class="dv">10</span>]) &gt; <span class="dv">3</span>;
+    })</code></pre>
+<p><img src="RSRC/06_19_MODS.png" alt="BB" /><br /></p>
+<h3 id="trouver-le-1er-modèle-dune-collection-correspondant-à-un-critère"><a href="#TOC"><span class="header-section-number">7.3.4</span> Trouver le 1er modèle d’une collection correspondant à un critère</a></h3>
+<p>La méthode <code>find()</code> fonctionne comme <code>filter()</code> mais retourne le premier élément correspondant aux critères de recherche :</p>
+<p><em>Appel de la méthode find() :</em></p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="kw">var</span> onePost = <span class="kw">postsList</span>.<span class="fu">find</span>(<span class="kw">function</span>(post){
+        <span class="kw">return</span> <span class="fu">parseInt</span>(<span class="kw">post</span>.<span class="fu">get</span>(<span class="st">&quot;title&quot;</span>)[<span class="dv">10</span>]) &gt; <span class="dv">3</span>;
+    })</code></pre>
+<p><img src="RSRC/06_20_MODS.png" alt="BB" /><br /></p>
+<h3 id="autres-méthodes-de-la-collection"><a href="#TOC"><span class="header-section-number">7.3.5</span> Autres méthodes de la collection</a></h3>
+<pre><code>//TODO: à faire ... en attendant lisez la doc de Backbone (ou faites moi une PR ;) )</code></pre>
+<h2 id="les-collections-parlent-au-serveur"><a href="#TOC"><span class="header-section-number">7.4</span> Les collections “parlent” au serveur</a></h2>
+<p>Sauvegardons d’abord nos modèles (en utilisant <code>each()</code> pour aller plus vite) pour avoir un jeu d’essai de données en base côté serveur. Pour cela, tapez donc ceci dans votre console :</p>
+<p><em>Sauvegarder tous les modèles :</em></p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="kw">postsList</span>.<span class="fu">each</span>(<span class="kw">function</span>(post){
+        <span class="kw">post</span>.<span class="fu">save</span>({},{
+            <span class="dt">success </span>:  <span class="kw">function</span> (post) {
+                <span class="kw">console</span>.<span class="fu">log</span>(<span class="kw">post</span>.<span class="fu">get</span>(<span class="st">&quot;title&quot;</span>),<span class="st">&quot; sauvegardé&quot;</span>);
+            },
+            <span class="dt">error </span>: <span class="kw">function</span> () { <span class="kw">console</span>.<span class="fu">log</span>(<span class="st">&quot;Oupss&quot;</span>); }
+        });
+
+    })</code></pre>
+<p><img src="RSRC/06_21_MODS.png" alt="BB" /><br /></p>
+<h3 id="charger-les-données"><a href="#TOC"><span class="header-section-number">7.4.1</span> Charger les données</a></h3>
+<p>Maintenant nous souhaitons interroger le serveur pour qu’il nous fournisse l’ensemble des modèles de type Post. Rechargez la page pour être sûr de remettre toutes les variables en mémoire à zéro. Ensuite créez une nouvelle instance de collection de Post :</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="kw">var</span> postsList = <span class="kw">new</span> Posts();</code></pre>
+<p>Et chargez celle-ci à partir des données du serveur :</p>
+<p><em>Appel de la méthode fetch() :</em></p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="kw">postsList</span>.<span class="fu">fetch</span>({
+        <span class="dt">success </span>: <span class="kw">function</span> () {
+            <span class="kw">postsList</span>.<span class="fu">each</span>(<span class="kw">function</span>(post){
+                <span class="kw">console</span>.<span class="fu">log</span>(<span class="kw">post</span>.<span class="fu">get</span>(<span class="st">&quot;title&quot;</span>));
+            })
+        },
+        <span class="dt">error </span>: <span class="kw">function</span> () {
+            <span class="kw">console</span>.<span class="fu">log</span>(<span class="st">&quot;Oupss&quot;</span>);
+        }
+    })</code></pre>
+<p>Nous avons donc bien une collection avec les modèles initialisés à partir des données du serveur :</p>
+<p><img src="RSRC/06_22_MODS.png" alt="BB" /><br /></p>
+<h3 id="requêtes"><a href="#TOC"><span class="header-section-number">7.4.2</span> Requêtes</a></h3>
+<p>Lorsque nous avons créé notre application côté serveur, nous avions prévu de pouvoir requêter les données. Nous voudrions pouvoir faire ça à partir de la collection que nous avons créée. Pour cela il faudra pouvoir changer la propriété <code>url</code> de la collection. Modifions alors le code source de notre collection de la façon suivante (dnas la page <code>index.html</code>) :</p>
+<p><em>Ajouter des méthodes à la collection :</em></p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="kw">window</span>.<span class="fu">Posts</span> = <span class="kw">Backbone.Collection</span>.<span class="fu">extend</span>({
+        <span class="dt">model </span>: Post,
+        <span class="dt">all </span>: <span class="kw">function</span> () {
+            <span class="kw">this</span>.<span class="fu">url</span> = <span class="st">&quot;/blogposts&quot;</span>;
+            <span class="kw">return</span> <span class="kw">this</span>;
+        },
+        <span class="dt">query </span>: <span class="kw">function</span> (query) {
+            <span class="kw">this</span>.<span class="fu">url</span> = <span class="st">&quot;/blogposts/query/&quot;</span>+query;
+            <span class="kw">return</span> <span class="kw">this</span>;
+        }
+
+    });</code></pre>
+<p>Rechargez ensuite la page, puis créez une nouvelle collection (dans la console du navigateur) :</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="kw">var</span> postsList = <span class="kw">new</span> Posts();</code></pre>
+<p>puis faites une requête :</p>
+<p><em>Ne charger que certains titres dans la collection :</em></p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="kw">postsList</span>.<span class="fu">query</span>(<span class="ch">&#39;{&quot;title&quot; : &quot;Titre Post2&quot;}&#39;</span>)
+        .<span class="fu">fetch</span>({
+            <span class="dt">success</span>:<span class="kw">function</span>(result){
+                <span class="kw">console</span>.<span class="fu">log</span>(result);
+            }
+    })</code></pre>
+<p>Vous obtenez ceci :</p>
+<p><img src="RSRC/06_23_MODS.png" alt="BB" /><br /></p>
+<p>Ensuite si vous souhaitez charger tous les modèles (toujours dans la console de votre navigateur) :</p>
+<p><em>Charger tous les modèles dans la collection :</em></p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="kw">postsList</span>.<span class="fu">all</span>()
+        .<span class="fu">fetch</span>({
+            <span class="dt">success</span>:<span class="kw">function</span>(result){
+                <span class="kw">console</span>.<span class="fu">log</span>(result);
+            }
+    })</code></pre>
+<p><img src="RSRC/06_24_MODS.png" alt="BB" /><br /></p>
+<blockquote>
+<blockquote>
+<p><strong>A Noter</strong> : il se trouve que les collections dans Backbone ont une méthode <code>url()</code> qui est appelée si la propriété <code>url</code> n’existe pas, cela peut être un autre moyen d’adresser la problématique de changement d’url. De même si les modèles ajoutés à une collection, n’ont pas de propriété <code>url</code> (ni <code>urlRoot</code>), ils héritent de celle de la collection (mais cela demande à revoir la politique de « routage » utilisée côté serveur ou de modifier <code>Backbone.sync()</code> qui construira les requêtes http en fonction du type d’objet faisant une requête (modèle ou collection)). Pour plus d’information sur le sujet, aller voir : <a href="http://backbonejs.org/#Model-url">http://backbonejs.org/#Model-url</a> ainsi que <a href="http://backbonejs.org/#Collection-url">http://backbonejs.org/#Collection-url</a>.</p>
+</blockquote>
+</blockquote>
+<h2 id="evénements-1"><a href="#TOC"><span class="header-section-number">7.5</span> Evénements</a></h2>
+<p>Comme pour les modèles, il est possible de s’abonner à des événements issus des collections. Nous souhaitons être notifié de tout changement dans un modèle de la collection. Saisissez donc ceci (dans la console) :</p>
+<p><em>Affecter un événement à tous les modèles :</em></p>
+<p>`<code>javascript     postsList.on('change', function (model) {         console.log(&quot;Changement : &quot;, model.get(&quot;title&quot;));     });</code></p>
+<p>Puis :</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="kw">postsList</span>.<span class="fu">at</span>(<span class="dv">0</span>).<span class="fu">set</span>(<span class="st">&quot;title&quot;</span>,<span class="st">&quot;=== Titre Post 4 ===&quot;</span>)</code></pre>
+<p>Vous obtenez ceci :</p>
+<p><img src="RSRC/06_25_MODS.png" alt="BB" /><br /></p>
+<p><strong>Il n’est donc plus obligatoire d’affecter un événement de façon individuelle aux modèles, tous les modèles appartenant à une collection héritent de l’événement (trigger) associé à celle-ci.</strong></p>
+<p>Voilà nous en connaissons assez sur les modèles et les collections pour passer à la suite.</p>
+<h1 id="vues-templating"><a href="#TOC"><span class="header-section-number">8</span> Vues &amp; Templating</a></h1>
+<blockquote>
+<p><em>Sommaire</em></p>
+</blockquote>
+<blockquote>
+<blockquote>
+<ul>
+<li><em>1ère vue</em></li>
+<li><em>Mise à jour automatique de l’affichage</em></li>
+<li><em>Sous-vues</em></li>
+<li><em>Templating</em></li>
+<li><em>évènements</em></li>
+</ul>
+</blockquote>
+</blockquote>
+<blockquote>
+<p><em>Nous avons joué avec les données dans le chapitre précédent, nous allons maintenant voir comment les afficher dynamiquement dans notre page web.</em></p>
+</blockquote>
+<p>Le composant View de Backbone est peut-être celui qui génère le plus de polémiques. Est-ce vraiment une vue ? Ne serait-ce pas plutôt un contrôleur ? Il se trouve que dans une version plus ancienne de Backbone, le composant Controller existait, aujourd’hui il est le devenu le composant Router que nous verrons par la suite … Cependant, un routeur est-il réellement un contrôleur ?... Mais, rappelez-vous que l’on est dans un contexte client (navigateur) et que le concept MVC « classique » n’est pas forcément « portable » en l’état. L’essentiel est que cela fonctionne, et si les contrôleurs vous manquent à ce point, nous verrons comment en créer quelques chapitres plus loin.</p>
+<pre><code>//En préparation, un peu de patience ...</code></pre>
 </body>
 </html>

@@ -5,11 +5,13 @@ pandoc -s --toc --highlight-style pygments -c style.css -N -o backbone.en.douceu
 	02-MAINS-DANS-LE-CAMBOUIS.md \
 	03-1ERS-CONTACTS-AVEC-BACKBONE.md \
 	04-LE-MODELE-OBJET-DE-BACKBONE.md \
-	05-IL-NOUS-FAUT-UN-SERVEUR.md
+	05-IL-NOUS-FAUT-UN-SERVEUR.md \
+	06-MODELES-ET-COLLECTIONS.md \
+	07-VUES-ET-TEMPLATING.md
 
 #PDF version
 pandoc -s --toc --latex-engine=xelatex --template=latex.template.tex -N \
-	--variable=version:alpha \
+	--variable=version:"alpha du 20.11.2012 | Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License." \
 	--variable=monofont:Consolas \
 	--variable=mainfont:Georgia \
 	--variable fontsize=12pt \
@@ -27,7 +29,9 @@ pandoc -s --toc --latex-engine=xelatex --template=latex.template.tex -N \
 	02-MAINS-DANS-LE-CAMBOUIS.md \
 	03-1ERS-CONTACTS-AVEC-BACKBONE.md \
 	04-LE-MODELE-OBJET-DE-BACKBONE.md \
-	05-IL-NOUS-FAUT-UN-SERVEUR.md
+	05-IL-NOUS-FAUT-UN-SERVEUR.md \
+	06-MODELES-ET-COLLECTIONS.md \
+	07-VUES-ET-TEMPLATING.md
 
 
 

@@ -14,8 +14,8 @@ Cet ouvrage va traiter au moins les points suivants :
 - 04-Premiers contacts avec Backbone *(publié)*
 - 05-Le modèle objet de Backbone *(publié)*
 - 06-Il nout faut un serveur & Principes REST *(publié)*
-- 07-Les Modèles & Collections en détail *(à venir : probablement le 19/11 ou le 20/11)*
-- 08-Les Vues & Templating
+- 07-Les Modèles & Collections en détail *(publié)*
+- 08-Les Vues & Templating *(en cours, probablement d'ici le 24.11)*
 - 09-Le Routeur
 - 10-Organiser son code
 - 11-Backbone.Sync
