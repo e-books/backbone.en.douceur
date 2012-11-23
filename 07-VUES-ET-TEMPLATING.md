@@ -65,18 +65,41 @@ Commencez par saisir ceci dans la console du navigateur :
 	];
 
 	blogPosts.add([
-		new Post({title : "Premier Message", message : messages[0], date : new Date(), author : "bob"}),
-		new Post({title : "Backbone ???", message : messages[1], date : new Date(), author : "bob"}),
-		new Post({title : "Les Modèles", message : messages[2], date : new Date(), author : "sam"}),
-		new Post({title : "Les Vues", message : messages[3], date : new Date(), author : "sam"}),
-		new Post({title : "Les Routes", message : messages[4], date : new Date(), author : "bob"}),
-		new Post({title : "Mais où sont les contrôleurs ?", message : messages[5], date : new Date(), author : "bob"})
+		new Post({
+            title : "Premier Message", 
+            message : messages[0], date : new Date(2012, 10, 23, 7,4,0,0), 
+            author : "bob"
+        }),
+		new Post({
+            title : "Backbone ???", 
+            message : messages[1], date : new Date(2012, 10, 23, 7,5,0,0), 
+            author : "bob"
+        }),
+		new Post({
+            title : "Les Modèles", 
+            message : messages[2], date : new Date(2012, 10, 23, 7,6,0,0), 
+            author : "sam"
+        }),
+		new Post({
+            title : "Les Vues", 
+            message : messages[3], date : new Date(2012, 10, 23, 7,7,0,0), 
+            author : "sam"
+        }),
+		new Post({
+            title : "Les Routes", 
+            message : messages[4], date : new Date(2012, 10, 23, 7,8,0,0), 
+            author : "bob"
+        }),
+		new Post({
+            title : "Mais où sont les contrôleurs ?", 
+            message : messages[5], date : new Date(2012, 10, 23, 7,9,0,0), 
+            author : "bob"
+        })
 
 	])
 ```
 
-	//TODO : revoir la partie date : ils vont tous avoir la même date, pas pratique pour trier
-	d = new Date(2012, 10, 23, 7,4,0,0) //Attention au mois
+>>**Remarque** : en javascript, pour les dates, le chiffre 10 correspond à Novembre (faire +1)
 
 Nous avons donc maintenant 5 Posts dans notre collection. Pour ne pas avoir à tout re-saisir à chaque fois, sauvegardez vos posts (toujours dans la console du navigateur) :
 
@@ -468,9 +491,9 @@ Le code final du script dans la page devrait ressembler à ceci :
                 this.collection.each(function(model) {
 
                     html += [
-                        '<h1>'+model.get("title")+'</h1><hr>',
-                        '<b>par : '+model.get("author")+'</b> le : '+model.get("date")+'<br>',
-                        '<p>'+model.get("message")+'</p>'
+                      '<h1>'+model.get("title")+'</h1><hr>',
+                      '<b>par : '+model.get("author")+'</b> le : '+model.get("date")+'<br>',
+                      '<p>'+model.get("message")+'</p>'
                     ].join("");
                     
                 });
@@ -565,8 +588,6 @@ Nous allons donc profiter des possibilités de Twitter Bootstrap pour revoir un 
 Modifions notre code html de la manière suivante :
 
 ```html
-<body>
-
     <div class="navbar navbar-fixed-top">
         <div class="navbar-inner">
             <div class="container">
@@ -617,6 +638,7 @@ Modifions notre code html de la manière suivante :
 
     </div>
 ```
+
 >>**Explications** : nous avons donc 2 templates, un pour afficher les 3 derniers posts (`id="blog_sidebar_template"`), un pour afficher tous les posts (`id="posts_list_template"`).
 
 ###Création & Modification des vues
@@ -861,7 +883,10 @@ Nous obtenons donc des templates html plus lisibles, utilisable moyennant une pe
             this.template = $("#posts_list_template").html();
         },
         render : function () {
-            var renderedContent = Mustache.to_html(this.template, {posts : this.collection.toJSON()} );
+            var renderedContent = Mustache.to_html(
+                this.template, 
+                {posts : this.collection.toJSON()} 
+            );
 
             this.$el.html(renderedContent);
         }
@@ -873,7 +898,10 @@ Nous obtenons donc des templates html plus lisibles, utilisable moyennant une pe
             this.template = $("#blog_sidebar_template").html();
         },
         render : function () {
-            var renderedContent = Mustache.to_html(this.template, {posts : this.collection.toJSON()} );
+            var renderedContent = Mustache.to_html(
+                this.template, 
+                {posts : this.collection.toJSON()} 
+            );
 
             this.$el.html(renderedContent);
         }           
@@ -989,7 +1017,8 @@ Nous allons donc créer une route `authenticate` avec le code suivant :
             res.json({infos:"Utilisateur déjà connecté"})
         } else { //si l'email n'est pas utilisé
         //Je cherche l'utilisateur dans la base de données
-            users.find({email: user.email, password: user.password }, function(err, results) {
+            users.find({email: user.email, password: user.password }, 
+              function(err, results) {
                 if(err) {
                     res.json({error:"Oups, Houson, on a un problème"}); 
                 } else {
@@ -1002,7 +1031,7 @@ Nous allons donc créer une route `authenticate` avec le code suivant :
                     authenticatedUser.key = key;
                     authenticatedUser.sessionID = req.sessionID;
 
-                    //J'ajoute l'utilisateur authentifié à la liste des utilisateurs connectés
+                    //Ajouter l'utilisateur authentifié à la liste des utilisateurs connectés
                     connectedUsers.push(authenticatedUser);
 
                     //Je renvoie au navigateur les informations de l'utilisateur
@@ -1401,6 +1430,7 @@ Nous somme maintenant prêts à utiliser tout cela côté client. Le code défin
 
     }
 ```
+
 ##Authentification (côté client)
 
 Nous repassons enfin au code client et nous allons pouvoir vérifier comment sont gérés les évènements dans une vue en implémentant l’authentification côté client.  

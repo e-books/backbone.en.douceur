@@ -19,7 +19,7 @@ Remerciements aussi pour :
 
 - [ehsavoie](https://github.com/ehsavoie) : 1ère pull request ;)
 - [lodennan](https://github.com/lodennan)
-- [cbonnissent](https://github.com/cbonnissent)
+- [cbonnissent](https://github.com/cbonnissent) : format epub
 
 
 ##Avertissement

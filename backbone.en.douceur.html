@@ -171,10 +171,12 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <li><a href="#gestion-des-événements-dans-les-vues"><span class="toc-section-number">8.7</span> Gestion des événements dans les vues</a></li>
 <li><a href="#authentification-côté-serveur-les-utilisateurs"><span class="toc-section-number">8.8</span> Authentification (côté serveur) : les utilisateurs</a><ul>
 <li><a href="#sauthentifier-se-déconnecter"><span class="toc-section-number">8.8.1</span> S’authentifier – Se déconnecter</a></li>
-<li><a href="#formulaire-dauthentification"><span class="toc-section-number">8.8.2</span> Formulaire d’authentification</a></li>
-<li><a href="#lobjet-backbone.view-login.view"><span class="toc-section-number">8.8.3</span> L’objet Backbone.View : Login.View</a></li>
-<li><a href="#ajoutons-une-gestion-des-évènements"><span class="toc-section-number">8.8.4</span> Ajoutons une gestion des évènements</a></li>
-<li><a href="#vérification"><span class="toc-section-number">8.8.5</span> Vérification</a></li>
+</ul></li>
+<li><a href="#authentification-côté-client"><span class="toc-section-number">8.9</span> Authentification (côté client)</a><ul>
+<li><a href="#formulaire-dauthentification"><span class="toc-section-number">8.9.1</span> Formulaire d’authentification</a></li>
+<li><a href="#lobjet-backbone.view-login.view"><span class="toc-section-number">8.9.2</span> L’objet Backbone.View : Login.View</a></li>
+<li><a href="#ajoutons-une-gestion-des-évènements"><span class="toc-section-number">8.9.3</span> Ajoutons une gestion des évènements</a></li>
+<li><a href="#vérification"><span class="toc-section-number">8.9.4</span> Vérification</a></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -193,6 +195,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <ul>
 <li><a href="https://github.com/ehsavoie">ehsavoie</a> : 1ère pull request ;)</li>
 <li><a href="https://github.com/lodennan">lodennan</a></li>
+<li><a href="https://github.com/cbonnissent">cbonnissent</a></li>
 </ul>
 <h2 id="avertissement"><a href="#TOC"><span class="header-section-number">1.1</span> Avertissement</a></h2>
 <p>Cet ouvrage est destiné à être purement éducatif. donc dès fois le code n'est pas fait dans les &quot;règles de l'art&quot;, mais plutôt avec une &quot;vision&quot; pédagogique. Désolé donc pour les puristes, mais à priori vous n'êtes pas la cible ;). Cependant, je serais ravi de pouvoir inclure vos remarques et bonnes pratiques sous forme de notes dans chacun des chapitres. Donc à vos pull-requests !</p>
@@ -2056,16 +2059,43 @@ npm install express</code></pre>
     ];
 
     <span class="kw">blogPosts</span>.<span class="fu">add</span>([
-        <span class="kw">new</span> Post({<span class="dt">title </span>: <span class="st">&quot;Premier Message&quot;</span>, <span class="dt">message </span>: messages[<span class="dv">0</span>], <span class="dt">date </span>: <span class="kw">new</span> <span class="kw">Date</span>(), <span class="dt">author </span>: <span class="st">&quot;bob&quot;</span>}),
-        <span class="kw">new</span> Post({<span class="dt">title </span>: <span class="st">&quot;Backbone ???&quot;</span>, <span class="dt">message </span>: messages[<span class="dv">1</span>], <span class="dt">date </span>: <span class="kw">new</span> <span class="kw">Date</span>(), <span class="dt">author </span>: <span class="st">&quot;bob&quot;</span>}),
-        <span class="kw">new</span> Post({<span class="dt">title </span>: <span class="st">&quot;Les Modèles&quot;</span>, <span class="dt">message </span>: messages[<span class="dv">2</span>], <span class="dt">date </span>: <span class="kw">new</span> <span class="kw">Date</span>(), <span class="dt">author </span>: <span class="st">&quot;sam&quot;</span>}),
-        <span class="kw">new</span> Post({<span class="dt">title </span>: <span class="st">&quot;Les Vues&quot;</span>, <span class="dt">message </span>: messages[<span class="dv">3</span>], <span class="dt">date </span>: <span class="kw">new</span> <span class="kw">Date</span>(), <span class="dt">author </span>: <span class="st">&quot;sam&quot;</span>}),
-        <span class="kw">new</span> Post({<span class="dt">title </span>: <span class="st">&quot;Les Routes&quot;</span>, <span class="dt">message </span>: messages[<span class="dv">4</span>], <span class="dt">date </span>: <span class="kw">new</span> <span class="kw">Date</span>(), <span class="dt">author </span>: <span class="st">&quot;bob&quot;</span>}),
-        <span class="kw">new</span> Post({<span class="dt">title </span>: <span class="st">&quot;Mais où sont les contrôleurs ?&quot;</span>, <span class="dt">message </span>: messages[<span class="dv">5</span>], <span class="dt">date </span>: <span class="kw">new</span> <span class="kw">Date</span>(), <span class="dt">author </span>: <span class="st">&quot;bob&quot;</span>})
+        <span class="kw">new</span> Post({
+            <span class="dt">title </span>: <span class="st">&quot;Premier Message&quot;</span>, 
+            <span class="dt">message </span>: messages[<span class="dv">0</span>], <span class="dt">date </span>: <span class="kw">new</span> <span class="kw">Date</span>(<span class="dv">2012</span>, <span class="dv">10</span>, <span class="dv">23</span>, <span class="dv">7</span>,<span class="dv">4</span>,<span class="dv">0</span>,<span class="dv">0</span>), 
+            <span class="dt">author </span>: <span class="st">&quot;bob&quot;</span>
+        }),
+        <span class="kw">new</span> Post({
+            <span class="dt">title </span>: <span class="st">&quot;Backbone ???&quot;</span>, 
+            <span class="dt">message </span>: messages[<span class="dv">1</span>], <span class="dt">date </span>: <span class="kw">new</span> <span class="kw">Date</span>(<span class="dv">2012</span>, <span class="dv">10</span>, <span class="dv">23</span>, <span class="dv">7</span>,<span class="dv">5</span>,<span class="dv">0</span>,<span class="dv">0</span>), 
+            <span class="dt">author </span>: <span class="st">&quot;bob&quot;</span>
+        }),
+        <span class="kw">new</span> Post({
+            <span class="dt">title </span>: <span class="st">&quot;Les Modèles&quot;</span>, 
+            <span class="dt">message </span>: messages[<span class="dv">2</span>], <span class="dt">date </span>: <span class="kw">new</span> <span class="kw">Date</span>(<span class="dv">2012</span>, <span class="dv">10</span>, <span class="dv">23</span>, <span class="dv">7</span>,<span class="dv">6</span>,<span class="dv">0</span>,<span class="dv">0</span>), 
+            <span class="dt">author </span>: <span class="st">&quot;sam&quot;</span>
+        }),
+        <span class="kw">new</span> Post({
+            <span class="dt">title </span>: <span class="st">&quot;Les Vues&quot;</span>, 
+            <span class="dt">message </span>: messages[<span class="dv">3</span>], <span class="dt">date </span>: <span class="kw">new</span> <span class="kw">Date</span>(<span class="dv">2012</span>, <span class="dv">10</span>, <span class="dv">23</span>, <span class="dv">7</span>,<span class="dv">7</span>,<span class="dv">0</span>,<span class="dv">0</span>), 
+            <span class="dt">author </span>: <span class="st">&quot;sam&quot;</span>
+        }),
+        <span class="kw">new</span> Post({
+            <span class="dt">title </span>: <span class="st">&quot;Les Routes&quot;</span>, 
+            <span class="dt">message </span>: messages[<span class="dv">4</span>], <span class="dt">date </span>: <span class="kw">new</span> <span class="kw">Date</span>(<span class="dv">2012</span>, <span class="dv">10</span>, <span class="dv">23</span>, <span class="dv">7</span>,<span class="dv">8</span>,<span class="dv">0</span>,<span class="dv">0</span>), 
+            <span class="dt">author </span>: <span class="st">&quot;bob&quot;</span>
+        }),
+        <span class="kw">new</span> Post({
+            <span class="dt">title </span>: <span class="st">&quot;Mais où sont les contrôleurs ?&quot;</span>, 
+            <span class="dt">message </span>: messages[<span class="dv">5</span>], <span class="dt">date </span>: <span class="kw">new</span> <span class="kw">Date</span>(<span class="dv">2012</span>, <span class="dv">10</span>, <span class="dv">23</span>, <span class="dv">7</span>,<span class="dv">9</span>,<span class="dv">0</span>,<span class="dv">0</span>), 
+            <span class="dt">author </span>: <span class="st">&quot;bob&quot;</span>
+        })
 
     ])</code></pre>
-<pre><code>//TODO : revoir la partie date : ils vont tous avoir la même date, pas pratique pour trier
-d = new Date(2012, 10, 23, 7,4,0,0) //Attention au mois</code></pre>
+<blockquote>
+<blockquote>
+<p><strong>Remarque</strong> : en javascript, pour les dates, le chiffre 10 correspond à Novembre (faire +1)</p>
+</blockquote>
+</blockquote>
 <p>Nous avons donc maintenant 5 Posts dans notre collection. Pour ne pas avoir à tout re-saisir à chaque fois, sauvegardez vos posts (toujours dans la console du navigateur) :</p>
 <p><em>Sauvegarder les modèles en base :</em></p>
 <pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="kw">blogPosts</span>.<span class="fu">each</span>(<span class="kw">function</span>(post){
@@ -2323,9 +2353,9 @@ d = new Date(2012, 10, 23, 7,4,0,0) //Attention au mois</code></pre>
                 <span class="kw">this</span>.<span class="fu">collection</span>.<span class="fu">each</span>(<span class="kw">function</span>(model) {
 
                     html += [
-                        <span class="ch">&#39;</span>&lt;<span class="ch">h1</span>&gt;<span class="ch">&#39;</span>+<span class="kw">model</span>.<span class="fu">get</span>(<span class="st">&quot;title&quot;</span>)+<span class="ch">&#39;</span>&lt;/<span class="ch">h1</span>&gt;&lt;<span class="ch">hr</span>&gt;<span class="ch">&#39;</span>,
-                        <span class="ch">&#39;</span>&lt;<span class="ch">b</span>&gt;<span class="ch">par</span> : <span class="ch">&#39;</span>+<span class="kw">model</span>.<span class="fu">get</span>(<span class="st">&quot;author&quot;</span>)+<span class="ch">&#39;</span>&lt;/<span class="ch">b</span>&gt; <span class="ch">le</span> : <span class="ch">&#39;</span>+<span class="kw">model</span>.<span class="fu">get</span>(<span class="st">&quot;date&quot;</span>)+<span class="ch">&#39;</span>&lt;<span class="ch">br</span>&gt;<span class="ch">&#39;</span>,
-                        <span class="ch">&#39;</span>&lt;<span class="ch">p</span>&gt;<span class="ch">&#39;</span>+<span class="kw">model</span>.<span class="fu">get</span>(<span class="st">&quot;message&quot;</span>)+<span class="ch">&#39;</span>&lt;/<span class="ch">p</span>&gt;<span class="ch">&#39;</span>
+                      <span class="ch">&#39;</span>&lt;<span class="ch">h1</span>&gt;<span class="ch">&#39;</span>+<span class="kw">model</span>.<span class="fu">get</span>(<span class="st">&quot;title&quot;</span>)+<span class="ch">&#39;</span>&lt;/<span class="ch">h1</span>&gt;&lt;<span class="ch">hr</span>&gt;<span class="ch">&#39;</span>,
+                      <span class="ch">&#39;</span>&lt;<span class="ch">b</span>&gt;<span class="ch">par</span> : <span class="ch">&#39;</span>+<span class="kw">model</span>.<span class="fu">get</span>(<span class="st">&quot;author&quot;</span>)+<span class="ch">&#39;</span>&lt;/<span class="ch">b</span>&gt; <span class="ch">le</span> : <span class="ch">&#39;</span>+<span class="kw">model</span>.<span class="fu">get</span>(<span class="st">&quot;date&quot;</span>)+<span class="ch">&#39;</span>&lt;<span class="ch">br</span>&gt;<span class="ch">&#39;</span>,
+                      <span class="ch">&#39;</span>&lt;<span class="ch">p</span>&gt;<span class="ch">&#39;</span>+<span class="kw">model</span>.<span class="fu">get</span>(<span class="st">&quot;message&quot;</span>)+<span class="ch">&#39;</span>&lt;/<span class="ch">p</span>&gt;<span class="ch">&#39;</span>
                     ].<span class="fu">join</span>(<span class="st">&quot;&quot;</span>);
 
                 });
@@ -2401,59 +2431,60 @@ d = new Date(2012, 10, 23, 7,4,0,0) //Attention au mois</code></pre>
 <p>Nous allons donc profiter des possibilités de Twitter Bootstrap pour revoir un peu la mise en page de notre « site » et du même coup mettre en œuvre le concept de sous-vue.</p>
 <h3 id="réorganisation-du-code-html"><a href="#TOC"><span class="header-section-number">8.5.1</span> Réorganisation du code html</a></h3>
 <p>Modifions notre code html de la manière suivante :</p>
-```html
-<body>
+<pre class="sourceCode html"><code class="sourceCode html">    <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;navbar navbar-fixed-top&quot;</span><span class="kw">&gt;</span>
+        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;navbar-inner&quot;</span><span class="kw">&gt;</span>
+            <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;container&quot;</span><span class="kw">&gt;</span>
+                <span class="kw">&lt;a</span><span class="ot"> class=</span><span class="st">&quot;brand&quot;</span><span class="kw">&gt;</span>Mon Blog<span class="kw">&lt;/a&gt;</span>
+            <span class="kw">&lt;/div&gt;</span>
+        <span class="kw">&lt;/div&gt;</span>
+    <span class="kw">&lt;/div&gt;</span>
 
-<pre><code>&lt;div class=&quot;navbar navbar-fixed-top&quot;&gt;
-    &lt;div class=&quot;navbar-inner&quot;&gt;
-        &lt;div class=&quot;container&quot;&gt;
-            &lt;a class=&quot;brand&quot;&gt;Mon Blog&lt;/a&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
-&lt;/div&gt;
+    <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;container-fluid&quot;</span><span class="kw">&gt;</span>
 
-&lt;div class=&quot;container-fluid&quot;&gt;
+        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;row-fluid&quot;</span><span class="kw">&gt;</span>
 
-    &lt;div class=&quot;row-fluid&quot;&gt;
+            <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;span3&quot;</span><span class="kw">&gt;</span>
+                <span class="kw">&lt;script</span><span class="ot"> type=</span><span class="st">&quot;text/template&quot;</span><span class="ot"> id=</span><span class="st">&quot;blog_sidebar_template&quot;</span><span class="kw">&gt;</span>
+                    &lt;h2&gt;Les <span class="dv">3</span> <span class="dt">derniers </span>:&lt;/h2&gt;
+                    &lt;ul&gt;
+                    &lt;% <span class="kw">_</span>.<span class="fu">each</span>(posts ,<span class="kw">function</span>(post){ %&gt;
+                        &lt;li&gt;&lt;%= <span class="kw">post</span>.<span class="fu">get</span>(<span class="st">&quot;title&quot;</span>) %&gt;&lt;/li&gt;
+                    &lt;% }); %&gt;
+                    &lt;/ul&gt;
+                <span class="kw">&lt;/script&gt;</span>
+                <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;sidebar&quot;</span><span class="ot"> id=</span><span class="st">&quot;blog_sidebar&quot;</span><span class="kw">&gt;</span>
+                    <span class="co">&lt;!-- Last 3 posts --&gt;</span>
+                <span class="kw">&lt;/div&gt;</span>
+            <span class="kw">&lt;/div&gt;</span>
 
-        &lt;div class=&quot;span3&quot;&gt;
-            &lt;script type=&quot;text/template&quot; id=&quot;blog_sidebar_template&quot;&gt;
-                &lt;h2&gt;Les 3 derniers :&lt;/h2&gt;
-                &lt;ul&gt;
-                &lt;% _.each(posts ,function(post){ %&gt;
-                    &lt;li&gt;&lt;%= post.get(&quot;title&quot;) %&gt;&lt;/li&gt;
-                &lt;% }); %&gt;
-                &lt;/ul&gt;
-            &lt;/script&gt;
-            &lt;div class=&quot;sidebar&quot; id=&quot;blog_sidebar&quot;&gt;
-                &lt;!-- Last 3 posts --&gt;
-            &lt;/div&gt;
-        &lt;/div&gt;
+            <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;span9&quot;</span><span class="kw">&gt;</span>
+                <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;hero-unit&quot;</span><span class="kw">&gt;</span>
+                    <span class="kw">&lt;h1&gt;</span>Backbone rocks !!!<span class="kw">&lt;/h1&gt;</span>
+                <span class="kw">&lt;/div&gt;</span>
 
-        &lt;div class=&quot;span9&quot;&gt;
-            &lt;div class=&quot;hero-unit&quot;&gt;
-                &lt;h1&gt;Backbone rocks !!!&lt;/h1&gt;
-            &lt;/div&gt;
+                <span class="co">&lt;!-- template pour les posts --&gt;</span>
+                <span class="kw">&lt;script</span><span class="ot"> type=</span><span class="st">&quot;text/template&quot;</span><span class="ot"> id=</span><span class="st">&quot;posts_list_template&quot;</span><span class="kw">&gt;</span>
 
-            &lt;!-- template pour les posts --&gt;
-            &lt;script type=&quot;text/template&quot; id=&quot;posts_list_template&quot;&gt;
+                    &lt;% <span class="kw">_</span>.<span class="fu">each</span>(posts ,<span class="kw">function</span>(post){ %&gt;
+                        &lt;h1&gt;&lt;%= <span class="kw">post</span>.<span class="fu">get</span>(<span class="st">&quot;title&quot;</span>) %&gt;&lt;/h1&gt;&lt;hr&gt;
+                        &lt;b&gt;<span class="dt">par </span>: &lt;%= <span class="kw">post</span>.<span class="fu">get</span>(<span class="st">&quot;author&quot;</span>) %&gt;&lt;/b&gt; <span class="dt">le </span>: &lt;%= <span class="kw">post</span>.<span class="fu">get</span>(<span class="st">&quot;date&quot;</span>) %&gt;&lt;br&gt;
+                        &lt;p&gt;&lt;%= <span class="kw">post</span>.<span class="fu">get</span>(<span class="st">&quot;message&quot;</span>) %&gt;&lt;/p&gt;
+                    &lt;% }); %&gt;
 
-                &lt;% _.each(posts ,function(post){ %&gt;
-                    &lt;h1&gt;&lt;%= post.get(&quot;title&quot;) %&gt;&lt;/h1&gt;&lt;hr&gt;
-                    &lt;b&gt;par : &lt;%= post.get(&quot;author&quot;) %&gt;&lt;/b&gt; le : &lt;%= post.get(&quot;date&quot;) %&gt;&lt;br&gt;
-                    &lt;p&gt;&lt;%= post.get(&quot;message&quot;) %&gt;&lt;/p&gt;
-                &lt;% }); %&gt;
+                <span class="kw">&lt;/script&gt;</span>
+                <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;row-fluid&quot;</span><span class="ot"> id=</span><span class="st">&quot;posts_list&quot;</span><span class="kw">&gt;&lt;/div&gt;</span>
 
-            &lt;/script&gt;
-            &lt;div class=&quot;row-fluid&quot; id=&quot;posts_list&quot;&gt;&lt;/div&gt;
-
-        &lt;/div&gt;
+            <span class="kw">&lt;/div&gt;</span>
 
 
-    &lt;/div&gt;
+        <span class="kw">&lt;/div&gt;</span>
 
-&lt;/div&gt;</code></pre>
-<p>``<code>&gt;&gt;**Explications** : nous avons donc 2 templates, un pour afficher les 3 derniers posts (</code>id=&quot;blog_sidebar_template&quot;<code>), un pour afficher tous les posts (</code>id=&quot;posts_list_template&quot;`).</p>
+    <span class="kw">&lt;/div&gt;</span></code></pre>
+<blockquote>
+<blockquote>
+<p><strong>Explications</strong> : nous avons donc 2 templates, un pour afficher les 3 derniers posts (<code>id=&quot;blog_sidebar_template&quot;</code>), un pour afficher tous les posts (<code>id=&quot;posts_list_template&quot;</code>).</p>
+</blockquote>
+</blockquote>
 <h3 id="création-modification-des-vues"><a href="#TOC"><span class="header-section-number">8.5.2</span> Création &amp; Modification des vues</a></h3>
 <p>Nous allons créer une vue principale (<code>MainView</code>) qui se chargera de &quot;piloter&quot; 2 sous-vues (<code>SidebarView</code> et <code>PostsListView</code>) :</p>
 <p><em>1] Simplifions PostsListView :</em></p>
@@ -2619,7 +2650,10 @@ d = new Date(2012, 10, 23, 7,4,0,0) //Attention au mois</code></pre>
             <span class="kw">this</span>.<span class="fu">template</span> = $(<span class="st">&quot;#posts_list_template&quot;</span>).<span class="fu">html</span>();
         },
         <span class="dt">render </span>: <span class="kw">function</span> () {
-            <span class="kw">var</span> renderedContent = <span class="kw">Mustache</span>.<span class="fu">to</span>_<span class="fu">html</span>(<span class="kw">this</span>.<span class="fu">template</span>, {<span class="dt">posts </span>: <span class="kw">this</span>.<span class="fu">collection</span>.<span class="fu">toJSON</span>()} );
+            <span class="kw">var</span> renderedContent = <span class="kw">Mustache</span>.<span class="fu">to</span>_<span class="fu">html</span>(
+                <span class="kw">this</span>.<span class="fu">template</span>, 
+                {<span class="dt">posts </span>: <span class="kw">this</span>.<span class="fu">collection</span>.<span class="fu">toJSON</span>()} 
+            );
 
             <span class="kw">this</span>.$<span class="fu">el</span>.<span class="fu">html</span>(renderedContent);
         }
@@ -2631,7 +2665,10 @@ d = new Date(2012, 10, 23, 7,4,0,0) //Attention au mois</code></pre>
             <span class="kw">this</span>.<span class="fu">template</span> = $(<span class="st">&quot;#blog_sidebar_template&quot;</span>).<span class="fu">html</span>();
         },
         <span class="dt">render </span>: <span class="kw">function</span> () {
-            <span class="kw">var</span> renderedContent = <span class="kw">Mustache</span>.<span class="fu">to</span>_<span class="fu">html</span>(<span class="kw">this</span>.<span class="fu">template</span>, {<span class="dt">posts </span>: <span class="kw">this</span>.<span class="fu">collection</span>.<span class="fu">toJSON</span>()} );
+            <span class="kw">var</span> renderedContent = <span class="kw">Mustache</span>.<span class="fu">to</span>_<span class="fu">html</span>(
+                <span class="kw">this</span>.<span class="fu">template</span>, 
+                {<span class="dt">posts </span>: <span class="kw">this</span>.<span class="fu">collection</span>.<span class="fu">toJSON</span>()} 
+            );
 
             <span class="kw">this</span>.$<span class="fu">el</span>.<span class="fu">html</span>(renderedContent);
         }           
@@ -2716,7 +2753,8 @@ d = new Date(2012, 10, 23, 7,4,0,0) //Attention au mois</code></pre>
             <span class="kw">res</span>.<span class="fu">json</span>({<span class="dt">infos</span>:<span class="st">&quot;Utilisateur déjà connecté&quot;</span>})
         } <span class="kw">else</span> { <span class="co">//si l&#39;email n&#39;est pas utilisé</span>
         <span class="co">//Je cherche l&#39;utilisateur dans la base de données</span>
-            <span class="kw">users</span>.<span class="fu">find</span>({<span class="dt">email</span>: <span class="kw">user</span>.<span class="fu">email</span>, <span class="dt">password</span>: <span class="kw">user</span>.<span class="fu">password</span> }, <span class="kw">function</span>(err, results) {
+            <span class="kw">users</span>.<span class="fu">find</span>({<span class="dt">email</span>: <span class="kw">user</span>.<span class="fu">email</span>, <span class="dt">password</span>: <span class="kw">user</span>.<span class="fu">password</span> }, 
+              <span class="kw">function</span>(err, results) {
                 <span class="kw">if</span>(err) {
                     <span class="kw">res</span>.<span class="fu">json</span>({<span class="dt">error</span>:<span class="st">&quot;Oups, Houson, on a un problème&quot;</span>}); 
                 } <span class="kw">else</span> {
@@ -2729,7 +2767,7 @@ d = new Date(2012, 10, 23, 7,4,0,0) //Attention au mois</code></pre>
                     <span class="kw">authenticatedUser</span>.<span class="fu">key</span> = key;
                     <span class="kw">authenticatedUser</span>.<span class="fu">sessionID</span> = <span class="kw">req</span>.<span class="fu">sessionID</span>;
 
-                    <span class="co">//J&#39;ajoute l&#39;utilisateur authentifié à la liste des utilisateurs connectés</span>
+                    <span class="co">//Ajouter l&#39;utilisateur authentifié à la liste des utilisateurs connectés</span>
                     <span class="kw">connectedUsers</span>.<span class="fu">push</span>(authenticatedUser);
 
                     <span class="co">//Je renvoie au navigateur les informations de l&#39;utilisateur</span>
@@ -2798,316 +2836,322 @@ d = new Date(2012, 10, 23, 7,4,0,0) //Attention au mois</code></pre>
 
     });</code></pre>
 <p>Nous somme maintenant prêts à utiliser tout cela côté client. Le code définitif de <code>app.js</code> devrait ressembler à ceci :</p>
-<p>```javascript /<em>-------------------------------------------- Déclaration des librairies --------------------------------------------</em>/ var express = require('express') , nStore = require('nstore') , app = module.exports = express.createServer();</p>
-<pre><code>nStore = nStore.extend(require(&#39;nstore/query&#39;)());
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="co">/*--------------------------------------------</span>
+<span class="co">        Déclaration des librairies</span>
+<span class="co">    --------------------------------------------*/</span>
+    <span class="kw">var</span> express = require(<span class="ch">&#39;express&#39;</span>)
+        , nStore = require(<span class="ch">&#39;nstore&#39;</span>)
+        , app = <span class="kw">module</span>.<span class="fu">exports</span> = <span class="kw">express</span>.<span class="fu">createServer</span>();
 
-/*--------------------------------------------
-    Paramétrages de fonctionnement d&#39;Express
---------------------------------------------*/
-app.use(express.bodyParser());
-app.use(express.methodOverride());
-app.use(express.static(__dirname + &#39;/public&#39;));
-app.use(express.cookieParser(&#39;ilovebackbone&#39;));
-app.use(express.session({ secret: &quot;ilovebackbone&quot; }));
+    nStore = <span class="kw">nStore</span>.<span class="fu">extend</span>(require(<span class="ch">&#39;nstore/query&#39;</span>)());
 
-/*--------------------------------------------
-    Définition des &quot;bases&quot; posts &amp; users
---------------------------------------------*/
-var posts, users;
+    <span class="co">/*--------------------------------------------</span>
+<span class="co">        Paramétrages de fonctionnement d&#39;Express</span>
+<span class="co">    --------------------------------------------*/</span>
+    <span class="kw">app</span>.<span class="fu">use</span>(<span class="kw">express</span>.<span class="fu">bodyParser</span>());
+    <span class="kw">app</span>.<span class="fu">use</span>(<span class="kw">express</span>.<span class="fu">methodOverride</span>());
+    <span class="kw">app</span>.<span class="fu">use</span>(<span class="kw">express</span>.<span class="fu">static</span>(__dirname + <span class="ch">&#39;/public&#39;</span>));
+    <span class="kw">app</span>.<span class="fu">use</span>(<span class="kw">express</span>.<span class="fu">cookieParser</span>(<span class="ch">&#39;ilovebackbone&#39;</span>));
+    <span class="kw">app</span>.<span class="fu">use</span>(<span class="kw">express</span>.<span class="fu">session</span>({ <span class="dt">secret</span>: <span class="st">&quot;ilovebackbone&quot;</span> }));
 
-posts = nStore.new(&quot;blog.db&quot;, function() {
-    users = nStore.new(&quot;users.db&quot;, function() {
-        Routes();
-        app.listen(3000);
-        console.log(&#39;Express app started on port 3000&#39;);
+    <span class="co">/*--------------------------------------------</span>
+<span class="co">        Définition des &quot;bases&quot; posts &amp; users</span>
+<span class="co">    --------------------------------------------*/</span>
+    <span class="kw">var</span> posts, users;
 
-    });
-});
+    posts = <span class="kw">nStore</span>.<span class="fu">new</span>(<span class="st">&quot;blog.db&quot;</span>, <span class="kw">function</span>() {
+        users = <span class="kw">nStore</span>.<span class="fu">new</span>(<span class="st">&quot;users.db&quot;</span>, <span class="kw">function</span>() {
+            Routes();
+            <span class="kw">app</span>.<span class="fu">listen</span>(<span class="dv">3000</span>);
+            <span class="kw">console</span>.<span class="fu">log</span>(<span class="ch">&#39;Express app started on port 3000&#39;</span>);
 
-
-/*======= Authentification =======*/
-
-var connectedUsers = [];
-
-function addUser (user) {
-    users.save(null,user, function (err, key){
-        if(err) { 
-            console.log(&quot;Erreur : &quot;,err);
-        } else {
-            user.id = key;
-            console.log(user);
-        }
-    });    
-}
-
-function addUsers () {
-    addUser({
-        email : &quot;bob@morane.com&quot;,
-        password : &quot;backbone&quot;,
-        isAdmin : true,
-        firstName : &quot;Bob&quot;,
-        lastName : &quot;Morane&quot;
-    });
-    addUser({
-        email : &quot;sam@lepirate.com&quot;,
-        password : &quot;underscore&quot;,
-        isAdmin : false,
-        firstName : &quot;Sam&quot;,
-        lastName : &quot;Le Pirate&quot;
+        });
     });
 
-    //etc. ...
-}
 
-function findUserBySession (sessionID) {
-    /*
-        Permet de retrouver un utilisateur par son id de session
-    */
-    return connectedUsers.filter(function(user) {
-        return user.sessionID == sessionID;
-    })[0];
+    <span class="co">/*======= Authentification =======*/</span>
 
-}
+    <span class="kw">var</span> connectedUsers = [];
 
-function findUserByMail (email) {
-    /*
-        Permet de vérifier si un utilisateur est déjà loggé
-    */
-    return connectedUsers.filter(function(user) {
-        return user.email == email;
-    })[0];    
-}
+    <span class="kw">function</span> addUser (user) {
+        <span class="kw">users</span>.<span class="fu">save</span>(null,user, <span class="kw">function</span> (err, key){
+            <span class="kw">if</span>(err) { 
+                <span class="kw">console</span>.<span class="fu">log</span>(<span class="st">&quot;Erreur : &quot;</span>,err);
+            } <span class="kw">else</span> {
+                <span class="kw">user</span>.<span class="fu">id</span> = key;
+                <span class="kw">console</span>.<span class="fu">log</span>(user);
+            }
+        });    
+    }
+
+    <span class="kw">function</span> addUsers () {
+        addUser({
+            <span class="dt">email </span>: <span class="st">&quot;bob@morane.com&quot;</span>,
+            <span class="dt">password </span>: <span class="st">&quot;backbone&quot;</span>,
+            <span class="dt">isAdmin </span>: <span class="kw">true</span>,
+            <span class="dt">firstName </span>: <span class="st">&quot;Bob&quot;</span>,
+            <span class="dt">lastName </span>: <span class="st">&quot;Morane&quot;</span>
+        });
+        addUser({
+            <span class="dt">email </span>: <span class="st">&quot;sam@lepirate.com&quot;</span>,
+            <span class="dt">password </span>: <span class="st">&quot;underscore&quot;</span>,
+            <span class="dt">isAdmin </span>: <span class="kw">false</span>,
+            <span class="dt">firstName </span>: <span class="st">&quot;Sam&quot;</span>,
+            <span class="dt">lastName </span>: <span class="st">&quot;Le Pirate&quot;</span>
+        });
+
+        <span class="co">//etc. ...</span>
+    }
+
+    <span class="kw">function</span> findUserBySession (sessionID) {
+        <span class="co">/*</span>
+<span class="co">            Permet de retrouver un utilisateur par son id de session</span>
+<span class="co">        */</span>
+        <span class="kw">return</span> <span class="kw">connectedUsers</span>.<span class="fu">filter</span>(<span class="kw">function</span>(user) {
+            <span class="kw">return</span> <span class="kw">user</span>.<span class="fu">sessionID</span> == sessionID;
+        })[<span class="dv">0</span>];
+
+    }
+
+    <span class="kw">function</span> findUserByMail (email) {
+        <span class="co">/*</span>
+<span class="co">            Permet de vérifier si un utilisateur est déjà loggé</span>
+<span class="co">        */</span>
+        <span class="kw">return</span> <span class="kw">connectedUsers</span>.<span class="fu">filter</span>(<span class="kw">function</span>(user) {
+            <span class="kw">return</span> <span class="kw">user</span>.<span class="fu">email</span> == email;
+        })[<span class="dv">0</span>];    
+    }
 
 
-function Routes() {
-    /*======= Routes pour authentification =======*/
+    <span class="kw">function</span> Routes() {
+        <span class="co">/*======= Routes pour authentification =======*/</span>
 
-    app.get(&#39;/addusers&#39;,function(req, res){
-        addUsers();
-        res.json({MESSAGE:&quot;Users added.&quot;});
-    });
+        <span class="kw">app</span>.<span class="fu">get</span>(<span class="ch">&#39;/addusers&#39;</span>,<span class="kw">function</span>(req, res){
+            addUsers();
+            <span class="kw">res</span>.<span class="fu">json</span>({<span class="dt">MESSAGE</span>:<span class="st">&quot;Users added.&quot;</span>});
+        });
 
-    app.get(&#39;/alreadyauthenticated&#39;,function(req, res){
+        <span class="kw">app</span>.<span class="fu">get</span>(<span class="ch">&#39;/alreadyauthenticated&#39;</span>,<span class="kw">function</span>(req, res){
 
-        var alreadyAuthenticatedUser = findUserBySession(req.sessionID);
+            <span class="kw">var</span> alreadyAuthenticatedUser = findUserBySession(<span class="kw">req</span>.<span class="fu">sessionID</span>);
 
-        /*  Si je suis déjà authentifié, 
-            renvoyer les informations utilisateur
-            sans le mot de passe bien sûr
-        */
-        if(alreadyAuthenticatedUser) {
-            res.json({
-                email:alreadyAuthenticatedUser.email,
-                firstName : alreadyAuthenticatedUser.firstName,
-                lastName : alreadyAuthenticatedUser.lastName,
-                isAdmin : alreadyAuthenticatedUser.isAdmin
+            <span class="co">/*  Si je suis déjà authentifié, </span>
+<span class="co">                renvoyer les informations utilisateur</span>
+<span class="co">                sans le mot de passe bien sûr</span>
+<span class="co">            */</span>
+            <span class="kw">if</span>(alreadyAuthenticatedUser) {
+                <span class="kw">res</span>.<span class="fu">json</span>({
+                    <span class="dt">email</span>:<span class="kw">alreadyAuthenticatedUser</span>.<span class="fu">email</span>,
+                    <span class="dt">firstName </span>: <span class="kw">alreadyAuthenticatedUser</span>.<span class="fu">firstName</span>,
+                    <span class="dt">lastName </span>: <span class="kw">alreadyAuthenticatedUser</span>.<span class="fu">lastName</span>,
+                    <span class="dt">isAdmin </span>: <span class="kw">alreadyAuthenticatedUser</span>.<span class="fu">isAdmin</span>
+                });
+            } <span class="kw">else</span> {
+                <span class="kw">res</span>.<span class="fu">json</span>({});
+            }
+
+        });
+
+        <span class="kw">app</span>.<span class="fu">post</span>(<span class="ch">&#39;/authenticate&#39;</span>,<span class="kw">function</span>(req, res){
+            <span class="kw">console</span>.<span class="fu">log</span>(<span class="st">&quot;POST authenticate &quot;</span>, <span class="kw">req</span>.<span class="fu">body</span>);
+            <span class="co">//Je récupère les information de connexion de l&#39;utilisateur</span>
+            <span class="kw">var</span> user = <span class="kw">req</span>.<span class="fu">body</span>;
+
+            <span class="co">//est ce que l&#39;email est déjà utilisé ?</span>
+            <span class="kw">if</span>(findUserByMail(<span class="kw">user</span>.<span class="fu">email</span>)) {
+                <span class="kw">res</span>.<span class="fu">json</span>({<span class="dt">infos</span>:<span class="st">&quot;Utilisateur déjà connecté&quot;</span>})
+            } <span class="kw">else</span> { <span class="co">//si l&#39;email n&#39;est pas utilisé</span>
+            <span class="co">//Je cherche l&#39;utilisateur dans la base de données</span>
+                <span class="kw">users</span>.<span class="fu">find</span>({<span class="dt">email</span>: <span class="kw">user</span>.<span class="fu">email</span>, <span class="dt">password</span>: <span class="kw">user</span>.<span class="fu">password</span> }, <span class="kw">function</span>(err, results) {
+                    <span class="kw">if</span>(err) {
+                        <span class="kw">res</span>.<span class="fu">json</span>({<span class="dt">error</span>:<span class="st">&quot;Oups, Houson, on a un problème&quot;</span>}); 
+                    } <span class="kw">else</span> {
+                        <span class="co">//J&#39;ai trouvé l&#39;utilisateur</span>
+                        <span class="kw">var</span> key = <span class="kw">Object</span>.<span class="fu">keys</span>(results)[<span class="dv">0</span>]
+                        ,   authenticatedUser = results[key];
+
+                        <span class="co">//Je rajoute l&#39;id de session à l&#39;objet utilisateur</span>
+
+                        <span class="kw">authenticatedUser</span>.<span class="fu">key</span> = key;
+                        <span class="kw">authenticatedUser</span>.<span class="fu">sessionID</span> = <span class="kw">req</span>.<span class="fu">sessionID</span>;
+
+                        <span class="co">//J&#39;ajoute l&#39;utilisateur authentifié à la liste des utilisateurs connectés</span>
+                        <span class="kw">connectedUsers</span>.<span class="fu">push</span>(authenticatedUser);
+
+                        <span class="co">//Je renvoie au navigateur les informations de l&#39;utilisateur</span>
+                        <span class="co">// ... sans le mot de passe bien sûr</span>
+                        <span class="kw">res</span>.<span class="fu">json</span>({
+                            <span class="dt">email</span>:<span class="kw">authenticatedUser</span>.<span class="fu">email</span>,
+                            <span class="dt">firstName </span>: <span class="kw">authenticatedUser</span>.<span class="fu">firstName</span>,
+                            <span class="dt">lastName </span>: <span class="kw">authenticatedUser</span>.<span class="fu">lastName</span>,
+                            <span class="dt">isAdmin </span>: <span class="kw">authenticatedUser</span>.<span class="fu">isAdmin</span>
+                        });
+                    }
+                });   
+            }
+
+        });
+
+        <span class="kw">app</span>.<span class="fu">get</span>(<span class="ch">&#39;/logoff&#39;</span>,<span class="kw">function</span>(req, res){
+
+            <span class="co">//Je recherche l&#39;utilisateur courant parmi les utilisateurs connectés</span>
+            <span class="kw">var</span> alreadyAuthenticatedUser = findUserBySession(<span class="kw">req</span>.<span class="fu">sessionID</span>);
+
+            <span class="kw">if</span>(alreadyAuthenticatedUser) {
+                <span class="co">//Je l&#39;ai trouvé, je le supprime de la liste des utilisateurs connectés</span>
+                <span class="kw">var</span> posInArray = <span class="kw">connectedUsers</span>.<span class="fu">indexOf</span>(alreadyAuthenticatedUser);
+                <span class="kw">connectedUsers</span>.<span class="fu">splice</span>(posInArray, <span class="dv">1</span>);
+                <span class="kw">res</span>.<span class="fu">json</span>({<span class="dt">state</span>:<span class="st">&quot;disconnected&quot;</span>});
+            } <span class="kw">else</span> {
+                <span class="kw">res</span>.<span class="fu">json</span>({});
+            }
+
+        });
+
+        <span class="co">/*======= Fin des routes &quot;authentification&quot; =======*/</span>
+
+        <span class="co">/*</span>
+<span class="co">            Obtenir la liste de tous les posts lorsque</span>
+<span class="co">            l&#39;on appelle http://localhost:3000/blogposts</span>
+<span class="co">            en mode GET</span>
+<span class="co">        */</span>
+        <span class="kw">app</span>.<span class="fu">get</span>(<span class="ch">&#39;/blogposts&#39;</span>,<span class="kw">function</span>(req, res){
+            <span class="kw">console</span>.<span class="fu">log</span>(<span class="st">&quot;GET (ALL) : /blogposts&quot;</span>);
+            <span class="kw">posts</span>.<span class="fu">all</span>(<span class="kw">function</span>(err, results) {
+
+                <span class="kw">if</span>(err) { 
+                    <span class="kw">console</span>.<span class="fu">log</span>(<span class="st">&quot;Erreur : &quot;</span>,err);
+                    <span class="kw">res</span>.<span class="fu">json</span>(err); 
+                } <span class="kw">else</span> {
+                    <span class="kw">var</span> posts = [];
+                    <span class="kw">for</span>(<span class="kw">var</span> key <span class="kw">in</span> results) {
+                        <span class="kw">var</span> post = results[key]; <span class="kw">post</span>.<span class="fu">id</span> = key;
+                        <span class="kw">posts</span>.<span class="fu">push</span>(post);
+                    }
+                    <span class="kw">res</span>.<span class="fu">json</span>(posts);
+                }
             });
-        } else {
-            res.json({});
-        }
 
-    });
+        });
 
-    app.post(&#39;/authenticate&#39;,function(req, res){
-        console.log(&quot;POST authenticate &quot;, req.body);
-        //Je récupère les information de connexion de l&#39;utilisateur
-        var user = req.body;
+        <span class="co">/*</span>
+<span class="co">            Obtenir la liste de tous les posts correspondant à un critère</span>
+<span class="co">            lorsque l&#39;on appelle http://localhost:3000/blogposts/ en</span>
+<span class="co">            mode GET avec une requête en paramètre</span>
+<span class="co">            ex : query : { &quot;title&quot; : &quot;Mon 1er post&quot;} }</span>
+<span class="co">        */</span>
+        <span class="kw">app</span>.<span class="fu">get</span>(<span class="ch">&#39;/blogposts/:query&#39;</span>,<span class="kw">function</span>(req, res){
+            <span class="kw">console</span>.<span class="fu">log</span>(<span class="st">&quot;GET (QUERY) : /blogposts/&quot;</span>+<span class="kw">req.params</span>.<span class="fu">query</span>);
 
-        //est ce que l&#39;email est déjà utilisé ?
-        if(findUserByMail(user.email)) {
-            res.json({infos:&quot;Utilisateur déjà connecté&quot;})
-        } else { //si l&#39;email n&#39;est pas utilisé
-        //Je cherche l&#39;utilisateur dans la base de données
-            users.find({email: user.email, password: user.password }, function(err, results) {
-                if(err) {
-                    res.json({error:&quot;Oups, Houson, on a un problème&quot;}); 
-                } else {
-                    //J&#39;ai trouvé l&#39;utilisateur
-                    var key = Object.keys(results)[0]
-                    ,   authenticatedUser = results[key];
+            <span class="kw">posts</span>.<span class="fu">find</span>(<span class="kw">JSON</span>.<span class="fu">parse</span>(<span class="kw">req.params</span>.<span class="fu">query</span>), <span class="kw">function</span>(err, results) {
+                <span class="kw">if</span>(err) {
+                    <span class="kw">console</span>.<span class="fu">log</span>(<span class="st">&quot;Erreur : &quot;</span>,err);
+                    <span class="kw">res</span>.<span class="fu">json</span>(err); 
+                } <span class="kw">else</span> {
+                    <span class="kw">var</span> posts = [];
+                    <span class="kw">for</span>(<span class="kw">var</span> key <span class="kw">in</span> results) {
+                        <span class="kw">var</span> post = results[key]; <span class="kw">post</span>.<span class="fu">id</span> = key;
+                        <span class="kw">posts</span>.<span class="fu">push</span>(post);
+                    }
+                    <span class="kw">res</span>.<span class="fu">json</span>(posts);
+                }
+            });
 
-                    //Je rajoute l&#39;id de session à l&#39;objet utilisateur
+        });
 
-                    authenticatedUser.key = key;
-                    authenticatedUser.sessionID = req.sessionID;
+        <span class="co">/*</span>
+<span class="co">            Retrouver un post par sa clé unique lorsque</span>
+<span class="co">            l&#39;on appelle http://localhost:3000/blogpost/identifiant_du_post</span>
+<span class="co">            en mode GET</span>
+<span class="co">        */</span>
 
-                    //J&#39;ajoute l&#39;utilisateur authentifié à la liste des utilisateurs connectés
-                    connectedUsers.push(authenticatedUser);
+        <span class="kw">app</span>.<span class="fu">get</span>(<span class="ch">&#39;/blogpost/:id&#39;</span>, <span class="kw">function</span>(req, res){
+            <span class="kw">console</span>.<span class="fu">log</span>(<span class="st">&quot;GET : /blogpost/&quot;</span>+<span class="kw">req.params</span>.<span class="fu">id</span>);
+            <span class="kw">posts</span>.<span class="fu">get</span>(<span class="kw">req.params</span>.<span class="fu">id</span>, <span class="kw">function</span>(err, post, key) {
+                <span class="kw">if</span>(err) {
+                    <span class="kw">console</span>.<span class="fu">log</span>(<span class="st">&quot;Erreur : &quot;</span>,err);
+                    <span class="kw">res</span>.<span class="fu">json</span>(err);
 
-                    //Je renvoie au navigateur les informations de l&#39;utilisateur
-                    // ... sans le mot de passe bien sûr
-                    res.json({
-                        email:authenticatedUser.email,
-                        firstName : authenticatedUser.firstName,
-                        lastName : authenticatedUser.lastName,
-                        isAdmin : authenticatedUser.isAdmin
+                } <span class="kw">else</span> {
+                    <span class="kw">post</span>.<span class="fu">id</span> = key;
+                    <span class="kw">res</span>.<span class="fu">json</span>(post);
+                }
+            });
+        });
+
+        <span class="co">/*</span>
+<span class="co">            Créer un nouveau post lorsque</span>
+<span class="co">            l&#39;on appelle http://localhost:3000/blogpost</span>
+<span class="co">            avec en paramètre le post au format JSON</span>
+<span class="co">            en mode POST</span>
+<span class="co">        */</span>
+        <span class="kw">app</span>.<span class="fu">post</span>(<span class="ch">&#39;/blogpost&#39;</span>,<span class="kw">function</span>(req, res){
+            <span class="kw">console</span>.<span class="fu">log</span>(<span class="st">&quot;POST CREATE &quot;</span>, <span class="kw">req</span>.<span class="fu">body</span>);
+
+            <span class="kw">var</span> d = <span class="kw">new</span> <span class="kw">Date</span>(), model = <span class="kw">req</span>.<span class="fu">body</span>;
+            <span class="kw">model</span>.<span class="fu">saveDate</span> = (<span class="kw">d</span>.<span class="fu">valueOf</span>());
+
+            <span class="kw">posts</span>.<span class="fu">save</span>(null,model, <span class="kw">function</span> (err, key){
+                <span class="kw">if</span>(err) { 
+                    <span class="kw">console</span>.<span class="fu">log</span>(<span class="st">&quot;Erreur : &quot;</span>,err);
+                    <span class="kw">res</span>.<span class="fu">json</span>(err); 
+                } <span class="kw">else</span> {
+                    <span class="kw">model</span>.<span class="fu">id</span> = key;
+                    <span class="kw">res</span>.<span class="fu">json</span>(model);
+                }
+            });
+        });
+
+
+        <span class="co">/*</span>
+<span class="co">            Mettre à jour un post lorsque</span>
+<span class="co">            l&#39;on appelle http://localhost:3000/blogpost</span>
+<span class="co">            avec en paramètre le post au format JSON</span>
+<span class="co">            en mode PUT</span>
+<span class="co">        */</span>
+        <span class="kw">app</span>.<span class="fu">put</span>(<span class="ch">&#39;/blogpost/:id&#39;</span>,<span class="kw">function</span>(req, res){
+            <span class="kw">console</span>.<span class="fu">log</span>(<span class="st">&quot;PUT UPDATE&quot;</span>, <span class="kw">req</span>.<span class="fu">body</span>, <span class="kw">req.params</span>.<span class="fu">id</span>);
+
+            <span class="kw">var</span> d = <span class="kw">new</span> <span class="kw">Date</span>(), model = <span class="kw">req</span>.<span class="fu">body</span>;
+            <span class="kw">model</span>.<span class="fu">saveDate</span> = (<span class="kw">d</span>.<span class="fu">valueOf</span>());
+
+            <span class="kw">posts</span>.<span class="fu">save</span>(<span class="kw">req.params</span>.<span class="fu">id</span>,model, <span class="kw">function</span> (err, key){
+                <span class="kw">if</span>(err) { 
+                    <span class="kw">console</span>.<span class="fu">log</span>(<span class="st">&quot;Erreur : &quot;</span>,err);
+                    <span class="kw">res</span>.<span class="fu">json</span>(err); 
+                } <span class="kw">else</span> {
+                    <span class="kw">res</span>.<span class="fu">json</span>(model);
+                }
+            });
+        });
+
+        <span class="co">/*</span>
+<span class="co">            supprimer un post par sa clé unique lorsque</span>
+<span class="co">            l&#39;on appelle http://localhost:3000/blogpost/identifiant_du_post</span>
+<span class="co">            en mode DELETE</span>
+<span class="co">        */</span>
+        <span class="kw">app</span>.<span class="fu">delete</span>(<span class="ch">&#39;/blogpost/:id&#39;</span>,<span class="kw">function</span>(req, res){
+            <span class="kw">console</span>.<span class="fu">log</span>(<span class="st">&quot;DELETE : /delete/&quot;</span>+<span class="kw">req.params</span>.<span class="fu">id</span>);
+
+            <span class="kw">posts</span>.<span class="fu">remove</span>(<span class="kw">req.params</span>.<span class="fu">id</span>, <span class="kw">function</span>(err){
+                <span class="kw">if</span>(err) { 
+                    <span class="kw">console</span>.<span class="fu">log</span>(<span class="st">&quot;Erreur : &quot;</span>,err);
+                    <span class="kw">res</span>.<span class="fu">json</span>(err); 
+                } <span class="kw">else</span> { 
+                    <span class="co">//petit correctif de contournement (bug ds nStore) : </span>
+                    <span class="co">//ré-ouvrir la base lorsque la suppression a été faite</span>
+                    posts = <span class="kw">nStore</span>.<span class="fu">new</span>(<span class="st">&quot;blog.db&quot;</span>, <span class="kw">function</span>() {
+                        <span class="kw">res</span>.<span class="fu">json</span>(<span class="kw">req.params</span>.<span class="fu">id</span>);
+                        <span class="co">//Le modèle est vide si on ne trouve rien</span>
                     });
                 }
-            });   
-        }
-
-    });
-
-    app.get(&#39;/logoff&#39;,function(req, res){
-
-        //Je recherche l&#39;utilisateur courant parmi les utilisateurs connectés
-        var alreadyAuthenticatedUser = findUserBySession(req.sessionID);
-
-        if(alreadyAuthenticatedUser) {
-            //Je l&#39;ai trouvé, je le supprime de la liste des utilisateurs connectés
-            var posInArray = connectedUsers.indexOf(alreadyAuthenticatedUser);
-            connectedUsers.splice(posInArray, 1);
-            res.json({state:&quot;disconnected&quot;});
-        } else {
-            res.json({});
-        }
-
-    });
-
-    /*======= Fin des routes &quot;authentification&quot; =======*/
-
-    /*
-        Obtenir la liste de tous les posts lorsque
-        l&#39;on appelle http://localhost:3000/blogposts
-        en mode GET
-    */
-    app.get(&#39;/blogposts&#39;,function(req, res){
-        console.log(&quot;GET (ALL) : /blogposts&quot;);
-        posts.all(function(err, results) {
-
-            if(err) { 
-                console.log(&quot;Erreur : &quot;,err);
-                res.json(err); 
-            } else {
-                var posts = [];
-                for(var key in results) {
-                    var post = results[key]; post.id = key;
-                    posts.push(post);
-                }
-                res.json(posts);
-            }
+            });
         });
 
-    });
-
-    /*
-        Obtenir la liste de tous les posts correspondant à un critère
-        lorsque l&#39;on appelle http://localhost:3000/blogposts/ en
-        mode GET avec une requête en paramètre
-        ex : query : { &quot;title&quot; : &quot;Mon 1er post&quot;} }
-    */
-    app.get(&#39;/blogposts/:query&#39;,function(req, res){
-        console.log(&quot;GET (QUERY) : /blogposts/&quot;+req.params.query);
-
-        posts.find(JSON.parse(req.params.query), function(err, results) {
-            if(err) {
-                console.log(&quot;Erreur : &quot;,err);
-                res.json(err); 
-            } else {
-                var posts = [];
-                for(var key in results) {
-                    var post = results[key]; post.id = key;
-                    posts.push(post);
-                }
-                res.json(posts);
-            }
-        });
-
-    });
-
-    /*
-        Retrouver un post par sa clé unique lorsque
-        l&#39;on appelle http://localhost:3000/blogpost/identifiant_du_post
-        en mode GET
-    */
-
-    app.get(&#39;/blogpost/:id&#39;, function(req, res){
-        console.log(&quot;GET : /blogpost/&quot;+req.params.id);
-        posts.get(req.params.id, function(err, post, key) {
-            if(err) {
-                console.log(&quot;Erreur : &quot;,err);
-                res.json(err);
-
-            } else {
-                post.id = key;
-                res.json(post);
-            }
-        });
-    });
-
-    /*
-        Créer un nouveau post lorsque
-        l&#39;on appelle http://localhost:3000/blogpost
-        avec en paramètre le post au format JSON
-        en mode POST
-    */
-    app.post(&#39;/blogpost&#39;,function(req, res){
-        console.log(&quot;POST CREATE &quot;, req.body);
-
-        var d = new Date(), model = req.body;
-        model.saveDate = (d.valueOf());
-
-        posts.save(null,model, function (err, key){
-            if(err) { 
-                console.log(&quot;Erreur : &quot;,err);
-                res.json(err); 
-            } else {
-                model.id = key;
-                res.json(model);
-            }
-        });
-    });
-
-
-    /*
-        Mettre à jour un post lorsque
-        l&#39;on appelle http://localhost:3000/blogpost
-        avec en paramètre le post au format JSON
-        en mode PUT
-    */
-    app.put(&#39;/blogpost/:id&#39;,function(req, res){
-        console.log(&quot;PUT UPDATE&quot;, req.body, req.params.id);
-
-        var d = new Date(), model = req.body;
-        model.saveDate = (d.valueOf());
-
-        posts.save(req.params.id,model, function (err, key){
-            if(err) { 
-                console.log(&quot;Erreur : &quot;,err);
-                res.json(err); 
-            } else {
-                res.json(model);
-            }
-        });
-    });
-
-    /*
-        supprimer un post par sa clé unique lorsque
-        l&#39;on appelle http://localhost:3000/blogpost/identifiant_du_post
-        en mode DELETE
-    */
-    app.delete(&#39;/blogpost/:id&#39;,function(req, res){
-        console.log(&quot;DELETE : /delete/&quot;+req.params.id);
-
-        posts.remove(req.params.id, function(err){
-            if(err) { 
-                console.log(&quot;Erreur : &quot;,err);
-                res.json(err); 
-            } else { 
-                //petit correctif de contournement (bug ds nStore) : 
-                //ré-ouvrir la base lorsque la suppression a été faite
-                posts = nStore.new(&quot;blog.db&quot;, function() {
-                    res.json(req.params.id);
-                    //Le modèle est vide si on ne trouve rien
-                });
-            }
-        });
-    });
-
-}</code></pre>
-<p>``` ##Authentification (côté client)</p>
+    }</code></pre>
+<h2 id="authentification-côté-client"><a href="#TOC"><span class="header-section-number">8.9</span> Authentification (côté client)</a></h2>
 <p>Nous repassons enfin au code client et nous allons pouvoir vérifier comment sont gérés les évènements dans une vue en implémentant l’authentification côté client.</p>
-<h3 id="formulaire-dauthentification"><a href="#TOC"><span class="header-section-number">8.8.2</span> Formulaire d’authentification</a></h3>
+<h3 id="formulaire-dauthentification"><a href="#TOC"><span class="header-section-number">8.9.1</span> Formulaire d’authentification</a></h3>
 <p>Nous allons donc commencer par créer le template du formulaire d’authentification dans notre page <code>index.html</code> (je choisis de le placer juste après la liste des 3 derniers posts) :</p>
 <pre class="sourceCode html"><code class="sourceCode html">    <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;sidebar&quot;</span><span class="ot"> id=</span><span class="st">&quot;blog_sidebar&quot;</span><span class="kw">&gt;</span>
         <span class="co">&lt;!-- Last 3 posts --&gt;</span>
@@ -3126,7 +3170,7 @@ function Routes() {
     <span class="kw">&lt;form</span><span class="ot"> class=</span><span class="st">&quot;container&quot;</span><span class="ot"> id=</span><span class="st">&quot;blog_login_form&quot;</span><span class="kw">&gt;</span>
 
     <span class="kw">&lt;/form&gt;</span></code></pre>
-<h3 id="lobjet-backbone.view-login.view"><a href="#TOC"><span class="header-section-number">8.8.3</span> L’objet Backbone.View : Login.View</a></h3>
+<h3 id="lobjet-backbone.view-login.view"><a href="#TOC"><span class="header-section-number">8.9.2</span> L’objet Backbone.View : Login.View</a></h3>
 <p>Notre composant d’authentification aura 2 zones de saisie (email et mot de passe), un bouton de login, un bouton pour se déconnecter, une zone pour afficher un message (bienvenue, erreur, …). Le composant devra aussi pouvoir vérifier si l’utilisateur est toujours connecté en cas de rafraîchissement de la page.</p>
 <pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="co">/*======= Authentification =======*/</span>
     <span class="kw">window</span>.<span class="fu">LoginView</span> = <span class="kw">Backbone.View</span>.<span class="fu">extend</span>({
@@ -3166,7 +3210,7 @@ function Routes() {
     <span class="kw">window</span>.<span class="fu">loginView</span> = <span class="kw">new</span> LoginView();
     <span class="co">/*======= Fin authentification =======*/</span></code></pre>
 <p>A l’initialisation (<code>initialize</code>) la vue va vérifier si l’utilisateur en cours est déjà authentifié (par exemple vous vous êtes signé, mais vous avez rafraîchi la page), en appelant la route <code>/alreadyauthenticated</code>, si l’utilisateur est déjà authentifié, la méthode <code>render</code> de la vue est appelée avec un message de bienvenue et les informations de l’utilisateur ( <code>that.render(&quot;Bienvenue&quot;,dataFromServer);</code> ) dans le cas contraire la méthode <code>render</code> est aussi appelée mais avec un message signifiant que l’utilisateur n’est pas connecté ( <code>that.render(&quot;???&quot;,{firstName:&quot;John&quot;, lastName:&quot;Doe&quot;});</code> ).</p>
-<h3 id="ajoutons-une-gestion-des-évènements"><a href="#TOC"><span class="header-section-number">8.8.4</span> Ajoutons une gestion des évènements</a></h3>
+<h3 id="ajoutons-une-gestion-des-évènements"><a href="#TOC"><span class="header-section-number">8.9.3</span> Ajoutons une gestion des évènements</a></h3>
 <p>Une propriété de l’objet <code>Backbone.View</code> permet de gérer les évènements spécifiques à la vue. Si vous vous souvenez, notre template de formulaire ressemble à ceci :</p>
 <pre class="sourceCode html"><code class="sourceCode html">    <span class="co">&lt;!-- /*======= Formulaire d&#39;authentification =======*/ --&gt;</span>
     <span class="kw">&lt;script</span><span class="ot"> type=</span><span class="st">&quot;text/template&quot;</span><span class="ot"> id=</span><span class="st">&quot;blog_login_form_template&quot;</span><span class="kw">&gt;</span>
@@ -3233,7 +3277,7 @@ function Routes() {
             }
         })
     }</code></pre>
-<h3 id="vérification"><a href="#TOC"><span class="header-section-number">8.8.5</span> Vérification</a></h3>
+<h3 id="vérification"><a href="#TOC"><span class="header-section-number">8.9.4</span> Vérification</a></h3>
 <p>Si vous avez bien suivi, nous devons avoir au moins 2 utilisateurs en base de données :</p>
 <pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="kw">function</span> addUsers () {
         addUser({

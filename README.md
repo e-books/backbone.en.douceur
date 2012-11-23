@@ -1,8 +1,10 @@
 <hr>
 
-###[Les Modèles & les Collections sont arrivés : Télécharger le pdf (v° alpha du 20/11/2012)](https://github.com/downloads/k33g/backbone.en.douceur/backbone.en.douceur.20121120.pdf) *(7 chapitres)*
+###[Les Modèles & les Collections sont arrivés : Télécharger le pdf (v° alpha du 23/11/2012)](https://github.com/downloads/k33g/backbone.en.douceur/backbone.en.douceur.20121123.pdf) *(8 chapitres)*
 
 ###[Voir le code source](https://github.com/k33g/backbone.en.douceur)
+
+###[Format epub disponible](https://github.com/downloads/k33g/backbone.en.douceur/backbone.en.douceur.20121123.epub)
 
 <hr>
 
@@ -15,9 +17,9 @@ Cet ouvrage va traiter au moins les points suivants :
 - 05-Le modèle objet de Backbone *(publié)*
 - 06-Il nout faut un serveur & Principes REST *(publié)*
 - 07-Les Modèles & Collections en détail *(publié)*
-- 08-Les Vues & Templating *(en cours, probablement d'ici le 24.11)*
-- 09-Le Routeur
-- 10-Organiser son code
+- 08-Les Vues & Templating *(publié)*
+- 09-Le Routeur *(en cours, probablement d'ici le 24.11 ou le 25.11)*
+- 10-Organiser son code *(en cours, probablement d'ici le 24.11 ou le 25.11)*
 - 11-Backbone.Sync
 - 12-Backbone & Coffeescript
 - 13-Autres frameworks MVC
