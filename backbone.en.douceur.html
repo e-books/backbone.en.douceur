@@ -145,7 +145,38 @@ code > span.er { color: #ff0000; font-weight: bold; }
 </ul></li>
 <li><a href="#evénements-1"><span class="toc-section-number">7.5</span> Evénements</a></li>
 </ul></li>
-<li><a href="#vues-templating"><span class="toc-section-number">8</span> Vues &amp; Templating</a></li>
+<li><a href="#vues-templating"><span class="toc-section-number">8</span> Vues &amp; Templating</a><ul>
+<li><a href="#préparons-le-terrain"><span class="toc-section-number">8.1</span> Préparons le terrain</a><ul>
+<li><a href="#création-et-sauvegarde-des-modèles"><span class="toc-section-number">8.1.1</span> Création et sauvegarde des modèles</a></li>
+</ul></li>
+<li><a href="#ère-vue"><span class="toc-section-number">8.2</span> 1ère vue</a><ul>
+<li><a href="#explications-utilisation"><span class="toc-section-number">8.2.1</span> Explications &amp; utilisation</a></li>
+</ul></li>
+<li><a href="#maintenant-un-peu-de-magie-..."><span class="toc-section-number">8.3</span> Maintenant, un peu de magie ...</a><ul>
+<li><a href="#sabonner-aux-événements"><span class="toc-section-number">8.3.1</span> S'abonner aux événements</a></li>
+<li><a href="#sabonner-à-dautres-évènements-modèles"><span class="toc-section-number">8.3.2</span> S’abonner à d’autres évènements (modèles)</a></li>
+<li><a href="#amélioration-finalisation-du-code"><span class="toc-section-number">8.3.3</span> Amélioration &amp; Finalisation du code</a></li>
+</ul></li>
+<li><a href="#utilisation-du-templating-...-1ère-fois"><span class="toc-section-number">8.4</span> Utilisation du templating ... 1ère fois</a><ul>
+<li><a href="#définition-de-notre-1er-template"><span class="toc-section-number">8.4.1</span> Définition de notre 1er template</a></li>
+</ul></li>
+<li><a href="#sous-vues"><span class="toc-section-number">8.5</span> Sous-vue(s)</a><ul>
+<li><a href="#réorganisation-du-code-html"><span class="toc-section-number">8.5.1</span> Réorganisation du code html</a></li>
+<li><a href="#création-modification-des-vues"><span class="toc-section-number">8.5.2</span> Création &amp; Modification des vues</a></li>
+<li><a href="#un-dernier-petit-réglage-tri-des-collections"><span class="toc-section-number">8.5.3</span> Un dernier petit réglage : tri des collections</a></li>
+</ul></li>
+<li><a href="#utilisation-dautres-moteurs-de-template"><span class="toc-section-number">8.6</span> Utilisation d’autre(s) moteur(s) de template</a><ul>
+<li><a href="#redéfinissons-donc-nos-templates"><span class="toc-section-number">8.6.1</span> Redéfinissons donc nos templates</a></li>
+</ul></li>
+<li><a href="#gestion-des-événements-dans-les-vues"><span class="toc-section-number">8.7</span> Gestion des événements dans les vues</a></li>
+<li><a href="#authentification-côté-serveur-les-utilisateurs"><span class="toc-section-number">8.8</span> Authentification (côté serveur) : les utilisateurs</a><ul>
+<li><a href="#sauthentifier-se-déconnecter"><span class="toc-section-number">8.8.1</span> S’authentifier – Se déconnecter</a></li>
+<li><a href="#formulaire-dauthentification"><span class="toc-section-number">8.8.2</span> Formulaire d’authentification</a></li>
+<li><a href="#lobjet-backbone.view-login.view"><span class="toc-section-number">8.8.3</span> L’objet Backbone.View : Login.View</a></li>
+<li><a href="#ajoutons-une-gestion-des-évènements"><span class="toc-section-number">8.8.4</span> Ajoutons une gestion des évènements</a></li>
+<li><a href="#vérification"><span class="toc-section-number">8.8.5</span> Vérification</a></li>
+</ul></li>
+</ul></li>
 </ul>
 </div>
 <h1 id="préambule-remerciements"><a href="#TOC"><span class="header-section-number">1</span> Préambule &amp; Remerciements</a></h1>
@@ -1985,6 +2016,1257 @@ npm install express</code></pre>
 <p><em>Nous avons joué avec les données dans le chapitre précédent, nous allons maintenant voir comment les afficher dynamiquement dans notre page web.</em></p>
 </blockquote>
 <p>Le composant View de Backbone est peut-être celui qui génère le plus de polémiques. Est-ce vraiment une vue ? Ne serait-ce pas plutôt un contrôleur ? Il se trouve que dans une version plus ancienne de Backbone, le composant Controller existait, aujourd’hui il est le devenu le composant Router que nous verrons par la suite … Cependant, un routeur est-il réellement un contrôleur ?... Mais, rappelez-vous que l’on est dans un contexte client (navigateur) et que le concept MVC « classique » n’est pas forcément « portable » en l’état. L’essentiel est que cela fonctionne, et si les contrôleurs vous manquent à ce point, nous verrons comment en créer quelques chapitres plus loin.</p>
-<pre><code>//En préparation, un peu de patience ...</code></pre>
+<h2 id="préparons-le-terrain"><a href="#TOC"><span class="header-section-number">8.1</span> Préparons le terrain</a></h2>
+<p>Pour repartir sur de bonnes bases, nous allons supprimer la base de données avec laquelle nous avons déjà bien joué. Donc supprimez le fichier <code>blog.db</code> de la racine de votre application. Ensuite, modifiez le code javascript de la page <code>index.html</code> dans le répertoire <code>/public</code>, donc dans la partie <code>&lt;script&gt;&lt;/script&gt;</code>, pour instancier une collection : (on ajoute : <code>window.blogPosts = new Posts();</code>)</p>
+<p><em>Instancier une collection :</em></p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    $(<span class="kw">function</span> (){
+
+        <span class="kw">window</span>.<span class="fu">Post</span> = <span class="kw">Backbone.Model</span>.<span class="fu">extend</span>({
+            <span class="dt">urlRoot </span>:<span class="st">&quot;/blogposts&quot;</span>
+
+        });
+
+        <span class="kw">window</span>.<span class="fu">Posts</span> = <span class="kw">Backbone.Collection</span>.<span class="fu">extend</span>({
+            <span class="dt">model </span>: Post,
+            <span class="dt">all </span>: <span class="kw">function</span> () {
+                <span class="kw">this</span>.<span class="fu">url</span> = <span class="st">&quot;/blogposts&quot;</span>;
+                <span class="kw">return</span> <span class="kw">this</span>;
+            },
+            <span class="dt">query </span>: <span class="kw">function</span> (query) {
+                <span class="kw">this</span>.<span class="fu">url</span> = <span class="st">&quot;/blogposts/query/&quot;</span>+query;
+                <span class="kw">return</span> <span class="kw">this</span>;
+            }
+
+        });
+
+        <span class="kw">window</span>.<span class="fu">blogPosts</span> = <span class="kw">new</span> Posts();
+
+    });</code></pre>
+<p>Sauvegardez, puis relancez votre application (<code>node app.js ou nodemon app.js</code>), dans le navigateur accédez à la page principale (<a href="http://localhost:3000/">http://localhost:3000/</a>), pour enfin ouvrir la console de votre navigateur. Nous allons créer des modèles, que nous ajouterons à la collection blogposts.</p>
+<h3 id="création-et-sauvegarde-des-modèles"><a href="#TOC"><span class="header-section-number">8.1.1</span> Création et sauvegarde des modèles</a></h3>
+<p>Commencez par saisir ceci dans la console du navigateur :</p>
+<p><em>Ajouter des modèles à la collection :</em></p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="kw">var</span> messages = [
+        <span class="st">&quot;Maecenas sed diam eget risus varius blandit sit amet non magna.&quot;</span>,
+        <span class="st">&quot;Integer posuere erat a ante venenatis dapibus posuere velit aliquet.&quot;</span>,
+        <span class="st">&quot;Donec id elit non mi porta gravida at eget metus.&quot;</span>,
+        <span class="st">&quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit.&quot;</span>,
+        <span class="st">&quot;Cras mattis consectetur purus sit amet fermentum.&quot;</span>,
+        <span class="st">&quot;Nulla vitae elit libero, a pharetra augue.&quot;</span>
+    ];
+
+    <span class="kw">blogPosts</span>.<span class="fu">add</span>([
+        <span class="kw">new</span> Post({<span class="dt">title </span>: <span class="st">&quot;Premier Message&quot;</span>, <span class="dt">message </span>: messages[<span class="dv">0</span>], <span class="dt">date </span>: <span class="kw">new</span> <span class="kw">Date</span>(), <span class="dt">author </span>: <span class="st">&quot;bob&quot;</span>}),
+        <span class="kw">new</span> Post({<span class="dt">title </span>: <span class="st">&quot;Backbone ???&quot;</span>, <span class="dt">message </span>: messages[<span class="dv">1</span>], <span class="dt">date </span>: <span class="kw">new</span> <span class="kw">Date</span>(), <span class="dt">author </span>: <span class="st">&quot;bob&quot;</span>}),
+        <span class="kw">new</span> Post({<span class="dt">title </span>: <span class="st">&quot;Les Modèles&quot;</span>, <span class="dt">message </span>: messages[<span class="dv">2</span>], <span class="dt">date </span>: <span class="kw">new</span> <span class="kw">Date</span>(), <span class="dt">author </span>: <span class="st">&quot;sam&quot;</span>}),
+        <span class="kw">new</span> Post({<span class="dt">title </span>: <span class="st">&quot;Les Vues&quot;</span>, <span class="dt">message </span>: messages[<span class="dv">3</span>], <span class="dt">date </span>: <span class="kw">new</span> <span class="kw">Date</span>(), <span class="dt">author </span>: <span class="st">&quot;sam&quot;</span>}),
+        <span class="kw">new</span> Post({<span class="dt">title </span>: <span class="st">&quot;Les Routes&quot;</span>, <span class="dt">message </span>: messages[<span class="dv">4</span>], <span class="dt">date </span>: <span class="kw">new</span> <span class="kw">Date</span>(), <span class="dt">author </span>: <span class="st">&quot;bob&quot;</span>}),
+        <span class="kw">new</span> Post({<span class="dt">title </span>: <span class="st">&quot;Mais où sont les contrôleurs ?&quot;</span>, <span class="dt">message </span>: messages[<span class="dv">5</span>], <span class="dt">date </span>: <span class="kw">new</span> <span class="kw">Date</span>(), <span class="dt">author </span>: <span class="st">&quot;bob&quot;</span>})
+
+    ])</code></pre>
+<pre><code>//TODO : revoir la partie date : ils vont tous avoir la même date, pas pratique pour trier
+d = new Date(2012, 10, 23, 7,4,0,0) //Attention au mois</code></pre>
+<p>Nous avons donc maintenant 5 Posts dans notre collection. Pour ne pas avoir à tout re-saisir à chaque fois, sauvegardez vos posts (toujours dans la console du navigateur) :</p>
+<p><em>Sauvegarder les modèles en base :</em></p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="kw">blogPosts</span>.<span class="fu">each</span>(<span class="kw">function</span>(post){
+        <span class="kw">post</span>.<span class="fu">save</span>({},{
+            <span class="dt">success </span>:  <span class="kw">function</span> (post) {
+                <span class="kw">console</span>.<span class="fu">log</span>(<span class="kw">post</span>.<span class="fu">get</span>(<span class="st">&quot;title&quot;</span>),<span class="st">&quot; sauvegardé&quot;</span>);
+            },
+            <span class="dt">error </span>: <span class="kw">function</span> () { <span class="kw">console</span>.<span class="fu">log</span>(<span class="st">&quot;Oupss&quot;</span>); }
+        });
+
+    })</code></pre>
+<p>Vous devriez au final obtenir ceci :</p>
+<p><img src="RSRC/07_01_VIEWS.png" alt="BB" /><br /></p>
+<p>Pour vérifier que la sauvegarde a bien fonctionné, raffraichissez votre page et lancez ce code dans la console du navigateur :</p>
+<p><em>Charger la collection avec les modèles sauvegardés en base :</em></p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="kw">blogPosts</span>.<span class="fu">all</span>()
+        .<span class="fu">fetch</span>({
+            <span class="dt">success</span>:<span class="kw">function</span>(result){
+                <span class="kw">console</span>.<span class="fu">log</span>(result);
+            }
+    })</code></pre>
+<p>Si tout va bien (il n’y a pas de raison), vous devriez obtenir ceci :</p>
+<p><img src="RSRC/07_02_VIEWS.png" alt="BB" /><br /></p>
+<p>Ainsi, quoiqu’il se passe, vous disposez de tous vos messages et ne serez plus obligés de les ressaisir pour la suite des exercices. Nous pouvons donc entrer dans le vif du sujet.</p>
+<h2 id="ère-vue"><a href="#TOC"><span class="header-section-number">8.2</span> 1ère vue</a></h2>
+<p>Un objet Vue dans Backbone (<code>Backbone.View</code>) et généralement composé (au minimum) par convention de :</p>
+<ul>
+<li>une propriété <code>el</code> : c'est l'élément du DOM (la partie de votre page html à laquelle on rattache l'objet <code>View</code>)</li>
+<li>une méthode <code>initialize</code> (déclenchée à l’instanciation de la vue)</li>
+<li>une méthode <code>render</code> (chargée d’afficher les données liées à la vue)</li>
+</ul>
+<blockquote>
+<blockquote>
+<p><strong>Remarque</strong> : Libre à vous de vous faire vos propres bonnes pratiques concernant les responsabilités de l’objet View afin de rendre votre code lisible et maintenable … Vous trouverez toujours quelqu’un pour les discuter mais c’est comme cela que l’on apprend et s’améliore … Et vous pouvez aussi avoir raison :-).</p>
+</blockquote>
+</blockquote>
+<p>Dans notre page <code>index.html</code> nous allons ajouter un tag <code>&lt;div id=&quot;posts_list&quot;&gt;&lt;/div&gt;</code> comme ceci :</p>
+<pre class="sourceCode html"><code class="sourceCode html">    <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;container&quot;</span><span class="kw">&gt;</span>
+        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;hero-unit&quot;</span><span class="kw">&gt;</span>
+            <span class="kw">&lt;h1&gt;</span>Backbone rocks !!!<span class="kw">&lt;/h1&gt;</span>
+        <span class="kw">&lt;/div&gt;</span>
+
+        <span class="kw">&lt;div</span><span class="ot"> id=</span><span class="st">&quot;posts_list&quot;</span><span class="kw">&gt;&lt;/div&gt;</span>
+
+    <span class="kw">&lt;/div&gt;</span></code></pre>
+<p>Et modifier le code javascript de la manière suivante : entre la définition de la collection et son instanciation, ajoutez le code de notre première vue :</p>
+<p><em>1ère vue pour afficher le contenu de la collection :</em></p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="kw">window</span>.<span class="fu">PostsListView</span> = <span class="kw">Backbone.View</span>.<span class="fu">extend</span>({
+        <span class="dt">el </span>: $(<span class="st">&quot;#posts_list&quot;</span>),
+        <span class="dt">initialize </span>: <span class="kw">function</span> (data) {
+            <span class="kw">this</span>.<span class="fu">collection</span> = data;
+        },
+        <span class="dt">render </span>: <span class="kw">function</span> () {
+            <span class="kw">var</span> html = <span class="st">&quot;&quot;</span>;
+            $(<span class="kw">this</span>.<span class="fu">el</span>).<span class="fu">html</span>(<span class="st">&quot;&quot;</span>); <span class="co">//on vide le div</span>
+            <span class="kw">this</span>.<span class="fu">collection</span>.<span class="fu">each</span>(<span class="kw">function</span>(model) {
+
+                html += [
+                    <span class="ch">&#39;&lt;h1&gt;&#39;</span>+<span class="kw">model</span>.<span class="fu">get</span>(<span class="st">&quot;title&quot;</span>)+<span class="ch">&#39;&lt;/h1&gt;&lt;hr&gt;&#39;</span>,
+                    <span class="ch">&#39;&lt;b&gt;par : &#39;</span>+<span class="kw">model</span>.<span class="fu">get</span>(<span class="st">&quot;author&quot;</span>)+<span class="ch">&#39;&lt;/b&gt; le : &#39;</span>+<span class="kw">model</span>.<span class="fu">get</span>(<span class="st">&quot;date&quot;</span>)+<span class="ch">&#39;&lt;br&gt;&#39;</span>,
+                    <span class="ch">&#39;&lt;p&gt;&#39;</span>+<span class="kw">model</span>.<span class="fu">get</span>(<span class="st">&quot;message&quot;</span>)+<span class="ch">&#39;&lt;/p&gt;&#39;</span>
+                ].<span class="fu">join</span>(<span class="st">&quot;&quot;</span>);
+
+            });
+
+            $(<span class="kw">this</span>.<span class="fu">el</span>).<span class="fu">append</span>(html);
+
+        }
+    });</code></pre>
+<h3 id="explications-utilisation"><a href="#TOC"><span class="header-section-number">8.2.1</span> Explications &amp; utilisation</a></h3>
+<p>Notre vue <code>PostsListView</code> est reliée au tag <code>&lt;div id=&quot;posts_list&quot;&gt;&lt;/div&gt;</code> par la propriété <code>el</code> qui n’est ni plus ni moins un objet <strong>jQuery</strong>. La méthode <code>initialize</code> (qui sera appelée à l’instanciation de la vue), prend en paramètre les données que nous souhaitons afficher, et les affecte à la propriété <code>collection</code> de la vue. La méthode <code>render</code>, vide le contenu du tag <code>&lt;div id=&quot;posts_list&quot;&gt;&lt;/div&gt;</code>, parcourt la collection de données pour construire le code html, et enfin affiche celui-ci par la commande <code>$(this.el).append(html)</code>. Mais utilisons directement notre code, ce sera plus « parlant ».</p>
+<p>Sauvegardez, rafraichissez la page et en mode console, passez les étapes qui suivent :</p>
+<p><em>1] Chargez les données de la collection :</em></p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="kw">blogPosts</span>.<span class="fu">all</span>()
+        .<span class="fu">fetch</span>({
+            <span class="dt">success</span>:<span class="kw">function</span>(result){
+                <span class="kw">console</span>.<span class="fu">log</span>(result);
+            }
+    })</code></pre>
+<p><em>2] Instanciez la vue en lui passant la collection en paramètre :</em></p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    postsListView = <span class="kw">new</span> PostsListView(blogPosts)</code></pre>
+<p><em>3] Appelez la méthode render de la vue :</em></p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="kw">postsListView</span>.<span class="fu">render</span>()</code></pre>
+<p>Et vous obtenez la liste de vos messages :</p>
+<p><img src="RSRC/07_03_VIEWS.png" alt="BB" /><br /></p>
+<p>Souvenez vous, dans les chapitres précédents nous avions « donné » aux collections la possibilité de faire des requêtes sur les données avant de lancer un <code>fetch</code>. Essayez donc ceci dans la console de votre navigateur :</p>
+<p><em>Je ne veux que les posts de l’auteur &quot;Sam&quot; :</em></p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="kw">blogPosts</span>.<span class="fu">query</span>(<span class="ch">&#39;{&quot;author&quot; : &quot;sam&quot;}&#39;</span>)
+        .<span class="fu">fetch</span>({
+            <span class="dt">success</span>:<span class="kw">function</span>(result){
+                <span class="kw">console</span>.<span class="fu">log</span>(result);
+            }
+    })</code></pre>
+<p>Puis faite à nouveau un :</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="kw">postsListView</span>.<span class="fu">render</span>()</code></pre>
+<p>Et là, l’affichage s’actualise automatiquement :</p>
+<p><img src="RSRC/07_04_VIEWS.png" alt="BB" /><br /></p>
+<h2 id="maintenant-un-peu-de-magie-..."><a href="#TOC"><span class="header-section-number">8.3</span> Maintenant, un peu de magie ...</a></h2>
+<h3 id="sabonner-aux-événements"><a href="#TOC"><span class="header-section-number">8.3.1</span> S'abonner aux événements</a></h3>
+<p>Modifions une nouvelle fois notre vue en ajoutans le code suivant à la méthode <code>initialize</code> :</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="kw">_</span>.<span class="fu">bindAll</span>(<span class="kw">this</span>, <span class="ch">&#39;render&#39;</span>);
+    <span class="kw">this</span>.<span class="fu">collection</span>.<span class="fu">bind</span>(<span class="ch">&#39;reset&#39;</span>, <span class="kw">this</span>.<span class="fu">render</span>);</code></pre>
+<p>Nous venons d’expliquer que tous les évènement déclarés déclencheront la méthode <code>render</code> de la vue. Et ensuite nous avons expliqué que la méthode <code>reset</code> de la collection déclenchera la méthode <code>render</code> de la vue.</p>
+<blockquote>
+<blockquote>
+<p><strong>Remarque</strong> : Une collection Backbone déclenche un <code>reset</code> lors de l’appel d’un <code>fetch</code>. La méthode <code>reset</code> vide la collection.</p>
+</blockquote>
+</blockquote>
+<pre><code>//TODO: faire un chapitre à part sur `_.bindAll`</code></pre>
+<p>Le code de notre vue doit donc ressembler à ceci :</p>
+<p><em>PostListView :</em></p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="kw">window</span>.<span class="fu">PostsListView</span> = <span class="kw">Backbone.View</span>.<span class="fu">extend</span>({
+        <span class="dt">el </span>: $(<span class="st">&quot;#posts_list&quot;</span>),
+        <span class="dt">initialize </span>: <span class="kw">function</span> (data) {
+            <span class="kw">this</span>.<span class="fu">collection</span> = data;
+
+            <span class="kw">_</span>.<span class="fu">bindAll</span>(<span class="kw">this</span>, <span class="ch">&#39;render&#39;</span>);
+            <span class="kw">this</span>.<span class="fu">collection</span>.<span class="fu">bind</span>(<span class="ch">&#39;reset&#39;</span>, <span class="kw">this</span>.<span class="fu">render</span>);
+
+        },
+        <span class="dt">render </span>: <span class="kw">function</span> () {
+            <span class="kw">var</span> html = <span class="st">&quot;&quot;</span>;
+            $(<span class="kw">this</span>.<span class="fu">el</span>).<span class="fu">html</span>(<span class="st">&quot;&quot;</span>); <span class="co">//on vide le div</span>
+            <span class="kw">this</span>.<span class="fu">collection</span>.<span class="fu">each</span>(<span class="kw">function</span>(model) {
+
+                html += [
+                    <span class="ch">&#39;&lt;h1&gt;&#39;</span>+<span class="kw">model</span>.<span class="fu">get</span>(<span class="st">&quot;title&quot;</span>)+<span class="ch">&#39;&lt;/h1&gt;&lt;hr&gt;&#39;</span>,
+                    <span class="ch">&#39;&lt;b&gt;par : &#39;</span>+<span class="kw">model</span>.<span class="fu">get</span>(<span class="st">&quot;author&quot;</span>)+<span class="ch">&#39;&lt;/b&gt; le : &#39;</span>+<span class="kw">model</span>.<span class="fu">get</span>(<span class="st">&quot;date&quot;</span>)+<span class="ch">&#39;&lt;br&gt;&#39;</span>,
+                    <span class="ch">&#39;&lt;p&gt;&#39;</span>+<span class="kw">model</span>.<span class="fu">get</span>(<span class="st">&quot;message&quot;</span>)+<span class="ch">&#39;&lt;/p&gt;&#39;</span>
+                ].<span class="fu">join</span>(<span class="st">&quot;&quot;</span>);
+
+            });
+
+            $(<span class="kw">this</span>.<span class="fu">el</span>).<span class="fu">append</span>(html);
+
+        }
+    });</code></pre>
+<p>Sauvegardez ensuite la page, puis retournez dans le navigateur, rafraichissez la page et retournez dans la console du navigateur pour instancier une nouvelle vue :</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    postsListView = <span class="kw">new</span> PostsListView(blogPosts)</code></pre>
+<p>Puis essayez ceci :</p>
+<p>`<code>javascript     blogPosts.all()         .fetch({             success:function(result){                 console.log(result);             }     })</code></p>
+<p>et cela :</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="kw">blogPosts</span>.<span class="fu">query</span>(<span class="ch">&#39;{&quot;author&quot; : &quot;sam&quot;}&#39;</span>)
+        .<span class="fu">fetch</span>({
+            <span class="dt">success</span>:<span class="kw">function</span>(result){
+                <span class="kw">console</span>.<span class="fu">log</span>(result);
+            }
+    })</code></pre>
+<p>Vous remarquez que votre vue se met à jour automatiquement à chaque changement, sans avoir à rappeler la méthode render de la vue. Mais il est possible de faire ceci aussi avec les changements sur les modèles.</p>
+<h3 id="sabonner-à-dautres-évènements-modèles"><a href="#TOC"><span class="header-section-number">8.3.2</span> S’abonner à d’autres évènements (modèles)</a></h3>
+<p>Toujours dans la méthode <code>initialize</code> de la vue, ajoutez le code suivant :</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="kw">this</span>.<span class="fu">collection</span>.<span class="fu">bind</span>(<span class="ch">&#39;change&#39;</span>, <span class="kw">this</span>.<span class="fu">render</span>);
+    <span class="kw">this</span>.<span class="fu">collection</span>.<span class="fu">bind</span>(<span class="ch">&#39;add&#39;</span>, <span class="kw">this</span>.<span class="fu">render</span>);
+    <span class="kw">this</span>.<span class="fu">collection</span>.<span class="fu">bind</span>(<span class="ch">&#39;remove&#39;</span>, <span class="kw">this</span>.<span class="fu">render</span>);</code></pre>
+<p>Maintenant, si vous changez la valeur d'un attribut d'un modèle, que vous ajoutez ou supprimez un modèle de la collection, la vue sera réactualisée à chaque fois.</p>
+<p>Sauvegardez la page, puis retournez dans le navigateur, rafraichissez la page et retournez dans la console du navigateur pour instancier une nouvelle vue et charger les données de la collection :</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    postsListView = <span class="kw">new</span> PostsListView(blogPosts)
+    <span class="kw">blogPosts</span>.<span class="fu">all</span>()
+        .<span class="fu">fetch</span>({
+            <span class="dt">success</span>:<span class="kw">function</span>(result){
+                <span class="kw">console</span>.<span class="fu">log</span>(result);
+            }
+    })</code></pre>
+<p>Puis changez le titre du 1er post :</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="kw">blogPosts</span>.<span class="fu">at</span>(<span class="dv">0</span>).<span class="fu">set</span>(<span class="st">&quot;title&quot;</span>,<span class="st">&quot;BACKBONE ???!!!&quot;</span>)</code></pre>
+<p>ou ajoutez un post :</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="kw">blogPosts</span>.<span class="fu">add</span>(<span class="kw">new</span> Post({<span class="dt">title</span>:<span class="st">&quot;HELLO&quot;</span>,<span class="dt">message </span>: <span class="st">&quot;salut&quot;</span>, <span class="dt">author </span>: <span class="st">&quot;k33g&quot;</span>}))</code></pre>
+<p>ou encore supprimez un post :</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="kw">blogPosts</span>.<span class="fu">remove</span>(<span class="kw">blogPosts</span>.<span class="fu">at</span>(<span class="dv">0</span>));</code></pre>
+<p>Là encore, votre page s’actualise instantanément.</p>
+<h3 id="amélioration-finalisation-du-code"><a href="#TOC"><span class="header-section-number">8.3.3</span> Amélioration &amp; Finalisation du code</a></h3>
+<p>Avant de passer à l’utilisation des templates dans les vue, nous allons apporter quelques modifications et améliorer un peu notre code pour nous préparer à la suite.</p>
+<p>Dans ses dernières versions, Backbone a hérité d’un raccourcis concernant la propriété <code>el</code> de la vue qui consiste à remplacer (avec pour objectif l’optimisation d’exécution de code) le sélecteur <code>$(this.el)</code> par <code>this.$el</code>.</p>
+<p>De plus, vous devez savoir qu’il n’est pas obligatoire de déclarer l’affectation de la collection dans la méthode initialize de la vue, mais que l’on peut faire ceci directement en paramètre du constructeur à l’instanciation de la vue. Comme ceci :</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="kw">new</span> PostsListView({<span class="dt">collection </span>: blogPosts})</code></pre>
+<p>On pourrait faire de même avec <code>el</code>, et utiliser ceci :</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="kw">new</span> PostsListView({<span class="dt">el </span>: $(<span class="st">&quot;#posts_list&quot;</span>), <span class="dt">collection </span>: blogPosts})</code></pre>
+<p>En fait tout dépend de vos besoins (et de vos habitudes).</p>
+<p>En ce qui nous concerne, modifions le code de notre vue de la manière suivante :</p>
+<p><em>PostsListView :</em></p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="kw">window</span>.<span class="fu">PostsListView</span> = <span class="kw">Backbone.View</span>.<span class="fu">extend</span>({
+        <span class="dt">el </span>: $(<span class="st">&quot;#posts_list&quot;</span>),
+        <span class="dt">initialize </span>: <span class="kw">function</span> () {
+
+            <span class="kw">_</span>.<span class="fu">bindAll</span>(<span class="kw">this</span>, <span class="ch">&#39;render&#39;</span>);
+            <span class="kw">this</span>.<span class="fu">collection</span>.<span class="fu">bind</span>(<span class="ch">&#39;reset&#39;</span>, <span class="kw">this</span>.<span class="fu">render</span>);
+            <span class="kw">this</span>.<span class="fu">collection</span>.<span class="fu">bind</span>(<span class="ch">&#39;change&#39;</span>, <span class="kw">this</span>.<span class="fu">render</span>);
+            <span class="kw">this</span>.<span class="fu">collection</span>.<span class="fu">bind</span>(<span class="ch">&#39;add&#39;</span>, <span class="kw">this</span>.<span class="fu">render</span>);
+            <span class="kw">this</span>.<span class="fu">collection</span>.<span class="fu">bind</span>(<span class="ch">&#39;remove&#39;</span>, <span class="kw">this</span>.<span class="fu">render</span>);
+
+        },
+        <span class="dt">render </span>: <span class="kw">function</span> () {
+            <span class="kw">var</span> html = <span class="st">&quot;&quot;</span>;
+            <span class="kw">this</span>.$<span class="fu">el</span>.<span class="fu">html</span>(<span class="st">&quot;&quot;</span>); <span class="co">//on vide le div</span>
+            <span class="kw">this</span>.<span class="fu">collection</span>.<span class="fu">each</span>(<span class="kw">function</span>(model) {
+
+                html += [
+                    <span class="ch">&#39;&lt;h1&gt;&#39;</span>+<span class="kw">model</span>.<span class="fu">get</span>(<span class="st">&quot;title&quot;</span>)+<span class="ch">&#39;&lt;/h1&gt;&lt;hr&gt;&#39;</span>,
+                    <span class="ch">&#39;&lt;b&gt;par : &#39;</span>+<span class="kw">model</span>.<span class="fu">get</span>(<span class="st">&quot;author&quot;</span>)+<span class="ch">&#39;&lt;/b&gt; le : &#39;</span>+<span class="kw">model</span>.<span class="fu">get</span>(<span class="st">&quot;date&quot;</span>)+<span class="ch">&#39;&lt;br&gt;&#39;</span>,
+                    <span class="ch">&#39;&lt;p&gt;&#39;</span>+<span class="kw">model</span>.<span class="fu">get</span>(<span class="st">&quot;message&quot;</span>)+<span class="ch">&#39;&lt;/p&gt;&#39;</span>
+                ].<span class="fu">join</span>(<span class="st">&quot;&quot;</span>);
+
+            });
+
+            <span class="kw">this</span>.$<span class="fu">el</span>.<span class="fu">append</span>(html);
+
+        }
+    });</code></pre>
+<p>Puis à la fin du code javascript, ajoutez le code qui instancie la vue, ainsi que le code qui « charge » la collection (on se souvient que le render de la vue sera déclenché automatiquement une fois le <code>fetch</code> de la collection terminé.) :</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="kw">window</span>.<span class="fu">postsListView</span> = <span class="kw">new</span> PostsListView({<span class="dt">collection </span>: blogPosts})
+
+    <span class="kw">blogPosts</span>.<span class="fu">all</span>().<span class="fu">fetch</span>({
+        <span class="dt">success</span>:<span class="kw">function</span>(result){
+            <span class="kw">console</span>.<span class="fu">log</span>(result);
+        }
+    });</code></pre>
+<p>Le code final du script dans la page devrait ressembler à ceci :</p>
+<p><em>Code final :</em></p>
+<pre class="sourceCode html"><code class="sourceCode html"><span class="co">&lt;!-- === code applicatif === --&gt;</span>
+<span class="kw">&lt;script&gt;</span>
+    $(<span class="kw">function</span> (){
+
+        <span class="kw">window</span>.<span class="fu">Post</span> = <span class="kw">Backbone.Model</span>.<span class="fu">extend</span>({
+            <span class="dt">urlRoot </span>:<span class="st">&quot;</span>/<span class="st">blogposts&quot;</span>
+
+        });
+
+        <span class="kw">window</span>.<span class="fu">Posts</span> = <span class="kw">Backbone.Collection</span>.<span class="fu">extend</span>({
+            <span class="dt">model </span>: Post,
+            <span class="dt">all </span>: <span class="kw">function</span> () {
+                <span class="kw">this</span>.<span class="fu">url</span> = <span class="st">&quot;</span>/<span class="st">blogposts&quot;</span>;
+                <span class="kw">return</span> <span class="kw">this</span>;
+            },
+            <span class="dt">query </span>: <span class="kw">function</span> (query) {
+                <span class="kw">this</span>.<span class="fu">url</span> = <span class="st">&quot;</span>/<span class="st">blogposts</span>/<span class="st">query</span>/<span class="st">&quot;</span>+query;
+                <span class="kw">return</span> <span class="kw">this</span>;
+            }
+
+        });
+
+        <span class="kw">window</span>.<span class="fu">PostsListView</span> = <span class="kw">Backbone.View</span>.<span class="fu">extend</span>({
+            <span class="dt">el </span>: $(<span class="st">&quot;</span>#<span class="st">posts</span>_<span class="st">list&quot;</span>),
+            <span class="dt">initialize </span>: <span class="kw">function</span> () {
+
+                <span class="kw">_</span>.<span class="fu">bindAll</span>(<span class="kw">this</span>, <span class="ch">&#39;render&#39;</span>);
+                <span class="kw">this</span>.<span class="fu">collection</span>.<span class="fu">bind</span>(<span class="ch">&#39;reset&#39;</span>, <span class="kw">this</span>.<span class="fu">render</span>);
+                <span class="kw">this</span>.<span class="fu">collection</span>.<span class="fu">bind</span>(<span class="ch">&#39;change&#39;</span>, <span class="kw">this</span>.<span class="fu">render</span>);
+                <span class="kw">this</span>.<span class="fu">collection</span>.<span class="fu">bind</span>(<span class="ch">&#39;add&#39;</span>, <span class="kw">this</span>.<span class="fu">render</span>);
+                <span class="kw">this</span>.<span class="fu">collection</span>.<span class="fu">bind</span>(<span class="ch">&#39;remove&#39;</span>, <span class="kw">this</span>.<span class="fu">render</span>);
+
+            },
+            <span class="dt">render </span>: <span class="kw">function</span> () {
+                <span class="kw">var</span> html = <span class="st">&quot;&quot;</span>;
+                <span class="kw">this</span>.$<span class="fu">el</span>.<span class="fu">html</span>(<span class="st">&quot;&quot;</span>); <span class="co">//on vide le div</span>
+                <span class="kw">this</span>.<span class="fu">collection</span>.<span class="fu">each</span>(<span class="kw">function</span>(model) {
+
+                    html += [
+                        <span class="ch">&#39;</span>&lt;<span class="ch">h1</span>&gt;<span class="ch">&#39;</span>+<span class="kw">model</span>.<span class="fu">get</span>(<span class="st">&quot;title&quot;</span>)+<span class="ch">&#39;</span>&lt;/<span class="ch">h1</span>&gt;&lt;<span class="ch">hr</span>&gt;<span class="ch">&#39;</span>,
+                        <span class="ch">&#39;</span>&lt;<span class="ch">b</span>&gt;<span class="ch">par</span> : <span class="ch">&#39;</span>+<span class="kw">model</span>.<span class="fu">get</span>(<span class="st">&quot;author&quot;</span>)+<span class="ch">&#39;</span>&lt;/<span class="ch">b</span>&gt; <span class="ch">le</span> : <span class="ch">&#39;</span>+<span class="kw">model</span>.<span class="fu">get</span>(<span class="st">&quot;date&quot;</span>)+<span class="ch">&#39;</span>&lt;<span class="ch">br</span>&gt;<span class="ch">&#39;</span>,
+                        <span class="ch">&#39;</span>&lt;<span class="ch">p</span>&gt;<span class="ch">&#39;</span>+<span class="kw">model</span>.<span class="fu">get</span>(<span class="st">&quot;message&quot;</span>)+<span class="ch">&#39;</span>&lt;/<span class="ch">p</span>&gt;<span class="ch">&#39;</span>
+                    ].<span class="fu">join</span>(<span class="st">&quot;&quot;</span>);
+
+                });
+
+                <span class="kw">this</span>.$<span class="fu">el</span>.<span class="fu">append</span>(html);
+
+            }
+        });
+
+        <span class="kw">window</span>.<span class="fu">blogPosts</span> = <span class="kw">new</span> Posts();
+
+        <span class="kw">window</span>.<span class="fu">postsListView</span> = <span class="kw">new</span> PostsListView({<span class="dt">collection </span>: blogPosts})
+
+        <span class="kw">blogPosts</span>.<span class="fu">all</span>().<span class="fu">fetch</span>({
+            <span class="dt">success</span>:<span class="kw">function</span>(result){
+                 <span class="co">//ça marche </span>!!!
+<span class="co">            </span>}
+<span class="co">        </span>});
+
+<span class="co">    </span>});
+
+
+<span class="kw">&lt;/script&gt;</span></code></pre>
+<p>Nous avons fait un peu de magie, passons donc à la sorcellerie ;) ...</p>
+<h2 id="utilisation-du-templating-...-1ère-fois"><a href="#TOC"><span class="header-section-number">8.4</span> Utilisation du templating ... 1ère fois</a></h2>
+<p>Vous vous souvenez ? Je vous avez parlé d'underscore avec les templates ? Eh bien il est temps de les mettre en œuvre.</p>
+<h3 id="définition-de-notre-1er-template"><a href="#TOC"><span class="header-section-number">8.4.1</span> Définition de notre 1er template</a></h3>
+<p>Dans la partie HTML de notre page, juste avant <code>&lt;div id=&quot;posts_list&quot;&gt;&lt;/div&gt;</code>, ajoutez le code ci-dessous (ce sera notre template) :</p>
+<pre class="sourceCode html"><code class="sourceCode html"><span class="co">&lt;!-- template pour les posts --&gt;</span>
+<span class="kw">&lt;script</span><span class="ot"> type=</span><span class="st">&quot;text/template&quot;</span><span class="ot"> id=</span><span class="st">&quot;posts_list_template&quot;</span><span class="kw">&gt;</span>
+
+    &lt;% <span class="kw">_</span>.<span class="fu">each</span>(posts ,<span class="kw">function</span>(post){ %&gt;
+        &lt;h1&gt;&lt;%= <span class="kw">post</span>.<span class="fu">get</span>(<span class="st">&quot;title&quot;</span>) %&gt;&lt;/h1&gt;&lt;hr&gt;
+        &lt;b&gt;<span class="dt">par </span>: &lt;%= <span class="kw">post</span>.<span class="fu">get</span>(<span class="st">&quot;author&quot;</span>) %&gt;&lt;/b&gt; <span class="dt">le </span>: &lt;%= <span class="kw">post</span>.<span class="fu">get</span>(<span class="st">&quot;date&quot;</span>) %&gt;&lt;br&gt;
+        &lt;p&gt;&lt;%= <span class="kw">post</span>.<span class="fu">get</span>(<span class="st">&quot;message&quot;</span>) %&gt;&lt;/p&gt;
+    &lt;% }); %&gt;
+
+<span class="kw">&lt;/script&gt;</span></code></pre>
+<blockquote>
+<blockquote>
+<p><strong>Remarque</strong> : le fait de définir le template à l'intérieur de <code>&lt;script type=&quot;text/template&quot;&gt;&lt;/script&gt;</code> fait que le modèle de template ne sera pas affiché dans la page.</p>
+</blockquote>
+</blockquote>
+<p>En fait (grace à underscore), nous venons de définir le template dont la vue backbone va se servir pour afficher les données. Il faudra lui passer pour cela un <strong>tableau</strong> de posts. Modifions donc notre vue de la façon suivante :</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="kw">window</span>.<span class="fu">PostsListView</span> = <span class="kw">Backbone.View</span>.<span class="fu">extend</span>({
+        <span class="dt">el </span>: $(<span class="st">&quot;#posts_list&quot;</span>),
+        <span class="dt">initialize </span>: <span class="kw">function</span> () {
+            <span class="kw">this</span>.<span class="fu">template</span> = <span class="kw">_</span>.<span class="fu">template</span>($(<span class="st">&quot;#posts_list_template&quot;</span>).<span class="fu">html</span>());
+
+            <span class="kw">_</span>.<span class="fu">bindAll</span>(<span class="kw">this</span>, <span class="ch">&#39;render&#39;</span>);
+            <span class="kw">this</span>.<span class="fu">collection</span>.<span class="fu">bind</span>(<span class="ch">&#39;reset&#39;</span>, <span class="kw">this</span>.<span class="fu">render</span>);
+            <span class="kw">this</span>.<span class="fu">collection</span>.<span class="fu">bind</span>(<span class="ch">&#39;change&#39;</span>, <span class="kw">this</span>.<span class="fu">render</span>);
+            <span class="kw">this</span>.<span class="fu">collection</span>.<span class="fu">bind</span>(<span class="ch">&#39;add&#39;</span>, <span class="kw">this</span>.<span class="fu">render</span>);
+            <span class="kw">this</span>.<span class="fu">collection</span>.<span class="fu">bind</span>(<span class="ch">&#39;remove&#39;</span>, <span class="kw">this</span>.<span class="fu">render</span>);
+
+        },
+        <span class="dt">render </span>: <span class="kw">function</span> () {
+            <span class="kw">var</span> renderedContent = <span class="kw">this</span>.<span class="fu">template</span>({<span class="dt">posts </span>: <span class="kw">this</span>.<span class="fu">collection</span>.<span class="fu">models</span>});
+
+            <span class="kw">this</span>.$<span class="fu">el</span>.<span class="fu">html</span>(renderedContent);
+        }
+    });</code></pre>
+<p>Nous avons inséré dans la méthode <code>initialize</code> : <code>this.template = _.template($(&quot;#posts_list_template&quot;).html());</code>, où nous expliquons que la définition du template se trouve dans la zone ayant <code>posts_list_template</code> pour <code>id</code>. Nous avons aussi simplifié grandement le contenu de la méthode render, où nous faisons générer le contenu HTML à partir du template et des données.</p>
+<blockquote>
+<blockquote>
+<p><strong>Remarque</strong> : notez bien que <code>this.collection.models</code> est un tableau de modèles.</p>
+</blockquote>
+</blockquote>
+<p>Vous pouvez sauvegarder et rafraichir, les résultats sont identiques aux précédent, mais il est beaucoup plus facile de créer et modifier vos templates html.</p>
+<p><img src="RSRC/07_05_VIEWS.png" alt="BB" /><br /></p>
+<h2 id="sous-vues"><a href="#TOC"><span class="header-section-number">8.5</span> Sous-vue(s)</a></h2>
+<p>Il est possible de faire des sous vues pour gérer différentes parties de votre page web. En fait il s’agit de vues encapsulées dans une autre vue, ce qui peut être pratique en termes d’organisation, mais aussi dans les cas où les comportements de chacunes des vues dépendent les uns des autres.</p>
+<p>Nous allons donc profiter des possibilités de Twitter Bootstrap pour revoir un peu la mise en page de notre « site » et du même coup mettre en œuvre le concept de sous-vue.</p>
+<h3 id="réorganisation-du-code-html"><a href="#TOC"><span class="header-section-number">8.5.1</span> Réorganisation du code html</a></h3>
+<p>Modifions notre code html de la manière suivante :</p>
+```html
+<body>
+
+<pre><code>&lt;div class=&quot;navbar navbar-fixed-top&quot;&gt;
+    &lt;div class=&quot;navbar-inner&quot;&gt;
+        &lt;div class=&quot;container&quot;&gt;
+            &lt;a class=&quot;brand&quot;&gt;Mon Blog&lt;/a&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;container-fluid&quot;&gt;
+
+    &lt;div class=&quot;row-fluid&quot;&gt;
+
+        &lt;div class=&quot;span3&quot;&gt;
+            &lt;script type=&quot;text/template&quot; id=&quot;blog_sidebar_template&quot;&gt;
+                &lt;h2&gt;Les 3 derniers :&lt;/h2&gt;
+                &lt;ul&gt;
+                &lt;% _.each(posts ,function(post){ %&gt;
+                    &lt;li&gt;&lt;%= post.get(&quot;title&quot;) %&gt;&lt;/li&gt;
+                &lt;% }); %&gt;
+                &lt;/ul&gt;
+            &lt;/script&gt;
+            &lt;div class=&quot;sidebar&quot; id=&quot;blog_sidebar&quot;&gt;
+                &lt;!-- Last 3 posts --&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;div class=&quot;span9&quot;&gt;
+            &lt;div class=&quot;hero-unit&quot;&gt;
+                &lt;h1&gt;Backbone rocks !!!&lt;/h1&gt;
+            &lt;/div&gt;
+
+            &lt;!-- template pour les posts --&gt;
+            &lt;script type=&quot;text/template&quot; id=&quot;posts_list_template&quot;&gt;
+
+                &lt;% _.each(posts ,function(post){ %&gt;
+                    &lt;h1&gt;&lt;%= post.get(&quot;title&quot;) %&gt;&lt;/h1&gt;&lt;hr&gt;
+                    &lt;b&gt;par : &lt;%= post.get(&quot;author&quot;) %&gt;&lt;/b&gt; le : &lt;%= post.get(&quot;date&quot;) %&gt;&lt;br&gt;
+                    &lt;p&gt;&lt;%= post.get(&quot;message&quot;) %&gt;&lt;/p&gt;
+                &lt;% }); %&gt;
+
+            &lt;/script&gt;
+            &lt;div class=&quot;row-fluid&quot; id=&quot;posts_list&quot;&gt;&lt;/div&gt;
+
+        &lt;/div&gt;
+
+
+    &lt;/div&gt;
+
+&lt;/div&gt;</code></pre>
+<p>``<code>&gt;&gt;**Explications** : nous avons donc 2 templates, un pour afficher les 3 derniers posts (</code>id=&quot;blog_sidebar_template&quot;<code>), un pour afficher tous les posts (</code>id=&quot;posts_list_template&quot;`).</p>
+<h3 id="création-modification-des-vues"><a href="#TOC"><span class="header-section-number">8.5.2</span> Création &amp; Modification des vues</a></h3>
+<p>Nous allons créer une vue principale (<code>MainView</code>) qui se chargera de &quot;piloter&quot; 2 sous-vues (<code>SidebarView</code> et <code>PostsListView</code>) :</p>
+<p><em>1] Simplifions PostsListView :</em></p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="kw">window</span>.<span class="fu">PostsListView</span> = <span class="kw">Backbone.View</span>.<span class="fu">extend</span>({
+        <span class="dt">el </span>: $(<span class="st">&quot;#posts_list&quot;</span>),
+        <span class="dt">initialize </span>: <span class="kw">function</span> () {
+            <span class="kw">this</span>.<span class="fu">template</span> = <span class="kw">_</span>.<span class="fu">template</span>($(<span class="st">&quot;#posts_list_template&quot;</span>).<span class="fu">html</span>());
+        },
+        <span class="dt">render </span>: <span class="kw">function</span> () {
+            <span class="kw">var</span> renderedContent = <span class="kw">this</span>.<span class="fu">template</span>({<span class="dt">posts </span>: <span class="kw">this</span>.<span class="fu">collection</span>.<span class="fu">models</span>});
+            <span class="kw">this</span>.$<span class="fu">el</span>.<span class="fu">html</span>(renderedContent);
+        }
+    });</code></pre>
+<p><em>2] Création de SidebarView :</em></p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="kw">window</span>.<span class="fu">SidebarView</span> = <span class="kw">Backbone.View</span>.<span class="fu">extend</span>({
+         <span class="dt">el </span>: $(<span class="st">&quot;#blog_sidebar&quot;</span>),
+        <span class="dt">initialize </span>: <span class="kw">function</span> () {
+            <span class="kw">this</span>.<span class="fu">template</span> = <span class="kw">_</span>.<span class="fu">template</span>($(<span class="st">&quot;#blog_sidebar_template&quot;</span>).<span class="fu">html</span>());
+        },
+        <span class="dt">render </span>: <span class="kw">function</span> () {
+            <span class="kw">var</span> renderedContent = <span class="kw">this</span>.<span class="fu">template</span>({<span class="dt">posts </span>: <span class="kw">this</span>.<span class="fu">collection</span>.<span class="fu">models</span>});
+            <span class="kw">this</span>.$<span class="fu">el</span>.<span class="fu">html</span>(renderedContent);
+        }           
+    });</code></pre>
+<p><em>3] Création de la vue principale :</em></p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="kw">window</span>.<span class="fu">MainView</span> = <span class="kw">Backbone.View</span>.<span class="fu">extend</span>({
+        <span class="dt">initialize </span>: <span class="kw">function</span> () {
+
+            <span class="kw">_</span>.<span class="fu">bindAll</span>(<span class="kw">this</span>, <span class="ch">&#39;render&#39;</span>);
+            <span class="kw">this</span>.<span class="fu">collection</span>.<span class="fu">bind</span>(<span class="ch">&#39;reset&#39;</span>, <span class="kw">this</span>.<span class="fu">render</span>);
+            <span class="kw">this</span>.<span class="fu">collection</span>.<span class="fu">bind</span>(<span class="ch">&#39;change&#39;</span>, <span class="kw">this</span>.<span class="fu">render</span>);
+            <span class="kw">this</span>.<span class="fu">collection</span>.<span class="fu">bind</span>(<span class="ch">&#39;add&#39;</span>, <span class="kw">this</span>.<span class="fu">render</span>);
+            <span class="kw">this</span>.<span class="fu">collection</span>.<span class="fu">bind</span>(<span class="ch">&#39;remove&#39;</span>, <span class="kw">this</span>.<span class="fu">render</span>);
+
+            <span class="kw">this</span>.<span class="fu">sidebarView</span> = <span class="kw">new</span> SidebarView();
+            <span class="kw">this</span>.<span class="fu">postsListView</span> = <span class="kw">new</span> PostsListView({<span class="dt">collection </span>: blogPosts});
+
+        },
+        <span class="dt">render </span>: <span class="kw">function</span> () {
+            <span class="kw">this</span>.<span class="fu">sidebarView</span>.<span class="fu">collection</span> = <span class="kw">new</span> Posts(<span class="kw">this</span>.<span class="fu">collection</span>.<span class="fu">first</span>(<span class="dv">3</span>));
+            <span class="kw">this</span>.<span class="fu">sidebarView</span>.<span class="fu">render</span>();
+            <span class="kw">this</span>.<span class="fu">postsListView</span>.<span class="fu">render</span>();
+        }
+    });</code></pre>
+<p>C'est donc maintenant la vue <code>MainView</code> qui s'abonne aux changements de la collection et déclenche le rendu des 2 autres vues.</p>
+<p>Et enfin instancions la collection ainsi que la vue principale (qui se chargera d’instancier les deux sous-vues). Donc à la place de :</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="kw">window</span>.<span class="fu">blogPosts</span> = <span class="kw">new</span> Posts();
+    <span class="kw">window</span>.<span class="fu">postsListView</span> = <span class="kw">new</span> PostsListView({<span class="dt">collection </span>: blogPosts})</code></pre>
+<p><strong>Nous aurons ceci :</strong></p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="kw">window</span>.<span class="fu">blogPosts</span> = <span class="kw">new</span> Posts();
+    <span class="kw">window</span>.<span class="fu">mainView</span> = <span class="kw">new</span> MainView({<span class="dt">collection </span>: blogPosts});</code></pre>
+<p>Vous pouvez sauvegarder votre code et raffraichir votre page :</p>
+<p><img src="RSRC/07_06_VIEWS.png" alt="BB" /><br /></p>
+<p>Et si vous faites ceci en mode console :</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="kw">blogPosts</span>.<span class="fu">at</span>(<span class="dv">0</span>).<span class="fu">set</span>(<span class="st">&quot;title&quot;</span>,<span class="st">&quot;Bonjour à tous !&quot;</span>)</code></pre>
+<p>Vous verrez que les modifications sont bien propagées dans les 2 vues simultanément.</p>
+<h3 id="un-dernier-petit-réglage-tri-des-collections"><a href="#TOC"><span class="header-section-number">8.5.3</span> Un dernier petit réglage : tri des collections</a></h3>
+<p>Nous souhaitons avant d’aller plus loin trier la collection de posts pour avoir les message en ordre décroissant. Pour cela nous allons créer ce que l’on appelle un <strong>« comparator »</strong> dans la méthode <code>initialize</code> de la vue principale <code>MainView</code> :</p>
+<p><em>Trier la collection par ordre décroissant de date :</em></p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="kw">this</span>.<span class="fu">collection</span>.<span class="fu">comparator</span> = <span class="kw">function</span> (model) {
+        <span class="kw">return</span> -(<span class="kw">new</span> <span class="kw">Date</span>(<span class="kw">model</span>.<span class="fu">get</span>(<span class="st">&quot;date&quot;</span>)).<span class="fu">getTime</span>());
+    }</code></pre>
+<p>Donc le code final de MainView sera celui-ci :</p>
+<p><em>Vue principale :</em></p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="kw">window</span>.<span class="fu">MainView</span> = <span class="kw">Backbone.View</span>.<span class="fu">extend</span>({
+        <span class="dt">initialize </span>: <span class="kw">function</span> () {
+
+            <span class="kw">this</span>.<span class="fu">collection</span>.<span class="fu">comparator</span> = <span class="kw">function</span> (model) {
+                <span class="kw">return</span> -(<span class="kw">new</span> <span class="kw">Date</span>(<span class="kw">model</span>.<span class="fu">get</span>(<span class="st">&quot;date&quot;</span>)).<span class="fu">getTime</span>());
+            }
+
+            <span class="kw">_</span>.<span class="fu">bindAll</span>(<span class="kw">this</span>, <span class="ch">&#39;render&#39;</span>);
+            <span class="kw">this</span>.<span class="fu">collection</span>.<span class="fu">bind</span>(<span class="ch">&#39;reset&#39;</span>, <span class="kw">this</span>.<span class="fu">render</span>);
+            <span class="kw">this</span>.<span class="fu">collection</span>.<span class="fu">bind</span>(<span class="ch">&#39;change&#39;</span>, <span class="kw">this</span>.<span class="fu">render</span>);
+            <span class="kw">this</span>.<span class="fu">collection</span>.<span class="fu">bind</span>(<span class="ch">&#39;add&#39;</span>, <span class="kw">this</span>.<span class="fu">render</span>);
+            <span class="kw">this</span>.<span class="fu">collection</span>.<span class="fu">bind</span>(<span class="ch">&#39;remove&#39;</span>, <span class="kw">this</span>.<span class="fu">render</span>);
+
+            <span class="kw">this</span>.<span class="fu">sidebarView</span> = <span class="kw">new</span> SidebarView();
+            <span class="kw">this</span>.<span class="fu">postsListView</span> = <span class="kw">new</span> PostsListView({<span class="dt">collection </span>: <span class="kw">this</span>.<span class="fu">collection</span>});
+
+        },
+        <span class="dt">render </span>: <span class="kw">function</span> () {
+
+
+            <span class="kw">this</span>.<span class="fu">sidebarView</span>.<span class="fu">collection</span> = <span class="kw">new</span> Posts(<span class="kw">this</span>.<span class="fu">collection</span>.<span class="fu">first</span>(<span class="dv">3</span>));
+            <span class="kw">this</span>.<span class="fu">sidebarView</span>.<span class="fu">render</span>();
+            <span class="kw">this</span>.<span class="fu">postsListView</span>.<span class="fu">render</span>();
+        }
+    });</code></pre>
+<p>Et le rendu dans le navigateur devrait vous donner ceci :</p>
+<p><img src="RSRC/07_07_VIEWS.png" alt="BB" /><br /></p>
+<pre><code>//TODO : faire un paragraphe sur le comparator dans le chapitre sur les collections</code></pre>
+<h2 id="utilisation-dautres-moteurs-de-template"><a href="#TOC"><span class="header-section-number">8.6</span> Utilisation d’autre(s) moteur(s) de template</a></h2>
+<p>Vous lirez souvent que Backbone est &quot;framwork agnostic&quot;, donc vous pouvez par exemple l'utiliser avec <strong>zepto</strong>, plutôt que <strong>jQuery</strong> en ce qui concerne la gestion du DOM et des appels Ajax. Il en est de même avec le moteur de template. Rien ne vous oblige à utiliser celui d’<strong>Underscore</strong>. Un des plus utilisé est Mustache.js (<a href="http://mustache.github.com/">http://mustache.github.com/</a>). Vous pouvez récupérer le code ici : <a href="https://github.com/janl/mustache.js/">https://github.com/janl/mustache.js/</a>. En fait, plus précisément, enregistrez le fichier <a href="https://raw.github.com/janl/mustache.js/master/mustache.js">https://raw.github.com/janl/mustache.js/master/mustache.js</a> dans votre répertoire <code>public/libs/vendors</code>. Puis faites y référence dans votre page <code>index.html</code> :</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    &lt;script src=<span class="st">&quot;libs/vendors/mustache.js&quot;</span>&gt;&lt;/script&gt;</code></pre>
+<p>Et nous allons une fois de plus &quot;casser&quot; notre code html.</p>
+<h3 id="redéfinissons-donc-nos-templates"><a href="#TOC"><span class="header-section-number">8.6.1</span> Redéfinissons donc nos templates</a></h3>
+<p><em>1] Avant pour la partie concernant la vue <code>SidebarView</code> nous avions ceci :</em></p>
+<pre class="sourceCode html"><code class="sourceCode html">    <span class="kw">&lt;script</span><span class="ot"> type=</span><span class="st">&quot;text/template&quot;</span><span class="ot"> id=</span><span class="st">&quot;blog_sidebar_template&quot;</span><span class="kw">&gt;</span>
+        &lt;h2&gt;Les <span class="dv">3</span> <span class="dt">derniers </span>:&lt;/h2&gt;
+        &lt;ul&gt;
+        &lt;% <span class="kw">_</span>.<span class="fu">each</span>(posts ,<span class="kw">function</span>(post){ %&gt;
+                &lt;li&gt;&lt;%= <span class="kw">post</span>.<span class="fu">get</span>(<span class="st">&quot;title&quot;</span>) %&gt;&lt;/li&gt;
+        &lt;% }); %&gt;
+        &lt;/ul&gt;
+    <span class="kw">&lt;/script&gt;</span></code></pre>
+<p><em>2] Que vous allez remplacer par ceci :</em></p>
+<pre class="sourceCode html"><code class="sourceCode html">    <span class="kw">&lt;script</span><span class="ot"> type=</span><span class="st">&quot;text/template&quot;</span><span class="ot"> id=</span><span class="st">&quot;blog_sidebar_template&quot;</span><span class="kw">&gt;</span>
+        &lt;h2&gt;Les <span class="dv">3</span> <span class="dt">derniers </span>:&lt;/h2&gt;
+
+        &lt;ul&gt;{{#posts}}
+            &lt;li&gt;{{title}}&lt;/li&gt;
+        {{/posts}}&lt;/ul&gt;
+
+    <span class="kw">&lt;/script&gt;</span></code></pre>
+<p><em>3] En ce qui concerne le template lié à la vue PostsListView, remplacez :</em></p>
+<pre class="sourceCode html"><code class="sourceCode html">    <span class="kw">&lt;script</span><span class="ot"> type=</span><span class="st">&quot;text/template&quot;</span><span class="ot"> id=</span><span class="st">&quot;posts_list_template&quot;</span><span class="kw">&gt;</span>
+
+        &lt;% <span class="kw">_</span>.<span class="fu">each</span>(posts ,<span class="kw">function</span>(post){ %&gt;
+            &lt;h1&gt;&lt;%= <span class="kw">post</span>.<span class="fu">get</span>(<span class="st">&quot;title&quot;</span>) %&gt;&lt;/h1&gt;&lt;hr&gt;
+            &lt;b&gt;<span class="dt">par </span>: &lt;%= <span class="kw">post</span>.<span class="fu">get</span>(<span class="st">&quot;author&quot;</span>) %&gt;&lt;/b&gt; <span class="dt">le </span>: &lt;%= <span class="kw">post</span>.<span class="fu">get</span>(<span class="st">&quot;date&quot;</span>) %&gt;&lt;br&gt;
+            &lt;p&gt;&lt;%= <span class="kw">post</span>.<span class="fu">get</span>(<span class="st">&quot;message&quot;</span>) %&gt;&lt;/p&gt;
+        &lt;% }); %&gt;
+
+    <span class="kw">&lt;/script&gt;</span></code></pre>
+<p><em>4] Par :</em></p>
+<pre class="sourceCode html"><code class="sourceCode html">    <span class="kw">&lt;script</span><span class="ot"> type=</span><span class="st">&quot;text/template&quot;</span><span class="ot"> id=</span><span class="st">&quot;posts_list_template&quot;</span><span class="kw">&gt;</span>
+
+        {{#posts}}
+            &lt;h1&gt;{{title}}&lt;/h1&gt;
+            &lt;b&gt;<span class="dt">par </span>: {{author}}&lt;/b&gt; <span class="dt">le </span>: {{date}}&lt;br&gt;
+            &lt;p&gt;{{message}}&lt;/p&gt;
+        {{/posts}}
+
+    <span class="kw">&lt;/script&gt;</span></code></pre>
+<p>Nous obtenons donc des templates html plus lisibles, utilisable moyennant une petite modification de nos vues :</p>
+<p><em>5] Avant (avec le moteur de template d’underscore) :</em></p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="kw">window</span>.<span class="fu">PostsListView</span> = <span class="kw">Backbone.View</span>.<span class="fu">extend</span>({
+        <span class="dt">el </span>: $(<span class="st">&quot;#posts_list&quot;</span>),
+        <span class="dt">initialize </span>: <span class="kw">function</span> () {
+            <span class="kw">this</span>.<span class="fu">template</span> = <span class="kw">_</span>.<span class="fu">template</span>($(<span class="st">&quot;#posts_list_template&quot;</span>).<span class="fu">html</span>());
+        },
+        <span class="dt">render </span>: <span class="kw">function</span> () {
+            <span class="kw">var</span> renderedContent = <span class="kw">this</span>.<span class="fu">template</span>({<span class="dt">posts </span>: <span class="kw">this</span>.<span class="fu">collection</span>.<span class="fu">models</span>});
+            <span class="kw">this</span>.$<span class="fu">el</span>.<span class="fu">html</span>(renderedContent);
+        }
+    });
+
+    <span class="kw">window</span>.<span class="fu">SidebarView</span> = <span class="kw">Backbone.View</span>.<span class="fu">extend</span>({
+         <span class="dt">el </span>: $(<span class="st">&quot;#blog_sidebar&quot;</span>),
+        <span class="dt">initialize </span>: <span class="kw">function</span> () {
+            <span class="kw">this</span>.<span class="fu">template</span> = <span class="kw">_</span>.<span class="fu">template</span>($(<span class="st">&quot;#blog_sidebar_template&quot;</span>).<span class="fu">html</span>());
+        },
+        <span class="dt">render </span>: <span class="kw">function</span> () {
+            <span class="kw">var</span> renderedContent = <span class="kw">this</span>.<span class="fu">template</span>({<span class="dt">posts </span>: <span class="kw">this</span>.<span class="fu">collection</span>.<span class="fu">models</span>});
+            <span class="kw">this</span>.$<span class="fu">el</span>.<span class="fu">html</span>(renderedContent);
+        }           
+    });</code></pre>
+<p><em>6] Après (en utilisant Mustache) nous aurons ceci :</em></p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="kw">window</span>.<span class="fu">PostsListView</span> = <span class="kw">Backbone.View</span>.<span class="fu">extend</span>({
+        <span class="dt">el </span>: $(<span class="st">&quot;#posts_list&quot;</span>),
+        <span class="dt">initialize </span>: <span class="kw">function</span> () {
+            <span class="kw">this</span>.<span class="fu">template</span> = $(<span class="st">&quot;#posts_list_template&quot;</span>).<span class="fu">html</span>();
+        },
+        <span class="dt">render </span>: <span class="kw">function</span> () {
+            <span class="kw">var</span> renderedContent = <span class="kw">Mustache</span>.<span class="fu">to</span>_<span class="fu">html</span>(<span class="kw">this</span>.<span class="fu">template</span>, {<span class="dt">posts </span>: <span class="kw">this</span>.<span class="fu">collection</span>.<span class="fu">toJSON</span>()} );
+
+            <span class="kw">this</span>.$<span class="fu">el</span>.<span class="fu">html</span>(renderedContent);
+        }
+    });
+
+    <span class="kw">window</span>.<span class="fu">SidebarView</span> = <span class="kw">Backbone.View</span>.<span class="fu">extend</span>({
+         <span class="dt">el </span>: $(<span class="st">&quot;#blog_sidebar&quot;</span>),
+        <span class="dt">initialize </span>: <span class="kw">function</span> () {
+            <span class="kw">this</span>.<span class="fu">template</span> = $(<span class="st">&quot;#blog_sidebar_template&quot;</span>).<span class="fu">html</span>();
+        },
+        <span class="dt">render </span>: <span class="kw">function</span> () {
+            <span class="kw">var</span> renderedContent = <span class="kw">Mustache</span>.<span class="fu">to</span>_<span class="fu">html</span>(<span class="kw">this</span>.<span class="fu">template</span>, {<span class="dt">posts </span>: <span class="kw">this</span>.<span class="fu">collection</span>.<span class="fu">toJSON</span>()} );
+
+            <span class="kw">this</span>.$<span class="fu">el</span>.<span class="fu">html</span>(renderedContent);
+        }           
+    });</code></pre>
+<p>Vous noterez l'utilisation de <code>this.collection.toJSON()</code> plutôt que <code>this.collection.models</code>. En effet Mustache a besoin d’objets au format JSON, et (cela tombe bien), les collections Backbone dispose d’une méthode d’exportation/mise en forme au format JSON.</p>
+<p>Sauvegardez, lancez, il n’y a pas de changement, l'affichages est identique (heureusement), vous avez juste utilisé une autre façon de travailler.</p>
+<h2 id="gestion-des-événements-dans-les-vues"><a href="#TOC"><span class="header-section-number">8.7</span> Gestion des événements dans les vues</a></h2>
+<p>Les objets de type Backbone.View peuvent aussi gérer les évènements (mouseover, click, etc. …). Nous allons donc profiter de ce paragraphe pour mettre en œuvre un système d’authentification dans notre application, qui utilisera donc cette possibilité. Il est temps de retourner travailler côté serveur quelques instants.</p>
+<p>Si vous voulez en savoir plus sur les événements dans les vues Backbone, je vous engage fortement à lire la documentation : <a href="http://backbonejs.org/#View-delegateEvents">http://backbonejs.org/#View-delegateEvents</a>.</p>
+<p>Donc ...</p>
+<h2 id="authentification-côté-serveur-les-utilisateurs"><a href="#TOC"><span class="header-section-number">8.8</span> Authentification (côté serveur) : les utilisateurs</a></h2>
+<blockquote>
+<blockquote>
+<p><em>Ce paragraphe ne parle pas des vues, mais est nécessaire pour la mise en place des paragraphes suivants.</em></p>
+</blockquote>
+</blockquote>
+<p>Nous aurons besoin d’une liste des utilisateurs connectés (je vous le rappelle, nous sommes côté serveur, donc dans le fichier <code>app.js</code>) que nous représenterons sous la forme d’un tableau de variables (ou d’objets) :</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="kw">var</span> connectedUsers = [];</code></pre>
+<p>Nous aurons besoin d’ajouter des utilisateurs dans notre base de données, donc nous allons nous créer de quoi rajouter au moins une fois quelques utilisateurs pour notre application :</p>
+<p><em>Ajouter un utilisateur en base :</em></p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="kw">function</span> addUser (user) {
+        <span class="kw">users</span>.<span class="fu">save</span>(null,user, <span class="kw">function</span> (err, key){
+            <span class="kw">if</span>(err) { 
+                <span class="kw">console</span>.<span class="fu">log</span>(<span class="st">&quot;Erreur : &quot;</span>,err);
+            } <span class="kw">else</span> {
+                <span class="kw">user</span>.<span class="fu">id</span> = key;
+                <span class="kw">console</span>.<span class="fu">log</span>(user);
+            }
+        });    
+    }</code></pre>
+<p>Nous appellerons n fois cette fonctions pour ajouter des utilisateurs :</p>
+<p><em>Ajouter des utilisateurs :</em></p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">function</span> addUsers () {
+    addUser({
+        <span class="dt">email </span>: <span class="st">&quot;bob@morane.com&quot;</span>,
+        <span class="dt">password </span>: <span class="st">&quot;backbone&quot;</span>,
+        <span class="dt">isAdmin </span>: <span class="kw">true</span>,
+        <span class="dt">firstName </span>: <span class="st">&quot;Bob&quot;</span>,
+        <span class="dt">lastName </span>: <span class="st">&quot;Morane&quot;</span>
+    });
+    addUser({
+        <span class="dt">email </span>: <span class="st">&quot;sam@lepirate.com&quot;</span>,
+        <span class="dt">password </span>: <span class="st">&quot;underscore&quot;</span>,
+        <span class="dt">isAdmin </span>: <span class="kw">false</span>,
+        <span class="dt">firstName </span>: <span class="st">&quot;Sam&quot;</span>,
+        <span class="dt">lastName </span>: <span class="st">&quot;Le Pirate&quot;</span>
+    });
+
+    <span class="co">//etc. ...</span>
+}</code></pre>
+<p>Et pour déclencher l’ajout des utilisateurs, nous créeons une « route » <code>addusers</code> :</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="kw">app</span>.<span class="fu">get</span>(<span class="ch">&#39;/addusers&#39;</span>,<span class="kw">function</span>(req, res){
+        addUsers();
+        <span class="kw">res</span>.<span class="fu">json</span>({<span class="dt">MESSAGE</span>:<span class="st">&quot;Users added.&quot;</span>});
+    });</code></pre>
+<p>Qu’il suffira d’appeler comme ceci dans le navigateur : <a href="http://localhost:3000/addusers/">http://localhost:3000/addusers/</a></p>
+<blockquote>
+<blockquote>
+<p><strong>Remarque</strong> : notez bien que mon système d’authentification est très « léger ». En production, il vous faudrait quelque chose de plus abouti, mais ce n’est pas le propos de cet ouvrage. Nous avions besoin de quelque chose de simple.</p>
+</blockquote>
+</blockquote>
+<h3 id="sauthentifier-se-déconnecter"><a href="#TOC"><span class="header-section-number">8.8.1</span> S’authentifier – Se déconnecter</a></h3>
+<p>Nous aurons besoin de nous authentifier. Il nous faut donc d’abord une fonction « utilitaire » qui nous permette de vérifier si l’email de l’utilisateur n’est pas déjà pris (utilisateur déjà connecté sous une autre session) :</p>
+<p><em>Vérifier si un utilisateur est déjà connecté :</em></p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="kw">function</span> findUserByMail (email) {
+        <span class="co">/*</span>
+<span class="co">            Permet de vérifier si un utilisateur est déjà loggé</span>
+<span class="co">        */</span>
+        <span class="kw">return</span> <span class="kw">connectedUsers</span>.<span class="fu">filter</span>(<span class="kw">function</span>(user) {
+            <span class="kw">return</span> <span class="kw">user</span>.<span class="fu">email</span> == email;
+        })[<span class="dv">0</span>];    
+    }</code></pre>
+<p>Nous allons donc créer une route <code>authenticate</code> avec le code suivant :</p>
+<p><em>Code pour s’authentifier :</em></p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="kw">app</span>.<span class="fu">post</span>(<span class="ch">&#39;/authenticate&#39;</span>,<span class="kw">function</span>(req, res){
+        <span class="kw">console</span>.<span class="fu">log</span>(<span class="st">&quot;POST authenticate &quot;</span>, <span class="kw">req</span>.<span class="fu">body</span>);
+        <span class="co">//Je récupère les information de connexion de l&#39;utilisateur</span>
+        <span class="kw">var</span> user = <span class="kw">req</span>.<span class="fu">body</span>;
+
+        <span class="co">//est ce que l&#39;email est déjà utilisé ?</span>
+        <span class="kw">if</span>(findUserByMail(<span class="kw">user</span>.<span class="fu">email</span>)) {
+            <span class="kw">res</span>.<span class="fu">json</span>({<span class="dt">infos</span>:<span class="st">&quot;Utilisateur déjà connecté&quot;</span>})
+        } <span class="kw">else</span> { <span class="co">//si l&#39;email n&#39;est pas utilisé</span>
+        <span class="co">//Je cherche l&#39;utilisateur dans la base de données</span>
+            <span class="kw">users</span>.<span class="fu">find</span>({<span class="dt">email</span>: <span class="kw">user</span>.<span class="fu">email</span>, <span class="dt">password</span>: <span class="kw">user</span>.<span class="fu">password</span> }, <span class="kw">function</span>(err, results) {
+                <span class="kw">if</span>(err) {
+                    <span class="kw">res</span>.<span class="fu">json</span>({<span class="dt">error</span>:<span class="st">&quot;Oups, Houson, on a un problème&quot;</span>}); 
+                } <span class="kw">else</span> {
+                    <span class="co">//J&#39;ai trouvé l&#39;utilisateur</span>
+                    <span class="kw">var</span> key = <span class="kw">Object</span>.<span class="fu">keys</span>(results)[<span class="dv">0</span>]
+                    ,   authenticatedUser = results[key];
+
+                    <span class="co">//Je rajoute l&#39;id de session à l&#39;objet utilisateur</span>
+
+                    <span class="kw">authenticatedUser</span>.<span class="fu">key</span> = key;
+                    <span class="kw">authenticatedUser</span>.<span class="fu">sessionID</span> = <span class="kw">req</span>.<span class="fu">sessionID</span>;
+
+                    <span class="co">//J&#39;ajoute l&#39;utilisateur authentifié à la liste des utilisateurs connectés</span>
+                    <span class="kw">connectedUsers</span>.<span class="fu">push</span>(authenticatedUser);
+
+                    <span class="co">//Je renvoie au navigateur les informations de l&#39;utilisateur</span>
+                    <span class="co">// ... sans le mot de passe bien sûr</span>
+                    <span class="kw">res</span>.<span class="fu">json</span>({
+                        <span class="dt">email</span>:<span class="kw">authenticatedUser</span>.<span class="fu">email</span>,
+                        <span class="dt">firstName </span>: <span class="kw">authenticatedUser</span>.<span class="fu">firstName</span>,
+                        <span class="dt">lastName </span>: <span class="kw">authenticatedUser</span>.<span class="fu">lastName</span>,
+                        <span class="dt">isAdmin </span>: <span class="kw">authenticatedUser</span>.<span class="fu">isAdmin</span>
+                    });
+                }
+            });   
+        }
+
+    });</code></pre>
+<blockquote>
+<blockquote>
+<p><strong>Remarque</strong> : La « bienséance » (d’un point de vue architecture) voudrait que ne mette pas tout ce code au niveau de la route mais dans la méthode d’un contrôleur qui serait appelée par la route. Une fois de plus je vais au plus court, mais gardez à l’esprit : toujours un code lisible et maintenable.</p>
+</blockquote>
+</blockquote>
+<p>Il faudra aussi pouvoir se déconnecter. Nous ajoutons donc une route <code>logoff</code> qui nous permettra de déconnecter l’utilisateur.</p>
+<p>Nous avons tout d’abord besoin d’une fonction nous permettant de retrouver un utilisateur par son id de session parmi les utilisateurs connectés :</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="kw">function</span> findUserBySession (sessionID) {
+        <span class="co">/*</span>
+<span class="co">            Permet de retrouver un utilisateur par son id de session</span>
+<span class="co">        */</span>
+        <span class="kw">return</span> <span class="kw">connectedUsers</span>.<span class="fu">filter</span>(<span class="kw">function</span>(user) {
+            <span class="kw">return</span> <span class="kw">user</span>.<span class="fu">sessionID</span> == sessionID;
+        })[<span class="dv">0</span>];
+
+    }</code></pre>
+<p>Que nous allons utiliser ensuite dans notre route <code>logoff</code> :</p>
+<p><em>Se déconnecter :</em></p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="kw">app</span>.<span class="fu">get</span>(<span class="ch">&#39;/logoff&#39;</span>,<span class="kw">function</span>(req, res){
+
+        <span class="co">//Je recherche l&#39;utilisateur courant parmi les utilisateurs connectés</span>
+        <span class="kw">var</span> alreadyAuthenticatedUser = findUserBySession(<span class="kw">req</span>.<span class="fu">sessionID</span>);
+
+        <span class="kw">if</span>(alreadyAuthenticatedUser) {
+            <span class="co">//Je l&#39;ai trouvé, je le supprime de la liste des utilisateurs connectés</span>
+            <span class="kw">var</span> posInArray = <span class="kw">connectedUsers</span>.<span class="fu">indexOf</span>(alreadyAuthenticatedUser);
+            <span class="kw">connectedUsers</span>.<span class="fu">splice</span>(posInArray, <span class="dv">1</span>);
+            <span class="kw">res</span>.<span class="fu">json</span>({<span class="dt">state</span>:<span class="st">&quot;disconnected&quot;</span>});
+        } <span class="kw">else</span> {
+            <span class="kw">res</span>.<span class="fu">json</span>({});
+        }
+
+    });</code></pre>
+<p>Nous aurons aussi besoin d’un moyen pour savoir (côté client) si un utilisateur est déjà connecté. Donc nous allons créer une route <code>alreadyauthenticated</code> que la page web pourra « appeler » pour vérification (par exemple au rechargement de la page) :</p>
+<p><em>Est-ce que je suis déjà authentifié ?</em></p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">app</span>.<span class="fu">get</span>(<span class="ch">&#39;/alreadyauthenticated&#39;</span>,<span class="kw">function</span>(req, res){
+
+        <span class="kw">var</span> alreadyAuthenticatedUser = findUserBySession(<span class="kw">req</span>.<span class="fu">sessionID</span>);
+
+        <span class="co">//Si je suis déjà authentifié, renvoyer les informations utilisateur</span>
+        <span class="kw">if</span>(alreadyAuthenticatedUser) {
+            <span class="kw">res</span>.<span class="fu">json</span>({
+                <span class="dt">email</span>:<span class="kw">alreadyAuthenticatedUser</span>.<span class="fu">email</span>,
+                <span class="dt">firstName </span>: <span class="kw">alreadyAuthenticatedUser</span>.<span class="fu">firstName</span>,
+                <span class="dt">lastName </span>: <span class="kw">alreadyAuthenticatedUser</span>.<span class="fu">lastName</span>,
+                <span class="dt">isAdmin </span>: <span class="kw">alreadyAuthenticatedUser</span>.<span class="fu">isAdmin</span>
+            });
+        } <span class="kw">else</span> {
+            <span class="kw">res</span>.<span class="fu">json</span>({});
+        }
+
+    });</code></pre>
+<p>Nous somme maintenant prêts à utiliser tout cela côté client. Le code définitif de <code>app.js</code> devrait ressembler à ceci :</p>
+<p>```javascript /<em>-------------------------------------------- Déclaration des librairies --------------------------------------------</em>/ var express = require('express') , nStore = require('nstore') , app = module.exports = express.createServer();</p>
+<pre><code>nStore = nStore.extend(require(&#39;nstore/query&#39;)());
+
+/*--------------------------------------------
+    Paramétrages de fonctionnement d&#39;Express
+--------------------------------------------*/
+app.use(express.bodyParser());
+app.use(express.methodOverride());
+app.use(express.static(__dirname + &#39;/public&#39;));
+app.use(express.cookieParser(&#39;ilovebackbone&#39;));
+app.use(express.session({ secret: &quot;ilovebackbone&quot; }));
+
+/*--------------------------------------------
+    Définition des &quot;bases&quot; posts &amp; users
+--------------------------------------------*/
+var posts, users;
+
+posts = nStore.new(&quot;blog.db&quot;, function() {
+    users = nStore.new(&quot;users.db&quot;, function() {
+        Routes();
+        app.listen(3000);
+        console.log(&#39;Express app started on port 3000&#39;);
+
+    });
+});
+
+
+/*======= Authentification =======*/
+
+var connectedUsers = [];
+
+function addUser (user) {
+    users.save(null,user, function (err, key){
+        if(err) { 
+            console.log(&quot;Erreur : &quot;,err);
+        } else {
+            user.id = key;
+            console.log(user);
+        }
+    });    
+}
+
+function addUsers () {
+    addUser({
+        email : &quot;bob@morane.com&quot;,
+        password : &quot;backbone&quot;,
+        isAdmin : true,
+        firstName : &quot;Bob&quot;,
+        lastName : &quot;Morane&quot;
+    });
+    addUser({
+        email : &quot;sam@lepirate.com&quot;,
+        password : &quot;underscore&quot;,
+        isAdmin : false,
+        firstName : &quot;Sam&quot;,
+        lastName : &quot;Le Pirate&quot;
+    });
+
+    //etc. ...
+}
+
+function findUserBySession (sessionID) {
+    /*
+        Permet de retrouver un utilisateur par son id de session
+    */
+    return connectedUsers.filter(function(user) {
+        return user.sessionID == sessionID;
+    })[0];
+
+}
+
+function findUserByMail (email) {
+    /*
+        Permet de vérifier si un utilisateur est déjà loggé
+    */
+    return connectedUsers.filter(function(user) {
+        return user.email == email;
+    })[0];    
+}
+
+
+function Routes() {
+    /*======= Routes pour authentification =======*/
+
+    app.get(&#39;/addusers&#39;,function(req, res){
+        addUsers();
+        res.json({MESSAGE:&quot;Users added.&quot;});
+    });
+
+    app.get(&#39;/alreadyauthenticated&#39;,function(req, res){
+
+        var alreadyAuthenticatedUser = findUserBySession(req.sessionID);
+
+        /*  Si je suis déjà authentifié, 
+            renvoyer les informations utilisateur
+            sans le mot de passe bien sûr
+        */
+        if(alreadyAuthenticatedUser) {
+            res.json({
+                email:alreadyAuthenticatedUser.email,
+                firstName : alreadyAuthenticatedUser.firstName,
+                lastName : alreadyAuthenticatedUser.lastName,
+                isAdmin : alreadyAuthenticatedUser.isAdmin
+            });
+        } else {
+            res.json({});
+        }
+
+    });
+
+    app.post(&#39;/authenticate&#39;,function(req, res){
+        console.log(&quot;POST authenticate &quot;, req.body);
+        //Je récupère les information de connexion de l&#39;utilisateur
+        var user = req.body;
+
+        //est ce que l&#39;email est déjà utilisé ?
+        if(findUserByMail(user.email)) {
+            res.json({infos:&quot;Utilisateur déjà connecté&quot;})
+        } else { //si l&#39;email n&#39;est pas utilisé
+        //Je cherche l&#39;utilisateur dans la base de données
+            users.find({email: user.email, password: user.password }, function(err, results) {
+                if(err) {
+                    res.json({error:&quot;Oups, Houson, on a un problème&quot;}); 
+                } else {
+                    //J&#39;ai trouvé l&#39;utilisateur
+                    var key = Object.keys(results)[0]
+                    ,   authenticatedUser = results[key];
+
+                    //Je rajoute l&#39;id de session à l&#39;objet utilisateur
+
+                    authenticatedUser.key = key;
+                    authenticatedUser.sessionID = req.sessionID;
+
+                    //J&#39;ajoute l&#39;utilisateur authentifié à la liste des utilisateurs connectés
+                    connectedUsers.push(authenticatedUser);
+
+                    //Je renvoie au navigateur les informations de l&#39;utilisateur
+                    // ... sans le mot de passe bien sûr
+                    res.json({
+                        email:authenticatedUser.email,
+                        firstName : authenticatedUser.firstName,
+                        lastName : authenticatedUser.lastName,
+                        isAdmin : authenticatedUser.isAdmin
+                    });
+                }
+            });   
+        }
+
+    });
+
+    app.get(&#39;/logoff&#39;,function(req, res){
+
+        //Je recherche l&#39;utilisateur courant parmi les utilisateurs connectés
+        var alreadyAuthenticatedUser = findUserBySession(req.sessionID);
+
+        if(alreadyAuthenticatedUser) {
+            //Je l&#39;ai trouvé, je le supprime de la liste des utilisateurs connectés
+            var posInArray = connectedUsers.indexOf(alreadyAuthenticatedUser);
+            connectedUsers.splice(posInArray, 1);
+            res.json({state:&quot;disconnected&quot;});
+        } else {
+            res.json({});
+        }
+
+    });
+
+    /*======= Fin des routes &quot;authentification&quot; =======*/
+
+    /*
+        Obtenir la liste de tous les posts lorsque
+        l&#39;on appelle http://localhost:3000/blogposts
+        en mode GET
+    */
+    app.get(&#39;/blogposts&#39;,function(req, res){
+        console.log(&quot;GET (ALL) : /blogposts&quot;);
+        posts.all(function(err, results) {
+
+            if(err) { 
+                console.log(&quot;Erreur : &quot;,err);
+                res.json(err); 
+            } else {
+                var posts = [];
+                for(var key in results) {
+                    var post = results[key]; post.id = key;
+                    posts.push(post);
+                }
+                res.json(posts);
+            }
+        });
+
+    });
+
+    /*
+        Obtenir la liste de tous les posts correspondant à un critère
+        lorsque l&#39;on appelle http://localhost:3000/blogposts/ en
+        mode GET avec une requête en paramètre
+        ex : query : { &quot;title&quot; : &quot;Mon 1er post&quot;} }
+    */
+    app.get(&#39;/blogposts/:query&#39;,function(req, res){
+        console.log(&quot;GET (QUERY) : /blogposts/&quot;+req.params.query);
+
+        posts.find(JSON.parse(req.params.query), function(err, results) {
+            if(err) {
+                console.log(&quot;Erreur : &quot;,err);
+                res.json(err); 
+            } else {
+                var posts = [];
+                for(var key in results) {
+                    var post = results[key]; post.id = key;
+                    posts.push(post);
+                }
+                res.json(posts);
+            }
+        });
+
+    });
+
+    /*
+        Retrouver un post par sa clé unique lorsque
+        l&#39;on appelle http://localhost:3000/blogpost/identifiant_du_post
+        en mode GET
+    */
+
+    app.get(&#39;/blogpost/:id&#39;, function(req, res){
+        console.log(&quot;GET : /blogpost/&quot;+req.params.id);
+        posts.get(req.params.id, function(err, post, key) {
+            if(err) {
+                console.log(&quot;Erreur : &quot;,err);
+                res.json(err);
+
+            } else {
+                post.id = key;
+                res.json(post);
+            }
+        });
+    });
+
+    /*
+        Créer un nouveau post lorsque
+        l&#39;on appelle http://localhost:3000/blogpost
+        avec en paramètre le post au format JSON
+        en mode POST
+    */
+    app.post(&#39;/blogpost&#39;,function(req, res){
+        console.log(&quot;POST CREATE &quot;, req.body);
+
+        var d = new Date(), model = req.body;
+        model.saveDate = (d.valueOf());
+
+        posts.save(null,model, function (err, key){
+            if(err) { 
+                console.log(&quot;Erreur : &quot;,err);
+                res.json(err); 
+            } else {
+                model.id = key;
+                res.json(model);
+            }
+        });
+    });
+
+
+    /*
+        Mettre à jour un post lorsque
+        l&#39;on appelle http://localhost:3000/blogpost
+        avec en paramètre le post au format JSON
+        en mode PUT
+    */
+    app.put(&#39;/blogpost/:id&#39;,function(req, res){
+        console.log(&quot;PUT UPDATE&quot;, req.body, req.params.id);
+
+        var d = new Date(), model = req.body;
+        model.saveDate = (d.valueOf());
+
+        posts.save(req.params.id,model, function (err, key){
+            if(err) { 
+                console.log(&quot;Erreur : &quot;,err);
+                res.json(err); 
+            } else {
+                res.json(model);
+            }
+        });
+    });
+
+    /*
+        supprimer un post par sa clé unique lorsque
+        l&#39;on appelle http://localhost:3000/blogpost/identifiant_du_post
+        en mode DELETE
+    */
+    app.delete(&#39;/blogpost/:id&#39;,function(req, res){
+        console.log(&quot;DELETE : /delete/&quot;+req.params.id);
+
+        posts.remove(req.params.id, function(err){
+            if(err) { 
+                console.log(&quot;Erreur : &quot;,err);
+                res.json(err); 
+            } else { 
+                //petit correctif de contournement (bug ds nStore) : 
+                //ré-ouvrir la base lorsque la suppression a été faite
+                posts = nStore.new(&quot;blog.db&quot;, function() {
+                    res.json(req.params.id);
+                    //Le modèle est vide si on ne trouve rien
+                });
+            }
+        });
+    });
+
+}</code></pre>
+<p>``` ##Authentification (côté client)</p>
+<p>Nous repassons enfin au code client et nous allons pouvoir vérifier comment sont gérés les évènements dans une vue en implémentant l’authentification côté client.</p>
+<h3 id="formulaire-dauthentification"><a href="#TOC"><span class="header-section-number">8.8.2</span> Formulaire d’authentification</a></h3>
+<p>Nous allons donc commencer par créer le template du formulaire d’authentification dans notre page <code>index.html</code> (je choisis de le placer juste après la liste des 3 derniers posts) :</p>
+<pre class="sourceCode html"><code class="sourceCode html">    <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;sidebar&quot;</span><span class="ot"> id=</span><span class="st">&quot;blog_sidebar&quot;</span><span class="kw">&gt;</span>
+        <span class="co">&lt;!-- Last 3 posts --&gt;</span>
+    <span class="kw">&lt;/div&gt;</span>
+
+    <span class="co">&lt;!-- /*======= Formulaire d&#39;authentification =======*/ --&gt;</span>
+    <span class="kw">&lt;script</span><span class="ot"> type=</span><span class="st">&quot;text/template&quot;</span><span class="ot"> id=</span><span class="st">&quot;blog_login_form_template&quot;</span><span class="kw">&gt;</span>
+        &lt;h3&gt;<span class="dt">Login </span>:&lt;/h3&gt;
+        &lt;input name=<span class="st">&quot;email&quot;</span> type=<span class="st">&quot;text&quot;</span> placeholder=<span class="st">&quot;email&quot;</span>/&gt;&lt;br&gt;
+        &lt;input name=<span class="st">&quot;password&quot;</span> type=<span class="st">&quot;password&quot;</span> placeholder=<span class="st">&quot;password&quot;</span>/&gt;&lt;br&gt;
+        &lt;a href=<span class="st">&quot;</span>#<span class="st">&quot;</span> class=<span class="st">&quot;btn</span> <span class="st">btn</span>-<span class="st">primary&quot;</span>&gt;Login&lt;/a&gt; 
+        &lt;a href=<span class="st">&quot;</span>#<span class="st">&quot;</span> class=<span class="st">&quot;btn</span> <span class="st">btn</span>-<span class="st">inverse&quot;</span>&gt;Logoff&lt;/a&gt;&lt;br&gt;
+        &lt;b&gt;{{message}} {{firstName}} {{lastName}}&lt;/b&gt;
+
+    <span class="kw">&lt;/script&gt;</span>
+    <span class="kw">&lt;form</span><span class="ot"> class=</span><span class="st">&quot;container&quot;</span><span class="ot"> id=</span><span class="st">&quot;blog_login_form&quot;</span><span class="kw">&gt;</span>
+
+    <span class="kw">&lt;/form&gt;</span></code></pre>
+<h3 id="lobjet-backbone.view-login.view"><a href="#TOC"><span class="header-section-number">8.8.3</span> L’objet Backbone.View : Login.View</a></h3>
+<p>Notre composant d’authentification aura 2 zones de saisie (email et mot de passe), un bouton de login, un bouton pour se déconnecter, une zone pour afficher un message (bienvenue, erreur, …). Le composant devra aussi pouvoir vérifier si l’utilisateur est toujours connecté en cas de rafraîchissement de la page.</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="co">/*======= Authentification =======*/</span>
+    <span class="kw">window</span>.<span class="fu">LoginView</span> = <span class="kw">Backbone.View</span>.<span class="fu">extend</span>({
+        <span class="dt">el </span>: $(<span class="st">&quot;#blog_login_form&quot;</span>),
+
+        <span class="dt">initialize </span>: <span class="kw">function</span> () {
+            <span class="kw">var</span> that = <span class="kw">this</span>;
+            <span class="kw">this</span>.<span class="fu">template</span> = $(<span class="st">&quot;#blog_login_form_template&quot;</span>).<span class="fu">html</span>();
+
+            <span class="co">//on vérifie si pas déjà authentifié</span>
+             $.<span class="fu">ajax</span>({<span class="dt">type</span>:<span class="st">&quot;GET&quot;</span>, <span class="dt">url</span>:<span class="st">&quot;/alreadyauthenticated&quot;</span>,
+                <span class="dt">error</span>:<span class="kw">function</span>(err){ <span class="kw">console</span>.<span class="fu">log</span>(err); },
+                <span class="dt">success</span>:<span class="kw">function</span>(dataFromServer) { 
+
+                    <span class="kw">if</span>(<span class="kw">dataFromServer</span>.<span class="fu">firstName</span>) {
+                        <span class="kw">that</span>.<span class="fu">render</span>(<span class="st">&quot;Bienvenue&quot;</span>,dataFromServer);
+                    } <span class="kw">else</span> {
+                        <span class="kw">that</span>.<span class="fu">render</span>(<span class="st">&quot;???&quot;</span>,{<span class="dt">firstName</span>:<span class="st">&quot;John&quot;</span>, <span class="dt">lastName</span>:<span class="st">&quot;Doe&quot;</span>});
+                    }
+                }
+            })    
+
+        },
+
+        <span class="dt">render </span>: <span class="kw">function</span> (message, user) {
+
+            <span class="kw">var</span> renderedContent = <span class="kw">Mustache</span>.<span class="fu">to</span>_<span class="fu">html</span>(<span class="kw">this</span>.<span class="fu">template</span>, {
+                <span class="dt">message </span>: message,
+                <span class="dt">firstName </span>: user ? <span class="dt">user.firstName </span>: <span class="st">&quot;&quot;</span>,
+                <span class="dt">lastName </span>: user ? <span class="dt">user.lastName </span>: <span class="st">&quot;&quot;</span>
+            });
+            <span class="kw">this</span>.$<span class="fu">el</span>.<span class="fu">html</span>(renderedContent);  
+        }
+
+    });
+
+    <span class="kw">window</span>.<span class="fu">loginView</span> = <span class="kw">new</span> LoginView();
+    <span class="co">/*======= Fin authentification =======*/</span></code></pre>
+<p>A l’initialisation (<code>initialize</code>) la vue va vérifier si l’utilisateur en cours est déjà authentifié (par exemple vous vous êtes signé, mais vous avez rafraîchi la page), en appelant la route <code>/alreadyauthenticated</code>, si l’utilisateur est déjà authentifié, la méthode <code>render</code> de la vue est appelée avec un message de bienvenue et les informations de l’utilisateur ( <code>that.render(&quot;Bienvenue&quot;,dataFromServer);</code> ) dans le cas contraire la méthode <code>render</code> est aussi appelée mais avec un message signifiant que l’utilisateur n’est pas connecté ( <code>that.render(&quot;???&quot;,{firstName:&quot;John&quot;, lastName:&quot;Doe&quot;});</code> ).</p>
+<h3 id="ajoutons-une-gestion-des-évènements"><a href="#TOC"><span class="header-section-number">8.8.4</span> Ajoutons une gestion des évènements</a></h3>
+<p>Une propriété de l’objet <code>Backbone.View</code> permet de gérer les évènements spécifiques à la vue. Si vous vous souvenez, notre template de formulaire ressemble à ceci :</p>
+<pre class="sourceCode html"><code class="sourceCode html">    <span class="co">&lt;!-- /*======= Formulaire d&#39;authentification =======*/ --&gt;</span>
+    <span class="kw">&lt;script</span><span class="ot"> type=</span><span class="st">&quot;text/template&quot;</span><span class="ot"> id=</span><span class="st">&quot;blog_login_form_template&quot;</span><span class="kw">&gt;</span>
+        &lt;h3&gt;<span class="dt">Login </span>:&lt;/h3&gt;
+        &lt;input name=<span class="st">&quot;email&quot;</span> type=<span class="st">&quot;text&quot;</span> placeholder=<span class="st">&quot;email&quot;</span>/&gt;&lt;br&gt;
+        &lt;input name=<span class="st">&quot;password&quot;</span> type=<span class="st">&quot;password&quot;</span> placeholder=<span class="st">&quot;password&quot;</span>/&gt;&lt;br&gt;
+        &lt;a href=<span class="st">&quot;</span>#<span class="st">&quot;</span> class=<span class="st">&quot;btn</span> <span class="st">btn</span>-<span class="st">primary&quot;</span>&gt;Login&lt;/a&gt; 
+        &lt;a href=<span class="st">&quot;</span>#<span class="st">&quot;</span> class=<span class="st">&quot;btn</span> <span class="st">btn</span>-<span class="st">inverse&quot;</span>&gt;Logoff&lt;/a&gt;&lt;br&gt;
+        &lt;b&gt;{{message}} {{firstName}} {{lastName}}&lt;/b&gt;
+    <span class="kw">&lt;/script&gt;</span></code></pre>
+<p>Je souhaite pouvoir déclencher des évènements lorsque je clique sur les boutons du formulaire. Pour cela il suffit d’ajouter à l’objet <code>Backbone.View</code> la propriété events :</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="dt">events </span>: {
+        <span class="st">&quot;click  .btn-primary&quot;</span>  : <span class="st">&quot;onClickBtnLogin&quot;</span>,
+        <span class="st">&quot;click  .btn-inverse&quot;</span>  : <span class="st">&quot;onClickBtnLogoff&quot;</span>
+    },</code></pre>
+<p>En fait je demande à mon objet <code>Backbone.View</code> d’intercepter tous les évènements de type click sur les éléments html (de la vue considérée) dont la classe <code>css</code> est <code>.btn-primary</code> ou <code>.btn-inverse</code> et de déclencher respectivement les méthodes <code>onClickBtnLogin</code> ou <code>onClickBtnLogoff</code>.</p>
+<blockquote>
+<blockquote>
+<p><strong>Remarque</strong> : nous aurions très bien pu affecter des id aux boutons :</p>
+</blockquote>
+</blockquote>
+<pre class="sourceCode html"><code class="sourceCode html">    <span class="kw">&lt;a</span><span class="ot"> href=</span><span class="st">&quot;#&quot;</span><span class="ot"> id=</span><span class="st">&quot;btnLogIn&quot;</span><span class="ot"> class=</span><span class="st">&quot;btn btn-primary&quot;</span><span class="kw">&gt;</span>Login<span class="kw">&lt;/a&gt;</span> 
+    <span class="kw">&lt;a</span><span class="ot"> href=</span><span class="st">&quot;#&quot;</span><span class="ot"> id=</span><span class="st">&quot;btnLogOff&quot;</span><span class="ot"> class=</span><span class="st">&quot;btn btn-inverse&quot;</span><span class="kw">&gt;</span>Logoff<span class="kw">&lt;/a&gt;&lt;br&gt;</span></code></pre>
+<p>et relier les évènements aux ids :</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="dt">events </span>: {
+        <span class="st">&quot;click  #btnLogIn&quot;</span>  : <span class="st">&quot;onClickBtnLogin&quot;</span>,
+        <span class="st">&quot;click  #btnLogOff&quot;</span>  : <span class="st">&quot;onClickBtnLogoff&quot;</span>
+    },</code></pre>
+<p>Il ne nous reste plus qu’à écrire les méthodes <code>onClickBtnLogin</code> ou <code>onClickBtnLogoff</code> au sein de notre objet de type <code>Backbone.View</code> qui vont respectivement appeler les routes que nous avions définies précédement :</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="dt">onClickBtnLogin </span>: <span class="kw">function</span> (domEvent) {
+
+        <span class="kw">var</span> fields = $(<span class="st">&quot;#blog_login_form :input&quot;</span>)
+        ,   that = <span class="kw">this</span>;
+
+        $.<span class="fu">ajax</span>({
+            <span class="dt">type</span>:<span class="st">&quot;POST&quot;</span>,
+            <span class="dt">url</span>:<span class="st">&quot;/authenticate&quot;</span>,
+            <span class="dt">data </span>: { <span class="dt">email </span>: fields[<span class="dv">0</span>].<span class="fu">value</span>, <span class="dt">password </span>: fields[<span class="dv">1</span>].<span class="fu">value</span> } ,
+            <span class="dt">dataType </span>: <span class="ch">&#39;json&#39;</span>,
+            <span class="dt">error</span>:<span class="kw">function</span>(err){ <span class="kw">console</span>.<span class="fu">log</span>(err); },
+            <span class="dt">success</span>:<span class="kw">function</span>(dataFromServer) { 
+
+                <span class="kw">if</span>(<span class="kw">dataFromServer</span>.<span class="fu">infos</span>) {
+                    <span class="kw">that</span>.<span class="fu">render</span>(<span class="kw">dataFromServer</span>.<span class="fu">infos</span>);
+                } <span class="kw">else</span> {
+                    <span class="kw">if</span>(<span class="kw">dataFromServer</span>.<span class="fu">error</span>) {
+                        <span class="kw">that</span>.<span class="fu">render</span>(<span class="kw">dataFromServer</span>.<span class="fu">error</span>);
+                    } <span class="kw">else</span> {
+                        <span class="kw">that</span>.<span class="fu">render</span>(<span class="st">&quot;Bienvenue&quot;</span>,dataFromServer);
+                    }
+                }
+
+            }
+        });                  
+    },
+    <span class="dt">onClickBtnLogoff </span>: <span class="kw">function</span>() {
+
+        <span class="kw">var</span> that = <span class="kw">this</span>;
+        $.<span class="fu">ajax</span>({<span class="dt">type</span>:<span class="st">&quot;GET&quot;</span>, <span class="dt">url</span>:<span class="st">&quot;/logoff&quot;</span>,
+            <span class="dt">error</span>:<span class="kw">function</span>(err){ <span class="kw">console</span>.<span class="fu">log</span>(err); },
+            <span class="dt">success</span>:<span class="kw">function</span>(dataFromServer) { 
+                <span class="kw">console</span>.<span class="fu">log</span>(dataFromServer); 
+                <span class="kw">that</span>.<span class="fu">render</span>(<span class="st">&quot;???&quot;</span>,{<span class="dt">firstName</span>:<span class="st">&quot;John&quot;</span>, <span class="dt">lastName</span>:<span class="st">&quot;Doe&quot;</span>});
+            }
+        })
+    }</code></pre>
+<h3 id="vérification"><a href="#TOC"><span class="header-section-number">8.8.5</span> Vérification</a></h3>
+<p>Si vous avez bien suivi, nous devons avoir au moins 2 utilisateurs en base de données :</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="kw">function</span> addUsers () {
+        addUser({
+            <span class="dt">email </span>: <span class="st">&quot;bob@morane.com&quot;</span>,
+            <span class="dt">password </span>: <span class="st">&quot;backbone&quot;</span>,
+            <span class="dt">isAdmin </span>: <span class="kw">true</span>,
+            <span class="dt">firstName </span>: <span class="st">&quot;Bob&quot;</span>,
+            <span class="dt">lastName </span>: <span class="st">&quot;Morane&quot;</span>
+        });
+        addUser({
+            <span class="dt">email </span>: <span class="st">&quot;sam@lepirate.com&quot;</span>,
+            <span class="dt">password </span>: <span class="st">&quot;underscore&quot;</span>,
+            <span class="dt">isAdmin </span>: <span class="kw">false</span>,
+            <span class="dt">firstName </span>: <span class="st">&quot;Sam&quot;</span>,
+            <span class="dt">lastName </span>: <span class="st">&quot;Le Pirate&quot;</span>
+        });
+
+        <span class="co">//etc. ...</span>
+    }</code></pre>
+<p>Lançons donc notre page web :</p>
+<p><img src="RSRC/07_08_VIEWS.png" alt="BB" /><br /></p>
+<p>Authentifiez vous en tapant n’importe quoi :</p>
+<p><img src="RSRC/07_09_VIEWS.png" alt="BB" /><br /></p>
+<p>Vous obtenez le message <strong>&quot;Ouups loupé !!!&quot;</strong></p>
+<p>Authentifiez vous en utilisant un des utilisateurs existant :</p>
+<p><img src="RSRC/07_10_VIEWS.png" alt="BB" /><br /></p>
+<p>Vous obtenez un message de bienvenue.</p>
+<p>Vous pouvez essayer de raffraîchir la page, vous restez connecté.</p>
+<p>Si vous ouvrez un autre navigateur (une autre marque de navigateur pour être sûr de ne pas partager la session), vous vous apercevez qu’il ne considère pas que vous êtes authentifié :</p>
+<p><img src="RSRC/07_11_VIEWS.png" alt="BB" /><br /></p>
+<p>Essayez de vous connecter avec un utilisateur déjà loggé sur une autre session :</p>
+<p><img src="RSRC/07_12_VIEWS.png" alt="BB" /><br /></p>
+<p>Vous obtenez le message <strong>&quot;Utilisateur déjà connecté&quot;</strong></p>
+<p>Vous disposez maintenant de suffisament d'élément pour jouer avec les vues. Nous allons pouvoir passer au composant <code>Backbone.Router</code>. Nous reviendrons ensuite sur la sécurisation de notre application dans le chapitre sur l'organisation du code.</p>
 </body>
 </html>
