@@ -22,14 +22,14 @@ Une “Webapp” n’a pas la même vocation qu’un site web même si les techn
 
 Une "Single Page Application est une application web qui embarque tous les éléments nécessaires à son fonctionnement dans une seule page HTML. Les scripts javascript liés seront chargés en même temps. Ensuite l’application web chargera les ressources nécessaires (généralement des données, des images …) à la demande en utilisant Ajax évitant ainsi tout rechargement de page et procurant une expérience utilisateur proche de celle que nous connaissions en mode “client-serveur”, voire meilleure dans certains cas. Ces webapps nouvelle génération peuvent aussi fonctionner offline en profitant des possibilités des derniers navigateurs (localstorage).
 
->>**Remarque** *: ce qui est amusant, c’est que dès 1999 ou 2000, Microsoft avait déjà introduit cette possibilité avec Internet Explorer 4 qui intégrait une applet Java (si si !) qui permettait de faire du Remote Protocol Call d’une page html vers le serveur sans recharger la page et en s’abonnant en javascript à l’évènement de retour (à vérifier, c’est loin, tout ça). Mais ce fut éclipsé par l’apparente simplicité de mise en œuvre des ActiveX (Flash était alors utilisée principalement pour de l’animation, mais permettait aussi ce genre d’artifice).*
+>>**Remarque** *: ce qui est amusant, c’est que dès 1999 ou 2000, Microsoft avait déjà introduit cette possibilité avec Internet Explorer 4 qui intégrait une applet Java (si si !) qui permettait de faire du Remote Protocol Call d’une page html vers le serveur sans recharger la page et en s’abonnant en javascript à l’évènement de retour (à vérifier, c’est loin, tout ça). Mais ce fut éclipsé par l’apparente simplicité de mise en œuvre des ActiveX (Flash était alors utilisé principalement pour de l’animation, mais permettait aussi ce genre d’artifice).*
 
 Tout ça c’est bien beau, mais vous savez comme moi qu’un code HTML+JS (+CSS) peut rapidement devenir un plat de spaghettis impossible à maintenir, pour les autres mais pour vous aussi (retournez dans votre code 6 mois plus tard ;)). Il faut donc s’astreindre à des règles et s’équiper des bons outils afin de se faciliter la tâche, ne pas avoir à réinventer la poudre à chaque fois et pouvoir coder des applications robustes facilement modifiables (faciles à corriger, faciles à faire évoluer). Et si en plus vous pouvez vous faire plaisir …
 
 C’est de ce constat qu’est parti Jeremy Ashkenas, et c’est en mettant en pratique les préceptes depuis longtemps éprouvés de MVC qu’il a conçu Backbone, pour répondre à une problématique existante, ce qui le rend d’autant plus légitime.
 Rafraîchissons donc un peu notre mémoire à propos de MVC.
 
->>**Remarque** *: pour les lecteurs qui ne connaitraient pas ce concept, ne refermez pas le livre tout de suite, vous verrez avec les exemples pratiques que le concept est simple et facilement assimilable. Donc si les quelques paragraphes théoriques qui suivent vous semblent obscurs, je vous promet que dans quelques chapitres vous aurez tout compris.*
+>>**Remarque** *: pour les lecteurs qui ne connaitraient pas ce concept, ne refermez pas le livre tout de suite, vous verrez avec les exemples pratiques que le concept est simple et facilement assimilable. Donc si les quelques paragraphes théoriques qui suivent vous semblent obscurs, je vous promets que dans quelques chapitres vous aurez tout compris.*
 
 ###Petit rappel : MVC ?
 
@@ -50,7 +50,7 @@ MVC un pattern (modèle) de programmation utilisé pour développer des applicat
 
 *Backbone.js respecte ce principe. Donc n'ayez pas peur, cela va être facile ;)*
 
-L'interprétation de MVC par Backbone est un peu particulière et les développeurs Java, .Net, PHP, Ruby, Python etc. ... pourraient être surpris. Mais, passons donc à quelques explications.
+L'interprétation de MVC par Backbone est un peu particulière et les développeurs Java, .Net, PHP, Ruby, Python etc. pourraient être surpris. Mais, passons donc à quelques explications.
 
 ##Backbone & MVC
 
@@ -58,8 +58,8 @@ Backbone "embarque" plusieurs composants qui vont nous permettre d'organiser not
 
 Voyons l'interprétation que fait Backbone du modèle MVC :
 
-- Le composant **Modèle** (selon Backbone : `Backbone.Model`) représente les données qui vont interagir avec votre code "backend" (côté serveur) via des requêtes Ajax. Ceux sont eux qui auront la responsabilité de la logique métier et de la validations des données.
-- Le composant **Vue** (selon Backbone : `Backbone.View`) n'est pas complètement une vue au sens où on l'entend habituellement (couche présentation). Dans le cas qui nous intéresse, la "vraie" vue est un fragment de code "natif" HTML dans la page web qui s'affiche dans le navigateur (il y a donc plusieurs vues dans une même page). Et `Backbone.View` est en fait un **Contrôleur de vues** (1) (vous verrez, ce sera plus facile à appréhender en le codant) qui va ordonnancer les évènements et interaction au sein de la page web.
+- Le composant **Modèle** (selon Backbone : `Backbone.Model`) représente les données qui vont interagir avec votre code "backend" (côté serveur) via des requêtes Ajax. Ce sont eux qui auront la responsabilité de la logique métier et de la validations des données.
+- Le composant **Vue** (selon Backbone : `Backbone.View`) n'est pas complètement une vue au sens où on l'entend habituellement (couche présentation). Dans le cas qui nous intéresse, la "vraie" vue est un fragment de code "natif" HTML dans la page web qui s'affiche dans le navigateur (il y a donc plusieurs vues dans une même page). Et `Backbone.View` est en fait un **Contrôleur de vues** (1) (vous verrez, ce sera plus facile à appréhender en le codant) qui va ordonnancer les évènements et interactions au sein de la page web.
 
 >>*(1) : c'est une interprétation très personnelle, c'est discutable, je reste à votre disposition*
 
