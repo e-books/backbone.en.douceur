@@ -1,12 +1,12 @@
 <hr>
 
-###* [Routeur & Organisation de code au menu : Télécharger le pdf (v° alpha du 28/11/2012)](https://github.com/downloads/k33g/backbone.en.douceur/backbone.en.douceur.20121128.pdf) *(10 chapitres)*
+###- [Routeur & Organisation de code au menu : Télécharger le pdf (v° alpha du 28/11/2012)](https://github.com/downloads/k33g/backbone.en.douceur/backbone.en.douceur.20121128.pdf) *(10 chapitres)*
 
-###* [Format epub disponible aussi ...](https://github.com/downloads/k33g/backbone.en.douceur/backbone.en.douceur.20121128.epub)
+###- [Format epub disponible aussi ...](https://github.com/downloads/k33g/backbone.en.douceur/backbone.en.douceur.20121128.epub)
 
-###* [Voir le code source ...](https://github.com/k33g/backbone.en.douceur)
+###- [Voir le code source ...](https://github.com/k33g/backbone.en.douceur)
 
-###* [Historique des downloads ...](https://github.com/downloads/k33g)
+###- [Historique des downloads ...](https://github.com/k33g/backbone.en.douceur/downloads)
 
 
 <hr>
