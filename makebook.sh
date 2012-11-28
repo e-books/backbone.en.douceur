@@ -7,11 +7,13 @@ pandoc -s --toc --highlight-style pygments -c style.css -N -o backbone.en.douceu
 	04-LE-MODELE-OBJET-DE-BACKBONE.md \
 	05-IL-NOUS-FAUT-UN-SERVEUR.md \
 	06-MODELES-ET-COLLECTIONS.md \
-	07-VUES-ET-TEMPLATING.md
+	07-VUES-ET-TEMPLATING.md \
+	08-ROUTEUR.md \
+	09-ORGANISATION-CODE.md
 
 #PDF version
 pandoc -s --toc --latex-engine=xelatex --template=latex.template.tex -N \
-	--variable=version:"alpha du 23.11.2012 | Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License." \
+	--variable=version:"alpha du 28.11.2012 | Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License." \
 	--variable=monofont:Consolas \
 	--variable=mainfont:Georgia \
 	--variable fontsize=12pt \
@@ -31,7 +33,9 @@ pandoc -s --toc --latex-engine=xelatex --template=latex.template.tex -N \
 	04-LE-MODELE-OBJET-DE-BACKBONE.md \
 	05-IL-NOUS-FAUT-UN-SERVEUR.md \
 	06-MODELES-ET-COLLECTIONS.md \
-	07-VUES-ET-TEMPLATING.md
+	07-VUES-ET-TEMPLATING.md \
+	08-ROUTEUR.md \
+	09-ORGANISATION-CODE.md
 
 
 #Epub version
@@ -44,4 +48,7 @@ pandoc -S --epub-metadata=epub-metadata.xml -o backbone.en.douceur.epub \
 	04-LE-MODELE-OBJET-DE-BACKBONE.md \
 	05-IL-NOUS-FAUT-UN-SERVEUR.md \
 	06-MODELES-ET-COLLECTIONS.md \
-	07-VUES-ET-TEMPLATING.md
+	07-VUES-ET-TEMPLATING.md \
+	08-ROUTEUR.md \
+	09-ORGANISATION-CODE.md
+

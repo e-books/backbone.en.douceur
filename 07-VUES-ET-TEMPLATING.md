@@ -319,7 +319,8 @@ Puis essayez ceci :
 	            console.log(result);
 	        }
 	})
-``
+```
+
 
 
 et cela :

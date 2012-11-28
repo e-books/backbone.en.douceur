@@ -179,6 +179,20 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <li><a href="#vérification"><span class="toc-section-number">8.9.4</span> Vérification</a></li>
 </ul></li>
 </ul></li>
+<li><a href="#le-routeur"><span class="toc-section-number">9</span> Le Routeur</a><ul>
+<li><a href="#modifions-notre-vue"><span class="toc-section-number">9.1</span> Modifions notre vue</a></li>
+<li><a href="#création-du-routeur"><span class="toc-section-number">9.2</span> Création du routeur</a></li>
+</ul></li>
+<li><a href="#organiser-son-code"><span class="toc-section-number">10</span> Organiser son code</a><ul>
+<li><a href="#a-lancienne"><span class="toc-section-number">10.1</span> &quot;A l'ancienne&quot;</a><ul>
+<li><a href="#namespace"><span class="toc-section-number">10.1.1</span> Namespace</a></li>
+<li><a href="#modules"><span class="toc-section-number">10.1.2</span> Modules</a></li>
+<li><a href="#au-final-nous-aurons-..."><span class="toc-section-number">10.1.3</span> Au final, nous aurons ...</a></li>
+</ul></li>
+<li><a href="#méthode-hype-comme-les-vrais"><span class="toc-section-number">10.2</span> Méthode “hype”, comme les vrais</a><ul>
+<li><a href="#préparation"><span class="toc-section-number">10.2.1</span> Préparation</a></li>
+</ul></li>
+</ul></li>
 </ul>
 </div>
 <h1 id="préambule-remerciements"><a href="#TOC"><span class="header-section-number">1</span> Préambule &amp; Remerciements</a></h1>
@@ -195,7 +209,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <ul>
 <li><a href="https://github.com/ehsavoie">ehsavoie</a> : 1ère pull request ;)</li>
 <li><a href="https://github.com/lodennan">lodennan</a></li>
-<li><a href="https://github.com/cbonnissent">cbonnissent</a></li>
+<li><a href="https://github.com/cbonnissent">cbonnissent</a> : format epub</li>
 </ul>
 <h2 id="avertissement"><a href="#TOC"><span class="header-section-number">1.1</span> Avertissement</a></h2>
 <p>Cet ouvrage est destiné à être purement éducatif. donc dès fois le code n'est pas fait dans les &quot;règles de l'art&quot;, mais plutôt avec une &quot;vision&quot; pédagogique. Désolé donc pour les puristes, mais à priori vous n'êtes pas la cible ;). Cependant, je serais ravi de pouvoir inclure vos remarques et bonnes pratiques sous forme de notes dans chacun des chapitres. Donc à vos pull-requests !</p>
@@ -2236,7 +2250,12 @@ npm install express</code></pre>
 <p>Sauvegardez ensuite la page, puis retournez dans le navigateur, rafraichissez la page et retournez dans la console du navigateur pour instancier une nouvelle vue :</p>
 <pre class="sourceCode javascript"><code class="sourceCode javascript">    postsListView = <span class="kw">new</span> PostsListView(blogPosts)</code></pre>
 <p>Puis essayez ceci :</p>
-<p>`<code>javascript     blogPosts.all()         .fetch({             success:function(result){                 console.log(result);             }     })</code></p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="kw">blogPosts</span>.<span class="fu">all</span>()
+        .<span class="fu">fetch</span>({
+            <span class="dt">success</span>:<span class="kw">function</span>(result){
+                <span class="kw">console</span>.<span class="fu">log</span>(result);
+            }
+    })</code></pre>
 <p>et cela :</p>
 <pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="kw">blogPosts</span>.<span class="fu">query</span>(<span class="ch">&#39;{&quot;author&quot; : &quot;sam&quot;}&#39;</span>)
         .<span class="fu">fetch</span>({
@@ -3312,5 +3331,638 @@ npm install express</code></pre>
 <p><img src="RSRC/07_12_VIEWS.png" alt="BB" /><br /></p>
 <p>Vous obtenez le message <strong>&quot;Utilisateur déjà connecté&quot;</strong></p>
 <p>Vous disposez maintenant de suffisament d'élément pour jouer avec les vues. Nous allons pouvoir passer au composant <code>Backbone.Router</code>. Nous reviendrons ensuite sur la sécurisation de notre application dans le chapitre sur l'organisation du code.</p>
+<h1 id="le-routeur"><a href="#TOC"><span class="header-section-number">9</span> Le Routeur</a></h1>
+<blockquote>
+<p><em>Sommaire</em></p>
+</blockquote>
+<blockquote>
+<blockquote>
+<ul>
+<li><em>Modifier (un peu) la vue principale</em></li>
+<li><em>Ajouter un template</em></li>
+<li><em>&quot;Maîtriser&quot; les urls</em></li>
+</ul>
+</blockquote>
+</blockquote>
+<blockquote>
+<p><em>Parmi les composants principaux de Backbone, il y a le Routeur (<code>Backbone.Router</code>), qui n’est pas obligatoire pour construire une application Backbone, mais qui néanmoins est très pratique. Son rôle principal est de déclencher des actions en fonction de l’url saisie dans votre navigateur, ou des liens cliqués.</em></p>
+</blockquote>
+<p>Dans une SPA (Single Page Application), la barre d’url est un composant à part entière de votre application. C’est une partie à laquelle l’utilisateur accède facilement, vous ne pouvez donc pas l’ignorer, et votre application devra pouvoir réagir en fonction des actions de l’utilisateur. Nous allons donc mettre en œuvre <code>Backbone.Router</code> pour pouvoir « réagir » aux changements d’url. Nous allons transformer notre vue d’affichages de posts, pour qu’elle n’affiche plus le détail des messages, mais à la place un lien qui lorsqu’il sera clické affichera le détail du message. Nous verrons qu’ensuite cette méthode nous permettra d’accéder directement à partir de la barre de l’url à des fonctionnalités de notre application.</p>
+<h2 id="modifions-notre-vue"><a href="#TOC"><span class="header-section-number">9.1</span> Modifions notre vue</a></h2>
+<p>Dans la page index.html, modifions le template « posts_list_template » afin qu’il n’affiche plus le contenu du post (<code>{{message}}</code>). A la place nous ajoutons un lien dont l’url sera post-fixée de l’id du post (<code>#post/{{id}}</code>) :</p>
+<pre class="sourceCode html"><code class="sourceCode html">    <span class="kw">&lt;script</span><span class="ot"> type=</span><span class="st">&quot;text/template&quot;</span><span class="ot"> id=</span><span class="st">&quot;posts_list_template&quot;</span><span class="kw">&gt;</span>
+
+        {{#posts}}
+            &lt;h2&gt;{{title}}&lt;/h2&gt;
+            &lt;b&gt;<span class="dt">par </span>: {{author}}&lt;/b&gt; <span class="dt">le </span>: {{date}}
+            &lt;a href=<span class="st">&quot;</span>#<span class="st">post</span>/{{<span class="st">id</span>}}<span class="st">&quot;</span>&gt;Lire ...&lt;/a&gt;
+
+        {{/posts}}
+
+    <span class="kw">&lt;/script&gt;</span></code></pre>
+<p>Ensuite nous ajoutons un nouveau template (pour voir le détail du post) qui sera utilisé lorsque nous cliquerons sur le lien « Lire … », avec un lien (<code>#/</code>) qui déclenchera l’affichage de l’ensemble de la liste des posts :</p>
+<pre class="sourceCode html"><code class="sourceCode html">    <span class="kw">&lt;script</span><span class="ot"> type=</span><span class="st">&quot;text/template&quot;</span><span class="ot"> id=</span><span class="st">&quot;post_details_template&quot;</span><span class="kw">&gt;</span>
+            &lt;h2&gt;{{<span class="kw">post</span>.<span class="fu">title</span>}}&lt;/h2&gt;
+            &lt;b&gt;<span class="dt">par </span>: {{<span class="kw">post</span>.<span class="fu">author</span>}}&lt;/b&gt; <span class="dt">le </span>: {{<span class="kw">post</span>.<span class="fu">date</span>}}
+            &lt;p&gt;{{<span class="kw">post</span>.<span class="fu">message</span>}}&lt;/p&gt;
+
+            &lt;a href=<span class="st">&quot;</span>#/<span class="st">&quot;</span>&gt;Tous les messages&lt;/a&gt;
+    <span class="kw">&lt;/script&gt;</span></code></pre>
+<p>Nous créons ensuite un nouvel objet de type <code>Backbone.View</code> qui sera « chargé » d’afficher le détail du message du post, à partir du nouveau template (<code>#post_details_template</code>), en lieu et place de la liste des posts (<code>#posts_list</code>) :</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="kw">window</span>.<span class="fu">PostView</span> = <span class="kw">Backbone.View</span>.<span class="fu">extend</span>({
+        <span class="dt">el </span>: $(<span class="st">&quot;#posts_list&quot;</span>),
+        <span class="dt">initialize </span>: <span class="kw">function</span> () {
+            <span class="kw">this</span>.<span class="fu">template</span> = $(<span class="st">&quot;#post_details_template&quot;</span>).<span class="fu">html</span>();
+        },
+        <span class="dt">render </span>: <span class="kw">function</span> (post) {               
+            <span class="kw">var</span> renderedContent = <span class="kw">Mustache</span>.<span class="fu">to</span>_<span class="fu">html</span>(<span class="kw">this</span>.<span class="fu">template</span>, {<span class="dt">post </span>: <span class="kw">post</span>.<span class="fu">toJSON</span>()} );
+            <span class="kw">this</span>.$<span class="fu">el</span>.<span class="fu">html</span>(renderedContent);
+        }
+
+    });
+
+    <span class="kw">window</span>.<span class="fu">postView</span> = <span class="kw">new</span> PostView();</code></pre>
+<h2 id="création-du-routeur"><a href="#TOC"><span class="header-section-number">9.2</span> Création du routeur</a></h2>
+<p>Nous pouvons maintenant créer notre routeur. La propriété importante du routeur est <code>routes</code>. Dans notre exemple (juste en dessous), je lui ai affecté trois routes :</p>
+<ul>
+<li><code>post/:id_post</code> : lorsque le click sur un lien de type <code>&lt;a href=&quot;#post/{{id}}&quot;&gt;Lire ...&lt;/a&gt;</code> la méthode <code>displayPost</code> du routeur sera appelée avec l’id du post en paramètre</li>
+<li><code>hello</code>, qui appellera la méthode <code>hello</code> si par exemple on saisit <code>http://localhost:3000/#hello</code> dans la barre d’url du navigateur (notez le “#”, nous y reviendrons plus tard)</li>
+<li>et enfin <code>*path</code> qui appellera la méthode <code>root</code> pour toute autre url comme <code>#/</code>, <code>/</code>, …</li>
+</ul>
+<p>Le code qui sert à récupérer la liste des posts en provenance du serveur est déplacé dans la méthode <code>root</code> du routeur :</p>
+<p><em>Le routeur de notre application de blog :</em></p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="kw">window</span>.<span class="fu">RoutesManager</span> = <span class="kw">Backbone.Router</span>.<span class="fu">extend</span>({
+        <span class="dt">routes </span>: {
+            <span class="st">&quot;post/:id_post&quot;</span> : <span class="st">&quot;displayPost&quot;</span>,
+            <span class="st">&quot;hello&quot;</span> : <span class="st">&quot;hello&quot;</span>,
+            <span class="st">&quot;*path&quot;</span> : <span class="st">&quot;root&quot;</span>
+        },
+        <span class="dt">root </span>: <span class="kw">function</span> () {
+            <span class="kw">blogPosts</span>.<span class="fu">all</span>().<span class="fu">fetch</span>({
+                <span class="dt">success</span>:<span class="kw">function</span>(result){
+                    <span class="co">//ça marche !!!</span>
+                }
+            });
+        },
+
+        <span class="dt">hello </span>: <span class="kw">function</span> () {
+            $(<span class="st">&quot;.hero-unit &gt; h1&quot;</span>).<span class="fu">html</span>(<span class="st">&quot;Hello World !!!&quot;</span>);
+        },
+
+        <span class="dt">displayPost </span>: <span class="kw">function</span> (id_post) {
+
+            <span class="kw">var</span> tmp = <span class="kw">new</span> Post({<span class="dt">id</span>:id_post});
+
+            <span class="kw">tmp</span>.<span class="fu">fetch</span>({
+                <span class="dt">success </span>: <span class="kw">function</span>(result) {
+                    <span class="kw">postView</span>.<span class="fu">render</span>(result);
+                }
+            });   
+        }
+    });
+
+    <span class="kw">window</span>.<span class="fu">router</span> = <span class="kw">new</span> RoutesManager();
+
+    <span class="kw">Backbone.history</span>.<span class="fu">start</span>();</code></pre>
+<pre><code>//TODO: faire un § sur Backbone.history.start({pushState: true}); </code></pre>
+<p>Sauvegardez le tout, rafraichissez la page, et testez :</p>
+<p><img src="RSRC/08_01_routeur.png" alt="BB" /><br /></p>
+<p>Si vous cliquez sur un des liens « Lire … », la liste des posts disparaît au profit du message relatif au post sélectionné :</p>
+<p><img src="RSRC/08_02_routeur.png" alt="BB" /><br /></p>
+<blockquote>
+<blockquote>
+<p><strong>Remarque IMPORTANTE</strong> : Du coup il est maintenant possible de bookmarquer les urls des posts pour pointer directement dessus.</p>
+</blockquote>
+</blockquote>
+<p>Maintenant, essayer aussi de taper l’url directement dans la barre d’url : <code>http://localhost:3000/#hello</code>. Et là, le titre de notre blog change. Donc l’url peut bien déclencher directement des actions javascript. Vous pouvez donc réagir, prévenir, … toute modification de l’url (comme le retour à la page précédente) pour déclencher l’action nécessaire (par exemple la sauvegarde des données en cours).</p>
+<p><img src="RSRC/08_03_routeur.png" alt="BB" /><br /></p>
+<p>Voilà. C'est un peu court pour le Routeur, mais cela devrait suffire pour le moment. Maintenant il est temps d'organiser notre code &quot;comme les vrais&quot; avant que notre projet devienne un sac de nouille.</p>
+<h1 id="organiser-son-code"><a href="#TOC"><span class="header-section-number">10</span> Organiser son code</a></h1>
+<blockquote>
+<p><em>Sommaire</em></p>
+</blockquote>
+<blockquote>
+<blockquote>
+<ul>
+<li><em>Namespaces &amp; Modules, à l'ancienne</em></li>
+<li><em>&quot;Loader&quot; javascript, comme les vrais</em></li>
+</ul>
+</blockquote>
+</blockquote>
+<blockquote>
+<p><em>Notre application (côté client) tient dans une seule page. Elle mélange du code HTML et du code Javascript, et cela dans un seul fichier commence à devenir difficilement lisible, difficilement modifiable et donc difficilement maintenable. J’aimerais ajouter la possibilité d’ajouter ou de modifier des posts, mais … Faisons d’abord le ménage et rangeons notre code..</em></p>
+</blockquote>
+<p>Il y a de nombreuses querelles de chapelle autour du sujet de l’organisation du code (des façons de le faire), et je vous avoue que je n’ai pas encore fait complètement mon choix, mais l’essentiel est de produire quelque chose qui fonctionne (correctement) et que vous pourrez facilement faire évoluer. Je vais donc vous présenter 2 méthodes, la méthode « à l’ancienne » qui a le mérite de fonctionner, d’être rapide, et la méthode « hype » pour les champions qui est intéressante à connaître tout particulièrement dans le cadre de gros projets.</p>
+<blockquote>
+<blockquote>
+<p><strong>Remarque</strong> : pour la méthode &quot;hype&quot;, j'utilise le(s) outil(s) (yepnope) que je préfère, il est tout à fait possible de suivre le principe décrit avec d'autres comme require.js et d'autres ... Je n'ai pas la science infuse, je me sens plus à l'aise avec YepNope ... c'est tout, et tant que ça marche ;) ...</p>
+</blockquote>
+</blockquote>
+<h2 id="a-lancienne"><a href="#TOC"><span class="header-section-number">10.1</span> &quot;A l'ancienne&quot;</a></h2>
+<h3 id="namespace"><a href="#TOC"><span class="header-section-number">10.1.1</span> Namespace</a></h3>
+<p>Créer une application Backbone, c’est écrire des modèles, des vues, des templates, etc. … Et une des bonnes pratiques pour parvenir à garder ceci bien organisé et d’utiliser le <strong>namespacing</strong> (comme en .Net, Java, …) de la façon suivante :</p>
+<p><em>Namespace Blog :</em></p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="kw">var</span> Blog = {
+        <span class="dt">Models </span>: {},
+        <span class="dt">Collections </span>: {},
+        <span class="dt">Views </span>: {},
+        <span class="dt">Router </span>: {}
+    }</code></pre>
+<p>Vous enregistrez ceci dans un fichier <code>Blog.js</code>, que vous pensez à référencer dans votre page html :</p>
+<pre class="sourceCode html"><code class="sourceCode html">    <span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">&quot;Blog.js&quot;</span><span class="kw">&gt;&lt;/script&gt;</span></code></pre>
+<p>Ainsi par la suite vous pourrez déclarer et faire référence à vos composants de la manière suivante :</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="kw">Blog.Models</span>.<span class="fu">Post</span> = <span class="kw">Backbone.Model</span>.<span class="fu">extend</span>({
+        <span class="co">//...</span>
+    });
+
+    <span class="kw">Blog.Collections</span>.<span class="fu">Posts</span> = <span class="kw">Backbone.Collection</span>.<span class="fu">extend</span>({
+        <span class="co">//...</span>
+    });
+    <span class="kw">Blog.Views</span>.<span class="fu">PostForm</span> = <span class="kw">Backbone.View</span>.<span class="fu">extend</span>({
+        <span class="co">//...</span>
+    });
+
+    <span class="co">//etc…</span></code></pre>
+<p>Puis les utiliser comme ceci :</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="kw">var</span> myPost = <span class="kw">new</span> <span class="kw">Blog.Models</span>.<span class="fu">Post</span>();
+    <span class="kw">var</span> posts = <span class="kw">new</span> <span class="kw">Blog.Collections</span>.<span class="fu">Posts</span>();
+    <span class="kw">var</span> postForm = <span class="kw">new</span> <span class="kw">Blog.Views</span>.<span class="fu">PostForm</span>();</code></pre>
+<p>Du coup, à la lecture du code, on voit tout de suite que <code>myPost</code> est un modèle, <code>posts</code> une collection et <code>postForm</code> une vue.</p>
+<p>Cela va donc permettre de créer d’autres fichiers javascript spécifiques à chacun de vos composants, par exemple un fichier <code>post.js</code> avec le code de votre modèle <code>post</code> <em>(en général j’y ajoute aussi la collection correspondante)</em>, puis autant de fichiers javascript que de vues. Cela va augmenter le nombre de vos fichiers, mais à chaque modification vous n’aurez à vous concentrer que sur une seule portion de code.</p>
+<p>Puis vous pouvez aussi organiser vos fichiers javascript dans des répertoires. Voici comment je procède :</p>
+<p><img src="RSRC/09_01_ORGA.png" alt="BB" /><br /> Je crée un répertoire <code>libs/vendors</code> pour tous les scripts « qui ne sont pas de moi » (jquery, backbone, etc. …), puis je range mes modèles dans un répertoire <code>models</code>, mes vues dans un répertoire <code>views</code>. Au même endroit que ma page <code>index.html</code>, je positionne le fichier <code>routes.js</code>(mon routeur) ainsi que le fichier <code>Blog.js</code> qui contient mes <strong>« namspaces »</strong>, et enfin je déclare tout ceci dans ma page <code>index.html</code>:</p>
+<pre class="sourceCode html"><code class="sourceCode html">    <span class="co">&lt;!-- === Frameworks === --&gt;</span>
+    <span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">&quot;libs/vendors/jquery-1.7.2.js&quot;</span><span class="kw">&gt;&lt;/script&gt;</span>
+    <span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">&quot;libs/vendors/underscore.js&quot;</span><span class="kw">&gt;&lt;/script&gt;</span>
+    <span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">&quot;libs/vendors/backbone.js&quot;</span><span class="kw">&gt;&lt;/script&gt;</span>
+    <span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">&quot;libs/vendors/mustache.js&quot;</span><span class="kw">&gt;&lt;/script&gt;</span>
+
+    <span class="co">&lt;!-- === code applicatif === --&gt;</span>
+
+    <span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">&quot;Blog.js&quot;</span><span class="kw">&gt;&lt;/script&gt;</span>
+    <span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">&quot;models/Post.js&quot;</span><span class="kw">&gt;&lt;/script&gt;</span> <span class="co">&lt;!-- Models &amp; Collection --&gt;</span>
+
+    <span class="co">&lt;!-- Backbone Views --&gt;</span>
+    <span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">&quot;views/SidebarView.js&quot;</span><span class="kw">&gt;&lt;/script&gt;</span> 
+    <span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">&quot;views/PostsListView.js&quot;</span><span class="kw">&gt;&lt;/script&gt;</span> 
+    <span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">&quot;views/MainView.js&quot;</span><span class="kw">&gt;&lt;/script&gt;</span>
+    <span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">&quot;views/LoginView.js&quot;</span><span class="kw">&gt;&lt;/script&gt;</span> 
+    <span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">&quot;views/PostView.js&quot;</span><span class="kw">&gt;&lt;/script&gt;</span> 
+
+    <span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">&quot;routes.js&quot;</span><span class="kw">&gt;&lt;/script&gt;</span></code></pre>
+<p>Pour ensuite écrire mon code javascript de « lancement », clairement simplifié par rapport à ce que nous avons fait jusqu’ici :</p>
+<pre class="sourceCode html"><code class="sourceCode html">    <span class="kw">&lt;script&gt;</span>
+        $(<span class="kw">function</span> (){
+
+            <span class="kw">window</span>.<span class="fu">blogPosts</span> = <span class="kw">new</span> <span class="kw">Blog.Collections</span>.<span class="fu">Posts</span>();
+
+            <span class="kw">window</span>.<span class="fu">mainView</span> = <span class="kw">new</span> <span class="kw">Blog.Views</span>.<span class="fu">MainView</span>({<span class="dt">collection </span>: blogPosts});
+
+            <span class="co">/*</span>======= Authentification =======<span class="co">*/</span>
+            <span class="kw">window</span>.<span class="fu">loginView</span> = <span class="kw">new</span> <span class="kw">Blog.Views</span>.<span class="fu">LoginView</span>();
+            <span class="co">/*</span>======= Fin authentification =======<span class="co">*/</span>
+
+            <span class="kw">window</span>.<span class="fu">postView</span> = <span class="kw">new</span> <span class="kw">Blog.Views</span>.<span class="fu">PostView</span>();
+
+
+            <span class="kw">window</span>.<span class="fu">router</span> = <span class="kw">new</span> <span class="kw">Blog.Router</span>.<span class="fu">RoutesManager</span>({<span class="dt">collection</span>:blogPosts});
+            <span class="kw">Backbone.history</span>.<span class="fu">start</span>();
+
+        });
+    <span class="kw">&lt;/script&gt;</span></code></pre>
+<blockquote>
+<blockquote>
+<p><strong>Remarque</strong> : Vous n’êtes pas obligés de faire comme moi, adaptez selon vos goûts ou les normes imposées sur les projets. Et n’hésitez pas à me contacter pour me donner des astuces pour améliorer mon organisation de code.</p>
+</blockquote>
+</blockquote>
+<h3 id="modules"><a href="#TOC"><span class="header-section-number">10.1.2</span> Modules</a></h3>
+<p>J’aime bien combiner la notion de module à la notion de namespace, ce qui permet d’associer à notre namespace une notion de variable ou de fonctions privées, mais aussi de créer un système de plugin. Je vous montre avec le code, ce sera plus « parlant » :</p>
+<p>Avant nous avions donc ceci :</p>
+<p><em>Namespace Blog :</em></p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="kw">var</span> Blog = {
+        <span class="dt">Models </span>: {},
+        <span class="dt">Collections </span>: {},
+        <span class="dt">Views </span>: {},
+        <span class="dt">Router </span>: {}
+    }</code></pre>
+<p>Que nous allons changer par ceci :</p>
+<p><em>Module+Namespace :</em></p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="kw">var</span> Blog = (<span class="kw">function</span> () {
+        <span class="kw">var</span> blog = {};
+
+        <span class="kw">blog</span>.<span class="fu">Models</span> = {};
+        <span class="kw">blog</span>.<span class="fu">Collections</span> = {};
+        <span class="kw">blog</span>.<span class="fu">Views</span> = {};
+        <span class="kw">blog</span>.<span class="fu">Router</span> = {};
+
+        <span class="kw">return</span> blog;
+    }());</code></pre>
+<p>Cela signifie que seul la variable <code>blog</code> sera exposée par l’entremise de la variable <code>Blog</code>. Tout ce qui est entre <code>(function () {</code> et <code>}());</code> sera exécuté. A l’intérieur de cette closure vous pouvez coder des variables et des méthodes privées.</p>
+<p>Ensuite vous allez pouvoir déclarer des « plug-ins » à votre module de la manière suivante (par exemple):</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="kw">var</span> Blog = (<span class="kw">function</span> (blog) {
+
+        <span class="kw">blog.Models</span>.<span class="fu">Post</span> = <span class="kw">Backbone.Model</span>.<span class="fu">extend</span>({
+            <span class="dt">urlRoot </span>:<span class="st">&quot;/blogposts&quot;</span>
+
+        });
+
+        <span class="kw">blog.Collections</span>.<span class="fu">Posts</span> = <span class="kw">Backbone.Collection</span>.<span class="fu">extend</span>({
+            <span class="dt">model </span>: <span class="kw">blog.Models</span>.<span class="fu">Post</span>,
+            <span class="dt">all </span>: <span class="kw">function</span> () {
+                <span class="kw">this</span>.<span class="fu">url</span> = <span class="st">&quot;/blogposts&quot;</span>;
+                <span class="kw">return</span> <span class="kw">this</span>;
+            },
+            <span class="dt">query </span>: <span class="kw">function</span> (query) {
+                <span class="kw">this</span>.<span class="fu">url</span> = <span class="st">&quot;/blogposts/query/&quot;</span>+query;
+                <span class="kw">return</span> <span class="kw">this</span>;
+            }
+
+        });    
+
+        <span class="kw">return</span> blog;
+    }(Blog));</code></pre>
+<h3 id="au-final-nous-aurons-..."><a href="#TOC"><span class="header-section-number">10.1.3</span> Au final, nous aurons ...</a></h3>
+<p>Avec les principes décrits plus haut, nous allons donc pouvoir &quot;découper&quot; notre code afin de bien tout ordonner, et nous obtiendrons les fichiers suivants :</p>
+<p><em>Blog.js :</em></p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="kw">var</span> Blog = (<span class="kw">function</span> () {
+        <span class="kw">var</span> blog = {};
+
+        <span class="kw">blog</span>.<span class="fu">Models</span> = {};
+        <span class="kw">blog</span>.<span class="fu">Collections</span> = {};
+        <span class="kw">blog</span>.<span class="fu">Views</span> = {};
+        <span class="kw">blog</span>.<span class="fu">Router</span> = {};
+
+        <span class="kw">return</span> blog;
+    }());</code></pre>
+<p><em>routes.js :</em></p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="kw">var</span> Blog = (<span class="kw">function</span> (blog) {
+
+        <span class="kw">blog.Router</span>.<span class="fu">RoutesManager</span> = <span class="kw">Backbone.Router</span>.<span class="fu">extend</span>({
+            <span class="dt">initialize </span>: <span class="kw">function</span>(args) {
+                <span class="kw">this</span>.<span class="fu">collection</span> = <span class="kw">args</span>.<span class="fu">collection</span>;
+            },
+            <span class="dt">routes </span>: {
+                <span class="st">&quot;post/:id_post&quot;</span> : <span class="st">&quot;displayPost&quot;</span>,
+                <span class="st">&quot;hello&quot;</span> : <span class="st">&quot;hello&quot;</span>,
+                <span class="st">&quot;*path&quot;</span> : <span class="st">&quot;root&quot;</span>
+            },
+            <span class="dt">root </span>: <span class="kw">function</span> () {
+                <span class="kw">this</span>.<span class="fu">collection</span>.<span class="fu">all</span>().<span class="fu">fetch</span>({
+                    <span class="dt">success</span>:<span class="kw">function</span>(result){
+                        <span class="co">//ça marche !!!</span>
+                    }
+                });
+            },
+
+            <span class="dt">hello </span>: <span class="kw">function</span> () {
+                $(<span class="st">&quot;.hero-unit &gt; h1&quot;</span>).<span class="fu">html</span>(<span class="st">&quot;Hello World !!!&quot;</span>);
+            },
+
+            <span class="dt">displayPost </span>: <span class="kw">function</span> (id_post) {
+
+                <span class="kw">var</span> tmp = <span class="kw">new</span> <span class="kw">blog.Models</span>.<span class="fu">Post</span>({<span class="dt">id</span>:id_post});
+
+                <span class="kw">tmp</span>.<span class="fu">fetch</span>({
+                    <span class="dt">success </span>: <span class="kw">function</span>(result) {
+                        <span class="kw">postView</span>.<span class="fu">render</span>(result);
+                    }
+                });   
+            }
+        });
+
+        <span class="kw">return</span> blog;
+    }(Blog));</code></pre>
+<p><em>models/post.js :</em></p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="kw">var</span> Blog = (<span class="kw">function</span> (blog) {
+
+        <span class="kw">blog.Models</span>.<span class="fu">Post</span> = <span class="kw">Backbone.Model</span>.<span class="fu">extend</span>({
+            <span class="dt">urlRoot </span>:<span class="st">&quot;/blogposts&quot;</span>
+        });
+
+        <span class="kw">blog.Collections</span>.<span class="fu">Posts</span> = <span class="kw">Backbone.Collection</span>.<span class="fu">extend</span>({
+            <span class="dt">model </span>: <span class="kw">blog.Models</span>.<span class="fu">Post</span>,
+            <span class="dt">all </span>: <span class="kw">function</span> () {
+                <span class="kw">this</span>.<span class="fu">url</span> = <span class="st">&quot;/blogposts&quot;</span>;
+                <span class="kw">return</span> <span class="kw">this</span>;
+            },
+            <span class="dt">query </span>: <span class="kw">function</span> (query) {
+                <span class="kw">this</span>.<span class="fu">url</span> = <span class="st">&quot;/blogposts/query/&quot;</span>+query;
+                <span class="kw">return</span> <span class="kw">this</span>;
+            }
+        });    
+
+        <span class="kw">return</span> blog;
+    }(Blog));</code></pre>
+<p><em>views/SidebarView.js :</em></p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="kw">var</span> Blog = (<span class="kw">function</span> (blog) {
+
+        <span class="kw">blog.Views</span>.<span class="fu">SidebarView</span> = <span class="kw">Backbone.View</span>.<span class="fu">extend</span>({
+             <span class="dt">el </span>: $(<span class="st">&quot;#blog_sidebar&quot;</span>),
+            <span class="dt">initialize </span>: <span class="kw">function</span> () {
+                <span class="kw">this</span>.<span class="fu">template</span> = $(<span class="st">&quot;#blog_sidebar_template&quot;</span>).<span class="fu">html</span>();
+            },
+            <span class="dt">render </span>: <span class="kw">function</span> () {
+                <span class="kw">var</span> renderedContent = <span class="kw">Mustache</span>.<span class="fu">to</span>_<span class="fu">html</span>(<span class="kw">this</span>.<span class="fu">template</span>, 
+                    {<span class="dt">posts </span>: <span class="kw">this</span>.<span class="fu">collection</span>.<span class="fu">toJSON</span>()} 
+                );
+
+                <span class="kw">this</span>.$<span class="fu">el</span>.<span class="fu">html</span>(renderedContent);
+            }
+        });
+
+        <span class="kw">return</span> blog;
+    }(Blog));</code></pre>
+<p><em>views/PostsListViews.js :</em></p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="kw">var</span> Blog = (<span class="kw">function</span> (blog) {
+
+        <span class="kw">blog.Views</span>.<span class="fu">PostsListView</span> = <span class="kw">Backbone.View</span>.<span class="fu">extend</span>({
+            <span class="dt">el </span>: $(<span class="st">&quot;#posts_list&quot;</span>),
+            <span class="dt">initialize </span>: <span class="kw">function</span> () {
+                <span class="kw">this</span>.<span class="fu">template</span> = $(<span class="st">&quot;#posts_list_template&quot;</span>).<span class="fu">html</span>();
+            },
+            <span class="dt">render </span>: <span class="kw">function</span> () {
+                <span class="kw">var</span> renderedContent = <span class="kw">Mustache</span>.<span class="fu">to</span>_<span class="fu">html</span>(<span class="kw">this</span>.<span class="fu">template</span>, 
+                    {<span class="dt">posts </span>: <span class="kw">this</span>.<span class="fu">collection</span>.<span class="fu">toJSON</span>()} 
+                );
+
+                <span class="kw">this</span>.$<span class="fu">el</span>.<span class="fu">html</span>(renderedContent);
+            }
+        });
+
+        <span class="kw">return</span> blog;
+    }(Blog));</code></pre>
+<p><em>views/MainView.js :</em></p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="kw">var</span> Blog = (<span class="kw">function</span> (blog) {
+
+        <span class="kw">blog.Views</span>.<span class="fu">MainView</span> = <span class="kw">Backbone.View</span>.<span class="fu">extend</span>({
+            <span class="dt">initialize </span>: <span class="kw">function</span> () {
+
+                <span class="kw">this</span>.<span class="fu">collection</span>.<span class="fu">comparator</span> = <span class="kw">function</span> (model) {
+                    <span class="kw">return</span> -(<span class="kw">new</span> <span class="kw">Date</span>(<span class="kw">model</span>.<span class="fu">get</span>(<span class="st">&quot;date&quot;</span>)).<span class="fu">getTime</span>());
+                }
+
+                <span class="kw">_</span>.<span class="fu">bindAll</span>(<span class="kw">this</span>, <span class="ch">&#39;render&#39;</span>);
+                <span class="kw">this</span>.<span class="fu">collection</span>.<span class="fu">bind</span>(<span class="ch">&#39;reset&#39;</span>, <span class="kw">this</span>.<span class="fu">render</span>);
+                <span class="kw">this</span>.<span class="fu">collection</span>.<span class="fu">bind</span>(<span class="ch">&#39;change&#39;</span>, <span class="kw">this</span>.<span class="fu">render</span>);
+                <span class="kw">this</span>.<span class="fu">collection</span>.<span class="fu">bind</span>(<span class="ch">&#39;add&#39;</span>, <span class="kw">this</span>.<span class="fu">render</span>);
+                <span class="kw">this</span>.<span class="fu">collection</span>.<span class="fu">bind</span>(<span class="ch">&#39;remove&#39;</span>, <span class="kw">this</span>.<span class="fu">render</span>);
+
+                <span class="kw">this</span>.<span class="fu">sidebarView</span> = <span class="kw">new</span> <span class="kw">blog.Views</span>.<span class="fu">SidebarView</span>();
+                <span class="kw">this</span>.<span class="fu">postsListView</span> = <span class="kw">new</span> <span class="kw">blog.Views</span>.<span class="fu">PostsListView</span>({
+                    <span class="dt">collection </span>: <span class="kw">this</span>.<span class="fu">collection</span>
+                });
+
+            },
+            <span class="dt">render </span>: <span class="kw">function</span> () {
+
+                <span class="co">//this.collection.models = this.collection.models.reverse();</span>
+                <span class="kw">this</span>.<span class="fu">sidebarView</span>.<span class="fu">collection</span> = 
+                    <span class="kw">new</span> <span class="kw">blog.Collections</span>.<span class="fu">Posts</span>(<span class="kw">this</span>.<span class="fu">collection</span>.<span class="fu">first</span>(<span class="dv">3</span>));
+                <span class="kw">this</span>.<span class="fu">sidebarView</span>.<span class="fu">render</span>();
+                <span class="kw">this</span>.<span class="fu">postsListView</span>.<span class="fu">render</span>();
+            }
+        });
+
+        <span class="kw">return</span> blog;
+    }(Blog));</code></pre>
+<p><em>views/LoginView.js :</em></p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="kw">var</span> Blog = (<span class="kw">function</span> (blog) {
+
+        <span class="kw">blog.Views</span>.<span class="fu">LoginView</span> = <span class="kw">Backbone.View</span>.<span class="fu">extend</span>({
+            <span class="dt">el </span>: $(<span class="st">&quot;#blog_login_form&quot;</span>),
+
+            <span class="dt">initialize </span>: <span class="kw">function</span> () {
+                <span class="kw">var</span> that = <span class="kw">this</span>;
+                <span class="kw">this</span>.<span class="fu">template</span> = $(<span class="st">&quot;#blog_login_form_template&quot;</span>).<span class="fu">html</span>();
+
+                <span class="co">//on vérifie si pas déjà authentifié</span>
+                 $.<span class="fu">ajax</span>({<span class="dt">type</span>:<span class="st">&quot;GET&quot;</span>, <span class="dt">url</span>:<span class="st">&quot;/alreadyauthenticated&quot;</span>,
+                    <span class="dt">error</span>:<span class="kw">function</span>(err){ <span class="kw">console</span>.<span class="fu">log</span>(err); },
+                    <span class="dt">success</span>:<span class="kw">function</span>(dataFromServer) { 
+
+                        <span class="kw">if</span>(<span class="kw">dataFromServer</span>.<span class="fu">firstName</span>) {
+                            <span class="kw">that</span>.<span class="fu">render</span>(<span class="st">&quot;Bienvenue&quot;</span>,dataFromServer);
+                        } <span class="kw">else</span> {
+                            <span class="kw">that</span>.<span class="fu">render</span>(<span class="st">&quot;???&quot;</span>,{<span class="dt">firstName</span>:<span class="st">&quot;John&quot;</span>, <span class="dt">lastName</span>:<span class="st">&quot;Doe&quot;</span>});
+                        }
+                    }
+                })    
+
+            },
+
+            <span class="dt">render </span>: <span class="kw">function</span> (message, user) {
+
+                <span class="kw">var</span> renderedContent = <span class="kw">Mustache</span>.<span class="fu">to</span>_<span class="fu">html</span>(<span class="kw">this</span>.<span class="fu">template</span>, {
+                    <span class="dt">message </span>: message,
+                    <span class="dt">firstName </span>: user ? <span class="dt">user.firstName </span>: <span class="st">&quot;&quot;</span>,
+                    <span class="dt">lastName </span>: user ? <span class="dt">user.lastName </span>: <span class="st">&quot;&quot;</span>
+                });
+                <span class="kw">this</span>.$<span class="fu">el</span>.<span class="fu">html</span>(renderedContent);  
+            },
+            <span class="dt">events </span>: {
+                <span class="st">&quot;click  .btn-primary&quot;</span>  : <span class="st">&quot;onClickBtnLogin&quot;</span>,
+                <span class="st">&quot;click  .btn-inverse&quot;</span>  : <span class="st">&quot;onClickBtnLogoff&quot;</span>
+            },
+            <span class="dt">onClickBtnLogin </span>: <span class="kw">function</span> (domEvent) {
+
+                <span class="kw">var</span> fields = $(<span class="st">&quot;#blog_login_form :input&quot;</span>)
+                ,   that = <span class="kw">this</span>;
+
+                $.<span class="fu">ajax</span>({
+                    <span class="dt">type</span>:<span class="st">&quot;POST&quot;</span>,
+                    <span class="dt">url</span>:<span class="st">&quot;/authenticate&quot;</span>,
+                    <span class="dt">data </span>: { <span class="dt">email </span>: fields[<span class="dv">0</span>].<span class="fu">value</span>, <span class="dt">password </span>: fields[<span class="dv">1</span>].<span class="fu">value</span> } ,
+                    <span class="dt">dataType </span>: <span class="ch">&#39;json&#39;</span>,
+                    <span class="dt">error</span>:<span class="kw">function</span>(err){ <span class="kw">console</span>.<span class="fu">log</span>(err); },
+                    <span class="dt">success</span>:<span class="kw">function</span>(dataFromServer) { 
+
+                        <span class="kw">if</span>(<span class="kw">dataFromServer</span>.<span class="fu">infos</span>) {
+                            <span class="kw">that</span>.<span class="fu">render</span>(<span class="kw">dataFromServer</span>.<span class="fu">infos</span>);
+                        } <span class="kw">else</span> {
+                            <span class="kw">if</span>(<span class="kw">dataFromServer</span>.<span class="fu">error</span>) {
+                                <span class="kw">that</span>.<span class="fu">render</span>(<span class="kw">dataFromServer</span>.<span class="fu">error</span>);
+                            } <span class="kw">else</span> {
+                                <span class="kw">that</span>.<span class="fu">render</span>(<span class="st">&quot;Bienvenue&quot;</span>,dataFromServer);
+                            }
+                        }
+
+                    }
+                });                  
+            },
+            <span class="dt">onClickBtnLogoff </span>: <span class="kw">function</span>() {
+
+                <span class="kw">var</span> that = <span class="kw">this</span>;
+                $.<span class="fu">ajax</span>({<span class="dt">type</span>:<span class="st">&quot;GET&quot;</span>, <span class="dt">url</span>:<span class="st">&quot;/logoff&quot;</span>,
+                    <span class="dt">error</span>:<span class="kw">function</span>(err){ <span class="kw">console</span>.<span class="fu">log</span>(err); },
+                    <span class="dt">success</span>:<span class="kw">function</span>(dataFromServer) { 
+                        <span class="kw">console</span>.<span class="fu">log</span>(dataFromServer); 
+                        <span class="kw">that</span>.<span class="fu">render</span>(<span class="st">&quot;???&quot;</span>,{<span class="dt">firstName</span>:<span class="st">&quot;John&quot;</span>, <span class="dt">lastName</span>:<span class="st">&quot;Doe&quot;</span>});
+                    }
+                })
+            }
+
+        });
+
+        <span class="kw">return</span> blog;
+    }(Blog));</code></pre>
+<p><em>views/PostView.js :</em></p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="kw">var</span> Blog = (<span class="kw">function</span> (blog) {
+
+        <span class="kw">blog.Views</span>.<span class="fu">PostView</span> = <span class="kw">Backbone.View</span>.<span class="fu">extend</span>({
+            <span class="dt">el </span>: $(<span class="st">&quot;#posts_list&quot;</span>),
+            <span class="dt">initialize </span>: <span class="kw">function</span> () {
+                <span class="kw">this</span>.<span class="fu">template</span> = $(<span class="st">&quot;#post_details_template&quot;</span>).<span class="fu">html</span>();
+            },
+            <span class="dt">render </span>: <span class="kw">function</span> (post) {               
+                <span class="kw">var</span> renderedContent = <span class="kw">Mustache</span>.<span class="fu">to</span>_<span class="fu">html</span>(<span class="kw">this</span>.<span class="fu">template</span>, 
+                    {<span class="dt">post </span>: <span class="kw">post</span>.<span class="fu">toJSON</span>()} 
+                );
+
+                <span class="kw">this</span>.$<span class="fu">el</span>.<span class="fu">html</span>(renderedContent);
+            }
+        });
+
+        <span class="kw">return</span> blog;
+    }(Blog));</code></pre>
+<p>... Sauvegardez tout ça et essayez, normalement cela devrait fonctionner et vous verrez qu'à l'usage, le code en devient plus lisible. Mais passons donc à la 2ème méthode.</p>
+<h2 id="méthode-hype-comme-les-vrais"><a href="#TOC"><span class="header-section-number">10.2</span> Méthode “hype”, comme les vrais</a></h2>
+<p>Plus les fichiers javascript se multiplient, plus la gestion des <code>&lt;script src=”…”&gt;</code> devient pénible, sans compter que dans certains cas il est nécessaire de gérer l’ordre d’inclusion, que l’on aimerait pouvoir déclencher un traitement uniquement lorsque l’on est sûr que notre script est chargé, etc. …</p>
+<p>Pour répondre à ces types de problématiques, il existe ce que l’on appelle des “loaders” (chargeurs) de script, tels :</p>
+<ul>
+<li>Require.js (probalement le plus connu et le plus utilisé) <a href="http://requirejs.org/">http://requirejs.org/</a></li>
+<li>Head.js <a href="http://headjs.com/">http://headjs.com/</a></li>
+<li>YepNope <a href="http://yepnopejs.com/">http://yepnopejs.com/</a> d'Alex Sexton</li>
+<li>Etc. ...</li>
+</ul>
+<p>Il y a beaucoup de débats autour des « javascript resources loaders », « est-ce bien ou mal ? » « Cela ralentit le chargement de la page web », « c’est génial il faut généraliser son utilisation » , ... Mon propos n’est pas de participer au débat mais de vous montrer « rapidement » de quelle façon on peut les utiliser. (Cependant si votre application est simple, cela ne vaut pas la peine d’en utiliser, si ce n’est à titre éducatif ou pour le plaisir).</p>
+<blockquote>
+<blockquote>
+<p><strong>Remarque</strong> : si vous souhaitez creuser le sujet je vous engage à lire « Non-onload-blocking async JS » de Stoyan Stefanov : <a href="http://www.phpied.com/non-onload-blocking-async-js/">http://www.phpied.com/non-onload-blocking-async-js/</a>.</p>
+</blockquote>
+</blockquote>
+<p>En ce qui nous concerne, j’ai choisi <strong>YepNope</strong> parce que nettement plus simple (plus léger aussi) que Require.js et développé par Alex Sexton, ce qui est un gage de qualité (excellent développeur javascript et qui prend le temps de répondre à vos questions, ce qui n’est pas négligeable).</p>
+<h3 id="préparation"><a href="#TOC"><span class="header-section-number">10.2.1</span> Préparation</a></h3>
+<p>Commencez par télécharger la dernière version de YepNope ici :</p>
+<ul>
+<li><a href="https://github.com/SlexAxton/yepnope.js/archives/master">https://github.com/SlexAxton/yepnope.js/archives/master</a></li>
+</ul>
+<p>Puis, dézipper et copier ensuite le fichier <code>yepnope.js</code> ou sa version minifiée (dans mon cas j’ai utilisé la version 1.5.4) dans le répertoire <code>public/libs/vendors</code> de votre application.</p>
+<p>Nous allons maitenant supprimer toutes les références de script que nous avions dans la page index.html :</p>
+<pre class="sourceCode html"><code class="sourceCode html">    <span class="co">&lt;!-- === Frameworks === --&gt;</span>
+    <span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">&quot;libs/vendors/jquery-1.7.2.js&quot;</span><span class="kw">&gt;&lt;/script&gt;</span>
+    <span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">&quot;libs/vendors/underscore.js&quot;</span><span class="kw">&gt;&lt;/script&gt;</span>
+    <span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">&quot;libs/vendors/backbone.js&quot;</span><span class="kw">&gt;&lt;/script&gt;</span>
+    <span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">&quot;libs/vendors/mustache.js&quot;</span><span class="kw">&gt;&lt;/script&gt;</span>
+
+    <span class="co">&lt;!-- === code applicatif === --&gt;</span>
+
+    <span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">&quot;Blog.js&quot;</span><span class="kw">&gt;&lt;/script&gt;</span>
+    <span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">&quot;models/Post.js&quot;</span><span class="kw">&gt;&lt;/script&gt;</span> <span class="co">&lt;!-- Models &amp; Collection --&gt;</span>
+
+    <span class="co">&lt;!-- Backbone Views --&gt;</span>
+    <span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">&quot;views/SidebarView.js&quot;</span><span class="kw">&gt;&lt;/script&gt;</span> 
+    <span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">&quot;views/PostsListView.js&quot;</span><span class="kw">&gt;&lt;/script&gt;</span> 
+    <span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">&quot;views/MainView.js&quot;</span><span class="kw">&gt;&lt;/script&gt;</span>
+    <span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">&quot;views/LoginView.js&quot;</span><span class="kw">&gt;&lt;/script&gt;</span> 
+    <span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">&quot;views/PostView.js&quot;</span><span class="kw">&gt;&lt;/script&gt;</span> 
+
+    <span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">&quot;routes.js&quot;</span><span class="kw">&gt;&lt;/script&gt;</span></code></pre>
+<p>Et nous écrivons ceci à la place :</p>
+<pre class="sourceCode html"><code class="sourceCode html">    <span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">&quot;libs/vendors/yepnope.1.5.4-min.js&quot;</span><span class="kw">&gt;&lt;/script&gt;</span>
+    <span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">&quot;main.js&quot;</span><span class="kw">&gt;&lt;/script&gt;</span></code></pre>
+<p>Et c’est donc dans le script <code>main.js</code> que nous allons procéder au chargement de nos différents scripts de la manière suivante :</p>
+<p><em>1ère utilisation de yepnope :</em></p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    yepnope({
+        <span class="dt">load</span>: {
+            <span class="dt">jquery              </span>: <span class="ch">&#39;libs/vendors/jquery-1.7.2.js&#39;</span>,
+            <span class="dt">underscore          </span>: <span class="ch">&#39;libs/vendors/underscore.js&#39;</span>,
+            <span class="dt">backbone            </span>: <span class="ch">&#39;libs/vendors/backbone.js&#39;</span>,
+            <span class="dt">mustache            </span>: <span class="ch">&#39;libs/vendors/mustache.js&#39;</span>,
+
+            <span class="co">//NameSpace</span>
+            <span class="dt">blog                </span>: <span class="ch">&#39;Blog.js&#39;</span>,
+
+            <span class="co">//Models</span>
+            <span class="dt">posts               </span>: <span class="ch">&#39;models/post.js&#39;</span>,
+
+            <span class="co">//Controllers</span>
+            <span class="dt">sidebarview         </span>: <span class="ch">&#39;views/SidebarView.js&#39;</span>,
+            <span class="dt">postslistviews      </span>: <span class="ch">&#39;views/PostsListView.js&#39;</span>,
+            <span class="dt">mainview            </span>: <span class="ch">&#39;views/MainView.js&#39;</span>,
+            <span class="dt">loginview           </span>: <span class="ch">&#39;views/LoginView.js&#39;</span>,
+            <span class="dt">postview            </span>: <span class="ch">&#39;views/PostView.js&#39;</span>,
+
+            <span class="co">//Routes</span>
+            <span class="dt">routes              </span>: <span class="ch">&#39;routes.js&#39;</span>
+
+        },
+
+        <span class="dt">callback </span>: {
+            <span class="st">&quot;routes&quot;</span> : <span class="kw">function</span> () {
+                <span class="kw">console</span>.<span class="fu">log</span>(<span class="st">&quot;routes loaded ...&quot;</span>);          
+            }
+        },
+        <span class="dt">complete </span>: <span class="kw">function</span> () {
+            <span class="co">//...</span>
+        }
+    });</code></pre>
+<p>Vous l’aurez compris, le paramètre <code>load</code> sert à définir les scripts à charger. Vous notez aussi que l’on peut donner un alias à chacun des scripts (sinon YepNope le fera automatiquement à partir du nom du fichier javascript), alias que l’on peut ensuite utiliser dans le paramètre <code>callback</code> pour déclencher un traitement une fois que le script est inclus dans la page (dans notre exemple c’est au moment de l’inclusion du fichier <code>routes.js</code>).</p>
+<p>Et enfin, il y a aussi le paramètre <code>complete</code> qui permet de lancer un traitement une fois tous les scripts inclus.</p>
+<p>Nous allons donc déplacer le javascript restant dans notre page à l’intérieur de complete, pour finalement obtenir ceci :</p>
+<p><em>Code définitif :</em></p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    yepnope({
+        <span class="dt">load</span>: {
+            <span class="dt">jquery              </span>: <span class="ch">&#39;libs/vendors/jquery-1.7.2.js&#39;</span>,
+            <span class="dt">underscore          </span>: <span class="ch">&#39;libs/vendors/underscore.js&#39;</span>,
+            <span class="dt">backbone            </span>: <span class="ch">&#39;libs/vendors/backbone.js&#39;</span>,
+            <span class="dt">mustache            </span>: <span class="ch">&#39;libs/vendors/mustache.js&#39;</span>,
+
+            <span class="co">//NameSpace</span>
+            <span class="dt">blog                </span>: <span class="ch">&#39;Blog.js&#39;</span>,
+
+            <span class="co">//Models</span>
+            <span class="dt">posts               </span>: <span class="ch">&#39;models/post.js&#39;</span>,
+
+            <span class="co">//Controllers</span>
+            <span class="dt">sidebarview         </span>: <span class="ch">&#39;views/SidebarView.js&#39;</span>,
+            <span class="dt">postslistviews      </span>: <span class="ch">&#39;views/PostsListView.js&#39;</span>,
+            <span class="dt">mainview            </span>: <span class="ch">&#39;views/MainView.js&#39;</span>,
+            <span class="dt">loginview           </span>: <span class="ch">&#39;views/LoginView.js&#39;</span>,
+            <span class="dt">postview            </span>: <span class="ch">&#39;views/PostView.js&#39;</span>,
+
+            <span class="co">//Routes</span>
+            <span class="dt">routes              </span>: <span class="ch">&#39;routes.js&#39;</span>
+
+        },
+
+        <span class="dt">callback </span>: {
+            <span class="st">&quot;routes&quot;</span> : <span class="kw">function</span> () {
+                <span class="kw">console</span>.<span class="fu">log</span>(<span class="st">&quot;routes loaded ...&quot;</span>);          
+            }
+        },
+        <span class="dt">complete </span>: <span class="kw">function</span> () {
+            $(<span class="kw">function</span> (){
+
+                <span class="kw">console</span>.<span class="fu">log</span>(<span class="st">&quot;Lauching application ...&quot;</span>);
+
+                <span class="kw">window</span>.<span class="fu">blogPosts</span> = <span class="kw">new</span> <span class="kw">Blog.Collections</span>.<span class="fu">Posts</span>();
+
+                <span class="kw">window</span>.<span class="fu">mainView</span> = <span class="kw">new</span> <span class="kw">Blog.Views</span>.<span class="fu">MainView</span>({<span class="dt">collection </span>: blogPosts});
+
+                <span class="co">/*======= Authentification =======*/</span>
+                <span class="kw">window</span>.<span class="fu">loginView</span> = <span class="kw">new</span> <span class="kw">Blog.Views</span>.<span class="fu">LoginView</span>();
+                <span class="co">/*======= Fin authentification =======*/</span>
+
+                <span class="kw">window</span>.<span class="fu">postView</span> = <span class="kw">new</span> <span class="kw">Blog.Views</span>.<span class="fu">PostView</span>();
+
+                <span class="kw">window</span>.<span class="fu">router</span> = <span class="kw">new</span> <span class="kw">Blog.Router</span>.<span class="fu">RoutesManager</span>({<span class="dt">collection</span>:blogPosts});
+
+                <span class="kw">Backbone.history</span>.<span class="fu">start</span>();
+
+            });  
+        }
+    });</code></pre>
+<p>Et voilà ! Vous disposez maintenant d’un code structuré, d’un outil de chargement de script facile à utiliser et modifier : désactivation ou changement provisoire de librairie pour tests par exemple mais aussi chargement conditionnel de script en fonction du contexte, … Je ne vous ai dévoilé qu’une infime partie de YepNope qui en dépit de sa taille est très puissant. Lisez la documentation, vous verrez …</p>
+<p>Maintenant que notre projet est &quot;propre&quot;, nous allons dans le chapitre suivant en profiter pour sécuriser un peu plus notre application.</p>
 </body>
 </html>
