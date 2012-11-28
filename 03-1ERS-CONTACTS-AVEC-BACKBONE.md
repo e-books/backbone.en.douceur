@@ -112,7 +112,7 @@ Dans la balise `<script></script>` saisissez le code suivant :
 	</script>
 ```
 
-Sauvegarder, relancer dans le navigateur, et allez dans la console :
+Sauvegardez, relancez dans le navigateur, et allez dans la console :
 
 - Pour créer un nouvel article : tapez la commande `myFirstArticle = new blog.Article()`
 - Pour "voir" le titre de l'article : tapez la commande `myFirstArticle.get("title")`
@@ -125,7 +125,7 @@ Sauvegarder, relancer dans le navigateur, et allez dans la console :
 ![BB](RSRC/03_01_BB.png)\
 
 
-Vous venez donc de voir que nous avons définis le modèle article “un peu” comme une classe qui hériterait (`extend`) de la classe `Backbone.Model`, que nous lui avons défini des valeurs par défauts (`defaults`), et affecté une méthode d’initialisation (`initialize`). Et qu’il existe un système de getter et de setter un peu particulier (`model.get(property_name)`, `model.set(property_name, value)`), mais nous verrons ultérieurement dans le détail comment fonctionnent les modèles.
+Vous venez donc de voir que nous avons défini le modèle article “un peu” comme une classe qui hériterait (`extend`) de la classe `Backbone.Model`, que nous lui avons défini des valeurs par défauts (`defaults`), et affecté une méthode d’initialisation (`initialize`). Et qu’il existe un système de getter et de setter un peu particulier (`model.get(property_name)`, `model.set(property_name, value)`), mais nous verrons ultérieurement dans le détail comment fonctionnent les modèles.
 
 >>**Remarque** *: le modèle de programmation de Javascript est bien orienté objet, mais n’est pas orienté “classe” comme peut l’être par exemple Java. Cela peut déstabiliser au départ, mais je vous engage à lire [REF VERS ARTICLE] à ce propos.*
 
