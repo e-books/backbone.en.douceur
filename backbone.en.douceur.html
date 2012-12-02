@@ -193,6 +193,52 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <li><a href="#préparation"><span class="toc-section-number">10.2.1</span> Préparation</a></li>
 </ul></li>
 </ul></li>
+<li><a href="#securisation"><span class="toc-section-number">11</span> Securisation</a><ul>
+<li><a href="#il-nous-faut-un-écran-dadministration"><span class="toc-section-number">11.1</span> Il nous faut un &quot;écran d’administration&quot;</a><ul>
+<li><a href="#création-dadminview"><span class="toc-section-number">11.1.1</span> Création d'AdminView</a></li>
+<li><a href="#modification-de-loginview"><span class="toc-section-number">11.1.2</span> Modification de LoginView</a></li>
+</ul></li>
+<li><a href="#sécurisation-côté-serveur"><span class="toc-section-number">11.2</span> Sécurisation côté serveur</a><ul>
+<li><a href="#sécurisation-des-routes"><span class="toc-section-number">11.2.1</span> Sécurisation des routes</a></li>
+<li><a href="#eh-bien-testons-maintenant"><span class="toc-section-number">11.2.2</span> Eh bien testons, maintenant</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#backbone.sync"><span class="toc-section-number">12</span> Backbone.sync()</a></li>
+<li><a href="#backbone-3-coffeescript"><span class="toc-section-number">13</span> Backbone &lt;3 Coffeescript</a><ul>
+<li><a href="#coffeescript-quest-ce-que-cest"><span class="toc-section-number">13.1</span> Coffeescript qu’est-ce que c’est ?</a></li>
+<li><a href="#un-code-plus-lisible"><span class="toc-section-number">13.2</span> Un code plus lisible ?</a><ul>
+<li><a href="#les-fonctions"><span class="toc-section-number">13.2.1</span> Les fonctions</a></li>
+<li><a href="#interopérabilité"><span class="toc-section-number">13.2.2</span> Interopérabilité</a></li>
+<li><a href="#interpolation-et-chaînes-de-caractères"><span class="toc-section-number">13.2.3</span> Interpolation et Chaînes de caractères</a></li>
+<li><a href="#jouez-un-peu-avec-les-tableaux"><span class="toc-section-number">13.2.4</span> Jouez un peu avec les tableaux</a></li>
+</ul></li>
+<li><a href="#et-enfin-et-surtout-les-classes"><span class="toc-section-number">13.3</span> Et enfin (et surtout ?) les classes</a><ul>
+<li><a href="#notre-1ère-classe"><span class="toc-section-number">13.3.1</span> Notre 1ère classe</a></li>
+<li><a href="#propriétés-valeurs-par-défaut"><span class="toc-section-number">13.3.2</span> Propriétés &amp; valeurs par défaut</a></li>
+<li><a href="#comme-en-java-composition-association-encapsulation"><span class="toc-section-number">13.3.3</span> Comme en Java : Composition, Association, Encapsulation</a></li>
+<li><a href="#comme-en-java-les-membres-statiques"><span class="toc-section-number">13.3.4</span> Comme en Java : les membres statiques</a></li>
+<li><a href="#mais-aussi-comme-en-java-lhéritage"><span class="toc-section-number">13.3.5</span> Mais aussi (comme en Java) : l’héritage !</a></li>
+</ul></li>
+<li><a href="#jaime-je-naime-pas"><span class="toc-section-number">13.4</span> J’aime / Je n’aime pas</a></li>
+<li><a href="#ré-écriture-de-notre-blog-soutiller"><span class="toc-section-number">13.5</span> Ré-écriture de notre blog ?! S'outiller</a><ul>
+<li><a href="#installation-de-coffeescript"><span class="toc-section-number">13.5.1</span> Installation de Coffeescript</a></li>
+<li><a href="#industrialisation-de-la-transpilation"><span class="toc-section-number">13.5.2</span> “Industrialisation” de la transpilation</a></li>
+</ul></li>
+<li><a href="#ré-écriture-traductions"><span class="toc-section-number">13.6</span> Ré-écriture / Traductions</a><ul>
+<li><a href="#blog.coffee"><span class="toc-section-number">13.6.1</span> Blog.coffee</a></li>
+<li><a href="#main.coffee"><span class="toc-section-number">13.6.2</span> main.coffee</a></li>
+<li><a href="#post.coffee"><span class="toc-section-number">13.6.3</span> post.coffee</a></li>
+<li><a href="#adminview.coffee"><span class="toc-section-number">13.6.4</span> AdminView.coffee</a></li>
+<li><a href="#loginview.coffee"><span class="toc-section-number">13.6.5</span> LoginView.coffee</a></li>
+<li><a href="#postslistview.coffee"><span class="toc-section-number">13.6.6</span> PostsListView.coffee</a></li>
+<li><a href="#postview.coffee"><span class="toc-section-number">13.6.7</span> PostView.coffee</a></li>
+<li><a href="#sidebarview.coffee"><span class="toc-section-number">13.6.8</span> SidebarView.coffee</a></li>
+<li><a href="#mainview.coffee"><span class="toc-section-number">13.6.9</span> MainView.coffee</a></li>
+<li><a href="#routes.coffee"><span class="toc-section-number">13.6.10</span> routes.coffee</a></li>
+<li><a href="#transpilons"><span class="toc-section-number">13.6.11</span> Transpilons</a></li>
+<li><a href="#conclusions"><span class="toc-section-number">13.6.12</span> Conclusion(s)</a></li>
+</ul></li>
+</ul></li>
 </ul>
 </div>
 <h1 id="préambule-remerciements"><a href="#TOC"><span class="header-section-number">1</span> Préambule &amp; Remerciements</a></h1>
@@ -3964,5 +4010,953 @@ npm install express</code></pre>
     });</code></pre>
 <p>Et voilà ! Vous disposez maintenant d’un code structuré, d’un outil de chargement de script facile à utiliser et modifier : désactivation ou changement provisoire de librairie pour tests par exemple mais aussi chargement conditionnel de script en fonction du contexte, … Je ne vous ai dévoilé qu’une infime partie de YepNope qui en dépit de sa taille est très puissant. Lisez la documentation, vous verrez …</p>
 <p>Maintenant que notre projet est &quot;propre&quot;, nous allons dans le chapitre suivant en profiter pour sécuriser un peu plus notre application.</p>
+<h1 id="securisation"><a href="#TOC"><span class="header-section-number">11</span> Securisation</a></h1>
+<blockquote>
+<p><em>Sommaire</em></p>
+</blockquote>
+<blockquote>
+<blockquote>
+<ul>
+<li><em>Un (tout) petit écran d'administration</em></li>
+<li><em>Une &quot;vraie&quot; sécurisation des routes côté serveur</em></li>
+</ul>
+</blockquote>
+</blockquote>
+<blockquote>
+<p><em>Profitons-en pour terminer (presque) notre application et la sécuriser. Je dis “presque”, car il y aura toujours des fonctionnalités à ajouter, des contrôles de saisie à faire, des codes à optimiser (vous verrez dans ce qui va suivre que ma façon d’accéder au DOM n’est pas forcément la plus élégante à défaut d’être la plus lisible), la gestion des commentaires, refaire l’authentification ...</em></p>
+</blockquote>
+<p>Je souhaite cependant pouvoir modifier et ajouter des messages (post). C’est un exercice pour démontrer l’utilité de l’organisation du code en modules pour mieux s’y retrouver.</p>
+<h2 id="il-nous-faut-un-écran-dadministration"><a href="#TOC"><span class="header-section-number">11.1</span> Il nous faut un &quot;écran d’administration&quot;</a></h2>
+<p>Je retourne donc dans le code html de ma page <code>index.html</code>. Ajoutons ceci juste après le “grand titre” de notre blog :</p>
+<p><em>Template de l’écran d’administration :</em></p>
+<pre class="sourceCode html"><code class="sourceCode html"><span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;span9&quot;</span><span class="kw">&gt;</span>
+    <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;hero-unit&quot;</span><span class="kw">&gt;</span>
+        <span class="kw">&lt;h1&gt;</span>Backbone rocks !!!<span class="kw">&lt;/h1&gt;</span>
+    <span class="kw">&lt;/div&gt;</span>
+
+    <span class="co">&lt;!--- Admin ---&gt;</span>
+    <span class="kw">&lt;script</span><span class="ot"> type=</span><span class="st">&quot;text/template&quot;</span><span class="ot"> id=</span><span class="st">&quot;admin_template&quot;</span><span class="kw">&gt;</span>
+        &lt;hr&gt;
+        &lt;h3&gt;Administration du Blog&lt;/h3&gt;
+        &lt;hr&gt;
+        &lt;select id=<span class="st">&quot;post</span>_<span class="st">choice&quot;</span>&gt;{{#posts}}
+            &lt;option value=<span class="st">&quot;</span>{{<span class="st">id</span>}}<span class="st">&quot;</span>&gt;{{title}}&lt;/option&gt;
+        {{/posts}}&lt;/select&gt;
+        &lt;a href=<span class="st">&quot;</span>#<span class="st">&quot;</span> id=<span class="st">&quot;btn</span>_<span class="st">update&quot;</span> class=<span class="st">&quot;btn</span> <span class="st">btn</span>-<span class="st">primary&quot;</span>&gt;Modifier Post&lt;/a&gt;
+        &lt;a href=<span class="st">&quot;</span>#<span class="st">&quot;</span> id=<span class="st">&quot;btn</span>_<span class="st">create&quot;</span> class=<span class="st">&quot;btn</span> <span class="st">btn</span>-<span class="st">primary&quot;</span>&gt;Ré-initialiser / Ajouter Post&lt;/a&gt;
+        &lt;hr&gt;
+            <span class="dt">id </span>: &lt;span name=<span class="st">&quot;id&quot;</span>&gt;&lt;/span&gt;&lt;br&gt;
+            &lt;input name=<span class="st">&quot;author&quot;</span> type=<span class="st">&quot;text&quot;</span> placeholder=<span class="st">&quot;author&quot;</span>/&gt;&lt;br&gt;
+            &lt;input name=<span class="st">&quot;title&quot;</span> type=<span class="st">&quot;text&quot;</span> placeholder=<span class="st">&quot;title&quot;</span>/&gt;&lt;br&gt;
+            &lt;textarea name=<span class="st">&quot;message&quot;</span> placeholder=<span class="st">&quot;message&quot;</span>&gt;&lt;/textarea&gt;&lt;br&gt;
+            &lt;a href=<span class="st">&quot;</span>#<span class="st">&quot;</span> id=<span class="st">&quot;btn</span>_<span class="st">send&quot;</span> class=<span class="st">&quot;btn</span> <span class="st">btn</span>-<span class="st">primary&quot;</span>&gt;Sauvegarder&lt;/a&gt;
+        &lt;hr&gt;
+    <span class="kw">&lt;/script&gt;</span>
+
+    <span class="kw">&lt;div</span><span class="ot"> id=</span><span class="st">&quot;admin&quot;</span><span class="kw">&gt;</span>
+
+    <span class="kw">&lt;/div&gt;</span>
+    <span class="co">&lt;!--- End of Admin ---&gt;</span></code></pre>
+<p>J’aurais donc un écran qui va ressembler à ceci :</p>
+<p><img src="RSRC/10_01_ORGA.png" alt="BB" /><br /></p>
+<p>Pour gérer cet écran je vais avoir besoin d’un objet de type <code>Backbone.View</code>, que nous allons créer dans le répertoire <code>/views</code> sous le nom d’<code>AdminView.js</code>. Avant de “coder” <code>AdminView</code>, nous allons le déclarer et l’instancier dans <code>main.js</code> :</p>
+<p><em>main.js : :</em></p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">yepnope({
+    <span class="dt">load</span>: {
+        <span class="dt">jquery              </span>: <span class="ch">&#39;libs/vendors/jquery-1.7.2.js&#39;</span>,
+        <span class="dt">underscore          </span>: <span class="ch">&#39;libs/vendors/underscore.js&#39;</span>,
+        <span class="dt">backbone            </span>: <span class="ch">&#39;libs/vendors/backbone.js&#39;</span>,
+        <span class="dt">mustache            </span>: <span class="ch">&#39;libs/vendors/mustache.js&#39;</span>,
+
+        <span class="co">//NameSpace</span>
+        <span class="dt">blog                </span>: <span class="ch">&#39;Blog.js&#39;</span>,
+
+        <span class="co">//Models</span>
+        <span class="dt">posts               </span>: <span class="ch">&#39;models/post.js&#39;</span>,
+
+        <span class="co">//Controllers</span>
+        <span class="dt">sidebarview         </span>: <span class="ch">&#39;views/SidebarView.js&#39;</span>,
+        <span class="dt">postslistviews      </span>: <span class="ch">&#39;views/PostsListView.js&#39;</span>,
+        <span class="dt">mainview            </span>: <span class="ch">&#39;views/MainView.js&#39;</span>,
+        <span class="dt">loginview           </span>: <span class="ch">&#39;views/LoginView.js&#39;</span>,
+        <span class="dt">postview            </span>: <span class="ch">&#39;views/PostView.js&#39;</span>,
+
+        <span class="co">//--- ADMINVIEW---</span>
+        <span class="dt">adminview           </span>: <span class="ch">&#39;views/AdminView.js&#39;</span>,
+
+        <span class="co">//Routes</span>
+        <span class="dt">routes              </span>: <span class="ch">&#39;routes.js&#39;</span> 
+    },
+
+    <span class="dt">callback </span>: {
+        <span class="st">&quot;routes&quot;</span> : <span class="kw">function</span> () {
+            <span class="kw">console</span>.<span class="fu">log</span>(<span class="st">&quot;routes loaded ...&quot;</span>);          
+        }
+    },
+    <span class="dt">complete </span>: <span class="kw">function</span> () {
+        $(<span class="kw">function</span> (){
+            <span class="kw">console</span>.<span class="fu">log</span>(<span class="st">&quot;Lauching application ...&quot;</span>);
+
+            <span class="kw">window</span>.<span class="fu">blogPosts</span> = <span class="kw">new</span> <span class="kw">Blog.Collections</span>.<span class="fu">Posts</span>();
+
+            <span class="kw">window</span>.<span class="fu">mainView</span> = <span class="kw">new</span> <span class="kw">Blog.Views</span>.<span class="fu">MainView</span>({<span class="dt">collection </span>: blogPosts});
+
+            <span class="co">/*======= Admin =======*/</span>
+            <span class="kw">window</span>.<span class="fu">adminView</span> = <span class="kw">new</span> <span class="kw">Blog.Views</span>.<span class="fu">AdminView</span>({<span class="dt">collection </span>: blogPosts});
+            <span class="co">/*======= Fin Admin =======*/</span>
+
+            <span class="co">/*======= Authentification =======*/</span>
+            <span class="kw">window</span>.<span class="fu">loginView</span> = <span class="kw">new</span> <span class="kw">Blog.Views</span>.<span class="fu">LoginView</span>({<span class="dt">adminView </span>: adminView});
+            <span class="co">/*======= Fin authentification =======*/</span>
+
+            <span class="kw">window</span>.<span class="fu">postView</span> = <span class="kw">new</span> <span class="kw">Blog.Views</span>.<span class="fu">PostView</span>();
+
+            <span class="kw">window</span>.<span class="fu">router</span> = <span class="kw">new</span> <span class="kw">Blog.Router</span>.<span class="fu">RoutesManager</span>({<span class="dt">collection</span>:blogPosts});
+            <span class="co">//Backbone.history.start({pushState: true}); </span>
+            <span class="kw">Backbone.history</span>.<span class="fu">start</span>();
+
+        });  
+    }
+});</code></pre>
+<blockquote>
+<blockquote>
+<p><strong>Remarque</strong> : Je passe la vue adminView à la vue loginView pour que cette dernière puisse déclencher le rendue de la première si nécessaire.</p>
+</blockquote>
+</blockquote>
+<h3 id="création-dadminview"><a href="#TOC"><span class="header-section-number">11.1.1</span> Création d'AdminView</a></h3>
+<p>Alors il n'y a pas grand chose à expliquer (c'est dans le code)</p>
+<p><em>AdminView.js :</em></p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">var</span> Blog = (<span class="kw">function</span> (blog) {
+
+    <span class="kw">blog.Views</span>.<span class="fu">AdminView</span> = <span class="kw">Backbone.View</span>.<span class="fu">extend</span>({
+        <span class="dt">el </span>: $(<span class="st">&quot;#admin&quot;</span>),
+        <span class="dt">initialize </span>: <span class="kw">function</span> () {
+            <span class="kw">this</span>.<span class="fu">template</span> = $(<span class="st">&quot;#admin_template&quot;</span>).<span class="fu">html</span>();
+            <span class="co">//je prévois de trier ma collection</span>
+            <span class="kw">this</span>.<span class="fu">collection</span>.<span class="fu">comparator</span> = <span class="kw">function</span> (model) {
+                <span class="kw">return</span> -(<span class="kw">new</span> <span class="kw">Date</span>(<span class="kw">model</span>.<span class="fu">get</span>(<span class="st">&quot;date&quot;</span>)).<span class="fu">getTime</span>());
+            }
+        },
+        <span class="dt">render </span>: <span class="kw">function</span> () {
+            <span class="kw">var</span> renderedContent = <span class="kw">Mustache</span>.<span class="fu">to</span>_<span class="fu">html</span>(<span class="kw">this</span>.<span class="fu">template</span>, 
+                {<span class="dt">posts </span>: <span class="kw">this</span>.<span class="fu">collection</span>.<span class="fu">toJSON</span>() } );
+            <span class="kw">this</span>.$<span class="fu">el</span>.<span class="fu">html</span>(renderedContent);
+        },
+        <span class="dt">events </span>: {
+            <span class="st">&quot;click  #btn_update&quot;</span>  : <span class="st">&quot;onClickBtnUpdate&quot;</span>,
+            <span class="st">&quot;click  #btn_create&quot;</span>  : <span class="st">&quot;onClickBtnCreate&quot;</span>,
+            <span class="st">&quot;click  #btn_send&quot;</span> : <span class="st">&quot;sendPost&quot;</span>
+        },
+
+        <span class="dt">onClickBtnUpdate </span>: <span class="kw">function</span> () {
+            <span class="kw">var</span> selectedId = $(<span class="st">&quot;#post_choice&quot;</span>).<span class="fu">val</span>()
+            ,   post = <span class="kw">this</span>.<span class="fu">collection</span>.<span class="fu">get</span>(selectedId);
+
+            <span class="co">//Je récupère les informations du post et les affiche</span>
+            $(<span class="st">&quot;#admin &gt; [name=&#39;id&#39;]&quot;</span>).<span class="fu">html</span>(<span class="kw">post</span>.<span class="fu">get</span>(<span class="st">&quot;id&quot;</span>));
+            $(<span class="st">&quot;#admin &gt; [name=&#39;author&#39;]&quot;</span>).<span class="fu">val</span>(<span class="kw">post</span>.<span class="fu">get</span>(<span class="st">&quot;author&quot;</span>));
+            $(<span class="st">&quot;#admin &gt; [name=&#39;title&#39;]&quot;</span>).<span class="fu">val</span>(<span class="kw">post</span>.<span class="fu">get</span>(<span class="st">&quot;title&quot;</span>));
+            $(<span class="st">&quot;#admin &gt; [name=&#39;message&#39;]&quot;</span>).<span class="fu">val</span>(<span class="kw">post</span>.<span class="fu">get</span>(<span class="st">&quot;message&quot;</span>));
+
+        },
+        <span class="dt">onClickBtnCreate </span>: <span class="kw">function</span> () {
+            <span class="co">//je ré-initialise les zones de saisie</span>
+            $(<span class="st">&quot;#admin &gt; [name=&#39;id&#39;]&quot;</span>).<span class="fu">html</span>(<span class="st">&quot;&quot;</span>);
+            $(<span class="st">&quot;#admin &gt; [name=&#39;author&#39;]&quot;</span>).<span class="fu">val</span>(<span class="st">&quot;&quot;</span>);
+            $(<span class="st">&quot;#admin &gt; [name=&#39;title&#39;]&quot;</span>).<span class="fu">val</span>(<span class="st">&quot;&quot;</span>);
+            $(<span class="st">&quot;#admin &gt; [name=&#39;message&#39;]&quot;</span>).<span class="fu">val</span>(<span class="st">&quot;&quot;</span>);
+        },
+        <span class="dt">sendPost </span>: <span class="kw">function</span> () { <span class="co">//Sauvegarde</span>
+            <span class="kw">var</span> that  = <span class="kw">this</span> <span class="co">//pour conserver le contexte</span>
+            ,   id = $(<span class="st">&quot;#admin &gt; [name=&#39;id&#39;]&quot;</span>).<span class="fu">html</span>()
+            ,   post;
+
+            <span class="kw">if</span>(id===<span class="st">&quot;&quot;</span>) { <span class="co">//si l&#39;id est vide c&#39;est une création</span>
+                post = <span class="kw">new</span> <span class="kw">Blog.Models</span>.<span class="fu">Post</span>();
+            } <span class="kw">else</span> { <span class="co">//l&#39;id n&#39;est pas vide c&#39;est une mise à jour</span>
+                post = <span class="kw">new</span> <span class="kw">Blog.Models</span>.<span class="fu">Post</span>({
+                    <span class="dt">id</span>:$(<span class="st">&quot;#admin &gt; [name=&#39;id&#39;]&quot;</span>).<span class="fu">html</span>()
+                });
+            }
+
+            <span class="kw">post</span>.<span class="fu">save</span>({
+                    <span class="dt">author </span>: $(<span class="st">&quot;#admin &gt; [name=&#39;author&#39;]&quot;</span>).<span class="fu">val</span>(),
+                    <span class="dt">title </span>: $(<span class="st">&quot;#admin &gt; [name=&#39;title&#39;]&quot;</span>).<span class="fu">val</span>(),
+                    <span class="dt">message </span>: $(<span class="st">&quot;#admin &gt; [name=&#39;message&#39;]&quot;</span>).<span class="fu">val</span>(),
+                    <span class="dt">date </span>: <span class="kw">new</span> <span class="kw">Date</span>()
+                },{
+                <span class="dt">success</span>:<span class="kw">function</span> () {
+                    <span class="co">//Si la transaction côté serveur a fonctionné</span>
+
+                    <span class="co">//je recharge ma collection</span>
+                    <span class="kw">that.collection</span>.<span class="fu">fetch</span>({
+                        <span class="dt">success</span>:<span class="kw">function</span>() {
+                            <span class="co">//mise à jour de la vue admin</span>
+                            <span class="kw">that</span>.<span class="fu">render</span>();
+                            <span class="co">//La vue principale se re-mettra à jour</span>
+                            <span class="co">//automatiquement, car elle est &quot;abonnée&quot;</span>
+                            <span class="co">//aux changement de la collection</span>
+                        }
+                    });
+                },
+                <span class="dt">error </span>: <span class="kw">function</span> () {}
+            });
+        }
+    });
+    <span class="kw">return</span> blog;
+}(Blog));</code></pre>
+<blockquote>
+<blockquote>
+<p><strong>Remarque</strong> : je n’abonne pas la vue aux changement de la collection pour pouvoir maîtriser le moment où je déclenche la méthode render() de celle-ci.</p>
+</blockquote>
+</blockquote>
+<h3 id="modification-de-loginview"><a href="#TOC"><span class="header-section-number">11.1.2</span> Modification de LoginView</a></h3>
+<p>Nous allons modifier <code>LoginView.js</code> pour prendre en compte l’ajout de notre fonctionnalité d’administration. Tout d’abord modifions le template associé :</p>
+<p><em>Template du formulaire de login :</em></p>
+<pre class="sourceCode html"><code class="sourceCode html"><span class="co">&lt;!-- /*======= Formulaire d&#39;authentification =======*/ --&gt;</span>
+<span class="kw">&lt;script</span><span class="ot"> type=</span><span class="st">&quot;text/template&quot;</span><span class="ot"> id=</span><span class="st">&quot;blog_login_form_template&quot;</span><span class="kw">&gt;</span>
+    &lt;h3&gt;<span class="dt">Login </span>:&lt;/h3&gt;
+    &lt;input name=<span class="st">&quot;email&quot;</span> type=<span class="st">&quot;text&quot;</span> placeholder=<span class="st">&quot;email&quot;</span>/&gt;&lt;br&gt;
+    &lt;input name=<span class="st">&quot;password&quot;</span> type=<span class="st">&quot;password&quot;</span> placeholder=<span class="st">&quot;password&quot;</span>/&gt;&lt;br&gt;
+    &lt;a href=<span class="st">&quot;</span>#<span class="st">&quot;</span> class=<span class="st">&quot;btn</span> <span class="st">btn</span>-<span class="st">primary&quot;</span>&gt;Login&lt;/a&gt; 
+    &lt;a href=<span class="st">&quot;</span>#<span class="st">&quot;</span> class=<span class="st">&quot;btn</span> <span class="st">btn</span>-<span class="st">inverse&quot;</span>&gt;Logoff&lt;/a&gt;&lt;br&gt;
+    &lt;b&gt;{{message}} {{firstName}} {{lastName}} &lt;/b&gt;
+    &lt;br&gt;&lt;a id=<span class="st">&quot;adminbtn&quot;</span> href=<span class="st">&quot;</span>#<span class="st">&quot;</span>&gt;{{adminLinkLabel}}&lt;/a&gt;
+
+<span class="kw">&lt;/script&gt;</span>
+<span class="kw">&lt;form</span><span class="ot"> class=</span><span class="st">&quot;container&quot;</span><span class="ot"> id=</span><span class="st">&quot;blog_login_form&quot;</span><span class="kw">&gt;</span>
+
+<span class="kw">&lt;/form&gt;</span>
+<span class="co">&lt;!-- /*======= Fin du formulaire=======*/ --&gt;</span></code></pre>
+<p>Puis modifions le code de LoginView.js :</p>
+<p><em>LoginView.js :</em></p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">var</span> Blog = (<span class="kw">function</span> (blog) {
+
+    <span class="kw">blog.Views</span>.<span class="fu">LoginView</span> = <span class="kw">Backbone.View</span>.<span class="fu">extend</span>({
+        <span class="dt">el </span>: $(<span class="st">&quot;#blog_login_form&quot;</span>),
+
+        <span class="dt">initialize </span>: <span class="kw">function</span> (args) {
+            <span class="kw">var</span> that = <span class="kw">this</span>;
+
+            <span class="kw">this</span>.<span class="fu">adminView</span> = <span class="kw">args</span>.<span class="fu">adminView</span>;
+
+            <span class="kw">this</span>.<span class="fu">template</span> = $(<span class="st">&quot;#blog_login_form_template&quot;</span>).<span class="fu">html</span>();
+
+            <span class="co">//on vérifie si pas déjà authentifié</span>
+             $.<span class="fu">ajax</span>({<span class="dt">type</span>:<span class="st">&quot;GET&quot;</span>, <span class="dt">url</span>:<span class="st">&quot;/alreadyauthenticated&quot;</span>,
+                <span class="dt">error</span>:<span class="kw">function</span>(err){ <span class="kw">console</span>.<span class="fu">log</span>(err); },
+                <span class="dt">success</span>:<span class="kw">function</span>(dataFromServer) { 
+
+                    <span class="kw">if</span>(<span class="kw">dataFromServer</span>.<span class="fu">firstName</span>) {
+
+                        <span class="kw">that</span>.<span class="fu">render</span>(<span class="st">&quot;Bienvenue&quot;</span>,dataFromServer);
+
+                    } <span class="kw">else</span> {
+                        <span class="kw">that</span>.<span class="fu">render</span>(<span class="st">&quot;???&quot;</span>,{<span class="dt">firstName</span>:<span class="st">&quot;John&quot;</span>, <span class="dt">lastName</span>:<span class="st">&quot;Doe&quot;</span>});
+                    }
+                }
+            })
+        },
+        <span class="dt">render </span>: <span class="kw">function</span> (message, user) {
+
+            <span class="kw">var</span> renderedContent = <span class="kw">Mustache</span>.<span class="fu">to</span>_<span class="fu">html</span>(<span class="kw">this</span>.<span class="fu">template</span>, {
+                <span class="dt">message </span>: message,
+                <span class="dt">firstName </span>: user ? <span class="dt">user.firstName </span>: <span class="st">&quot;&quot;</span>,
+                <span class="dt">lastName </span>: user ? <span class="dt">user.lastName </span>: <span class="st">&quot;&quot;</span>,
+                <span class="dt">adminLinkLabel </span>: user ? <span class="kw">user</span>.<span class="fu">isAdmin</span> ? <span class="st">&quot;Administration&quot;</span> : <span class="st">&quot;&quot;</span> :<span class="st">&quot;&quot;</span>
+            });
+            <span class="kw">this</span>.$<span class="fu">el</span>.<span class="fu">html</span>(renderedContent);  
+        },
+        <span class="dt">events </span>: {
+            <span class="st">&quot;click  .btn-primary&quot;</span>  : <span class="st">&quot;onClickBtnLogin&quot;</span>,
+            <span class="st">&quot;click  .btn-inverse&quot;</span>  : <span class="st">&quot;onClickBtnLogoff&quot;</span>,
+            <span class="st">&quot;click #adminbtn&quot;</span> : <span class="st">&quot;displayAdminPanel&quot;</span>
+        },
+
+        <span class="dt">displayAdminPanel </span>: <span class="kw">function</span>(){
+            <span class="co">//this.adminView.render();</span>
+        },
+
+        <span class="dt">onClickBtnLogin </span>: <span class="kw">function</span> (domEvent) {
+        <span class="co">//code non affiché pour des raisons de mise en page</span>
+         <span class="co">//ne pas modifier</span>
+        },
+        <span class="dt">onClickBtnLogoff </span>: <span class="kw">function</span>() {
+        <span class="co">//code non affiché pour des raisons de mise en page</span>
+         <span class="co">//ne pas modifier</span>
+        }
+
+    });
+    <span class="kw">return</span> blog;
+}(Blog));</code></pre>
+<p>Maintenant que nous avons fait nos modifications côté client, allons sécuriser les actions côté serveur.</p>
+<h2 id="sécurisation-côté-serveur"><a href="#TOC"><span class="header-section-number">11.2</span> Sécurisation côté serveur</a></h2>
+<p>Vous pouvez tester les modifications dès maintenant, cela va fonctionner, mais il est de bon ton de sécuriser côté serveur les actions de création, modification, suppression, etc. …</p>
+<blockquote>
+<blockquote>
+<p><strong>Remarque</strong> : La gestion des session avec express.js ainsi que la sécurisation des routes peut être prise en compte de manière plus « professionnel ». Gardez à l’esprit que les exemples donnés le sont à titre « didactique » et que certains points sont perfectibles.</p>
+</blockquote>
+</blockquote>
+<p>Nous allons retourner dans le code de <code>app.js</code> (vous vous souvenez : notre application express.js) et créer une fonction qui permet de vérifier si l’utilisateur est connecté et est administrateur et cette fonction servira à sécuriser les routes :</p>
+<h3 id="sécurisation-des-routes"><a href="#TOC"><span class="header-section-number">11.2.1</span> Sécurisation des routes</a></h3>
+<p>Notre fonction vérifie si l'utilisateur connecté est un administrateur, si c'est le cas, elle passe la main à la fonction &quot;callback&quot; que j'ai appelée <code>next</code> sinon elle génère une erreur.</p>
+<p><em>Fonction haveToBeAdmin :</em></p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    haveToBeAdmin = <span class="kw">function</span> (req, res, next) {
+        <span class="kw">console</span>.<span class="fu">log</span>(<span class="st">&quot;NEEDS ADMIN RIGHTS&quot;</span>);
+        <span class="kw">if</span>(findUserBySession(<span class="kw">req</span>.<span class="fu">sessionID</span>)){
+            <span class="kw">if</span> (findUserBySession(<span class="kw">req</span>.<span class="fu">sessionID</span>).<span class="fu">isAdmin</span>==<span class="kw">true</span>) {
+                next();
+            } <span class="kw">else</span> {
+                <span class="kw">throw</span> <span class="st">&quot;You have to be administrator&quot;</span>;
+            }          
+        } <span class="kw">else</span> {
+            <span class="kw">throw</span> <span class="st">&quot;You have to be connected&quot;</span>;    
+        }
+    }</code></pre>
+<blockquote>
+<blockquote>
+<p><strong>Remarque</strong> : Si la condition est vérifiée, la fonction <code>next()</code> est appelée, elle correspond au traitement de la route sécurisée.</p>
+</blockquote>
+</blockquote>
+<p>Et sécurisons ensuite nos routes de la manière suivante :</p>
+<p><em>Ajout :</em></p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="kw">app</span>.<span class="fu">post</span>(<span class="ch">&#39;/blogposts&#39;</span>, [haveToBeAdmin], <span class="kw">function</span>(req, res, next){
+        <span class="kw">console</span>.<span class="fu">log</span>(<span class="st">&quot;POST CREATE &quot;</span>, <span class="kw">req</span>.<span class="fu">body</span>);
+
+        <span class="kw">var</span> d = <span class="kw">new</span> <span class="kw">Date</span>(), model = <span class="kw">req</span>.<span class="fu">body</span>;
+        <span class="kw">model</span>.<span class="fu">saveDate</span> = (<span class="kw">d</span>.<span class="fu">valueOf</span>());
+
+        <span class="kw">posts</span>.<span class="fu">save</span>(null,model, <span class="kw">function</span> (err, key){
+            <span class="kw">if</span>(err) { 
+                <span class="kw">console</span>.<span class="fu">log</span>(<span class="st">&quot;Erreur : &quot;</span>,err);
+                <span class="kw">res</span>.<span class="fu">json</span>(err); 
+            } <span class="kw">else</span> {
+                <span class="kw">model</span>.<span class="fu">id</span> = key;
+                <span class="kw">res</span>.<span class="fu">json</span>(model);
+            }
+        });
+    });</code></pre>
+<blockquote>
+<blockquote>
+<p><strong>Remarque &quot;au passage&quot;</strong> : vous remarquez le passage du paramètre <code>[haveToBeAdmin]</code>, le contenu de <code>app.post</code> ne sera exécuté que si <code>haveToBeAdmin</code> &quot;déclenche&quot; <code>next</code>.</p>
+</blockquote>
+</blockquote>
+<p>De la même façon pour la mise à jour et la suppression :</p>
+<p><em>Mise à jour :</em></p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="kw">app</span>.<span class="fu">put</span>(<span class="ch">&#39;/blogposts/:id&#39;</span>, [haveToBeAdmin],<span class="kw">function</span>(req, res, next){
+        <span class="kw">console</span>.<span class="fu">log</span>(<span class="st">&quot;PUT UPDATE&quot;</span>, <span class="kw">req</span>.<span class="fu">body</span>, <span class="kw">req.params</span>.<span class="fu">id</span>);
+
+        <span class="kw">var</span> d = <span class="kw">new</span> <span class="kw">Date</span>(), model = <span class="kw">req</span>.<span class="fu">body</span>;
+        <span class="kw">model</span>.<span class="fu">saveDate</span> = (<span class="kw">d</span>.<span class="fu">valueOf</span>());
+
+        <span class="kw">posts</span>.<span class="fu">save</span>(<span class="kw">req.params</span>.<span class="fu">id</span>,model, <span class="kw">function</span> (err, key){
+            <span class="kw">if</span>(err) { 
+                <span class="kw">console</span>.<span class="fu">log</span>(<span class="st">&quot;Erreur : &quot;</span>,err);
+                <span class="kw">res</span>.<span class="fu">json</span>(err); 
+            } <span class="kw">else</span> {
+                <span class="kw">res</span>.<span class="fu">json</span>(model);
+            }
+        });
+    });</code></pre>
+<p><em>Suppression :</em></p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="kw">app</span>.<span class="fu">delete</span>(<span class="ch">&#39;/blogposts/:id&#39;</span>, [haveToBeAdmin], <span class="kw">function</span>(req, res, next){
+        <span class="kw">console</span>.<span class="fu">log</span>(<span class="st">&quot;DELETE : /delete/&quot;</span>+<span class="kw">req.params</span>.<span class="fu">id</span>);
+
+        <span class="kw">posts</span>.<span class="fu">remove</span>(<span class="kw">req.params</span>.<span class="fu">id</span>, <span class="kw">function</span>(err){
+            <span class="kw">if</span>(err) { 
+                <span class="kw">console</span>.<span class="fu">log</span>(<span class="st">&quot;Erreur : &quot;</span>,err);
+                <span class="kw">res</span>.<span class="fu">json</span>(err); 
+            } <span class="kw">else</span> { 
+                <span class="co">//petit correctif de contournement (bug ds nStore) : </span>
+                <span class="co">//ré-ouvrir la base lorsque la suppression a été faite</span>
+                posts = <span class="kw">nStore</span>.<span class="fu">new</span>(<span class="st">&quot;blog.db&quot;</span>, <span class="kw">function</span>() {
+                    <span class="kw">res</span>.<span class="fu">json</span>(<span class="kw">req.params</span>.<span class="fu">id</span>);
+                    <span class="co">//Le modèle est vide si on ne trouve rien</span>
+                });
+            }
+        });
+    });</code></pre>
+<h3 id="eh-bien-testons-maintenant"><a href="#TOC"><span class="header-section-number">11.2.2</span> Eh bien testons, maintenant</a></h3>
+<ul>
+<li>Relancez l’application côté serveur.</li>
+<li>Ouvrez le navigateur et connectez vous au blog sans vous authentifier.</li>
+<li>Ouvrez la console du navigateur et saisissez ceci : <code>adminView.render()</code>.</li>
+</ul>
+<p>Cela va faire apparaître l’écran d’administration alors que vous n’êtes pas administrateur (vous faites une tentativve de hacking sur vous même) !</p>
+<p>Sélectionnez un Post dans la liste, et cliquez sur “modifer Post” pour charger le formulaire :</p>
+<p><img src="RSRC/10_02_ORGA.png" alt="BB" /><br /></p>
+<p>Saissez quelques modifications, cliquez sur le bouton “Sauvegarder” . Vous obtiendrez un message d’erreur dans la console :</p>
+<p><img src="RSRC/10_03_ORGA.png" alt="BB" /><br /></p>
+<p>A vous de gérer les message côté client (avec le callback “error” lors du <code>save()</code>) Et côté serveur cela vous affiche que vous devez être connecté :</p>
+<p><img src="RSRC/10_04_ORGA.png" alt="BB" /><br /></p>
+<p>Donc notre blog est bien &quot;sécurisé&quot;. Maintenant rafraichissez votre page et connectez vous en tant qu’administrateur. Vous obtiendrez un lien “Administration” au niveau du message de bienvenue qui vous permettra de déclencher l’affichage de l’écran d’administration :</p>
+<p><img src="RSRC/10_05_ORGA.png" alt="BB" /><br /></p>
+<p>Faites quelques modifications, et sauvegardez les modifications :</p>
+<p><img src="RSRC/10_06_ORGA.png" alt="BB" /><br /></p>
+<p>Vous pouvez ensuite vérifiez qu’elles ont bien été prises en compte :</p>
+<p><img src="RSRC/10_07_ORGA.png" alt="BB" /><br /></p>
+<p>Voilà. Notre application est &quot;terminée&quot;. Je sais il faut le dire vite ;) mais vous avez une base, que vous pouvez faire évoluer (il faudrait ajouter les commentaires par exemple) ou améliorer, ou mieux, cassez tout et faites votre propre application avec votre &quot;propre style&quot;.</p>
+<p>Par contre, l'ouvrage n'est pas fini, j'ai encore 2,3 petites choses dont j'aimerais vous parlez.</p>
+<h1 id="backbone.sync"><a href="#TOC"><span class="header-section-number">12</span> Backbone.sync()</a></h1>
+<pre><code>//TODO: je n&#39;ai encore rien &quot;gratté&quot; à ce sujet (viendra probablement en dernier)</code></pre>
+<h1 id="backbone-3-coffeescript"><a href="#TOC"><span class="header-section-number">13</span> Backbone &lt;3 Coffeescript</a></h1>
+<blockquote>
+<p><em>Sommaire</em></p>
+</blockquote>
+<blockquote>
+<blockquote>
+<ul>
+<li><em>Coffeescript</em></li>
+<li><em>On s'outille</em></li>
+<li><em>Traduction</em></li>
+</ul>
+</blockquote>
+</blockquote>
+<blockquote>
+<p><em>Depuis longtemps, les développeurs “serveur” ont de nombreux a priori vis-à-vis de Javascript : un modèle objet “particulier” difficile à comprendre après des années de programmation orientée classes, un système d’héritage par prototype générant beaucoup d’effets de bord s’il n’est pas maîtrisé (sans compter la maintenabilité du code) et justement pas de classes en javascript, ce qui rend difficile l’organisation du code (toujours d’un point de vue approche “classique”).</em></p>
+</blockquote>
+<p>L’arrivée de CoffeeScript tend aujourd’hui à gommer ces problématiques et tout particulièrement par l’introduction d’un système de classes qui prend en charge (pour/à la place du développeur) toutes les problématiques liées au modèle objet Javascript, garantissant ainsi la réduction de l’apparition de bugs dus à la méconnaissance de javascript. Gardez cependant une chose à l’esprit : Coffeescript, cela reste du Javascript, mais avec une manière différente de l’écrire, plus simple, plus efficace et (à mon avis) avec moins d’erreurs. Coffeescript, vous aidera aussi à comprendre et mieux écrire le Javascript.</p>
+<h2 id="coffeescript-quest-ce-que-cest"><a href="#TOC"><span class="header-section-number">13.1</span> Coffeescript qu’est-ce que c’est ?</a></h2>
+<p>Coffeescript est un langage de script qui ressemble beaucoup au Python. Il a été créé par Jeremy Ashkenas, vous savez, le brillant développeur aussi à l’origine de frameworks connus tels Backbone.js et Underscore.js. Coffeescript, c’est aussi un “Transpiler” Javascript. C’est-à-dire, qu’au lieu de compiler pour obtenir un binaire, on “compile” le code Coffeescript en Javascript directement exécutable dans un navigateur (ou côté serveur avec Node.js). Classiquement, le transpiler Coffeescript s’exécute sous Node.js, mais vous pouvez très bien l’utiliser en mode “run-time” et insérer du code Coffeescript directement (inline) dans vos pages HTML. C’est moins performant, mais cela peut être utile pour debugger. L’objet de ce chapitre n’est pas de vous apprendre Coffeescript, mais de vous le présenter rapidement et vous montrer à quoi pourrait ressembler le code de la partie cliente de notre blog traduite en Coffeescript. Vous trouverez les informations complémentaire ici : <a href="http://coffeescript.org/">http://coffeescript.org/</a>.</p>
+<h2 id="un-code-plus-lisible"><a href="#TOC"><span class="header-section-number">13.2</span> Un code plus lisible ?</a></h2>
+<p>Donc, selon moi (et d’autres), Coffeescript permet de simplifier le javascript, générer du javascript « propre » et apporte des évolutions de langage qui vont simplifier et rendre le code plus lisible. Nous allons tenter de voir ça par le biais de quelques exemples.</p>
+<h3 id="les-fonctions"><a href="#TOC"><span class="header-section-number">13.2.1</span> Les fonctions</a></h3>
+<p>Le terme <code>function</code> disparaît au profit d’une « flèche » ! <code>return</code> disparaît complètement !!! (par défaut c'est la dernière ligne qui fait office de return) et les parenthèses ne sont pas partout obligatoires (ce qui facilite l’écriture de DSL) ... Et plus de point-virgule.</p>
+<p><em>Fonction d’addition en javascript :</em></p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="kw">function</span> addition (a,b) {
+        <span class="kw">return</span> a+b
+    }
+
+    <span class="co">//Utilisation :</span>
+
+    <span class="kw">var</span> c = addition(<span class="dv">45</span>, <span class="dv">12</span>)</code></pre>
+<p>Deviendra :</p>
+<p><em>Fonction d’addition en Coffeescript :</em></p>
+<pre class="sourceCode python"><code class="sourceCode python">    addition = (a,b)-&gt;
+        a+b
+
+    <span class="co">#Utilisation :</span>
+
+    c = addition <span class="dv">45</span>, <span class="dv">12</span></code></pre>
+<h3 id="interopérabilité"><a href="#TOC"><span class="header-section-number">13.2.2</span> Interopérabilité</a></h3>
+<p>Coffeescript reste compatible avec les librairies existantes (pas besoin de ré-écrire jQuery ... ouf !)</p>
+<p><em>Attendre le chargement de la page pour lancer les commandes :</em></p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    $(<span class="kw">function</span>() {
+        some() ;
+        init() ;
+        calls() ;
+    }) ;</code></pre>
+<p><em>La même chose en Coffeescript :</em></p>
+<pre class="sourceCode python"><code class="sourceCode python">    $ -&gt;
+        some()
+        init()
+        calls()</code></pre>
+<h3 id="interpolation-et-chaînes-de-caractères"><a href="#TOC"><span class="header-section-number">13.2.3</span> Interpolation et Chaînes de caractères</a></h3>
+<p>Imaginons un objet bob :</p>
+<p><em>En Javascript :</em></p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="kw">var</span> bob = {
+        <span class="dt">firstName </span>: <span class="st">&quot;Bob&quot;</span>,
+        <span class="dt">lastName </span>: <span class="st">&quot;Morane&quot;</span>,
+        <span class="dt">sayHello </span>: <span class="kw">function</span>() { <span class="kw">return</span> <span class="st">&quot;Hello !&quot;</span>}
+    }</code></pre>
+<p>Nous voulons afficher un message à partir des propriétés de Bob, aujourd’hui nous faisons comme ceci :</p>
+<p><em>En Javascript :</em></p>
+<pre class="sourceCode python"><code class="sourceCode python">    console.log(
+        <span class="st">&quot;Firstname : &quot;</span> + bob.firstName + 
+        <span class="st">&quot; Lastname : &quot;</span> + bob.lastName + 
+        <span class="st">&quot;Hello : &quot;</span> + 
+        bob.sayHello()
+    ) ;</code></pre>
+<p>Coffeescript introduit des nouveaux concepts à propos des chaînes de caractères et particulièrement <code>#{variable}</code> qui permet d’insérer la valeur de variable dans une chaîne. Nous aurons donc ceci :</p>
+<p><em>Version Coffeescript :</em></p>
+<pre class="sourceCode python"><code class="sourceCode python">    bob = 
+        firstName : <span class="st">&quot;Bob&quot;</span>
+        lastName : <span class="st">&quot;Morane&quot;</span>
+        sayHello : -&gt;
+            <span class="st">&quot;Hello !&quot;</span>
+
+    console.log <span class="st">&quot;</span>
+<span class="st">        Firstname : #{bob.firstName}</span>
+<span class="st">        Lastname : #{bob.lastName}</span>
+<span class="st">        Hello : #{bob.sayHello()}</span>
+<span class="st">    &quot;</span></code></pre>
+<blockquote>
+<blockquote>
+<p><strong>Remarquez au passage</strong>, la possibilité d’écrire vos chaînes de caractères sur plusieurs lignes (dans ce cas les saut de lignes ne sont pas pris en comptes, pour les prendre en comptes utilisez des triples « doubles-quotes » : &quot;&quot;&quot;)</p>
+</blockquote>
+</blockquote>
+<h3 id="jouez-un-peu-avec-les-tableaux"><a href="#TOC"><span class="header-section-number">13.2.4</span> Jouez un peu avec les tableaux</a></h3>
+<p>Nous avons le tableau suivant (en Coffeescript) :</p>
+<p><em>Copains :</em></p>
+<pre class="sourceCode python"><code class="sourceCode python">    copains = [
+        { nom : <span class="st">&quot;Bob&quot;</span>, age : <span class="dv">30</span> }
+        { nom : <span class="st">&quot;Sam&quot;</span>, age : <span class="dv">50</span> }
+        { nom : <span class="st">&quot;John&quot;</span>, age : <span class="dv">20</span> }
+    ]</code></pre>
+<p>Nous voudrions obtenir tous les copains de moins de 50 ans :</p>
+<p><em>Jeunes copains :</em></p>
+<pre class="sourceCode python"><code class="sourceCode python">    Result = (copain <span class="kw">for</span> copain in copains when copain.age &lt; <span class="dv">50</span>)</code></pre>
+<h2 id="et-enfin-et-surtout-les-classes"><a href="#TOC"><span class="header-section-number">13.3</span> Et enfin (et surtout ?) les classes</a></h2>
+<p>Maintenant, grâce à Coffeescript, nous pouvons écrire des classes. Il faut aussi savoir ceci : le mot clé <code>this</code> devient <code>@</code>, les « champs » (propriétés) de la classes sont déclarés dans le constructeur. Mais un exemple est souvent plus parlant que trop d’explications :</p>
+<h3 id="notre-1ère-classe"><a href="#TOC"><span class="header-section-number">13.3.1</span> Notre 1ère classe</a></h3>
+<p><em>Classe “Human” :</em></p>
+<pre class="sourceCode python"><code class="sourceCode python">    <span class="kw">class</span> Human
+        constructor : (firstName, lastName) -&gt;
+            <span class="co">#fields : @ = this</span>
+            @firstName = firstName
+            @lastName = lastName
+
+        <span class="co">#method</span>
+        hello : -&gt;
+            console.log <span class="st">&quot;Hello #{@firstName} #{@lastName}&quot;</span>
+
+    <span class="co">#Utilisation</span>
+    Bob = new Human <span class="st">&quot;Bob&quot;</span>, <span class="st">&quot;Morane&quot;</span>
+
+    Bob.hello()</code></pre>
+<h3 id="propriétés-valeurs-par-défaut"><a href="#TOC"><span class="header-section-number">13.3.2</span> Propriétés &amp; valeurs par défaut</a></h3>
+<p>Vous pouvez aller encore plus vite et déclarer vos propriétés et leur valeur par défaut directement en paramètres du constructeur.</p>
+<p><em>Classe “Human”, autre version, même résultats :</em></p>
+<pre class="sourceCode python"><code class="sourceCode python">    <span class="kw">class</span> Human
+        constructor : (@firstName = <span class="st">&quot;John&quot;</span>, @lastName = <span class="st">&quot;Doe&quot;</span>) -&gt;
+        hello : -&gt;
+                console.log <span class="st">&quot;Hello #{@firstName} #{@lastName}&quot;</span></code></pre>
+<h3 id="comme-en-java-composition-association-encapsulation"><a href="#TOC"><span class="header-section-number">13.3.3</span> Comme en Java : Composition, Association, Encapsulation</a></h3>
+<p>La notion de classe apportée par Coffeescript (même s’il existe en javascript, comme nous avons pu le voir par exemple avec le modèle objet de Backbone) permet facilement de mettre en œuvre les différents concepts habituels en programmation « orientée classes » et plus facilement encore décliner les « design patterns ».</p>
+<p><em>Composition de classes :</em></p>
+<pre class="sourceCode python"><code class="sourceCode python">    <span class="kw">class</span> Dog
+        constructor:(@name)-&gt;
+
+    <span class="kw">class</span> Human
+        constructor:(@first, @last, @dog)-&gt;
+
+    Bob = new Human <span class="st">&quot;Bob&quot;</span>, <span class="st">&quot;Morane&quot;</span>, new Dog <span class="st">&quot;Wolf&quot;</span>
+    console.log <span class="st">&quot;Le chien de Bob s&#39;appelle #{Bob.dog.name}&quot;</span></code></pre>
+<p><em>Encapsulation de classes :</em></p>
+<pre class="sourceCode python"><code class="sourceCode python">    <span class="kw">class</span> Human
+        <span class="kw">class</span> Hand
+            constructor:(@whichOne)-&gt;
+
+        constructor:(@first, @last)-&gt;
+            @leftHand = new Hand <span class="st">&quot;left&quot;</span>
+            @rightHand = new Hand <span class="st">&quot;right&quot;</span>
+
+    console.log JSON.stringify new Human <span class="st">&quot;Bob&quot;</span>, <span class="st">&quot;Morane&quot;</span></code></pre>
+<h3 id="comme-en-java-les-membres-statiques"><a href="#TOC"><span class="header-section-number">13.3.4</span> Comme en Java : les membres statiques</a></h3>
+<p>La définition/déclaration de membres statiques se fait pour les propriétés en dehors du constructeur cette fois-ci et pré-fixées par <code>@</code>, les méthodes statiques « commencent » elles aussi par <code>@</code> :</p>
+<p><em>Toujours et encore notre classe « Human » :</em></p>
+<pre class="sourceCode python"><code class="sourceCode python">    <span class="kw">class</span> Human
+        @counter : <span class="dv">0</span> <span class="co">#static property</span>
+
+        constructor : (@firstName, @lastName) -&gt;
+            Human.counter += <span class="dv">1</span>
+
+        <span class="co">#static method</span>
+        @howMany : -&gt;
+            Human.counter
+
+    Bob = new Human <span class="st">&quot;Bob&quot;</span>, <span class="st">&quot;Morane&quot;</span>
+    console.log <span class="st">&quot;Human.counter #{Human.howMany()}&quot;</span></code></pre>
+<h3 id="mais-aussi-comme-en-java-lhéritage"><a href="#TOC"><span class="header-section-number">13.3.5</span> Mais aussi (comme en Java) : l’héritage !</a></h3>
+<p>Coffeescript introduit le mot clé <code>extends</code> pour permettre à une classe d’hériter d’une autre classe, et cela s’utilise de façon très intuitive :</p>
+<p><em>Un humain, et un super héros qui hérite d’humain … :</em></p>
+<pre class="sourceCode python"><code class="sourceCode python">    <span class="kw">class</span> Human
+        constructor : (@firstName, @lastName) -&gt;
+
+        hello : -&gt;
+            <span class="st">&quot;Hello #{@firstName} #{@lastName}&quot;</span>
+
+    <span class="kw">class</span> Superhero extends Human
+        constructor : (@firstName, @lastName, @name) -&gt;
+
+        hello : -&gt;
+            <span class="dt">super</span> + <span class="st">&quot; known as #{@name}&quot;</span>
+
+    SuperMan = new Superhero <span class="st">&quot;Clark&quot;</span>, <span class="st">&quot;Kent&quot;</span>, <span class="st">&quot;SuperMan&quot;</span>
+    console.log SuperMan.hello()</code></pre>
+<blockquote>
+<blockquote>
+<p><strong>Notez au passage</strong> l’apparition du mot-clé super qui permet « d’appeler » la méthode du « parent ».</p>
+</blockquote>
+</blockquote>
+<p>Une première conclusion s’impose : Maintenant vous pouvez faire du javascript « orienté classes » tout en conservant les possibilités actuelles de javascript.</p>
+<h2 id="jaime-je-naime-pas"><a href="#TOC"><span class="header-section-number">13.4</span> J’aime / Je n’aime pas</a></h2>
+<p>Coffeescript fait beaucoup de bruit dans la communauté javascript, mais aussi du côtés des développeurs java, .Net, etc. ... Il a été assez bien adopté par les développeurs Ruby car il a une syntaxe assez proche.</p>
+<p>Ce qui plaît beaucoup, plus particulièrement aux développeurs « non javascript », c’est le concept de classes, mais les développeurs javascript « puristes » ne voient pas l’intérêt d’utiliser des classes, les concepts objet de javascript apparaîssant largement suffisants.</p>
+<blockquote>
+<blockquote>
+<p>Personnellement, si l’aspect classe doit contribuer à l’adoption de javascript, laissons les classes ! Il y a encore trop de développeurs rebutés par javascript pour de fausses raisons. Ce n’est probablement pas pour rien si le concept de classe apparaît dans la future version de javascript ES6.</p>
+</blockquote>
+</blockquote>
+<p>Ce qui plaît beaucoup moins, et là les développeurs javascripts et java se rejoignent, c’est l’abscence de points virgule, d’accolades, et la notion d’indentation « significative » comme en python, rendant le code difficilement lisible s’il est trop long.</p>
+<blockquote>
+<blockquote>
+<p>D’autres vous diront que la simplification du code grâce à Coffeescript contribue à sa lisibilité. Comme quoi, les goûts et les couleurs ...</p>
+</blockquote>
+</blockquote>
+<p>Le plus gros défaut de Coffeescript, reste la difficulté à debbuger du code coffeescript, l’impossibilité de l’utiliser directement dans la console du navigateur. Cependant le projet <strong>Source Map</strong> devrait régler ce type de problème à l’avenir (et pour d’autres transpilers aussi) : <a href="http://www.coffeescriptlove.com/2012/04/source-maps-for-coffeescript.html">http://www.coffeescriptlove.com/2012/04/source-maps-for-coffeescript.html</a>.</p>
+<p>On pourrait ensuite se demander, mais que va devenir Coffeescript dans le futur avec l’apparition de la nouvelle version de javascript ? Je vous répondrais, qu’avant que cette version soit déployée sur tous les postes de travail (donc que tout le monde dispose d’un navigateur de dernière génération) il va se passer plusieurs années et que Coffeescript génère du code javascript qui fonctionne sur la majorité des navigateurs existants.</p>
+<p>Brendan Heich (le papa de javascript) a officiellement donné sa bénédiction « publique » à Coffeescript, nul doute que Jeremy Ashkenas ne fasse évoluer Coffeescript en fonction des spécifications javascript pour garder une compatibilté ascendante et descendante. Pour rappel, en début de page du site de Coffeescript, il est écrit : <strong>« The golden rule of CoffeeScript is: &quot;It's just JavaScript&quot; »</strong>.</p>
+<blockquote>
+<blockquote>
+<p>Pour ma part, je pense que c’est un excellent outil d’apprentissage (il génère du code javascript « propre ») mais sur un projet de réalisation professionnel, il est à réserver aux « gurus » qui maîtrise déjà javascript.</p>
+</blockquote>
+</blockquote>
+<p>Attention, un challenger de poids vient de naître dans le monde des transpilers javascript : <strong>TypeScript</strong>, porté par Microsoft, développé entre autre par le papa de l’ancêtre du Turbo Pascal mais aussi du C# et qui tend à gommer une grande partie des défauts reprochés à Coffeescript. Cela fera l’objet d’un prochain chapitre, mais avant cela, passons à la ré-écriture de notre Blog en Coffeescript.</p>
+<h2 id="ré-écriture-de-notre-blog-soutiller"><a href="#TOC"><span class="header-section-number">13.5</span> Ré-écriture de notre blog ?! S'outiller</a></h2>
+<p>Avant toute chose, sauvegardez votre arborescence applicative à un autre emplacement pour pouvoir la réutiliser.</p>
+<h3 id="installation-de-coffeescript"><a href="#TOC"><span class="header-section-number">13.5.1</span> Installation de Coffeescript</a></h3>
+<p>L’installation de Coffeescript est très simple, elle s’effectue en mode commande avec npm (installé en même temps que Node.js) :</p>
+<pre><code>npm install –g coffee-script</code></pre>
+<blockquote>
+<blockquote>
+<p><strong>Remarque :</strong> pour les utilisateurs sous OSX, vous devez normalement utiliser la commande <code>sudo npm install –g coffee-script</code></p>
+</blockquote>
+</blockquote>
+<p>A partir de maintenant, vous pouvez compiler/transpiler du code Coffeescript en javascript avec la commande suivante :</p>
+<pre><code>coffee –compile Human.coffee</code></pre>
+<p>qui produira un fichier javascript <code>Human.js</code>.</p>
+<p>Pour plus d’informations : <a href="http://jashkenas.github.com/coffee-script/#usage">http://jashkenas.github.com/coffee-script/#usage</a>.</p>
+<h3 id="industrialisation-de-la-transpilation"><a href="#TOC"><span class="header-section-number">13.5.2</span> “Industrialisation” de la transpilation</a></h3>
+<p>Nous avons donc décidé de re-écrire la partie javascript cliente de notre blog. Pour cela dans le répertoire de notre application, créez un répertoire <code>public.coffee</code> avec un sous-répertoire <code>models</code> et un sous répertoire <code>views</code>. Ce répertoire et ces deux sous-répertoires contiendrons les fichiers source coffeescript (que vous pouvez d’ores et déjà créer “vides” dans les répertoires correspondants) :</p>
+<pre><code>public.coffee\
+              |-models\
+              |        |-post.coffee
+              |-views\
+              |       |-AdminView.coffee
+              |       |-LoginView.coffee
+              |       |-MainView.coffee
+              |       |-PostsListView.coffee
+              |       |-PostView.coffee
+              |       |-SidebarView.coffee
+              |       
+              |-Blog.coffee
+              |-main.coffee
+              |-routes.coffee</code></pre>
+<p>Le “but du jeu” étant de transpiler tous les fichiers <code>.coffee</code> en fichier javascript <code>.js</code> dans le répertoire <code>public</code> (et ses sous-répertoire). Faire ceci “à la main” en prenant les fichiers un par un peut devenir très rapidement fastidieux. Mais heureusement, l’installation de Coffeescript inclut un système simple de “build” qui s’appelle <strong>Cake</strong>, qui est capable d’effectuer des tâches simples décrites dans un fichier <code>Cakefile</code>. Plus d’information ici : <a href="http://jashkenas.github.com/coffee-script/#cake">http://jashkenas.github.com/coffee-script/#cake</a>.</p>
+<p>Donc à la racine de votre application, créez un fichier <code>Cakefile</code> avec le contenu suivant :</p>
+<p><em>Cakefile :</em></p>
+<pre class="sourceCode python"><code class="sourceCode python">    fs = require <span class="st">&#39;fs&#39;</span>
+    {<span class="kw">print</span>} = require <span class="st">&#39;util&#39;</span>
+    {spawn} = require <span class="st">&#39;child_process&#39;</span>
+
+    build = (callback) -&gt;
+        coffee = spawn <span class="st">&#39;coffee&#39;</span>, [<span class="st">&#39;-c&#39;</span>, <span class="st">&#39;-o&#39;</span>, <span class="st">&#39;public&#39;</span>, <span class="st">&#39;public.coffee&#39;</span>] 
+        coffee.stderr.on <span class="st">&#39;data&#39;</span>, (data) -&gt;
+            process.stderr.write data.toString()
+        coffee.stdout.on <span class="st">&#39;data&#39;</span>, (data) -&gt; 
+            <span class="kw">print</span> data.toString()
+        coffee.on <span class="st">&#39;exit&#39;</span>, (code) -&gt; 
+            callback?() <span class="kw">if</span> code is <span class="dv">0</span>
+
+    task <span class="st">&#39;build&#39;</span>, <span class="st">&#39;Build public/ from public.coffee/&#39;</span>, -&gt; 
+        build()</code></pre>
+<p>En fait nous expliquons à Cake que nous souhaitons transpiler en javascript tous les fichiers du répertoire source <code>public.coffee</code> vers le répertoire cible <code>public</code>. Et pour cela, il suffira, dans un terminal (ou une console) de lancer la commande : <code>cake build</code> (à la racine de notre application, là où est situé le fichier <code>Cakefile</code>).</p>
+<h2 id="ré-écriture-traductions"><a href="#TOC"><span class="header-section-number">13.6</span> Ré-écriture / Traductions</a></h2>
+<p>Alors, l’objectif n’est pas d’apprendre Coffeescript (cela pourrait donner lieu à un ouvrage entier), mais de montrer comment il est possible d’écrire notre blog “autrement”, donc je vous livre ici la traduction en Coffeescript (pas forcément dans les règles de l’art) qui fonctionnera et assortie de quelques remarques.</p>
+<h3 id="blog.coffee"><a href="#TOC"><span class="header-section-number">13.6.1</span> Blog.coffee</a></h3>
+<pre class="sourceCode python"><code class="sourceCode python">    window.Blog = 
+      Models : {}
+      Collections : {}
+      Views : {}
+      Router : {}</code></pre>
+<h3 id="main.coffee"><a href="#TOC"><span class="header-section-number">13.6.2</span> main.coffee</a></h3>
+<pre class="sourceCode python"><code class="sourceCode python">    yepnope
+      load:
+        jquery: <span class="st">&quot;libs/vendors/jquery-1.7.2.js&quot;</span>
+        underscore: <span class="st">&quot;libs/vendors/underscore.js&quot;</span>
+        backbone: <span class="st">&quot;libs/vendors/backbone.js&quot;</span>
+        mustache: <span class="st">&quot;libs/vendors/mustache.js&quot;</span>
+
+        <span class="co">#NameSpace</span>
+        blog: <span class="st">&quot;Blog.js&quot;</span>
+
+        <span class="co">#Models</span>
+        posts: <span class="st">&quot;models/post.js&quot;</span>
+
+        <span class="co">#Controllers</span>
+        sidebarview: <span class="st">&quot;views/SidebarView.js&quot;</span>
+        postslistviews: <span class="st">&quot;views/PostsListView.js&quot;</span>
+        mainview: <span class="st">&quot;views/MainView.js&quot;</span>
+        loginview: <span class="st">&quot;views/LoginView.js&quot;</span>
+        postview: <span class="st">&quot;views/PostView.js&quot;</span>
+        adminview: <span class="st">&quot;views/AdminView.js&quot;</span>
+
+        <span class="co">#Routes</span>
+        routes: <span class="st">&quot;routes.js&quot;</span>
+
+      callback:
+        routes: -&gt;
+          console.log <span class="st">&quot;routes loaded ...&quot;</span>
+
+      complete: -&gt;
+        $ -&gt;
+          console.log <span class="st">&quot;Lauching application ...&quot;</span>
+          window.blogPosts = new Blog.Collections.Posts()
+          window.mainView = new Blog.Views.MainView(collection: blogPosts)
+
+          <span class="co">#======= Admin =======</span>
+          window.adminView = new Blog.Views.AdminView(collection: blogPosts)
+
+
+          <span class="co">#======= Authentification =======</span>
+          window.loginView = new Blog.Views.LoginView(adminView: adminView)
+
+          window.postView = new Blog.Views.PostView()
+          window.router = new Blog.Router.RoutesManager(collection: blogPosts)
+
+          Backbone.history.start()</code></pre>
+<h3 id="post.coffee"><a href="#TOC"><span class="header-section-number">13.6.3</span> post.coffee</a></h3>
+<pre class="sourceCode python"><code class="sourceCode python">    <span class="kw">class</span> Blog.Models.Post extends Backbone.Model
+      urlRoot:<span class="st">&quot;/blogposts&quot;</span>
+
+    <span class="kw">class</span> Blog.Collections.Posts extends Backbone.Collection
+
+      model: Blog.Models.Post
+
+      <span class="dt">all</span>: -&gt;
+        @url = <span class="st">&quot;/blogposts&quot;</span>
+        @
+
+      query: (query) -&gt;
+        @url = <span class="st">&quot;/blogposts/query/&quot;</span> + query
+        @    </code></pre>
+<h3 id="adminview.coffee"><a href="#TOC"><span class="header-section-number">13.6.4</span> AdminView.coffee</a></h3>
+<pre class="sourceCode python"><code class="sourceCode python">    <span class="kw">class</span> Blog.Views.AdminView extends Backbone.View
+      el: $ <span class="st">&quot;#admin&quot;</span>
+      initialize: -&gt;
+        @template = $(<span class="st">&quot;#admin_template&quot;</span>).html()
+
+        <span class="co">#je prévois de trier ma collection</span>
+        @collection.comparator = (model) -&gt;
+          -(new Date(model.get(<span class="st">&quot;date&quot;</span>)).getTime())
+
+      render: -&gt;
+        renderedContent = Mustache.to_html(@template,
+          posts: @collection.toJSON()
+        )
+        @$el.html renderedContent
+
+      events:
+        <span class="st">&quot;click  #btn_update&quot;</span>: <span class="st">&quot;onClickBtnUpdate&quot;</span>
+        <span class="st">&quot;click  #btn_create&quot;</span>: <span class="st">&quot;onClickBtnCreate&quot;</span>
+        <span class="st">&quot;click  #btn_send&quot;</span>: <span class="st">&quot;sendPost&quot;</span>
+
+      onClickBtnUpdate: -&gt;
+        selectedId = $(<span class="st">&quot;#post_choice&quot;</span>).val()
+        post = @collection.get(selectedId)
+
+        <span class="co">#Je récupère les informations du post et les affiche</span>
+        $(<span class="st">&quot;#admin &gt; [name=&#39;id&#39;]&quot;</span>).html post.get(<span class="st">&quot;id&quot;</span>)
+        $(<span class="st">&quot;#admin &gt; [name=&#39;author&#39;]&quot;</span>).val post.get(<span class="st">&quot;author&quot;</span>)
+        $(<span class="st">&quot;#admin &gt; [name=&#39;title&#39;]&quot;</span>).val post.get(<span class="st">&quot;title&quot;</span>)
+        $(<span class="st">&quot;#admin &gt; [name=&#39;message&#39;]&quot;</span>).val post.get(<span class="st">&quot;message&quot;</span>)
+
+      onClickBtnCreate: -&gt;
+
+        <span class="co">#je ré-initialise les zones de saisie</span>
+        $(<span class="st">&quot;#admin &gt; [name=&#39;id&#39;]&quot;</span>).html <span class="st">&quot;&quot;</span>
+        $(<span class="st">&quot;#admin &gt; [name=&#39;author&#39;]&quot;</span>).val <span class="st">&quot;&quot;</span>
+        $(<span class="st">&quot;#admin &gt; [name=&#39;title&#39;]&quot;</span>).val <span class="st">&quot;&quot;</span>
+        $(<span class="st">&quot;#admin &gt; [name=&#39;message&#39;]&quot;</span>).val <span class="st">&quot;&quot;</span>
+
+      sendPost: -&gt; <span class="co">#Sauvegarde</span>
+        <span class="co">#that = this #pour conserver le contexte</span>
+        <span class="dt">id</span> = $(<span class="st">&quot;#admin &gt; [name=&#39;id&#39;]&quot;</span>).html()
+        post = undefined
+        <span class="kw">if</span> <span class="dt">id</span> is <span class="st">&quot;&quot;</span> <span class="co">#si l&#39;id est vide c&#39;est une création</span>
+          post = new Blog.Models.Post()
+        <span class="kw">else</span> <span class="co">#l&#39;id n&#39;est pas vide c&#39;est une mise à jour</span>
+          post = new Blog.Models.Post(<span class="dt">id</span>: $(<span class="st">&quot;#admin &gt; [name=&#39;id&#39;]&quot;</span>).html())
+        post.save
+          author: $(<span class="st">&quot;#admin &gt; [name=&#39;author&#39;]&quot;</span>).val()
+          title: $(<span class="st">&quot;#admin &gt; [name=&#39;title&#39;]&quot;</span>).val()
+          message: $(<span class="st">&quot;#admin &gt; [name=&#39;message&#39;]&quot;</span>).val()
+          date: new Date()
+        ,
+          success: -&gt;
+
+            <span class="co">#Si la transaction côté serveur a fonctionné</span>
+
+            <span class="co">#je recharge ma collection</span>
+            @collection.fetch success: =&gt;
+
+              <span class="co">#mise à jour de la vue admin</span>
+              @render()
+
+
+
+          <span class="co">#La vue principale se re-mettra à jour</span>
+          <span class="co">#automatiquement, car elle est &quot;abonnée&quot;</span>
+          <span class="co">#aux changement de la collection</span>
+          error: -&gt;</code></pre>
+<pre><code>//TODO : parler de fat arrow =&gt;</code></pre>
+<h3 id="loginview.coffee"><a href="#TOC"><span class="header-section-number">13.6.5</span> LoginView.coffee</a></h3>
+<pre class="sourceCode python"><code class="sourceCode python">    <span class="kw">class</span> Blog.Views.LoginView extends Backbone.View
+      el: $ <span class="st">&quot;#blog_login_form&quot;</span>
+      initialize: (args) -&gt;
+        that = this
+        @adminView = args.adminView
+        @template = $(<span class="st">&quot;#blog_login_form_template&quot;</span>).html()
+
+        <span class="co">#on vérifie si pas déjà authentifié</span>
+        $.ajax
+          <span class="dt">type</span>: <span class="st">&quot;GET&quot;</span>
+          url: <span class="st">&quot;/alreadyauthenticated&quot;</span>
+          error: (err) -&gt;
+            console.log err
+
+          success: (dataFromServer) -&gt;
+            <span class="kw">if</span> dataFromServer.firstName
+              that.render <span class="st">&quot;Bienvenue&quot;</span>, dataFromServer
+            <span class="kw">else</span>
+              that.render <span class="st">&quot;???&quot;</span>,
+                firstName: <span class="st">&quot;John&quot;</span>
+                lastName: <span class="st">&quot;Doe&quot;</span>
+
+
+
+      render: (message, user) -&gt;
+        renderedContent = Mustache.to_html(@template,
+          message: message
+          firstName: (<span class="kw">if</span> user then user.firstName <span class="kw">else</span> <span class="st">&quot;&quot;</span>)
+          lastName: (<span class="kw">if</span> user then user.lastName <span class="kw">else</span> <span class="st">&quot;&quot;</span>)
+
+          <span class="co">#adminLink : user.isAdmin ? &#39;#/admin&#39; : &quot;&quot;,</span>
+          adminLinkLabel: 
+            (<span class="kw">if</span> user then (<span class="kw">if</span> user.isAdmin then <span class="st">&quot;Administration&quot;</span> <span class="kw">else</span> <span class="st">&quot;&quot;</span>) <span class="kw">else</span> <span class="st">&quot;&quot;</span>)
+        )
+        @$el.html renderedContent
+
+      events:
+        <span class="st">&quot;click  .btn-primary&quot;</span>: <span class="st">&quot;onClickBtnLogin&quot;</span>
+        <span class="st">&quot;click  .btn-inverse&quot;</span>: <span class="st">&quot;onClickBtnLogoff&quot;</span>
+        <span class="st">&quot;click #adminbtn&quot;</span>: <span class="st">&quot;displayAdminPanel&quot;</span>
+
+      displayAdminPanel: -&gt;
+        @adminView.render()
+
+      onClickBtnLogin: (domEvent) -&gt;
+        fields = $(<span class="st">&quot;#blog_login_form :input&quot;</span>)
+        <span class="co">#that = this</span>
+        $.ajax
+          <span class="dt">type</span>: <span class="st">&quot;POST&quot;</span>
+          url: <span class="st">&quot;/authenticate&quot;</span>
+          data:
+            email: fields[<span class="dv">0</span>].value
+            password: fields[<span class="dv">1</span>].value
+
+          dataType: <span class="st">&quot;json&quot;</span>
+          error: (err) -&gt;
+            console.log err
+
+          success: (dataFromServer) =&gt;
+            <span class="kw">if</span> dataFromServer.infos
+              @render dataFromServer.infos
+            <span class="kw">else</span>
+              <span class="kw">if</span> dataFromServer.error
+                @render dataFromServer.error
+              <span class="kw">else</span>
+                @render <span class="st">&quot;Bienvenue&quot;</span>, dataFromServer
+
+
+      onClickBtnLogoff: =&gt;
+        <span class="co">#that = this</span>
+        $.ajax
+          <span class="dt">type</span>: <span class="st">&quot;GET&quot;</span>
+          url: <span class="st">&quot;/logoff&quot;</span>
+          error: (err) -&gt;
+            console.log err
+
+          success: (dataFromServer) -&gt;
+            console.log dataFromServer
+            @render <span class="st">&quot;???&quot;</span>,
+              firstName: <span class="st">&quot;John&quot;</span>
+              lastName: <span class="st">&quot;Doe&quot;</span>   </code></pre>
+<h3 id="postslistview.coffee"><a href="#TOC"><span class="header-section-number">13.6.6</span> PostsListView.coffee</a></h3>
+<pre class="sourceCode python"><code class="sourceCode python">    <span class="kw">class</span> Blog.Views.PostsListView extends Backbone.View
+      el: $ <span class="st">&quot;#posts_list&quot;</span>
+      initialize: -&gt;
+        @template = $(<span class="st">&quot;#posts_list_template&quot;</span>).html()
+
+      render: -&gt;
+        renderedContent = Mustache.to_html(@template,
+          posts: @collection.toJSON()
+        )
+        @$el.html renderedContent</code></pre>
+<h3 id="postview.coffee"><a href="#TOC"><span class="header-section-number">13.6.7</span> PostView.coffee</a></h3>
+<pre class="sourceCode python"><code class="sourceCode python">    <span class="kw">class</span> Blog.Views.PostView extends Backbone.View
+      el: $ <span class="st">&quot;#posts_list&quot;</span>
+      initialize: -&gt;
+        @template = $(<span class="st">&quot;#post_details_template&quot;</span>).html()
+
+      render: (post) -&gt;
+        renderedContent = Mustache.to_html(@template,
+          post: post.toJSON()
+        )
+        @$el.html renderedContent</code></pre>
+<h3 id="sidebarview.coffee"><a href="#TOC"><span class="header-section-number">13.6.8</span> SidebarView.coffee</a></h3>
+<pre class="sourceCode python"><code class="sourceCode python">    <span class="kw">class</span> Blog.Views.SidebarView extends Backbone.View
+      el: $ <span class="st">&quot;#blog_sidebar&quot;</span>
+      initialize: -&gt;
+        @template = $(<span class="st">&quot;#blog_sidebar_template&quot;</span>).html()
+
+      render: -&gt;
+        renderedContent = Mustache.to_html(@template,
+          posts: @collection.toJSON()
+        )
+        @$el.html renderedContent</code></pre>
+<h3 id="mainview.coffee"><a href="#TOC"><span class="header-section-number">13.6.9</span> MainView.coffee</a></h3>
+<pre class="sourceCode python"><code class="sourceCode python">    <span class="kw">class</span> Blog.Views.MainView extends Backbone.View
+      initialize: -&gt;
+        @collection.comparator = (model) -&gt;
+          -(new Date(model.get(<span class="st">&quot;date&quot;</span>)).getTime())
+
+        _.bindAll this, <span class="st">&quot;render&quot;</span>
+        @collection.bind <span class="st">&quot;reset&quot;</span>, @render
+        @collection.bind <span class="st">&quot;change&quot;</span>, @render
+        @collection.bind <span class="st">&quot;add&quot;</span>, @render
+        @collection.bind <span class="st">&quot;remove&quot;</span>, @render
+        @sidebarView = new Blog.Views.SidebarView()
+        @postsListView = new Blog.Views.PostsListView(collection: @collection)
+
+      render: -&gt;
+
+        @sidebarView.collection = new Blog.Collections.Posts(@collection.first(<span class="dv">3</span>))
+        @sidebarView.render()
+        @postsListView.render()</code></pre>
+<h3 id="routes.coffee"><a href="#TOC"><span class="header-section-number">13.6.10</span> routes.coffee</a></h3>
+<pre class="sourceCode python"><code class="sourceCode python">    <span class="kw">class</span> Blog.Router.RoutesManager extends Backbone.Router
+      initialize: (args) -&gt;
+        @collection = args.collection
+
+      routes:
+        <span class="st">&quot;post/:id_post&quot;</span>: <span class="st">&quot;displayPost&quot;</span>
+        hello: <span class="st">&quot;hello&quot;</span>
+        <span class="st">&quot;*path&quot;</span>: <span class="st">&quot;root&quot;</span>
+
+      root: -&gt;
+        @collection.<span class="dt">all</span>().fetch success: (result) -&gt;
+
+          <span class="co">#ça marche !!!</span>
+          console.log <span class="st">&quot;fetching collection&quot;</span>, result
+
+
+      hello: -&gt;
+        $(<span class="st">&quot;.hero-unit &gt; h1&quot;</span>).html <span class="st">&quot;Hello World !!!&quot;</span>
+
+      displayPost: (id_post) -&gt;
+        tmp = new Blog.Models.Post(<span class="dt">id</span>: id_post)
+        tmp.fetch success: (result) -&gt;
+          postView.render result</code></pre>
+<p>Ouf, c'est fini.</p>
+<h3 id="transpilons"><a href="#TOC"><span class="header-section-number">13.6.11</span> Transpilons</a></h3>
+<p>Si vous lancez la commande : <code>cake build</code> vous obtiendrez de nouveau fichiers javascript dans le répertoire public. Relancez votre application, vous noterez qu’elle fonctionne comme avant.</p>
+<h3 id="conclusions"><a href="#TOC"><span class="header-section-number">13.6.12</span> Conclusion(s)</a></h3>
+<p>Les conclusions sont très personnelles. J'aime beaucoup le principe de &quot;classe&quot; et je le trouve très utile pour organiser son code, tout particulièrement en ce qui concerne les modèles et les collections. Au passage, vous avez du remarquer que le modèle objet de Backbone se marie parfaitement avec celui de Coffeescript (on peut hériter directement d'un Backbone.Model par exemple). C'est normal, les 2 outils sont codés par le même auteur.</p>
+<p>Ce que j'aime aussi, c'est les possibilités des chaînes de caractères.</p>
+<p>Par contre, je trouve que pour des portions de code très longue, on perd en visibilité (cf. <code>AdminView</code> ou <code>LoginView</code>) (mais ça n'engage que moi).</p>
+<p>Cependant, je ne peux m'empêcher d'aimer ce &quot;petit&quot; langage et les concepts qu'il apporte.</p>
+<p>... A vous de voir ;)</p>
 </body>
 </html>

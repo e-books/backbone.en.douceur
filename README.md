@@ -1,8 +1,8 @@
 <hr>
 
-###- [Routeur & Organisation de code au menu : Télécharger le pdf (v° alpha du 28/11/2012)](https://github.com/downloads/k33g/backbone.en.douceur/backbone.en.douceur.20121128.pdf) *(10 chapitres)*
+###- [Sécurisation, Coffeescript au menu : Télécharger le pdf (v° alpha du 02/12/2012)](https://github.com/downloads/k33g/backbone.en.douceur/backbone.en.douceur.20121202.pdf) *(10 chapitres)*
 
-###- [Format epub disponible aussi ...](https://github.com/downloads/k33g/backbone.en.douceur/backbone.en.douceur.20121128.epub)
+###- [Format epub disponible aussi ...](https://github.com/downloads/k33g/backbone.en.douceur/backbone.en.douceur.20121202.epub)
 
 ###- [Voir le code source ...](https://github.com/k33g/backbone.en.douceur)
 
@@ -23,12 +23,12 @@ Cet ouvrage va traiter au moins les points suivants :
 - 08-Les Vues & Templating *(publié)*
 - 09-Le Routeur *(publié)*
 - 10-Organiser son code *(publié)*
-- 11-"Securisation" de notre application *(à venir pour début décembre)*
-- 12-Backbone.Sync
-- 13-Backbone & Coffeescript
-- 14-Autres frameworks MVC
-- 15-Backbone & Typescript
-- 16-Ressources
+- 11-"Securisation" de notre application *(publié)*
+- 12-Backbone.Sync *(à écrire)*
+- 13-Backbone & Coffeescript *(publié)*
+- 14-Autres frameworks MVC *(à venir)*
+- 15-Backbone & Typescript *(à venir)*
+- 16-Ressources *(à écrire)*
 
 Soyez patient, l'ensemble des chapitres sera publié avant fin décembre. J'ai juste besoin d'un peu de temps entre ma vie de famille, ma vie pro et ma vie de geek.
 
