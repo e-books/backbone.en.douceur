@@ -21,7 +21,7 @@ Remerciements aussi pour :
 - [lodennan](https://github.com/lodennan)
 - [cbonnissent](https://github.com/cbonnissent) : format epub
 - [loicdescotte](https://github.com/loicdescotte) : relecture & corrections
-- [hasalex](https://github.com/hasalex) : relecture & corrections
+- [hasalex](https://github.com/hasalex) : relecture & corrections (nombreuses)
 
 
 ##Avertissement
