@@ -31,7 +31,7 @@ Nous verrons dans quelques chapitres qu'il est tout à fait possible de "marier"
 
 ###IDE (Editeur)
 
-Pour coder choisissez l'éditeur de code avec lequel vous vous sentez le plus à l'aise. Ils ont tous leurs spécificités, ils sont gratuits, open-source ou payants. Certains "puristes" utilisent même Vim ou Emacs. Je vous en livre ici quelques-uns que j'ai trouvé agréables à utiliser si vous n'avez pas déjà fait votre choix :
+Pour coder choisissez l'éditeur de code avec lequel vous vous sentez le plus à l'aise. Ils ont tous leurs spécificités, ils sont gratuits, open-source ou payants. Certains "puristes" utilisent même Vim ou Emacs. Je vous en livre ici quelques-uns que j'ai trouvés agréables à utiliser si vous n'avez pas déjà fait votre choix :
 
 - Mon préféré mais payant : WebStorm de chez JetBrains, il possède des fonctionnalités de refactoring très utiles (existe sous Windows, Linux et OSX)
 - Dans le même esprit et gratuit : Netbeans, il propose un éditeur HTML/Javascript très pertinent quant à la qualité de votre code (existe sous Windows, Linux et OSX)
@@ -44,7 +44,7 @@ Vous voyez, il y en a pour tous les goûts. En ce qui me concerne j'utilise esse
 
 ###Navigateur
 
-Le navigateur le plus agréable, selon moi, à utiliser pour faire du développement Web est certainement Chrome (C'est un avis très personnel, donc amis utilisateurs de Firefox ne m'en veuillez pas). En effet Chrome propose une console d'administration particulièrement puissante. C'est ce que je vais utiliser, rien ne vous empêche d'utiliser votre navigateur préféré. Par contre, que cela ne vous dispense pas d'aller tester régulièrement votre code sous d'autres navigateurs.
+Le navigateur le plus agréable, selon moi, à utiliser pour faire du développement Web est certainement Chrome (c'est un avis très personnel, donc amis utilisateurs de Firefox ne m'en veuillez pas). En effet Chrome propose une console d'administration particulièrement puissante. C'est ce que je vais utiliser, rien ne vous empêche d'utiliser votre navigateur préféré. Par contre, que cela ne vous dispense pas d'aller tester régulièrement votre code sous d'autres navigateurs.
 
 ##Initialisation de notre projet de travail
 
@@ -109,7 +109,7 @@ Les deux paragraphes qui suivent ne sont que pour ceux d'entre vous qui ne conna
 
 ##Jouons avec jQuery
 
-JQuery est un framework javascript initialement crée par John Resig qui vous permet de prendre le contrôle de votre page HTML. Voyons tout de suite comment nous en servir.
+JQuery est un framework javascript initialement créé par John Resig qui vous permet de prendre le contrôle de votre page HTML. Voyons tout de suite comment nous en servir.
 Dans notre toute nouvelle page `index.html`, préparons un peu notre bac à sable et saisissons le code suivant :
 
 ```html
@@ -214,7 +214,7 @@ Je voudrais la liste de mes titres `<H1>` : dans la console, saisir : `$('h1')`,
 ![jQuery](RSRC/02_04_JQUERY.png)\
 
 
-Je voudrais le texte du titre `<H1>` dont l'id est `"current_articles_title"` : dans la console, saisir : `$('#current_articles_title').text()`. L'identifiant étant unique, en fait le type de la node est peu important :
+Je voudrais le texte de l'élément dont l'id est `"current_articles_title"` : dans la console, saisir : `$('#current_articles_title').text()`. L'identifiant étant unique, en fait le type de la node est peu important :
 
 ![jQuery](RSRC/02_05_JQUERY.png)\
 
@@ -298,7 +298,7 @@ Puis ouvrez la page dans votre navigateur et activez la console :
 ![jQuery](RSRC/02_10_JQUERY.png)\
 
 
-Il semble que tous les éléments soient chargés correctement avec ou sans l’utilisation de la méthode `ready()` de jQuery. Vous avez du remarquer que j'avais déplacé mon code javascript et les références aux autres code javascript "en bas de ma page". Maintenant, déplacez `<script src="libs/vendors/jquery-1.7.2.js"></script>` et le code source que nous avons écrit au niveau du header (balise `<head>`) de la page, ce qui est plus "classique" et rechargez la page :
+Il semble que tous les éléments soient chargés correctement avec ou sans l’utilisation de la méthode `ready()` de jQuery. Vous avez du remarquer que j'avais déplacé mon code javascript et les références aux autres codes javascript "en bas de ma page". Maintenant, déplacez `<script src="libs/vendors/jquery-1.7.2.js"></script>` et le code source que nous avons écrit au niveau du header (balise `<head>`) de la page, ce qui est plus "classique" et rechargez la page :
 
 ![jQuery](RSRC/02_11_JQUERY.png)\
 
