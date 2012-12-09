@@ -19,7 +19,7 @@ Nous aurons besoin de :
 
 ##Principes http : GET, POST, PUT, DELETE
 
-Mon but est de faire une application web avec Node & Express sur les principes REST (Representational State Transfer) qui permettra de faire des opérations de type **CRUD** avec les modèles BAckbone en utilisant des services basés sur le protocole http avec les verbes suivants :
+Mon but est de faire une application web avec Node & Express sur les principes REST (Representational State Transfer) qui permettra de faire des opérations de type **CRUD** avec les modèles Backbone en utilisant des services basés sur le protocole http avec les verbes suivants :
 
 - **C**reate : POST
 - **R**ead : GET
