@@ -239,6 +239,31 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <li><a href="#conclusions"><span class="toc-section-number">13.6.12</span> Conclusion(s)</a></li>
 </ul></li>
 </ul></li>
+<li><a href="#autres-frameworks-mvc"><span class="toc-section-number">14</span> Autres Frameworks MVC</a><ul>
+<li><a href="#canjs"><span class="toc-section-number">14.1</span> CanJS</a><ul>
+<li><a href="#mise-en-oeuvre-rapide"><span class="toc-section-number">14.1.1</span> Mise en oeuvre rapide</a></li>
+<li><a href="#conclusion-sur-canjs"><span class="toc-section-number">14.1.2</span> Conclusion sur CanJS</a></li>
+</ul></li>
+<li><a href="#spine"><span class="toc-section-number">14.2</span> Spine</a><ul>
+<li><a href="#mise-en-oeuvre-rapide-1"><span class="toc-section-number">14.2.1</span> Mise en oeuvre rapide</a></li>
+<li><a href="#conclusion-sur-spine"><span class="toc-section-number">14.2.2</span> Conclusion sur Spine</a></li>
+</ul></li>
+<li><a href="#knockout"><span class="toc-section-number">14.3</span> Knockout</a><ul>
+<li><a href="#mise-en-oeuvre-très-très-rapide-...-mais-suffisante"><span class="toc-section-number">14.3.1</span> Mise en oeuvre très très rapide ... Mais suffisante</a></li>
+<li><a href="#un-modèle-selon-knockout"><span class="toc-section-number">14.3.2</span> Un modèle selon Knockout</a></li>
+<li><a href="#collections-1"><span class="toc-section-number">14.3.3</span> Collections ?</a></li>
+<li><a href="#attachons-notre-modèle-à-des-vues"><span class="toc-section-number">14.3.4</span> Attachons notre modèle à des vues !</a></li>
+<li><a href="#attachons-note-liste-de-messages-à-une-vue"><span class="toc-section-number">14.3.5</span> Attachons note liste de messages à une vue</a></li>
+<li><a href="#code-définitif-de-notre-page-index.html"><span class="toc-section-number">14.3.6</span> Code définitif de notre page index.html</a></li>
+<li><a href="#démonstration"><span class="toc-section-number">14.3.7</span> Démonstration !!!</a></li>
+<li><a href="#conclusion-1"><span class="toc-section-number">14.3.8</span> Conclusion</a></li>
+</ul></li>
+<li><a href="#encore-dautres-frameworks-mvc-javascript"><span class="toc-section-number">14.4</span> Encore d’autres frameworks MVC (javascript)</a></li>
+<li><a href="#conclusion-2"><span class="toc-section-number">14.5</span> Conclusion</a></li>
+</ul></li>
+<li><a href="#backbone-et-typescript"><span class="toc-section-number">15</span> Backbone et Typescript</a></li>
+<li><a href="#ressources-backbone"><span class="toc-section-number">16</span> Ressources Backbone</a></li>
+<li><a href="#resthub-backbone-stack"><span class="toc-section-number">17</span> RestHub Backbone Stack</a></li>
 </ul>
 </div>
 <h1 id="préambule-remerciements"><a href="#TOC"><span class="header-section-number">1</span> Préambule &amp; Remerciements</a></h1>
@@ -256,6 +281,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <li><a href="https://github.com/ehsavoie">ehsavoie</a> : 1ère pull request ;)</li>
 <li><a href="https://github.com/lodennan">lodennan</a></li>
 <li><a href="https://github.com/cbonnissent">cbonnissent</a> : format epub</li>
+<li><a href="https://github.com/loicdescotte">loicdescotte</a> : relecture</li>
 </ul>
 <h2 id="avertissement"><a href="#TOC"><span class="header-section-number">1.1</span> Avertissement</a></h2>
 <p>Cet ouvrage est destiné à être purement éducatif. donc dès fois le code n'est pas fait dans les &quot;règles de l'art&quot;, mais plutôt avec une &quot;vision&quot; pédagogique. Désolé donc pour les puristes, mais à priori vous n'êtes pas la cible ;). Cependant, je serais ravi de pouvoir inclure vos remarques et bonnes pratiques sous forme de notes dans chacun des chapitres. Donc à vos pull-requests !</p>
@@ -283,14 +309,14 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <p>Une &quot;Single Page Application est une application web qui embarque tous les éléments nécessaires à son fonctionnement dans une seule page HTML. Les scripts javascript liés seront chargés en même temps. Ensuite l’application web chargera les ressources nécessaires (généralement des données, des images …) à la demande en utilisant Ajax évitant ainsi tout rechargement de page et procurant une expérience utilisateur proche de celle que nous connaissions en mode “client-serveur”, voire meilleure dans certains cas. Ces webapps nouvelle génération peuvent aussi fonctionner offline en profitant des possibilités des derniers navigateurs (localstorage).</p>
 <blockquote>
 <blockquote>
-<p><strong>Remarque</strong> <em>: ce qui est amusant, c’est que dès 1999 ou 2000, Microsoft avait déjà introduit cette possibilité avec Internet Explorer 4 qui intégrait une applet Java (si si !) qui permettait de faire du Remote Protocol Call d’une page html vers le serveur sans recharger la page et en s’abonnant en javascript à l’évènement de retour (à vérifier, c’est loin, tout ça). Mais ce fut éclipsé par l’apparente simplicité de mise en œuvre des ActiveX (Flash était alors utilisée principalement pour de l’animation, mais permettait aussi ce genre d’artifice).</em></p>
+<p><strong>Remarque</strong> <em>: ce qui est amusant, c’est que dès 1999 ou 2000, Microsoft avait déjà introduit cette possibilité avec Internet Explorer 4 qui intégrait une applet Java (si si !) qui permettait de faire du Remote Protocol Call d’une page html vers le serveur sans recharger la page et en s’abonnant en javascript à l’évènement de retour (à vérifier, c’est loin, tout ça). Mais ce fut éclipsé par l’apparente simplicité de mise en œuvre des ActiveX (Flash était alors utilisé principalement pour de l’animation, mais permettait aussi ce genre d’artifice).</em></p>
 </blockquote>
 </blockquote>
 <p>Tout ça c’est bien beau, mais vous savez comme moi qu’un code HTML+JS (+CSS) peut rapidement devenir un plat de spaghettis impossible à maintenir, pour les autres mais pour vous aussi (retournez dans votre code 6 mois plus tard ;)). Il faut donc s’astreindre à des règles et s’équiper des bons outils afin de se faciliter la tâche, ne pas avoir à réinventer la poudre à chaque fois et pouvoir coder des applications robustes facilement modifiables (faciles à corriger, faciles à faire évoluer). Et si en plus vous pouvez vous faire plaisir …</p>
 <p>C’est de ce constat qu’est parti Jeremy Ashkenas, et c’est en mettant en pratique les préceptes depuis longtemps éprouvés de MVC qu’il a conçu Backbone, pour répondre à une problématique existante, ce qui le rend d’autant plus légitime. Rafraîchissons donc un peu notre mémoire à propos de MVC.</p>
 <blockquote>
 <blockquote>
-<p><strong>Remarque</strong> <em>: pour les lecteurs qui ne connaitraient pas ce concept, ne refermez pas le livre tout de suite, vous verrez avec les exemples pratiques que le concept est simple et facilement assimilable. Donc si les quelques paragraphes théoriques qui suivent vous semblent obscurs, je vous promet que dans quelques chapitres vous aurez tout compris.</em></p>
+<p><strong>Remarque</strong> <em>: pour les lecteurs qui ne connaitraient pas ce concept, ne refermez pas le livre tout de suite, vous verrez avec les exemples pratiques que le concept est simple et facilement assimilable. Donc si les quelques paragraphes théoriques qui suivent vous semblent obscurs, je vous promets que dans quelques chapitres vous aurez tout compris.</em></p>
 </blockquote>
 </blockquote>
 <h3 id="petit-rappel-mvc"><a href="#TOC"><span class="header-section-number">2.1.2</span> Petit rappel : MVC ?</a></h3>
@@ -321,13 +347,13 @@ code > span.er { color: #ff0000; font-weight: bold; }
 </blockquote>
 </blockquote>
 <p><em>Backbone.js respecte ce principe. Donc n'ayez pas peur, cela va être facile ;)</em></p>
-<p>L'interprétation de MVC par Backbone est un peu particulière et les développeurs Java, .Net, PHP, Ruby, Python etc. ... pourraient être surpris. Mais, passons donc à quelques explications.</p>
+<p>L'interprétation de MVC par Backbone est un peu particulière et les développeurs Java, .Net, PHP, Ruby, Python etc. pourraient être surpris. Mais, passons donc à quelques explications.</p>
 <h2 id="backbone-mvc"><a href="#TOC"><span class="header-section-number">2.2</span> Backbone &amp; MVC</a></h2>
 <p>Backbone &quot;embarque&quot; plusieurs composants qui vont nous permettre d'organiser notre webapp selon les &quot;préceptes&quot; MVC et simplifier les communications avec le serveur (avec le code applicatif côté serveur).</p>
 <p>Voyons l'interprétation que fait Backbone du modèle MVC :</p>
 <ul>
-<li>Le composant <strong>Modèle</strong> (selon Backbone : <code>Backbone.Model</code>) représente les données qui vont interagir avec votre code &quot;backend&quot; (côté serveur) via des requêtes Ajax. Ceux sont eux qui auront la responsabilité de la logique métier et de la validations des données.</li>
-<li>Le composant <strong>Vue</strong> (selon Backbone : <code>Backbone.View</code>) n'est pas complètement une vue au sens où on l'entend habituellement (couche présentation). Dans le cas qui nous intéresse, la &quot;vraie&quot; vue est un fragment de code &quot;natif&quot; HTML dans la page web qui s'affiche dans le navigateur (il y a donc plusieurs vues dans une même page). Et <code>Backbone.View</code> est en fait un <strong>Contrôleur de vues</strong> (1) (vous verrez, ce sera plus facile à appréhender en le codant) qui va ordonnancer les évènements et interaction au sein de la page web.</li>
+<li>Le composant <strong>Modèle</strong> (selon Backbone : <code>Backbone.Model</code>) représente les données qui vont interagir avec votre code &quot;backend&quot; (côté serveur) via des requêtes Ajax. Ce sont eux qui auront la responsabilité de la logique métier et de la validations des données.</li>
+<li>Le composant <strong>Vue</strong> (selon Backbone : <code>Backbone.View</code>) n'est pas complètement une vue au sens où on l'entend habituellement (couche présentation). Dans le cas qui nous intéresse, la &quot;vraie&quot; vue est un fragment de code &quot;natif&quot; HTML dans la page web qui s'affiche dans le navigateur (il y a donc plusieurs vues dans une même page). Et <code>Backbone.View</code> est en fait un <strong>Contrôleur de vues</strong> (1) (vous verrez, ce sera plus facile à appréhender en le codant) qui va ordonnancer les évènements et interactions au sein de la page web.</li>
 </ul>
 <blockquote>
 <blockquote>
@@ -729,7 +755,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
         });
 
     <span class="kw">&lt;/script&gt;</span></code></pre>
-<p>Sauvegarder, relancer dans le navigateur, et allez dans la console :</p>
+<p>Sauvegardez, relancez dans le navigateur, et allez dans la console :</p>
 <ul>
 <li>Pour créer un nouvel article : tapez la commande <code>myFirstArticle = new blog.Article()</code></li>
 <li>Pour &quot;voir&quot; le titre de l'article : tapez la commande <code>myFirstArticle.get(&quot;title&quot;)</code></li>
@@ -739,7 +765,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <li>Pour créer un article directement avec un titre et du contenu : tapez la commande <code>mySecondArticle = new blog.Article({title : &quot;MON AUTRE ARTICLE&quot;, content : &quot;lore ipsum ...&quot;})</code></li>
 </ul>
 <p><img src="RSRC/03_01_BB.png" alt="BB" /><br /></p>
-<p>Vous venez donc de voir que nous avons définis le modèle article “un peu” comme une classe qui hériterait (<code>extend</code>) de la classe <code>Backbone.Model</code>, que nous lui avons défini des valeurs par défauts (<code>defaults</code>), et affecté une méthode d’initialisation (<code>initialize</code>). Et qu’il existe un système de getter et de setter un peu particulier (<code>model.get(property_name)</code>, <code>model.set(property_name, value)</code>), mais nous verrons ultérieurement dans le détail comment fonctionnent les modèles.</p>
+<p>Vous venez donc de voir que nous avons défini le modèle article “un peu” comme une classe qui hériterait (<code>extend</code>) de la classe <code>Backbone.Model</code>, que nous lui avons défini des valeurs par défauts (<code>defaults</code>), et affecté une méthode d’initialisation (<code>initialize</code>). Et qu’il existe un système de getter et de setter un peu particulier (<code>model.get(property_name)</code>, <code>model.set(property_name, value)</code>), mais nous verrons ultérieurement dans le détail comment fonctionnent les modèles.</p>
 <blockquote>
 <blockquote>
 <p><strong>Remarque</strong> <em>: le modèle de programmation de Javascript est bien orienté objet, mais n’est pas orienté “classe” comme peut l’être par exemple Java. Cela peut déstabiliser au départ, mais je vous engage à lire [REF VERS ARTICLE] à ce propos.</em></p>
@@ -773,8 +799,10 @@ listeArticles.add(new blog.Article({ title : &quot;titre3&quot;, content : &quot
 <p>Nous venons donc d'ajouter 3 articles à notre collection,</p>
 <ul>
 <li>Si vous tapez la commande <code>listeArticles.models</code> vous obtiendrez un tableau de modèles</li>
-<li>Si vous souhaitez obtenir le titre du 2ème article de la collection, tapez : <code>listeArticles.models[1].get(&quot;title&quot;)</code></li>
-<li>vous souhaitez parcourir les articles de la collection et afficher leur titre : <code>listeArticles.each(function(article){ console.log (article.get(&quot;title&quot;)); });</code></li>
+<li><p>Si vous souhaitez obtenir le titre du 2ème article de la collection, tapez :</p>
+<p><code>listeArticles.models[1].get(&quot;title&quot;)</code></p></li>
+<li><p>vous souhaitez parcourir les articles de la collection et afficher leur titre :</p>
+<p><code>listeArticles.each(function(article){ console.log (article.get(&quot;title&quot;)); });</code></p></li>
 </ul>
 <blockquote>
 <blockquote>
@@ -850,9 +878,10 @@ listeArticles.add(new blog.Article({ title : &quot;titre3&quot;, content : &quot
 <h3 id="quavons-nous-fait"><a href="#TOC"><span class="header-section-number">4.4.1</span> Qu’avons-nous fait ?</a></h3>
 <p>Eh bien, nous avons défini une vue avec :</p>
 <ul>
-<li>Une propriété <code>el</code> (pour élément) à laquelle on “attache” le <code>&lt;div&gt;</code> dont l’id est <code>“articles-collection-container”</code>. C’est dans ce <code>&lt;div&gt;</code> que seront affichés les articles</li>
+<li><p>Une propriété <code>el</code> (pour élément) à laquelle on “attache” le <code>&lt;div&gt;</code> dont l’id est :</p>
+<p><code>“articles-collection-container”</code>. C’est dans ce <code>&lt;div&gt;</code> que seront affichés les articles</p></li>
 <li>Une méthode <code>initialize</code>, qui affecte une méthode <code>template()</code> à l’instance de la vue en lui précisant que nous utiliserons le modèle de code html définit dans le <code>&lt;div&gt;</code> dont l’id est <code>“articles-collection-template”</code></li>
-<li>Une méthode <code>render</code>, qui va passer les données en paramètre à la méthode <code>template()</code> puis les afficher dans la page</li>
+<li><p>Une méthode <code>render</code>, qui va passer les données en paramètre à la méthode <code>template()</code> puis les afficher dans la page</p></li>
 </ul>
 <p>Sauvegarder, relancer dans le navigateur, et retournez encore dans la console pour saisir les commandes suivantes :</p>
 <ul>
@@ -1055,7 +1084,7 @@ listeArticles.add(new blog.Article({ title : &quot;titre3&quot;, content : &quot
 <blockquote>
 <p><em>Ce qui est souvent déstabilisant pour le développeur Java (PHP, .Net, etc. ....) c’est le modèle objet de javascript qui diffère du classique modèle orienté « classes » que nous connaissons tous (normalement). De nombreux ouvrages, articles, … se sont attaqués au sujet, mais ce n’est pas l’objet de ce chapitre.</em></p>
 </blockquote>
-<p>Je vais vous présenter de quelle façon Backbone gère son « Orientation objet » et comment réutiliser cette fonctionnalité. L’objectifs et double : Mieux comprendre le fonctionnement de Backbone et vous donner un moyen de faire de l’objet en javascript sans être dépaysé (quelque chose qui ressemble dans sa logique, à ce que vous connaissez déjà.</p>
+<p>Je vais vous présenter de quelle façon Backbone gère son « Orientation objet » et comment réutiliser cette fonctionnalité. L’objectifs et double : Mieux comprendre le fonctionnement de Backbone et vous donner un moyen de faire de l’objet en javascript sans être dépaysé (quelque chose qui ressemble dans sa logique, à ce que vous connaissez déjà).</p>
 <h2 id="un-petit-tour-dans-le-code"><a href="#TOC"><span class="header-section-number">5.1</span> Un petit tour dans le code</a></h2>
 <p>Si vous avez la curiosité d’aller lire le code de Backbone (je vous engage à le faire, le code est clair et simple et avec le temps très instructif), vous « tomberez » sur une ligne particulièrement intéressante (vers la fin du code source dans <code>backbone.js</code> pour ceux qui iront réellement lire le code) :</p>
 <pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="co">// Set up inheritance for the model, collection, and view.</span>
@@ -4958,5 +4987,522 @@ npm install express</code></pre>
 <p>Par contre, je trouve que pour des portions de code très longue, on perd en visibilité (cf. <code>AdminView</code> ou <code>LoginView</code>) (mais ça n'engage que moi).</p>
 <p>Cependant, je ne peux m'empêcher d'aimer ce &quot;petit&quot; langage et les concepts qu'il apporte.</p>
 <p>... A vous de voir ;)</p>
+<h1 id="autres-frameworks-mvc"><a href="#TOC"><span class="header-section-number">14</span> Autres Frameworks MVC</a></h1>
+<blockquote>
+<p><em>Sommaire</em></p>
+</blockquote>
+<blockquote>
+<blockquote>
+<ul>
+<li><em>CanJS</em></li>
+<li><em>Spine</em></li>
+<li><em>Knockout</em></li>
+<li><em>Les autres ...</em></li>
+</ul>
+</blockquote>
+</blockquote>
+<blockquote>
+<p><em>Il faut aller voir ailleurs !!! Backbone peut ne pas correspondre à vos attentes, à votre façon de coder, ... Je vous engage à tester d'autres frameworks.</em></p>
+</blockquote>
+<blockquote>
+<p><em>Il existe aujourd’hui de TRES nombreux frameworks MVC en javascript “côté navigateur”. Certains fournissent beaucoup plus de services que Backbone, d’autres vont même plus loin, puisqu’ils vont jusqu’à fournir un framework associé côté serveur (en javascript avec du nodejs). Ils sont plus ou moins complexes, plus ou moins bien documentés.</em></p>
+</blockquote>
+<p>L'objectif de ce chapitre n'est pas de faire un cours sur tous les frameworks javascript existants (chacun mériterait un ouvrage), mais de lever un coin de voile sur eux, et montrer que chacun possède ses spécificités. J'en ai sélectionné 2, sur un seul critère de sélection (qui me tient à coeur) : <strong>LA SIMPLICITE</strong> (après la notion de simplicité d'un dev à l'autre, est relative ...), il faut que le framework soit simple à mettre en oeuvre, sans pour autant être obligé de le connaître par coeur avant de pouvoir l'utiliser. Autrement dit, si au bout d’un quart d’heure de lecture, vous avez compris les principes de bases, le framework que vous étudiez est susceptible d’être facilement compréhensible par le reste de votre équipe (par exemple) et donc vous ne devriez pas avoir de frein à l’adoption. Si au bout d’une demi-heure, vous n’êtes pas arrivé à l’installé correctement, vous pouvez commencer à avoir des doutes (c’est une méthode très personnelle, si elle ne garantit pas les fonctionnalités du framework, elle vous assure au moins sa simplicité). La qualité de la documentation peut avoir un impact fort dans vos choix.</p>
+<h2 id="canjs"><a href="#TOC"><span class="header-section-number">14.1</span> CanJS</a></h2>
+<p><a href="http://canjs.us">http://canjs.us</a></p>
+<p><strong>CanJS</strong> n'est pas le plus léger des frameworks, mais son approche est très intéressante et relativement intuitive, tout particulièrement pour des développeurs &quot;backend&quot;. D'un point de vue objet, on retrouve dès le départ le concept de méthode statique dans le modèle, et c'est la &quot;pseudo classe&quot; modèle qui se chargera de &quot;ramener&quot; un modèle, mais aussi la liste des modèles (alors que dans Backbone, c'est un objet à part : la collection qui s’en charge). Mais un exemple sera tout de suite beaucoup plus parlant :</p>
+<p><strong>Définition d’un modèle :</strong></p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="kw">var</span> Post = <span class="kw">can</span>.<span class="fu">Model</span>({
+      <span class="dt">findAll </span>: <span class="ch">&#39;GET /blogposts&#39;</span>,
+      <span class="dt">findOne </span>: <span class="ch">&#39;GET /blogposts/{id}&#39;</span>,
+      <span class="dt">create  </span>: <span class="ch">&#39;POST /blogposts&#39;</span>,
+      <span class="dt">update  </span>: <span class="ch">&#39;PUT /blogposts/{id}&#39;</span>,
+      <span class="dt">destroy </span>: <span class="ch">&#39;DELETE /blogposts/{id}&#39;</span>
+    }, {});</code></pre>
+<p>Ensuite si je souhaite “récupérer” du serveur un modèle particulier par son id :</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="kw">Blog.Post</span>.<span class="fu">findOne</span>({<span class="dt">id</span>:<span class="st">&quot;2o03macl&quot;</span>},<span class="kw">function</span>(post){<span class="kw">console</span>.<span class="fu">log</span>(post);})</code></pre>
+<p>Puis, si je veux tous les modèles :</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="kw">Blog.Post</span>.<span class="fu">findAll</span>({}, <span class="kw">function</span>(posts){ <span class="kw">console</span>.<span class="fu">log</span>(posts);});</code></pre>
+<p>... qui me retournera un tableau de modèles.</p>
+<p>Vous remarquerez que l'on définit toutes les routes au niveau du modèle, et non pas une seule url comme dans Backbone.</p>
+<p>Question templating, <strong>CanJS</strong> embarque son propre langage de template qui ressemble fortement à celui d'Underscore (mais rien ne vous empêche d'utiliser autre chose). Côté &quot;DOM&quot;, <strong>CanJS</strong> sait travailler avec jQuery, Zepto, Dojo, Mootools et YUI, à vous de faire votre choix et de télécharger la version adaptée.</p>
+<h3 id="mise-en-oeuvre-rapide"><a href="#TOC"><span class="header-section-number">14.1.1</span> Mise en oeuvre rapide</a></h3>
+<p>Pour notre exemple, j’ai utilisez la version de CanJS adaptée pour jQuery, que vous pouvez télécharger ici : <a href="https://github.com/downloads/jupiterjs/canjs/can.jquery-1.0.7.js">https://github.com/downloads/jupiterjs/canjs/can.jquery-1.0.7.js</a> et que vous copierez ensuite dans <code>public/libs/vendors</code> (nous utilisons notre application pour pouvoir se connecter à la partie serveur).</p>
+<p>Dans notre répertoire public (à la racine), créez une page <code>index.canjs.html</code> avec le code suivant :</p>
+<p><em>Index.canjs.html :</em></p>
+<pre class="sourceCode html"><code class="sourceCode html">    <span class="dt">&lt;!DOCTYPE </span>html<span class="dt">&gt;</span>
+    <span class="kw">&lt;html&gt;</span>
+    <span class="kw">&lt;head&gt;</span>
+        <span class="kw">&lt;meta</span><span class="ot"> http-equiv=</span><span class="st">&quot;Content-Type&quot;</span><span class="ot"> content=</span><span class="st">&quot;text/html; charset=utf-8&quot;</span><span class="kw">&gt;</span>
+        <span class="kw">&lt;title&gt;</span>CanJS<span class="kw">&lt;/title&gt;</span>
+        <span class="kw">&lt;link</span><span class="ot"> href=</span><span class="st">&quot;libs/vendors/bootstrap/css/bootstrap.css&quot;</span><span class="ot"> rel=</span><span class="st">&quot;stylesheet&quot;</span><span class="kw">&gt;</span>
+        <span class="kw">&lt;style&gt;</span>
+            body <span class="kw">{</span>
+                <span class="kw">padding-top:</span> <span class="dt">60px</span><span class="kw">;</span>
+                <span class="kw">padding-bottom:</span> <span class="dt">40px</span><span class="kw">;</span>
+            <span class="kw">}</span>
+        <span class="kw">&lt;/style&gt;</span>
+        <span class="kw">&lt;link</span><span class="ot"> href=</span><span class="st">&quot;libs/vendors/bootstrap/css/bootstrap-responsive.css&quot;</span><span class="ot"> rel=</span><span class="st">&quot;stylesheet&quot;</span><span class="kw">&gt;</span>
+    <span class="kw">&lt;/head&gt;</span>
+
+    <span class="kw">&lt;body&gt;</span>
+
+        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;navbar navbar-fixed-top&quot;</span><span class="kw">&gt;</span>
+            <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;navbar-inner&quot;</span><span class="kw">&gt;</span>
+                <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;container&quot;</span><span class="kw">&gt;</span>
+                    <span class="kw">&lt;a</span><span class="ot"> class=</span><span class="st">&quot;brand&quot;</span><span class="kw">&gt;</span>Mon Blog avec CanJS<span class="kw">&lt;/a&gt;</span>
+                <span class="kw">&lt;/div&gt;</span>
+            <span class="kw">&lt;/div&gt;</span>
+        <span class="kw">&lt;/div&gt;</span>
+
+        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;container-fluid&quot;</span><span class="kw">&gt;</span>
+
+            <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;row-fluid&quot;</span><span class="kw">&gt;</span>
+
+                <span class="kw">&lt;script</span><span class="ot"> type=</span><span class="st">&quot;text/ejs&quot;</span><span class="ot"> id=</span><span class="st">&quot;myposts_template&quot;</span><span class="kw">&gt;</span>
+                  &lt;% <span class="kw">for</span>( <span class="kw">var</span> i = <span class="dv">0</span>; i &lt; <span class="kw">this</span>.<span class="fu">length</span>; i++ ) { %&gt;
+                    &lt;li&gt;
+                        &lt;b&gt;&lt;%= <span class="kw">this</span>[i].<span class="fu">title</span> %&gt;&lt;/b&gt;
+                        &lt;br&gt;
+                        &lt;p&gt;&lt;%= <span class="kw">this</span>[i].<span class="fu">message</span> %&gt;&lt;/p&gt;
+                        &lt;hr&gt;
+                    &lt;/li&gt;
+                  &lt;% } %&gt;
+                <span class="kw">&lt;/script&gt;</span>
+
+                <span class="kw">&lt;ul</span><span class="ot"> id=</span><span class="st">&quot;myposts&quot;</span><span class="kw">&gt;&lt;/ul&gt;</span>
+
+            <span class="kw">&lt;/div&gt;</span>
+
+        <span class="kw">&lt;/div&gt;</span>
+
+    <span class="kw">&lt;/body&gt;</span>
+
+    <span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">&quot;libs/vendors/yepnope.1.5.4-min.js&quot;</span><span class="kw">&gt;&lt;/script&gt;</span>
+
+    <span class="kw">&lt;script</span><span class="ot"> type=</span><span class="st">&quot;text/javascript&quot;</span><span class="kw">&gt;</span>
+    yepnope({
+        <span class="dt">load</span>: {
+            <span class="dt">jquery              </span>: <span class="ch">&#39;libs</span>/<span class="ch">vendors</span>/<span class="ch">jquery</span>-1.7.2.<span class="ch">js&#39;</span>,
+            <span class="dt">canjs               </span>: <span class="ch">&#39;libs</span>/<span class="ch">vendors</span>/<span class="ch">can</span>.<span class="ch">jquery</span>-1.0.7.<span class="ch">js&#39;</span>
+        },
+
+        <span class="dt">complete </span>: <span class="kw">function</span> () {
+            $(<span class="kw">function</span> (){
+
+                <span class="kw">window</span>.<span class="fu">Blog</span> = {}
+
+                <span class="kw">Blog</span>.<span class="fu">Post</span> = <span class="kw">can</span>.<span class="fu">Model</span>({
+                  <span class="dt">findAll </span>: <span class="ch">&#39;GET</span> /<span class="ch">blogposts&#39;</span>,
+                  <span class="dt">findOne </span>: <span class="ch">&#39;GET</span> /<span class="ch">blogposts</span>/{<span class="ch">id</span>}<span class="ch">&#39;</span>,
+                  <span class="dt">create  </span>: <span class="ch">&#39;POST</span> /<span class="ch">blogposts&#39;</span>,
+                  <span class="dt">update  </span>: <span class="ch">&#39;PUT</span> /<span class="ch">blogposts</span>/{<span class="ch">id</span>}<span class="ch">&#39;</span>,
+                  <span class="dt">destroy </span>: <span class="ch">&#39;DELETE</span> /<span class="ch">blogposts</span>/{<span class="ch">id</span>}<span class="ch">&#39;</span>
+                }, {});
+
+                <span class="kw">Blog.Post</span>.<span class="fu">findAll</span>({}, <span class="kw">function</span>(posts){ 
+                    $(<span class="ch">&#39;</span>#<span class="ch">myposts&#39;</span>).<span class="fu">html</span>(<span class="kw">can</span>.<span class="fu">view</span>( <span class="ch">&#39;myposts</span>_<span class="ch">template&#39;</span>, posts ))
+                });
+            });  
+        }
+    });
+
+    <span class="kw">&lt;/script&gt;</span>
+    <span class="kw">&lt;/html&gt;</span></code></pre>
+<p>Nous avons conservé le mécanisme de chargement de yepnope et jQuery, donc une fois le chargement de la page terminé, nous avons défini notre modèle avec les routes nécessaires pour accéder aux services de données, puis nous exécutons un <code>findAll</code> pour obtenir la liste des posts sur le serveur et l’affichons dans la page une fois les données récupérées grâce à l’objet <code>can.view</code>.</p>
+<p>Vous n’avez plus qu’à enregistrer et relancer votre application et ouvrir l’url :</p>
+<p><code>http://localhost:3000/index.canjs.html</code> dans votre navigateur, pour obtenir la liste des posts :</p>
+<p><img src="RSRC/13_01_MVC.png" alt="BB" /><br /></p>
+<h3 id="conclusion-sur-canjs"><a href="#TOC"><span class="header-section-number">14.1.2</span> Conclusion sur CanJS</a></h3>
+<p>Je trouve CanJS facile d'accès. Il propose de nombreux plug-ins et apparaît très complet. Pour le moment, le projet semble actif. D'un point de vue code, il n'a pas la concision de Backbone, il y a beaucoup plus de chose, mais il propose aussi beaucoup plus de services “clés en main”. Un autre avantage non négligeable est la documentation qui est claire, bien faite et facile d'accès.</p>
+<blockquote>
+<blockquote>
+<p><strong>Remarque</strong> : Si vous avez un doute sur la pertinence de votre choix, je vous conseille d’aller faire un tour sur <a href="https://github.com/addyosmani/todomvc">https://github.com/addyosmani/todomvc</a>, où Addy Osmani, un googler réputé et spécialiste entre autre de Backbone maintient (avec d’autres développeurs) des exemples de “TODO list” MVC javascript pour chacun des frameworks MVC (ou pas complètement MVC d’ailleurs) du moment. Si le framework que vous étudiez est dans la liste, il y a des chances que ce ne soit pas un mauvais choix, de plus vous disposerez d’un exemple de code (dans les règles de l’art) pour commencer.</p>
+</blockquote>
+</blockquote>
+<h2 id="spine"><a href="#TOC"><span class="header-section-number">14.2</span> Spine</a></h2>
+<p><a href="http://spinejs.com/">http://spinejs.com/</a></p>
+<p><strong>Spine</strong> est très très inspiré de Backbone avec les spécificités suivantes (entre autres) :</p>
+<ul>
+<li>il est écrit en Coffeescript (mais vous pouvez bien sûr l'utiliser en pur javascript)</li>
+<li>Spine propose des Contrôleurs ! ... qui ne sont ni plus ni moins l'équivalent des Backbones.Views</li>
+<li>... et considère que les vues sont représentée par les templates. A ce sujet Spine propose tout un mécanisme évolué mais nous n'utiliserons que Mustache de la même façon qu'avec Backbone.</li>
+</ul>
+<p>Spine peut s'installer avec <strong>npm</strong> (node package manager) et ainsi proposer des outils supplémentaires permettant de générer un squelette de projet, de gérer les dépendances, ... Mais pour notre exemple, nous allons le faire &quot;à l'ancienne&quot;, l'objectif étant de ne modifier en rien la stack serveur existante. Vous pouvez donc vous préparer un environnement identique à celui du chapitre sur Coffeescript ave un répertoire <code>public.coffee</code> pour votre code coffeescript et n’oubliez pas le fichier de build <code>Cakefile</code>.</p>
+<p>Un modèle Spine se décrit de la manière suivante :</p>
+<pre class="sourceCode python"><code class="sourceCode python">    <span class="kw">class</span> window.Post extends Spine.Model
+      @configure <span class="st">&quot;Post&quot;</span>, <span class="st">&quot;title&quot;</span>, <span class="st">&quot;message&quot;</span>, <span class="st">&quot;author&quot;</span>
+      @extend Spine.Model.Ajax
+      @url: <span class="st">&quot;/blogposts&quot;</span></code></pre>
+<p>la ligne <code>@configure &quot;Post&quot;, &quot;title&quot;, &quot;message&quot;, &quot;author&quot;</code> définit le nom du modèle et de ses propriétés, ce qui permettra de faire référence ensuite à celles-ci de la façon suivante : <code>@title, @message, @author</code>, comme ceci par exemple, si nous ajoutons une méthode <code>toString()</code> à notre modèle :</p>
+<p><em>Utilisation des “propriétés” :</em></p>
+<pre class="sourceCode python"><code class="sourceCode python">    <span class="kw">class</span> Post extends Spine.Model
+      @configure <span class="st">&quot;Post&quot;</span>, <span class="st">&quot;title&quot;</span>, <span class="st">&quot;message&quot;</span>, <span class="st">&quot;author&quot;</span>
+      @extend Spine.Model.Ajax
+      @url: <span class="st">&quot;/blogposts&quot;</span>
+
+      toString:()-&gt;
+        <span class="st">&quot;#{@title} : #{@message} / #{@author}&quot;</span></code></pre>
+<p>Vous remarquerez que l'on ne définit qu'une seule url. Par contre le système de getter et de setter de Backbone disparaît (à vous de les écrire).</p>
+<p>En ce qui concerne le contrôleur, il prend la forme suivante :</p>
+<p><em>Contrôleur spine :</em></p>
+<pre class="sourceCode python"><code class="sourceCode python">    <span class="kw">class</span> Blog extends Spine.Controller
+
+      constructor:()-&gt;
+        <span class="dt">super</span>
+
+      render:()-&gt;</code></pre>
+<h3 id="mise-en-oeuvre-rapide-1"><a href="#TOC"><span class="header-section-number">14.2.1</span> Mise en oeuvre rapide</a></h3>
+<p>Téléchargez la distribution <a href="http://spinejs.com/pages/download">http://spinejs.com/pages/download</a>, dézippez et copiez les fichiers suivants dans <code>public/libs/vendors</code> :</p>
+<ul>
+<li>spine.js</li>
+<li>ajax.js</li>
+<li>list.js</li>
+<li>local.js</li>
+<li>manager.js</li>
+<li>relation.js</li>
+<li>route.js</li>
+</ul>
+<p>Cette fois-ci, nous allons utiliser 2 fichiers : une page <code>index.spine.html</code> qui affichera nos données et un fichier de script coffeescript <code>main.spine.coffee</code> qui contiendra notre code applicatif.</p>
+<p>A nouveau, dans notre répertoire <code>public</code> (à la racine), créez une page <code>index.spine.html</code> avec le code suivant :</p>
+<p><em>Index.spine.html :</em></p>
+<pre class="sourceCode html"><code class="sourceCode html">    <span class="dt">&lt;!DOCTYPE </span>html<span class="dt">&gt;</span>
+    <span class="kw">&lt;html&gt;</span>
+    <span class="kw">&lt;head&gt;</span>
+        <span class="kw">&lt;meta</span><span class="ot"> http-equiv=</span><span class="st">&quot;Content-Type&quot;</span><span class="ot"> content=</span><span class="st">&quot;text/html; charset=utf-8&quot;</span><span class="kw">&gt;</span>
+        <span class="kw">&lt;title&gt;</span>Spine<span class="kw">&lt;/title&gt;</span>
+        <span class="kw">&lt;link</span><span class="ot"> href=</span><span class="st">&quot;libs/vendors/bootstrap/css/bootstrap.css&quot;</span><span class="ot"> rel=</span><span class="st">&quot;stylesheet&quot;</span><span class="kw">&gt;</span>
+        <span class="kw">&lt;style&gt;</span>
+            body <span class="kw">{</span>
+                <span class="kw">padding-top:</span> <span class="dt">60px</span><span class="kw">;</span>
+                <span class="kw">padding-bottom:</span> <span class="dt">40px</span><span class="kw">;</span>
+            <span class="kw">}</span>
+        <span class="kw">&lt;/style&gt;</span>
+        <span class="kw">&lt;link</span><span class="ot"> href=</span><span class="st">&quot;libs/vendors/bootstrap/css/bootstrap-responsive.css&quot;</span><span class="ot"> rel=</span><span class="st">&quot;stylesheet&quot;</span><span class="kw">&gt;</span>
+    <span class="kw">&lt;/head&gt;</span>
+
+    <span class="kw">&lt;body&gt;</span>
+
+        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;navbar navbar-fixed-top&quot;</span><span class="kw">&gt;</span>
+            <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;navbar-inner&quot;</span><span class="kw">&gt;</span>
+                <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;container&quot;</span><span class="kw">&gt;</span>
+                    <span class="kw">&lt;a</span><span class="ot"> class=</span><span class="st">&quot;brand&quot;</span><span class="kw">&gt;</span>Mon Blog avec Spine<span class="kw">&lt;/a&gt;</span>
+                <span class="kw">&lt;/div&gt;</span>
+            <span class="kw">&lt;/div&gt;</span>
+        <span class="kw">&lt;/div&gt;</span>
+
+        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;container-fluid&quot;</span><span class="kw">&gt;</span>
+
+            <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;row-fluid&quot;</span><span class="kw">&gt;</span>
+
+                <span class="kw">&lt;script</span><span class="ot"> type=</span><span class="st">&quot;text/template&quot;</span><span class="ot"> id=</span><span class="st">&quot;myposts_template&quot;</span><span class="kw">&gt;</span>
+                    {{#posts}}
+                        &lt;li&gt;
+                            &lt;b&gt;{{title}}&lt;/b&gt;&lt;br&gt;
+                            &lt;p&gt;{{message}}&lt;/p&gt;
+                            &lt;hr&gt;
+                        &lt;/li&gt;
+                    {{/posts}}
+                <span class="kw">&lt;/script&gt;</span>
+
+                <span class="kw">&lt;ul</span><span class="ot"> id=</span><span class="st">&quot;myposts&quot;</span><span class="kw">&gt;&lt;/ul&gt;</span>
+
+            <span class="kw">&lt;/div&gt;</span>
+
+        <span class="kw">&lt;/div&gt;</span>
+
+    <span class="kw">&lt;/body&gt;</span>
+
+    <span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">&quot;libs/vendors/yepnope.1.5.4-min.js&quot;</span><span class="kw">&gt;&lt;/script&gt;</span>
+    <span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">&quot;main.spine.js&quot;</span><span class="kw">&gt;&lt;/script&gt;</span>
+
+    <span class="kw">&lt;/html&gt;</span></code></pre>
+<p>et enfin dans le répertoire <code>public.coffee</code>, créez un fichier <code>main.spine.coffee</code> avec le code ci-dessous :</p>
+<p><em>main.spine.coffee :</em></p>
+<pre class="sourceCode python"><code class="sourceCode python">yepnope
+  load:
+    jquery  : <span class="st">&quot;libs/vendors/jquery-1.7.2.js&quot;</span>
+    mustache: <span class="st">&quot;libs/vendors/mustache.js&quot;</span>
+    spine   : <span class="st">&quot;libs/vendors/spine.js&quot;</span>
+    ajax    : <span class="st">&quot;libs/vendors/ajax.js&quot;</span>
+    <span class="dt">list</span>    : <span class="st">&quot;libs/vendors/list.js&quot;</span>
+    local   : <span class="st">&quot;libs/vendors/local.js&quot;</span>
+    manager : <span class="st">&quot;libs/vendors/manager.js&quot;</span>
+    relation: <span class="st">&quot;libs/vendors/relation.js&quot;</span>
+    route   : <span class="st">&quot;libs/vendors/route.js&quot;</span>
+
+  complete: -&gt;
+    $ -&gt;
+
+      <span class="kw">class</span> Post extends Spine.Model
+        @configure <span class="st">&quot;Post&quot;</span>, <span class="st">&quot;title&quot;</span>, <span class="st">&quot;message&quot;</span>, <span class="st">&quot;author&quot;</span>
+        @extend Spine.Model.Ajax
+        @url: <span class="st">&quot;/blogposts&quot;</span>
+
+        toString:()-&gt;
+          <span class="st">&quot;#{@title} : #{@message} / #{@author}&quot;</span>
+
+
+      <span class="kw">class</span> Blog extends Spine.Controller
+
+        constructor:()-&gt;
+          <span class="dt">super</span>
+          @posts = []
+          @template = $(<span class="st">&quot;#myposts_template&quot;</span>).html()
+          @el = $ <span class="st">&quot;ul&quot;</span>
+
+          <span class="co"># on s&#39;abonne au &quot;rafraîchissement&quot; de la liste des posts</span>
+          <span class="co"># lorsque la liste est rafraîchie, on affiche la liste (méthode render)</span>
+          Post.bind <span class="st">&#39;refresh&#39;</span>, =&gt; 
+            @posts = Post.<span class="dt">all</span>()
+            @render()
+
+          <span class="co"># on charge les posts à partir du serveur</span>
+          <span class="co"># cela va déclencher l&#39;évènement &quot;refresh&quot;</span>
+          Post.fetch()
+
+        render:()-&gt;
+          @el.html Mustache.to_html(@template,
+            posts: @posts
+          )
+
+      window.myBlog = new Blog()</code></pre>
+<p>Maintenant positionnez vous au même endroit que le fichier <code>Cakefile</code>, lancez la commande cake <code>build</code>, lancez votre application serveur si ce n'est pas déjà fait et connectez vous, comme pour CanJS, vous obtiendrez à nouveau la même liste des posts dans votre navigateur :</p>
+<p><img src="RSRC/13_02_MVC.png" alt="BB" /><br /></p>
+<h3 id="conclusion-sur-spine"><a href="#TOC"><span class="header-section-number">14.2.2</span> Conclusion sur Spine</a></h3>
+<p>Spine est moins simple que Backbone, mais s'en inspire énormément tout en restant facile d'accès (je fais abstraction de Coffeescript en faisant cette remarque). Il est possible d'utiliser Spine directement en javascript, mais le “style” de code ne prend vraiment de l'intérêt que dans un “mode Coffeescript” grace à la notion de classe. De la même façon que CanJS, Spine apporte plus de services “clés en main” que Backbone, comme par exemple la gestion du localstorage. Spine propose aussi un volet “développement mobile” : <a href="http://spinejs.com/mobile/index">http://spinejs.com/mobile/index</a>. Si vous n’êtes pas effrayé par Coffeescript, c’est un framework à suivre et à adopter.</p>
+<p>Globalement, ce qui m'a intéressé tant dans CanJS que dans Spine, c'est leur simplicité de mise en oeuvre. Il est possible en quelques minutes d'écrire quelques premières lignes opérationnelles, ce qui n'est pas forcément le cas avec d'autres frameworks beaucoup plus (ou trop?) complets.</p>
+<h2 id="knockout"><a href="#TOC"><span class="header-section-number">14.3</span> Knockout</a></h2>
+<p>Knockout <a href="http://knockoutjs.com">http://knockoutjs.com</a>, l'OVNI de l’équipe, on ne parle plus de MVC mais du pattern “Model-View-View Model”, très très orienté IHM, puisqu'il renforce le lien entre les données et l'IHM, c'est un peu déroutant (mais où est donc encore passé le contrôleur !?), mais cela permet de réaliser des interfaces très réactives en fonction des changements et évolutions des données.</p>
+<p>En ce qui concerne <strong>Knockout</strong>, nous n'allons pas repartir de nos exemples précédents, car ce qui caractérise <strong>Knockout</strong>, c'est son système de <strong>&quot;binding&quot;</strong> qui &quot;frise&quot; le <strong>&quot;magique&quot;</strong> : vos actions sur les modèles sont directement impactées sur les vues (le DOM HTML) et inversement vos actions sur le DOM (saisie dans une zone de texte par exemple) sont directement reflétées sur les modèles. Le concept de modèle en tant que tel (comme dans Backbone par exemple) n'existe pas, donc à vous de les écrire, mais <strong>Knockout</strong> apporte les outils nécessaires pour &quot;faire&quot; des <strong>&quot;propriétés observables&quot;</strong> et des <strong>&quot;tableaux observables&quot;</strong> qui seront ensuite &quot;liés&quot; aux vues qui ne sont ni plus ni moins que votre code html.</p>
+<p>Donc vous l'aurez compris, <strong>Knockout</strong> met en oeuvre le pattern <strong>Observer</strong> :</p>
+<p><a href="http://en.wikipedia.org/wiki/Observer_pattern">http://en.wikipedia.org/wiki/Observer_pattern</a></p>
+<p>Ou encore mieux, la version &quot;javascript&quot; par Addy Osmani :</p>
+<p><a href="http://addyosmani.com/resources/essentialjsdesignpatterns/book/#observerpatternjavascript">http://addyosmani.com/resources/essentialjsdesignpatterns/book/#observerpatternjavascript</a>.</p>
+<h3 id="mise-en-oeuvre-très-très-rapide-...-mais-suffisante"><a href="#TOC"><span class="header-section-number">14.3.1</span> Mise en oeuvre très très rapide ... Mais suffisante</a></h3>
+<p>Récupérez donc la librairie Knockout.js par ici :</p>
+<p><a href="http://cloud.github.com/downloads/SteveSanderson/knockout/knockout-2.2.0.js">http://cloud.github.com/downloads/SteveSanderson/knockout/knockout-2.2.0.js</a></p>
+<p>Puis copiez la dans un répertoire, dans lequel vous allez créer une page <code>index.html</code> avec la structure suivante :</p>
+<pre class="sourceCode html"><code class="sourceCode html">    <span class="dt">&lt;!DOCTYPE </span>html<span class="dt">&gt;</span>
+    <span class="kw">&lt;html&gt;</span>
+    <span class="kw">&lt;head&gt;</span>
+        <span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">&quot;knockout-2.2.0.js&quot;</span><span class="kw">&gt;&lt;/script&gt;</span>
+    <span class="kw">&lt;/head&gt;</span>
+    <span class="kw">&lt;body&gt;</span>
+
+        <span class="kw">&lt;h1&gt;</span>Tuto KnockOut<span class="kw">&lt;/h1&gt;</span>
+        <span class="co">&lt;!-- ICI VIENDRONT LES VUES --&gt;</span>
+    <span class="kw">&lt;/body&gt;</span>
+    <span class="kw">&lt;script&gt;</span>
+        <span class="co">/*</span> ICI VIENDRA NOTRE CODE <span class="co">*/</span>
+    <span class="kw">&lt;/script&gt;</span>
+    <span class="kw">&lt;/html&gt;</span></code></pre>
+<h3 id="un-modèle-selon-knockout"><a href="#TOC"><span class="header-section-number">14.3.2</span> Un modèle selon Knockout</a></h3>
+<p>Avec <strong>Knockout</strong>, pour définir qu'une propriété est &quot;observable&quot;, on utilise la méthode :</p>
+<pre><code>ko.observable(nom_de_la_propriété)</code></pre>
+<p>Définissons donc notre 1er modèle :</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="kw">var</span> Message = <span class="kw">function</span> (from, subject, body) {
+        <span class="kw">this</span>.<span class="fu">from</span> = <span class="kw">ko</span>.<span class="fu">observable</span>(from);
+        <span class="kw">this</span>.<span class="fu">subject</span> = <span class="kw">ko</span>.<span class="fu">observable</span>(subject);
+        <span class="kw">this</span>.<span class="fu">body</span> = <span class="kw">ko</span>.<span class="fu">observable</span>(body);
+
+        <span class="co">//je m&#39;abonne aux modification de from</span>
+        <span class="kw">this</span>.<span class="fu">from</span>.<span class="fu">subscribe</span>(<span class="kw">function</span>(value){<span class="kw">console</span>.<span class="fu">log</span>(<span class="st">&quot;value : &quot;</span>, value);});
+    }</code></pre>
+<p>Toute propriété &quot;observable&quot; du modèle <code>Message</code> va ensuite s'utiliser de la manière suivante (pour instancier, faites un <code>myMessage = new Message(&quot;Bob&quot;, &quot;Important&quot;, &quot;Hello World !&quot;)</code>):</p>
+<ul>
+<li>changer la valeur de <code>from</code> : <code>myMessage.from(&quot;Bob Morane&quot;)</code></li>
+<li>obtenir la valeur de <code>from</code> : <code>myMessage.from()</code></li>
+<li><p>s'abonner aux changements de valeur de <code>from</code> :</p>
+<p><code>this.from.subscribe(function(value){ //do something ... })</code></p></li>
+</ul>
+<p>Simple, non ?</p>
+<h3 id="collections-1"><a href="#TOC"><span class="header-section-number">14.3.3</span> Collections ?</a></h3>
+<p>La notion de collection de Backbone n'existe plus, nous travaillons simplement avec des tableaux (<code>Array</code>). Je souhaite donc un tablea u &quot;observable&quot; de messages, je vais procéder comme ceci (en utilisant <code>ko.observableArray</code>):</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="kw">var</span> Messages = <span class="kw">ko</span>.<span class="fu">observableArray</span>([
+        <span class="kw">new</span> Message(<span class="st">&quot;John Doe&quot;</span>, <span class="st">&quot;First Message&quot;</span>, <span class="st">&quot;Hello World&quot;</span>),
+        <span class="kw">new</span> Message(<span class="st">&quot;Bob Morane&quot;</span>, <span class="st">&quot;hello&quot;</span>, <span class="st">&quot;hello world&quot;</span>),
+        <span class="kw">new</span> Message(<span class="st">&quot;Sam Le Pirate&quot;</span>, <span class="st">&quot;Salut&quot;</span>, <span class="st">&quot;Salut à Tous&quot;</span>)
+    ]);</code></pre>
+<p>Donc encore plus simple que pour les modèles !!! <em>(donc j'ai un tableau observable de modèles observables ...)</em></p>
+<h3 id="attachons-notre-modèle-à-des-vues"><a href="#TOC"><span class="header-section-number">14.3.4</span> Attachons notre modèle à des vues !</a></h3>
+<p>Imaginons, que j'ai une portion de mon code html qui est dédiée à affiché un message bien précis :</p>
+<pre class="sourceCode html"><code class="sourceCode html">    <span class="kw">&lt;div</span><span class="ot"> id=</span><span class="st">&quot;messageView&quot;</span><span class="kw">&gt;</span>
+        <span class="kw">&lt;span</span><span class="ot"> data-bind=</span><span class="st">&quot;text: from&quot;</span><span class="kw">&gt;&lt;/span&gt;</span>
+        <span class="kw">&lt;span</span><span class="ot"> data-bind=</span><span class="st">&quot;text: subject&quot;</span><span class="kw">&gt;&lt;/span&gt;</span>
+        <span class="kw">&lt;span</span><span class="ot"> data-bind=</span><span class="st">&quot;text: body&quot;</span><span class="kw">&gt;&lt;/span&gt;</span>
+    <span class="kw">&lt;/div&gt;</span></code></pre>
+<p>Le code javascript pour attacher le message à <code>messageView</code> sera le suivant :</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    msg = <span class="kw">new</span> Message(<span class="st">&quot;bob&quot;</span>, <span class="st">&quot;hello&quot;</span>, <span class="st">&quot;hello world&quot;</span>);
+
+    <span class="kw">ko</span>.<span class="fu">applyBindings</span>(msg, <span class="kw">document</span>.<span class="fu">querySelector</span>(<span class="st">&quot;#messageView&quot;</span>));</code></pre>
+<blockquote>
+<blockquote>
+<p>Le lien sera fait avec les attributs html <code>data-bind</code>. Toute modification de notre modèle sera reflétée instantanément dans le code html (mais nous y reviendrons plus tard dans la démonstration).</p>
+</blockquote>
+</blockquote>
+<p>De la même façon, si je souhaite faire un formulaire de saisie lié à mon message :</p>
+<pre class="sourceCode html"><code class="sourceCode html">    <span class="kw">&lt;form&gt;</span>
+        <span class="kw">&lt;input</span><span class="ot"> data-bind=</span><span class="st">&quot;value: from&quot;</span><span class="kw">/&gt;</span> <span class="kw">&lt;input</span><span class="ot"> data-bind=</span><span class="st">&quot;value: subject&quot;</span><span class="kw">/&gt;</span>
+    <span class="kw">&lt;/form&gt;</span></code></pre>
+<blockquote>
+<blockquote>
+<p>Notez cette fois <code>data-bind=&quot;value: from&quot;</code> au lieu de <code>data-bind=&quot;text: from&quot;</code>, <code>value</code> exprime le &quot;binding à double sens&quot; (là aussi nous y reviendrons plus tard).</p>
+</blockquote>
+</blockquote>
+<p>Et le code javascript pour attacher le message au formulaire sera le suivant :</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="kw">ko</span>.<span class="fu">applyBindings</span>(msg, <span class="kw">document</span>.<span class="fu">querySelector</span>(<span class="st">&quot;form&quot;</span>));</code></pre>
+<blockquote>
+<blockquote>
+<p>Au fait, l'utilisation de jQuery n'est pas obligatoire (mais tellement pratique), avec jQuery, à la place de <code>document.querySelector(&quot;selector&quot;)</code> nous aurions donc <code>$(&quot;selector&quot;)</code>.</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p><strong>Pas d'objet vue !</strong> La vue est entièrement représentée par les bouts de code HTML.</p>
+</blockquote>
+</blockquote>
+<h3 id="attachons-note-liste-de-messages-à-une-vue"><a href="#TOC"><span class="header-section-number">14.3.5</span> Attachons note liste de messages à une vue</a></h3>
+<p>En ce qui concerne notre tableau &quot;observable&quot;, cela reste aussi simple :</p>
+<pre class="sourceCode html"><code class="sourceCode html">    <span class="kw">&lt;div</span><span class="ot"> id=</span><span class="st">&quot;messagesList&quot;</span><span class="kw">&gt;</span>
+        <span class="kw">&lt;table&gt;</span>
+            <span class="kw">&lt;thead&gt;</span>
+                <span class="kw">&lt;tr&gt;&lt;th&gt;</span>From<span class="kw">&lt;/th&gt;&lt;th&gt;</span>Subject<span class="kw">&lt;/th&gt;&lt;th&gt;</span>Body<span class="kw">&lt;/th&gt;&lt;/tr&gt;</span>
+            <span class="kw">&lt;/thead&gt;</span>
+            <span class="kw">&lt;tbody</span><span class="ot"> data-bind=</span><span class="st">&quot;foreach: messages&quot;</span><span class="kw">&gt;</span>
+                <span class="kw">&lt;tr&gt;</span>
+                    <span class="kw">&lt;td</span><span class="ot"> data-bind=</span><span class="st">&quot;text: from&quot;</span><span class="kw">&gt;&lt;/td&gt;</span>
+                    <span class="kw">&lt;td</span><span class="ot"> data-bind=</span><span class="st">&quot;text: subject&quot;</span><span class="kw">&gt;&lt;/td&gt;</span>
+                    <span class="kw">&lt;td</span><span class="ot"> data-bind=</span><span class="st">&quot;text: body&quot;</span><span class="kw">&gt;&lt;/td&gt;</span>
+                <span class="kw">&lt;/tr&gt;</span>
+            <span class="kw">&lt;/tbody&gt;</span>
+        <span class="kw">&lt;/table&gt;</span>        
+    <span class="kw">&lt;/div&gt;</span></code></pre>
+<p>Pour exprimer à <strong>Knockout</strong> que l'on veut afficher une liste d'éléments, on utilise l'attribut <code>data-bind=&quot;foreach: messages&quot;</code>. Et en javascript, nous devrons écrire ceci :</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="kw">ko</span>.<span class="fu">applyBindings</span>({<span class="dt">messages</span>:Messages}, <span class="kw">document</span>.<span class="fu">querySelector</span>(<span class="st">&quot;#messagesList&quot;</span>));</code></pre>
+<p>Donc, toujours aussi simple !!!</p>
+<h3 id="code-définitif-de-notre-page-index.html"><a href="#TOC"><span class="header-section-number">14.3.6</span> Code définitif de notre page index.html</a></h3>
+<p>Avant de &quot;lancer&quot; notre page, vérifions que le code ressemble à ceci :</p>
+<pre class="sourceCode html"><code class="sourceCode html">    <span class="dt">&lt;!DOCTYPE </span>html<span class="dt">&gt;</span>
+    <span class="kw">&lt;html&gt;</span>
+    <span class="kw">&lt;head&gt;</span>
+        <span class="kw">&lt;meta</span><span class="ot"> http-equiv=</span><span class="st">&quot;Content-Type&quot;</span><span class="ot"> content=</span><span class="st">&quot;text/html; charset=utf-8&quot;</span><span class="kw">&gt;</span>
+        <span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">&quot;knockout-2.2.0.js&quot;</span><span class="kw">&gt;&lt;/script&gt;</span>
+    <span class="kw">&lt;/head&gt;</span>
+    <span class="kw">&lt;body&gt;</span>
+
+        <span class="kw">&lt;h1&gt;</span>Tuto KnockOut<span class="kw">&lt;/h1&gt;</span>
+
+        <span class="kw">&lt;div</span><span class="ot"> id=</span><span class="st">&quot;messageView&quot;</span><span class="kw">&gt;</span>
+            <span class="kw">&lt;span</span><span class="ot"> data-bind=</span><span class="st">&quot;text: from&quot;</span><span class="kw">&gt;&lt;/span&gt;</span>
+            <span class="kw">&lt;span</span><span class="ot"> data-bind=</span><span class="st">&quot;text: subject&quot;</span><span class="kw">&gt;&lt;/span&gt;</span>
+            <span class="kw">&lt;span</span><span class="ot"> data-bind=</span><span class="st">&quot;text: body&quot;</span><span class="kw">&gt;&lt;/span&gt;</span>
+        <span class="kw">&lt;/div&gt;</span>
+        <span class="kw">&lt;hr&gt;</span>
+        <span class="kw">&lt;div</span><span class="ot"> id=</span><span class="st">&quot;messagesList&quot;</span><span class="kw">&gt;</span>
+            <span class="kw">&lt;table&gt;</span>
+                <span class="kw">&lt;thead&gt;</span>
+                    <span class="kw">&lt;tr&gt;&lt;th&gt;</span>From<span class="kw">&lt;/th&gt;&lt;th&gt;</span>Subject<span class="kw">&lt;/th&gt;&lt;th&gt;</span>Body<span class="kw">&lt;/th&gt;&lt;/tr&gt;</span>
+                <span class="kw">&lt;/thead&gt;</span>
+                <span class="kw">&lt;tbody</span><span class="ot"> data-bind=</span><span class="st">&quot;foreach: messages&quot;</span><span class="kw">&gt;</span>
+                    <span class="kw">&lt;tr&gt;</span>
+                        <span class="kw">&lt;td</span><span class="ot"> data-bind=</span><span class="st">&quot;text: from&quot;</span><span class="kw">&gt;&lt;/td&gt;</span>
+                        <span class="kw">&lt;td</span><span class="ot"> data-bind=</span><span class="st">&quot;text: subject&quot;</span><span class="kw">&gt;&lt;/td&gt;</span>
+                        <span class="kw">&lt;td</span><span class="ot"> data-bind=</span><span class="st">&quot;text: body&quot;</span><span class="kw">&gt;&lt;/td&gt;</span>
+                    <span class="kw">&lt;/tr&gt;</span>
+                <span class="kw">&lt;/tbody&gt;</span>
+            <span class="kw">&lt;/table&gt;</span>        
+        <span class="kw">&lt;/div&gt;</span>
+        <span class="kw">&lt;hr&gt;</span>
+        <span class="kw">&lt;form&gt;</span>
+            <span class="kw">&lt;input</span><span class="ot"> data-bind=</span><span class="st">&quot;value: from&quot;</span><span class="kw">/&gt;&lt;input</span><span class="ot"> data-bind=</span><span class="st">&quot;value: subject&quot;</span><span class="kw">/&gt;</span>
+        <span class="kw">&lt;/form&gt;</span>
+
+
+    <span class="kw">&lt;/body&gt;</span>
+    <span class="kw">&lt;script&gt;</span>
+
+        <span class="kw">var</span> Message = <span class="kw">function</span> (from, subject, body) {
+            <span class="kw">this</span>.<span class="fu">from</span> = <span class="kw">ko</span>.<span class="fu">observable</span>(from);
+            <span class="kw">this</span>.<span class="fu">subject</span> = <span class="kw">ko</span>.<span class="fu">observable</span>(subject);
+            <span class="kw">this</span>.<span class="fu">body</span> = <span class="kw">ko</span>.<span class="fu">observable</span>(body);
+
+            <span class="kw">this</span>.<span class="fu">from</span>.<span class="fu">subscribe</span>(<span class="kw">function</span>(value){<span class="kw">console</span>.<span class="fu">log</span>(<span class="st">&quot;value</span> : <span class="st">&quot;</span>, value);});
+        }
+
+        <span class="kw">var</span> Messages = <span class="kw">ko</span>.<span class="fu">observableArray</span>([
+            <span class="kw">new</span> Message(<span class="st">&quot;John</span> <span class="st">Doe&quot;</span>, <span class="st">&quot;First</span> <span class="st">Message&quot;</span>, <span class="st">&quot;Hello</span> <span class="st">World&quot;</span>),
+            <span class="kw">new</span> Message(<span class="st">&quot;Bob</span> <span class="st">Morane&quot;</span>, <span class="st">&quot;hello&quot;</span>, <span class="st">&quot;hello</span> <span class="st">world&quot;</span>),
+            <span class="kw">new</span> Message(<span class="st">&quot;Sam</span> <span class="st">Le</span> <span class="st">Pirate&quot;</span>, <span class="st">&quot;Salut&quot;</span>, <span class="st">&quot;Salut</span> <span class="st">à</span> <span class="st">Tous&quot;</span>)
+        ]);
+
+        msg = <span class="kw">new</span> Message(<span class="st">&quot;bob&quot;</span>, <span class="st">&quot;hello&quot;</span>, <span class="st">&quot;hello</span> <span class="st">world&quot;</span>);
+
+        <span class="kw">ko</span>.<span class="fu">applyBindings</span>(msg, <span class="kw">document</span>.<span class="fu">querySelector</span>(<span class="st">&quot;</span>#<span class="st">messageView&quot;</span>));
+
+        <span class="kw">ko</span>.<span class="fu">applyBindings</span>(msg, <span class="kw">document</span>.<span class="fu">querySelector</span>(<span class="st">&quot;form&quot;</span>));
+
+        <span class="kw">ko</span>.<span class="fu">applyBindings</span>({<span class="dt">messages</span>:Messages}, <span class="kw">document</span>.<span class="fu">querySelector</span>(<span class="st">&quot;</span>#<span class="st">messagesList&quot;</span>));
+
+    <span class="kw">&lt;/script&gt;</span>
+    <span class="kw">&lt;/html&gt;</span></code></pre>
+<h3 id="démonstration"><a href="#TOC"><span class="header-section-number">14.3.7</span> Démonstration !!!</a></h3>
+<p>Ouvrez votre page dans votre navigateur préféré (Chrome donc ;)) et ouvrez aussi la console du navigateur. Vous pouvez donc noter que le lien entre les données et la page s'effectue bien :</p>
+<p><img src="RSRC/13_03_MVC.png" alt="BB" /><br /></p>
+<p>Ensuite dans la console, tapez ceci : <code>msg.from(&quot;BOBBY&quot;).subject(&quot;Hello You !!!&quot;)</code> et validez. Vous vous apercevez que les modifications sont prises en compte automatiquement aussi bien dans la première ligne d'affichage du message que dans le formulaire de saisie. Notez au passage la possibilité &quot;jqueryesque&quot; (chaînée) de mise à jour des propriétés :</p>
+<p><img src="RSRC/13_04_MVC.png" alt="BB" /><br /></p>
+<p>Maintenant, si vous saisissez <code>Bob</code> dans la zone de saisie, vous pouvez vérifier que les changements sont bien répercutés dans les 2 sens :</p>
+<p><img src="RSRC/13_05_MVC.png" alt="BB" /><br /></p>
+<p>Ensuite, ajoutons notre message <code>msg</code> à la liste des messages <code>Messages</code> en saisissant ceci dans la console : <code>Messages.push(msg)</code>. Vous voyez que la liste des messages se met directement à jour :</p>
+<p><img src="RSRC/13_06_MVC.png" alt="BB" /><br /></p>
+<p>Et enfin, si vous modifiez les données dans les zones de saisie, vous pouvez voir que tout se met à jour même la liste des messages :</p>
+<p><img src="RSRC/13_07_MVC.png" alt="BB" /><br /></p>
+<h3 id="conclusion-1"><a href="#TOC"><span class="header-section-number">14.3.8</span> Conclusion</a></h3>
+<p>&quot;Je ne sais pas vous&quot;, mais je trouve <strong>Knockout</strong> particulièrement intéressant :). Si vous souhaitez aller plus loin, faites un tour dans la documentation et tout particulièrement ceci :</p>
+<ul>
+<li><p>Pour les interaction avec le serveur (ajax &amp; jQuery) :</p>
+<p><a href="http://knockoutjs.com/documentation/json-data.html">http://knockoutjs.com/documentation/json-data.html</a></p></li>
+<li><p>Mapping des données :</p>
+<p><a href="http://knockoutjs.com/documentation/plugins-mapping.html">http://knockoutjs.com/documentation/plugins-mapping.html</a></p></li>
+</ul>
+<p>Et si vous rêvez de combiner Backbone et Knockout, à voir : <strong>Knockback</strong> :</p>
+<p><a href="http://kmalakoff.github.com/knockback/">http://kmalakoff.github.com/knockback/</a></p>
+<p>qui fera certainement l'objet d'un chapitre de cet &quot;ouvrage&quot;.</p>
+<h2 id="encore-dautres-frameworks-mvc-javascript"><a href="#TOC"><span class="header-section-number">14.4</span> Encore d’autres frameworks MVC (javascript)</a></h2>
+<p>ils sont nombreux, mais les &quot;ténors&quot; connus, reconnus et utilisés sont les suivants :</p>
+<ul>
+<li><strong>Ember.js</strong> <a href="http://emberjs.com">http://emberjs.com</a> : le concurrent direct “officiel” de Backbone, très très complet, puissant, mais avec une dépendance forte avec le moteur de template Handelbar (un Mustache survitaminé), à suivre de très près. Il est cependant dommage que la gestion des modèles ne soit pas encore en mode stable (c'est un module à part), mais le modèle objet d’Ember.js est évolué, plus strict que celui de Backbone, donc à mon sens plus contraignant, mais cela peut en rassurer d'autres, car il propose un cadre “plus normatif” et permet donc de “forcer” à respecter les normes de développement sur un projet.</li>
+<li><strong>AngularJS</strong> <a href="http://angularjs.org">http://angularjs.org</a> : le framework pour Webapp de Google, mais pas complètement MVC (les modèles de sont pas traités) qui met essentiellement l'accent sur le binding des données avec le DOM</li>
+<li><strong>JavaScriptMVC</strong> <a href="http://javascriptmvc.com">http://javascriptmvc.com</a> : intéressant (peut-être un des plus anciens), car il essaye de coller le plus possible à ce que des développeurs java connaissent de MVC, mais la mécanique de mise en oeuvre est un peu lourde. Cependant le code est très lisible.</li>
+</ul>
+<p>Vous trouverez aussi des frameworks javascript MVC “Client et Serveur”, tels :</p>
+<ul>
+<li><strong>Batman</strong> <a href="http://batmanjs.org/">http://batmanjs.org/</a> : plutôt destiné aux développeurs Coffeescript. Il fournit son propre serveur mais peut être utilisé avec d’autres technologies serveur notamment le Ruby ou même “seul” dans le navigateur. Je trouve la documentation insuffisante, vous êtes parfois obligés d’aller dans le code du framework pour en comprendre le fonctionnement.</li>
+<li><strong>Matador</strong> <a href="http://obvious.github.com/matador">http://obvious.github.com/matador</a> : celui-ci est essentiellement un framework MVC côté serveur en javascript s’appuyant sur express, il servirait donc plutôt à, par exemple, re-écrire la partie serveur de notre blog. Mais il est intéressant de voir de quelle manière il utilise des frameworks javascript initialement développés pour le navigateur, côté serveur, tel le modèle objet Klass (https://github.com/ded/klass).</li>
+<li><strong>Chaplin</strong> <a href="https://github.com/chaplinjs/chaplin">https://github.com/chaplinjs/chaplin</a> : qui est une architecture complète autour de Backbone, une fois de plus “programmable” en coffeescript.</li>
+<li>et beaucoup d'autres ...</li>
+</ul>
+<h2 id="conclusion-2"><a href="#TOC"><span class="header-section-number">14.5</span> Conclusion</a></h2>
+<p>L’éco-système des framworks MVC javascript est vaste et il est difficile de faire un choix. L'important est de vous faire votre propre avis, d'utiliser les outils avec vous êtes le plus à l'aise, mais tout en étant sûr que vous avez chosi un framework largement utilisé par d'autres, avec une communauté active. Un dernier petit conseil : le plus souvent les frameworks javascript affiche leur repository sur GitHub (“the place to be”), alors tout le monde peut y être (j’y suis), mais c’est un 1er critère, ensuite un des gros avantage de Github, c’est que vous pouvez voir facilement l’activité autour du framework :</p>
+<ul>
+<li>Qui sont les contributeurs (et à quels autres projets il participent) ?</li>
+<li>Depuis combien de temps le code n’a pas été mis à jour ?</li>
+<li>Combien de personnes sont abonnées au projet ?</li>
+<li>Combien de personnes ont “forké” le projet (dupliqué pour modifications et propositions de modifications, on parle de “pull request”) ?</li>
+<li>Dans le bug tracker, quelle est la qualité des réponses ?</li>
+<li>…</li>
+</ul>
+<blockquote>
+<blockquote>
+<p>Par exemple pour Backbone, plus de 10 000 “abonnés”, plus de 1 700 “forks”, c’est peu de dire que mon “jouet préféré” suscite de l’intérêt. Vous pouvez même comparer par rapport à d’autres frameworks java connus pour vous faire une idée. Ayez donc ce réflexe pour tout framework que vous souhaitez utiliser, cela peut vous éviter quelques soucis.</p>
+</blockquote>
+</blockquote>
+<h1 id="backbone-et-typescript"><a href="#TOC"><span class="header-section-number">15</span> Backbone et Typescript</a></h1>
+<pre><code>//TODO: 
+Où nous parlerons de Typescript et de sa cohabitation avec Backbone</code></pre>
+<h1 id="ressources-backbone"><a href="#TOC"><span class="header-section-number">16</span> Ressources Backbone</a></h1>
+<pre><code>//TODO : une liste à faire vivre des ressources intéressantes concernant Backbone</code></pre>
+<h1 id="resthub-backbone-stack"><a href="#TOC"><span class="header-section-number">17</span> RestHub Backbone Stack</a></h1>
+<pre><code>//TODO : ou comment organiser son code de manière professionnelle</code></pre>
 </body>
 </html>

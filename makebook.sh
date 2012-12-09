@@ -12,11 +12,15 @@ pandoc -s --toc --highlight-style pygments -c style.css -N -o backbone.en.douceu
 	09-ORGANISATION-CODE.md \
 	10-SECURISATION.md \
 	11-BACKBONE-SYNC.md \
-	12-BB-COFFEESCRIPT.md
+	12-BB-COFFEESCRIPT.md \
+	13-AUTRES-FWKS-MVC.md \
+	14-BACKBONE-ET-TYPESCRIPT.md \
+	15-RESSOURCES.md \
+	16-HS-RESTHUB-BB-STACK.md
 
 #PDF version
 pandoc -s --toc --latex-engine=xelatex --template=latex.template.tex -N \
-	--variable=version:"alpha du 2.12.2012 | Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License." \
+	--variable=version:"alpha du 9.12.2012 | Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License." \
 	--variable=monofont:Consolas \
 	--variable=mainfont:Georgia \
 	--variable fontsize=12pt \
@@ -41,7 +45,11 @@ pandoc -s --toc --latex-engine=xelatex --template=latex.template.tex -N \
 	09-ORGANISATION-CODE.md \
 	10-SECURISATION.md \
 	11-BACKBONE-SYNC.md \
-	12-BB-COFFEESCRIPT.md
+	12-BB-COFFEESCRIPT.md \
+	13-AUTRES-FWKS-MVC.md \
+	14-BACKBONE-ET-TYPESCRIPT.md \
+	15-RESSOURCES.md \
+	16-HS-RESTHUB-BB-STACK.md
 
 
 #Epub version
@@ -59,5 +67,10 @@ pandoc -S --epub-metadata=epub-metadata.xml -o backbone.en.douceur.epub \
 	09-ORGANISATION-CODE.md \
 	10-SECURISATION.md \
 	11-BACKBONE-SYNC.md \
-	12-BB-COFFEESCRIPT.md
+	12-BB-COFFEESCRIPT.md \
+	13-AUTRES-FWKS-MVC.md \
+	14-BACKBONE-ET-TYPESCRIPT.md \
+	15-RESSOURCES.md \
+	16-HS-RESTHUB-BB-STACK.md
+	
 

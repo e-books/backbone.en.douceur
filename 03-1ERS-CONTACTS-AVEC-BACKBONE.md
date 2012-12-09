@@ -163,8 +163,13 @@ Sauvegarder, relancer dans le navigateur, et retournez à nouveau dans la consol
 Nous venons donc d'ajouter 3 articles à notre collection,
 
 - Si vous tapez la commande `listeArticles.models` vous obtiendrez un tableau de modèles
-- Si vous souhaitez obtenir le titre du 2ème article de la collection, tapez : `listeArticles.models[1].get("title")`
-- vous souhaitez parcourir les articles de la collection et afficher leur titre : `listeArticles.each(function(article){ console.log (article.get("title")); });`
+- Si vous souhaitez obtenir le titre du 2ème article de la collection, tapez : 
+
+	`listeArticles.models[1].get("title")`
+
+- vous souhaitez parcourir les articles de la collection et afficher leur titre : 
+
+	`listeArticles.each(function(article){ console.log (article.get("title")); });`
 
 >>Cela vous rappelle quelque chose ? Le `each` de Backbone est implémenté grâce à Underscore.
 
@@ -259,7 +264,10 @@ Puis dans le code javascript, à la suite du code de la collection et avant le c
 
 Eh bien, nous avons défini une vue avec :
 
-- Une propriété `el` (pour élément) à laquelle on “attache” le `<div>` dont l’id est `“articles-collection-container”`. C’est dans ce `<div>` que seront affichés les articles
+- Une propriété `el` (pour élément) à laquelle on “attache” le `<div>` dont l’id est : 
+
+	`“articles-collection-container”`. C’est dans ce `<div>` que seront affichés les articles
+
 - Une méthode `initialize`, qui affecte une méthode `template()` à l’instance de la vue en lui précisant que nous utiliserons le modèle de code html définit dans le `<div>` dont l’id est `“articles-collection-template”`
 - Une méthode `render`, qui va passer les données en paramètre à la méthode `template()` puis les afficher dans la page 
 

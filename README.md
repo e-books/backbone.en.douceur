@@ -1,8 +1,8 @@
 <hr>
 
-###- [Sécurisation, Coffeescript au menu : Télécharger le pdf (v° alpha du 02/12/2012)](https://github.com/downloads/k33g/backbone.en.douceur/backbone.en.douceur.20121202.pdf) *(10 chapitres)*
+###- [Au Menu les autres frameworks MVC : Télécharger le pdf (v° alpha du 09/12/2012)](https://github.com/downloads/k33g/backbone.en.douceur/backbone.en.douceur.20121209.pdf) *(10 chapitres)*
 
-###- [Format epub disponible aussi ...](https://github.com/downloads/k33g/backbone.en.douceur/backbone.en.douceur.20121202.epub)
+###- [Format epub disponible aussi ...](https://github.com/downloads/k33g/backbone.en.douceur/backbone.en.douceur.20121209.epub)
 
 ###- [Voir le code source ...](https://github.com/k33g/backbone.en.douceur)
 
@@ -26,9 +26,10 @@ Cet ouvrage va traiter au moins les points suivants :
 - 11-"Securisation" de notre application *(publié)*
 - 12-Backbone.Sync *(à écrire)*
 - 13-Backbone & Coffeescript *(publié)*
-- 14-Autres frameworks MVC *(à venir)*
+- 14-Autres frameworks MVC *(publié)*
 - 15-Backbone & Typescript *(à venir)*
 - 16-Ressources *(à écrire)*
+- 17-Hors Serie : RestHub Backbone Stack : "quick start" *(en cours d'écriture)*
 
 Soyez patient, l'ensemble des chapitres sera publié avant fin décembre. J'ai juste besoin d'un peu de temps entre ma vie de famille, ma vie pro et ma vie de geek.
 
