@@ -1,6 +1,6 @@
 #Préambule & Remerciements
 
-J'ai eu la prétention d'écrire un livre, et sur Backbone en plus ! En fait il n'existe peu de littérature française spécialisée sur des frameworks, qui plus est des framework javascript, alors que nos amis anglo-saxons écrivent sur Dart, Coffeescript, Backbone, etc. ...
+J'ai eu la prétention d'écrire un livre, et sur Backbone en plus ! En fait il n'existe peu de littérature française spécialisée sur des frameworks, qui plus est des frameworks javascript, alors que nos amis anglo-saxons écrivent sur Dart, Coffeescript, Backbone, etc. ...
 Au départ ce "bouquin" est un projet un peu fou, puisque j'ai même contacté les éditions Eyrolles (quand je vous disais que j'étais prétentieux ;) ). Et ils ont été d'accord ! Alors vous vous demandez pourquoi, finalement je publie ça de manière open source ?
 
 Eh bien, écrire un livre est un travail de longue haleine, qui doit se faire dans la durée. D'un autre côté, les technologies, tout particulièrement ce qui gravite autour de javascript, progressent et changent à une allure vertigineuse. Mon constat est que, si je veux écrire tout ce que j'ai en tête, cela ne finira jamais, ou bien le contenu n'aura plus d'intérêt (obsolète) et qu'il me semble plus approprié de livrer déjà ce que j'ai "gratté" et de transformer ce livre en projet open-source.
@@ -25,4 +25,4 @@ Remerciements aussi pour :
 
 ##Avertissement
 
-Cet ouvrage est destiné à être purement éducatif. donc dès fois le code n'est pas fait dans les "règles de l'art", mais plutôt avec une "vision" pédagogique. Désolé donc pour les puristes, mais à priori vous n'êtes pas la cible ;). Cependant, je serais ravi de pouvoir inclure vos remarques et bonnes pratiques sous forme de notes dans chacun des chapitres. Donc à vos pull-requests !
+Cet ouvrage est destiné à être purement éducatif. Donc le code n'est pas toujours fait dans les "règles de l'art", mais plutôt avec une "vision" pédagogique. Désolé donc pour les puristes, mais a priori vous n'êtes pas la cible ;). Cependant, je serais ravi de pouvoir inclure vos remarques et bonnes pratiques sous forme de notes dans chacun des chapitres. Donc à vos pull-requests !
