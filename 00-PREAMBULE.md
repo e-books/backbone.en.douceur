@@ -20,7 +20,8 @@ Remerciements aussi pour :
 - [ehsavoie](https://github.com/ehsavoie) : 1ère pull request ;)
 - [lodennan](https://github.com/lodennan)
 - [cbonnissent](https://github.com/cbonnissent) : format epub
-- [loicdescotte](https://github.com/loicdescotte) : relecture
+- [loicdescotte](https://github.com/loicdescotte) : relecture & corrections
+- [hasalex](https://github.com/hasalex) : relecture & corrections
 
 
 ##Avertissement
