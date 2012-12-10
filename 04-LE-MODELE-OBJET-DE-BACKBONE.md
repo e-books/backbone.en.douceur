@@ -9,7 +9,7 @@
 
 >*Ce qui est souvent déstabilisant pour le développeur Java (PHP, .Net, etc. ....) c’est le modèle objet de javascript qui diffère du classique modèle orienté « classes » que nous connaissons tous (normalement). De nombreux ouvrages, articles, … se sont attaqués au sujet, mais ce n’est pas l’objet de ce chapitre.*
 
-Je vais vous présenter de quelle façon Backbone gère son « Orientation objet » et comment réutiliser cette fonctionnalité. L’objectifs et double : Mieux comprendre le fonctionnement de Backbone et vous donner un moyen de faire de l’objet en javascript sans être dépaysé (quelque chose qui ressemble dans sa logique, à ce que vous connaissez déjà).
+Je vais vous présenter de quelle façon Backbone gère son « Orientation objet » et comment ré-utiliser cette fonctionnalité. L’objectif est double : mieux comprendre le fonctionnement de Backbone et vous donner un moyen de faire de l’objet en javascript sans être dépaysé (quelque chose qui ressemble dans sa logique, à ce que vous connaissez déjà).
 
 ##Un petit tour dans le code
 
