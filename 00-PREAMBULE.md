@@ -22,6 +22,7 @@ Remerciements aussi pour :
 - [cbonnissent](https://github.com/cbonnissent) : format epub
 - [loicdescotte](https://github.com/loicdescotte) : relecture & corrections
 - [hasalex](https://github.com/hasalex) : relecture & corrections (nombreuses)
+- [iammichiel](https://github.com/iammichiel) : typo
 
 
 ##Avertissement
