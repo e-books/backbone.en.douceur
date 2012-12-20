@@ -373,8 +373,8 @@ define([
           "click button[data-action='cancel']": 'cancel',
       },
       
-      init() {
-      	this.render();
+      initialize : function() {
+        this.render();
       },
 
       add : function() {

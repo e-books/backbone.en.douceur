@@ -278,7 +278,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
 </ul></li>
 <li><a href="#ressources-backbone"><span class="toc-section-number">16</span> Ressources Backbone</a></li>
 <li><a href="#resthub-backbone-stack"><span class="toc-section-number">17</span> RestHub Backbone Stack</a><ul>
-<li><a href="#resthub-backbone-stack-mais-quest-ce-donc"><span class="toc-section-number">17.1</span> RestHub Backbone Stack : mais qu'est-ce donc ?</a></li>
+<li><a href="#resthub-backbone-stack-mais-quest-ce-donc"><span class="toc-section-number">17.1</span> RESThub Backbone Stack : mais qu'est-ce donc ?</a></li>
 <li><a href="#avant-de-sen-servir-nous-avons-besoin-dune-stack-serveur"><span class="toc-section-number">17.2</span> Avant de s'en servir, nous avons besoin d'une &quot;stack serveur&quot;</a></li>
 <li><a href="#installation-de-rbs"><span class="toc-section-number">17.3</span> Installation de RBS</a></li>
 <li><a href="#création-dun-modèle-et-dune-collection"><span class="toc-section-number">17.4</span> Création d'un modèle et d'une collection</a></li>
@@ -311,7 +311,9 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <li><a href="https://github.com/lodennan">lodennan</a></li>
 <li><a href="https://github.com/cbonnissent">cbonnissent</a> : format epub</li>
 <li><a href="https://github.com/loicdescotte">loicdescotte</a> : relecture &amp; corrections</li>
-<li><a href="https://github.com/hasalex">hasalex</a> : relecture &amp; corrections</li>
+<li><a href="https://github.com/hasalex">hasalex</a> : relecture &amp; corrections (nombreuses)</li>
+<li><a href="https://github.com/iammichiel">iammichiel</a> : typo</li>
+<li><a href="https://github.com/sdeleuze">sdeleuze</a> : optimisation de code et typo</li>
 </ul>
 <h2 id="avertissement"><a href="#TOC"><span class="header-section-number">1.1</span> Avertissement</a></h2>
 <p>Cet ouvrage est destiné à être purement éducatif. Donc le code n'est pas toujours fait dans les &quot;règles de l'art&quot;, mais plutôt avec une &quot;vision&quot; pédagogique. Désolé donc pour les puristes, mais a priori vous n'êtes pas la cible ;). Cependant, je serais ravi de pouvoir inclure vos remarques et bonnes pratiques sous forme de notes dans chacun des chapitres. Donc à vos pull-requests !</p>
@@ -445,7 +447,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
 </blockquote>
 <h2 id="outils-de-développement"><a href="#TOC"><span class="header-section-number">3.2</span> Outils de développement</a></h2>
 <h3 id="ide-editeur"><a href="#TOC"><span class="header-section-number">3.2.1</span> IDE (Editeur)</a></h3>
-<p>Pour coder choisissez l'éditeur de code avec lequel vous vous sentez le plus à l'aise. Ils ont tous leurs spécificités, ils sont gratuits, open-source ou payants. Certains &quot;puristes&quot; utilisent même Vim ou Emacs. Je vous en livre ici quelques-uns que j'ai trouvé agréables à utiliser si vous n'avez pas déjà fait votre choix :</p>
+<p>Pour coder choisissez l'éditeur de code avec lequel vous vous sentez le plus à l'aise. Ils ont tous leurs spécificités, ils sont gratuits, open-source ou payants. Certains &quot;puristes&quot; utilisent même Vim ou Emacs. Je vous en livre ici quelques-uns que j'ai trouvés agréables à utiliser si vous n'avez pas déjà fait votre choix :</p>
 <ul>
 <li>Mon préféré mais payant : WebStorm de chez JetBrains, il possède des fonctionnalités de refactoring très utiles (existe sous Windows, Linux et OSX)</li>
 <li>Dans le même esprit et gratuit : Netbeans, il propose un éditeur HTML/Javascript très pertinent quant à la qualité de votre code (existe sous Windows, Linux et OSX)</li>
@@ -456,7 +458,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
 </ul>
 <p>Vous voyez, il y en a pour tous les goûts. En ce qui me concerne j'utilise essentiellement WebStorm ou SublimeText.</p>
 <h3 id="navigateur"><a href="#TOC"><span class="header-section-number">3.2.2</span> Navigateur</a></h3>
-<p>Le navigateur le plus agréable, selon moi, à utiliser pour faire du développement Web est certainement Chrome (C'est un avis très personnel, donc amis utilisateurs de Firefox ne m'en veuillez pas). En effet Chrome propose une console d'administration particulièrement puissante. C'est ce que je vais utiliser, rien ne vous empêche d'utiliser votre navigateur préféré. Par contre, que cela ne vous dispense pas d'aller tester régulièrement votre code sous d'autres navigateurs.</p>
+<p>Le navigateur le plus agréable, selon moi, à utiliser pour faire du développement Web est certainement Chrome (c'est un avis très personnel, donc amis utilisateurs de Firefox ne m'en veuillez pas). En effet Chrome propose une console d'administration particulièrement puissante. C'est ce que je vais utiliser, rien ne vous empêche d'utiliser votre navigateur préféré. Par contre, que cela ne vous dispense pas d'aller tester régulièrement votre code sous d'autres navigateurs.</p>
 <h2 id="initialisation-de-notre-projet-de-travail"><a href="#TOC"><span class="header-section-number">3.3</span> Initialisation de notre projet de travail</a></h2>
 <p>Maintenant que nous sommes “outillés” (un éditeur de code et un navigateur) nous allons pouvoir initialiser notre environnement de développement.</p>
 <h3 id="installation"><a href="#TOC"><span class="header-section-number">3.3.1</span> Installation</a></h3>
@@ -510,7 +512,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <p><img src="RSRC/02_01_ARBO.png" alt="Arborecsence" /><br /></p>
 <p>Les deux paragraphes qui suivent ne sont que pour ceux d'entre vous qui ne connaissent ni <strong>jQuery</strong> ni <strong>Underscore</strong>. Ces paragraphes n'ont pas la prétention de vous apprendre ces outils, mais vous donneront les bases nécessaires pour vous en servir, pour comprendre leur utilité et pour vous donner envie d'aller plus loin. Les autres (ceux qui connaissent déjà), passez directement au <strong>§ &quot;1er contact … avec Backbone&quot;</strong>.</p>
 <h2 id="jouons-avec-jquery"><a href="#TOC"><span class="header-section-number">3.4</span> Jouons avec jQuery</a></h2>
-<p>JQuery est un framework javascript initialement crée par John Resig qui vous permet de prendre le contrôle de votre page HTML. Voyons tout de suite comment nous en servir. Dans notre toute nouvelle page <code>index.html</code>, préparons un peu notre bac à sable et saisissons le code suivant :</p>
+<p>JQuery est un framework javascript initialement créé par John Resig qui vous permet de prendre le contrôle de votre page HTML. Voyons tout de suite comment nous en servir. Dans notre toute nouvelle page <code>index.html</code>, préparons un peu notre bac à sable et saisissons le code suivant :</p>
 <pre class="sourceCode html"><code class="sourceCode html">    <span class="dt">&lt;!DOCTYPE </span>html<span class="dt">&gt;</span>
     <span class="kw">&lt;html&gt;</span>
     <span class="kw">&lt;head&gt;</span>
@@ -596,7 +598,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <h4 id="saisissons-nos-1ères-commandes"><a href="#TOC"><span class="header-section-number">3.4.1.1</span> Saisissons nos 1ères commandes :</a></h4>
 <p>Je voudrais la liste de mes titres <code>&lt;H1&gt;</code> : dans la console, saisir : <code>$('h1')</code>, validez, et vous obtenez un tableau (Array au sens javascript) des nodes html de type <code>&lt;H1&gt;</code> présentes dans votre page html :</p>
 <p><img src="RSRC/02_04_JQUERY.png" alt="jQuery" /><br /></p>
-<p>Je voudrais le texte du titre <code>&lt;H1&gt;</code> dont l'id est <code>&quot;current_articles_title&quot;</code> : dans la console, saisir : <code>$('#current_articles_title').text()</code>. L'identifiant étant unique, en fait le type de la node est peu important :</p>
+<p>Je voudrais le texte de l'élément dont l'id est <code>&quot;current_articles_title&quot;</code> : dans la console, saisir : <code>$('#current_articles_title').text()</code>. L'identifiant étant unique, en fait le type de la node est peu important :</p>
 <p><img src="RSRC/02_05_JQUERY.png" alt="jQuery" /><br /></p>
 <p>Mais comment dois-je faire pour avoir le texte du premier <code>&lt;H1&gt;</code> de ma page, il n'a pas d'id ?!?. Tout simplement, en utilisant la commande suivante : <code>$('h1').first().text()</code> :</p>
 <p><img src="RSRC/02_06_JQUERY.png" alt="jQuery" /><br /></p>
@@ -640,7 +642,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
     });</code></pre>
 <p>Puis ouvrez la page dans votre navigateur et activez la console :</p>
 <p><img src="RSRC/02_10_JQUERY.png" alt="jQuery" /><br /></p>
-<p>Il semble que tous les éléments soient chargés correctement avec ou sans l’utilisation de la méthode <code>ready()</code> de jQuery. Vous avez du remarquer que j'avais déplacé mon code javascript et les références aux autres code javascript &quot;en bas de ma page&quot;. Maintenant, déplacez <code>&lt;script src=&quot;libs/vendors/jquery-1.7.2.js&quot;&gt;&lt;/script&gt;</code> et le code source que nous avons écrit au niveau du header (balise <code>&lt;head&gt;</code>) de la page, ce qui est plus &quot;classique&quot; et rechargez la page :</p>
+<p>Il semble que tous les éléments soient chargés correctement avec ou sans l’utilisation de la méthode <code>ready()</code> de jQuery. Vous avez du remarquer que j'avais déplacé mon code javascript et les références aux autres codes javascript &quot;en bas de ma page&quot;. Maintenant, déplacez <code>&lt;script src=&quot;libs/vendors/jquery-1.7.2.js&quot;&gt;&lt;/script&gt;</code> et le code source que nous avons écrit au niveau du header (balise <code>&lt;head&gt;</code>) de la page, ce qui est plus &quot;classique&quot; et rechargez la page :</p>
 <p><img src="RSRC/02_11_JQUERY.png" alt="jQuery" /><br /></p>
 <p>Et là on voit bien qu'au 1er appel <code>$('#current_articles_list')</code> jQuery ne trouve rien, puis une fois le DOM chargé, jQuery trouve la liste. J'ai mis mes codes en bas de page, pour des raisons de performances et c'est pour ça que cela &quot;semblait&quot; fonctionner même à l'extérieur de <code>$(document).ready(handler)</code>, les éléments se chargeant plus rapidement, mais ça ne garantit rien, tout particulièrement lorsque votre page n’est plus en local. Donc n'oubliez jamais d'exécuter votre code au bon moment grâce à <code>$(document).ready(handler)</code>, ... Et remettez quand même votre code en bas de page ;).</p>
 <p>Vous venez de voir une infime partie des possibilités de jQuery, mais cela vous donne déjà un aperçu et vous permet de commencer à jouer avec et aller plus loin. jQuery permet aussi de faire des requêtes AJAX (http) vers des serveurs web, mais nous verrons cela un peu plus tard.</p>
@@ -1114,7 +1116,7 @@ listeArticles.add(new blog.Article({ title : &quot;titre3&quot;, content : &quot
 <blockquote>
 <p><em>Ce qui est souvent déstabilisant pour le développeur Java (PHP, .Net, etc. ....) c’est le modèle objet de javascript qui diffère du classique modèle orienté « classes » que nous connaissons tous (normalement). De nombreux ouvrages, articles, … se sont attaqués au sujet, mais ce n’est pas l’objet de ce chapitre.</em></p>
 </blockquote>
-<p>Je vais vous présenter de quelle façon Backbone gère son « Orientation objet » et comment réutiliser cette fonctionnalité. L’objectifs et double : Mieux comprendre le fonctionnement de Backbone et vous donner un moyen de faire de l’objet en javascript sans être dépaysé (quelque chose qui ressemble dans sa logique, à ce que vous connaissez déjà).</p>
+<p>Je vais vous présenter de quelle façon Backbone gère son « Orientation objet » et comment réutiliser cette fonctionnalité. L’objectif est double : mieux comprendre le fonctionnement de Backbone et vous donner un moyen de faire de l’objet en javascript sans être dépaysé (quelque chose qui ressemble dans sa logique, à ce que vous connaissez déjà).</p>
 <h2 id="un-petit-tour-dans-le-code"><a href="#TOC"><span class="header-section-number">5.1</span> Un petit tour dans le code</a></h2>
 <p>Si vous avez la curiosité d’aller lire le code de Backbone (je vous engage à le faire, le code est clair et simple et avec le temps très instructif), vous « tomberez » sur une ligne particulièrement intéressante (vers la fin du code source dans <code>backbone.js</code> pour ceux qui iront réellement lire le code) :</p>
 <pre class="sourceCode javascript"><code class="sourceCode javascript">    <span class="co">// Set up inheritance for the model, collection, and view.</span>
@@ -5800,8 +5802,8 @@ declare var _: any;</code></pre>
 </ul>
 </blockquote>
 </blockquote>
-<h2 id="resthub-backbone-stack-mais-quest-ce-donc"><a href="#TOC"><span class="header-section-number">17.1</span> RestHub Backbone Stack : mais qu'est-ce donc ?</a></h2>
-<p>Pour faire court, RestHub est une stack technique Java orientée MVC et services REST, c'est un framework opensource (Lyonnais :) ) <a href="http://resthub.org/">http://resthub.org/</a>. Il se trouve que l'équipe projet est aussi friande de javascript et a livré il y a peu une stack javascript pour RestHub à base de Backbone pour la partie cliente <a href="http://resthub.org/backbone-stack.html">http://resthub.org/backbone-stack.html</a>. Comme l'équipe est sympa, ils ont fait une stack js indépendante de la stack serveur, ce qui permet de l'utiliser avec n'importe quelle autre stack serveur quelle que soit la technologie utilisée.</p>
+<h2 id="resthub-backbone-stack-mais-quest-ce-donc"><a href="#TOC"><span class="header-section-number">17.1</span> RESThub Backbone Stack : mais qu'est-ce donc ?</a></h2>
+<p>Pour faire court, RestHub est une stack technique Java orientée MVC et services REST, c'est un framework opensource (Lyonnais :) ) <a href="http://resthub.org/">http://resthub.org/</a>. Il se trouve que l'équipe projet est aussi friande de javascript et a livré il y a peu une stack javascript pour RESThub à base de Backbone pour la partie cliente <a href="http://resthub.org/backbone-stack.html">http://resthub.org/backbone-stack.html</a>. Comme l'équipe est sympa, ils ont fait une stack js indépendante de la stack serveur, ce qui permet de l'utiliser avec n'importe quelle autre stack serveur quelle que soit la technologie utilisée.</p>
 <p>Alors, RBS (je lui donne ce petit nom pour aller plus vite) ne vient pas seule, mais est bien accompagnée, puisqu'elle embarque :</p>
 <ul>
 <li>twitter bootstrap</li>
@@ -6067,7 +6069,7 @@ models = <span class="kw">nStore</span>.<span class="fu">new</span>(<span class=
 <h3 id="template-de-liste"><a href="#TOC"><span class="header-section-number">17.5.2</span> Template de liste</a></h3>
 <p>Dans <code>public/templates</code> créez un fichier <code>message.hbs</code> avec le code suivant :</p>
 <pre class="sourceCode html"><code class="sourceCode html"><span class="kw">&lt;ul&gt;</span>
-  {{#each this}}
+  {{#each collection}}
     <span class="kw">&lt;li&gt;</span>{{from}} : {{subject}} / {{body}}<span class="kw">&lt;/li&gt;</span>
   {{/each}}
 <span class="kw">&lt;/ul&gt;</span></code></pre>
@@ -6075,28 +6077,29 @@ models = <span class="kw">nStore</span>.<span class="fu">new</span>(<span class=
 <p>Nous allons créer dans <code>public/js/views</code> 2 vues backbone associées à chacun des templates.</p>
 <h3 id="messages-view.js"><a href="#TOC"><span class="header-section-number">17.6.1</span> messages-view.js</a></h3>
 <pre class="sourceCode javascript"><code class="sourceCode javascript">define([
-  <span class="ch">&#39;backbone&#39;</span>, 
+  <span class="ch">&#39;resthub&#39;</span>, 
   <span class="ch">&#39;hbs!templates/messages&#39;</span>
   ], 
-  <span class="kw">function</span>(Backbone, messagesTemplate) {
+  <span class="kw">function</span>(Resthub, messagesTemplate) {
 
-    <span class="kw">var</span> MessagesView = <span class="kw">Backbone.View</span>.<span class="fu">extend</span>({
+    <span class="kw">var</span> MessagesView = <span class="kw">Resthub.View</span>.<span class="fu">extend</span>({
       <span class="dt">el</span>: $(<span class="ch">&#39;#messages&#39;</span>),
+      <span class="dt">template</span>: messagesTemplate,
 
       <span class="dt">initialize</span>: <span class="kw">function</span>() {
         <span class="kw">this</span>.<span class="fu">collection</span>.<span class="fu">on</span>(<span class="ch">&#39;reset&#39;</span>, <span class="kw">this</span>.<span class="fu">render</span>, <span class="kw">this</span>);
         <span class="kw">this</span>.<span class="fu">collection</span>.<span class="fu">on</span>(<span class="ch">&#39;add&#39;</span>, <span class="kw">this</span>.<span class="fu">render</span>, <span class="kw">this</span>);
-      },
-      <span class="dt">render</span>: <span class="kw">function</span>() {
-        <span class="kw">var</span> renderedContent = messagesTemplate(<span class="kw">this</span>.<span class="fu">collection</span>.<span class="fu">toJSON</span>());
-        <span class="kw">this</span>.$<span class="fu">el</span>.<span class="fu">html</span>(renderedContent);
-        <span class="kw">return</span> <span class="kw">this</span>;
       }
     });
 
     <span class="kw">return</span> MessagesView;
   }
 );</code></pre>
+<blockquote>
+<blockquote>
+<p><em>Notez l'utilisation de Resthub.View qui est une version améliorée de Backbone.View fournissant notamment une implémentation par défaut du render() ainsi que la gestion de l'élément <span class="math"><em>r</em><em>o</em><em>o</em><em>t</em><em>s</em><em>u</em><em>r</em><em>l</em><em>e</em><em>q</em><em>u</em><em>e</em><em>l</em><em>e</em><em>s</em><em>t</em><em>a</em><em>t</em><em>t</em><em>a</em><em>c</em><em>h</em><em>é</em><em>l</em><em>a</em><em>v</em><em>u</em><em>e</em>(</span>el représentant l'élément DOM de la vue elle même) ainsi que tout un tas de fonctionnalités très pratiques</em></p>
+</blockquote>
+</blockquote>
 <blockquote>
 <blockquote>
 <p><em>Remarquez ceci : <code>'hbs!templates/messages'</code> pour référencer les template</em></p>
@@ -6113,14 +6116,19 @@ models = <span class="kw">nStore</span>.<span class="fu">new</span>(<span class=
   <span class="ch">&#39;hbs!templates/message-form&#39;</span>,
   <span class="ch">&#39;models/message&#39;</span>
   ], 
-  <span class="kw">function</span>(Backbone, messageFormTemplate, Message, MessagesView) {
+  <span class="kw">function</span>(Resthub, messageFormTemplate, Message, MessagesView) {
 
-    <span class="kw">var</span> MessageFormView = <span class="kw">Backbone.View</span>.<span class="fu">extend</span>({
+    <span class="kw">var</span> MessageFormView = <span class="kw">Resthub.View</span>.<span class="fu">extend</span>({
       <span class="dt">el</span>: $(<span class="ch">&#39;#message_form&#39;</span>),
+      <span class="dt">template</span>: messageFormTemplate,
 
       <span class="dt">events</span>: {
           <span class="st">&quot;click button[data-action=&#39;add&#39;]&quot;</span>: <span class="ch">&#39;add&#39;</span>,
           <span class="st">&quot;click button[data-action=&#39;cancel&#39;]&quot;</span>: <span class="ch">&#39;cancel&#39;</span>,
+      },
+
+      <span class="dt">initialize </span>: <span class="kw">function</span>() {
+        <span class="kw">this</span>.<span class="fu">render</span>();
       },
 
       <span class="dt">add </span>: <span class="kw">function</span>() {
@@ -6147,11 +6155,6 @@ models = <span class="kw">nStore</span>.<span class="fu">new</span>(<span class=
       <span class="dt">cancel </span>: <span class="kw">function</span>() {
         <span class="kw">console</span>.<span class="fu">log</span>(<span class="st">&quot;CANCEL&quot;</span>);
         <span class="kw">this</span>.$<span class="fu">el</span>[<span class="dv">0</span>].<span class="fu">reset</span>();
-      },
-      <span class="dt">render</span>: <span class="kw">function</span>() {
-        <span class="kw">var</span> renderedContent = messageFormTemplate();
-        <span class="kw">this</span>.$<span class="fu">el</span>.<span class="fu">html</span>(renderedContent);
-        <span class="kw">return</span> <span class="kw">this</span>;
       }
     });
     <span class="kw">return</span> MessageFormView;
@@ -6173,13 +6176,13 @@ models = <span class="kw">nStore</span>.<span class="fu">new</span>(<span class=
 
         <span class="kw">window</span>.<span class="fu">messages</span> = <span class="kw">new</span> Messages();
         <span class="kw">window</span>.<span class="fu">messagesView</span> = <span class="kw">new</span> MessagesView({<span class="dt">collection</span>:messages});
-        <span class="kw">window</span>.<span class="fu">messageForm</span> = <span class="kw">new</span> MessageFormView({<span class="dt">collection</span>:messages}).<span class="fu">render</span>();
+        <span class="kw">window</span>.<span class="fu">messageForm</span> = <span class="kw">new</span> MessageFormView({<span class="dt">collection</span>:messages});
 
         <span class="kw">messages</span>.<span class="fu">fetch</span>();
 });</code></pre>
 <p>Vous pouvez maintenant lancer votre application : <code>node app.js</code> et vérifier que tout fonctionne.</p>
 <p><img src="RSRC/16_01_RBS.png" alt="BB" /><br /></p>
 <h2 id="conclusion-3"><a href="#TOC"><span class="header-section-number">17.8</span> Conclusion</a></h2>
-<p>Voilà, il existe dans la stack RestHub Backbone, de nombreux autres composants que je n'ai pas encore eu le temps d'étudier et qui certainement permettent de faire du code plus simple que celui que je vous montre, mais je tenais à vous parler de cette stack car l'organisation des différents fichiers de scripts, templates, ... ainsi que la gestion des dépendance me plaît beaucoup, et est sans nul doute un critère de réussite sur un projet en équipe. Ce côté structurant peut paraître fastidieux au départ, mais au bout de quelques heures de code intensif, vous vous apercevrez que vous retrouvez beaucoup plus facilement vos petits.</p>
+<p>Voilà, il existe dans la stack RESThub Backbone, de nombreux autres composants que je n'ai pas encore eu le temps d'étudier et qui certainement permettent de faire du code plus simple que celui que je vous montre, mais je tenais à vous parler de cette stack car l'organisation des différents fichiers de scripts, templates, ... ainsi que la gestion des dépendance me plaît beaucoup, et est sans nul doute un critère de réussite sur un projet en équipe. Ce côté structurant peut paraître fastidieux au départ, mais au bout de quelques heures de code intensif, vous vous apercevrez que vous retrouvez beaucoup plus facilement vos petits.</p>
 </body>
 </html>

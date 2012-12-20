@@ -23,6 +23,7 @@ Remerciements aussi pour :
 - [loicdescotte](https://github.com/loicdescotte) : relecture & corrections
 - [hasalex](https://github.com/hasalex) : relecture & corrections (nombreuses)
 - [iammichiel](https://github.com/iammichiel) : typo
+- [sdeleuze](https://github.com/sdeleuze) : optimisation de code et typo
 
 
 ##Avertissement
