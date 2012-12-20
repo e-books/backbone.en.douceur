@@ -8,9 +8,9 @@
 >>- *Cht'ite stack server avant de commencer*
 >>- *Cht'ite application*
 
-##RestHub Backbone Stack : mais qu'est-ce donc ?
+##RESThub Backbone Stack : mais qu'est-ce donc ?
 
-Pour faire court, RestHub est une stack technique Java orientée MVC et services REST, c'est un framework opensource (Lyonnais :) ) [http://resthub.org/](http://resthub.org/). Il se trouve que l'équipe projet est aussi friande de javascript et a livré il y a peu une stack javascript pour RestHub à base de Backbone pour la partie cliente [http://resthub.org/backbone-stack.html](http://resthub.org/backbone-stack.html). Comme l'équipe est sympa, ils ont fait une stack js indépendante de la stack serveur, ce qui permet de l'utiliser avec n'importe quelle autre stack serveur quelle que soit la technologie utilisée.
+Pour faire court, RestHub est une stack technique Java orientée MVC et services REST, c'est un framework opensource (Lyonnais :) ) [http://resthub.org/](http://resthub.org/). Il se trouve que l'équipe projet est aussi friande de javascript et a livré il y a peu une stack javascript pour RESThub à base de Backbone pour la partie cliente [http://resthub.org/backbone-stack.html](http://resthub.org/backbone-stack.html). Comme l'équipe est sympa, ils ont fait une stack js indépendante de la stack serveur, ce qui permet de l'utiliser avec n'importe quelle autre stack serveur quelle que soit la technologie utilisée.
 
 Alors, RBS (je lui donne ce petit nom pour aller plus vite) ne vient pas seule, mais est bien accompagnée, puisqu'elle embarque :
 
@@ -314,7 +314,7 @@ Dans `public/templates` créez un fichier `message.hbs` avec le code suivant :
 
 ```html
 <ul>
-  {{#each this}}
+  {{#each collection}}
     <li>{{from}} : {{subject}} / {{body}}</li>
   {{/each}}
 </ul>
@@ -328,22 +328,18 @@ Nous allons créer dans `public/js/views` 2 vues backbone associées à chacun d
 
 ```javascript
 define([
-  'backbone', 
+  'resthub', 
   'hbs!templates/messages'
   ], 
-  function(Backbone, messagesTemplate) {
+  function(Resthub, messagesTemplate) {
 
-    var MessagesView = Backbone.View.extend({
+    var MessagesView = Resthub.View.extend({
       el: $('#messages'),
+      template: messagesTemplate,
       
       initialize: function() {
         this.collection.on('reset', this.render, this);
         this.collection.on('add', this.render, this);
-      },
-      render: function() {
-        var renderedContent = messagesTemplate(this.collection.toJSON());
-        this.$el.html(renderedContent);
-        return this;
       }
     });
 
@@ -351,6 +347,8 @@ define([
   }
 );
 ```
+
+>>*Notez l'utilisation de Resthub.View qui est une version améliorée de Backbone.View fournissant notamment une implémentation par défaut du render() ainsi que la gestion de l'élément $root sur lequel est attaché la vue ($el représentant l'élément DOM de la vue elle même) ainsi que tout un tas de fonctionnalités très pratiques*
 
 >>*Remarquez ceci : `'hbs!templates/messages'` pour référencer les template*
 
@@ -364,14 +362,19 @@ define([
   'hbs!templates/message-form',
   'models/message'
   ], 
-  function(Backbone, messageFormTemplate, Message, MessagesView) {
+  function(Resthub, messageFormTemplate, Message, MessagesView) {
 
-    var MessageFormView = Backbone.View.extend({
+    var MessageFormView = Resthub.View.extend({
       el: $('#message_form'),
+      template: messageFormTemplate,
 
       events: {
           "click button[data-action='add']": 'add',
           "click button[data-action='cancel']": 'cancel',
+      },
+      
+      init() {
+      	this.render();
       },
 
       add : function() {
@@ -398,11 +401,6 @@ define([
       cancel : function() {
         console.log("CANCEL");
         this.$el[0].reset();
-      },
-      render: function() {
-        var renderedContent = messageFormTemplate();
-        this.$el.html(renderedContent);
-        return this;
       }
     });
     return MessageFormView;
@@ -426,7 +424,7 @@ define([
     	
 	    window.messages = new Messages();
 	    window.messagesView = new MessagesView({collection:messages});
-	    window.messageForm = new MessageFormView({collection:messages}).render();
+	    window.messageForm = new MessageFormView({collection:messages});
 
 	    messages.fetch();
 });
@@ -439,4 +437,4 @@ Vous pouvez maintenant lancer votre application : `node app.js` et vérifier que
 
 ##Conclusion
 
-Voilà, il existe dans la stack RestHub Backbone, de nombreux autres composants que je n'ai pas encore eu le temps d'étudier et qui certainement permettent de faire du code plus simple que celui que je vous montre, mais je tenais à vous parler de cette stack car l'organisation des différents fichiers de scripts, templates, ... ainsi que la gestion des dépendance me plaît beaucoup, et est sans nul doute un critère de réussite sur un projet en équipe. Ce côté structurant peut paraître fastidieux au départ, mais au bout de quelques heures de code intensif, vous vous apercevrez que vous retrouvez beaucoup plus facilement vos petits.
+Voilà, il existe dans la stack RESThub Backbone, de nombreux autres composants que je n'ai pas encore eu le temps d'étudier et qui certainement permettent de faire du code plus simple que celui que je vous montre, mais je tenais à vous parler de cette stack car l'organisation des différents fichiers de scripts, templates, ... ainsi que la gestion des dépendance me plaît beaucoup, et est sans nul doute un critère de réussite sur un projet en équipe. Ce côté structurant peut paraître fastidieux au départ, mais au bout de quelques heures de code intensif, vous vous apercevrez que vous retrouvez beaucoup plus facilement vos petits.
