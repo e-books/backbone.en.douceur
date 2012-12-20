@@ -261,13 +261,42 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <li><a href="#encore-dautres-frameworks-mvc-javascript"><span class="toc-section-number">14.4</span> Encore d’autres frameworks MVC (javascript)</a></li>
 <li><a href="#conclusion-2"><span class="toc-section-number">14.5</span> Conclusion</a></li>
 </ul></li>
-<li><a href="#backbone-et-typescript"><span class="toc-section-number">15</span> Backbone et Typescript</a></li>
+<li><a href="#backbone-et-typescript"><span class="toc-section-number">15</span> Backbone et Typescript</a><ul>
+<li><a href="#typescript-on-installe"><span class="toc-section-number">15.1</span> TypeScript, on installe</a><ul>
+<li><a href="#pré-requis"><span class="toc-section-number">15.1.1</span> Pré-requis</a></li>
+<li><a href="#installation-de-typescript"><span class="toc-section-number">15.1.2</span> Installation de Typescript</a></li>
+<li><a href="#comment-transpiler"><span class="toc-section-number">15.1.3</span> Comment transpiler ?</a></li>
+<li><a href="#ide"><span class="toc-section-number">15.1.4</span> IDE ?</a></li>
+<li><a href="#typescript-quoi-de-plus-que-javascript-ou-coffeescript"><span class="toc-section-number">15.1.5</span> TypeScript, quoi de plus que Javascript ou Coffeescript ?</a></li>
+</ul></li>
+<li><a href="#le-petit-tour-de-typescript-en-1-exemple"><span class="toc-section-number">15.2</span> Le (petit) tour de TypeScript en 1 exemple</a><ul>
+<li><a href="#core.ts"><span class="toc-section-number">15.2.1</span> core.ts</a></li>
+<li><a href="#allons-créer-nos-modèles"><span class="toc-section-number">15.2.2</span> Allons créer nos modèles</a></li>
+<li><a href="#utilisons-tout-cela"><span class="toc-section-number">15.2.3</span> Utilisons tout cela</a></li>
+</ul></li>
+<li><a href="#et-backbone-dans-tout-ça"><span class="toc-section-number">15.3</span> Et Backbone dans tout ça ?</a></li>
+</ul></li>
 <li><a href="#ressources-backbone"><span class="toc-section-number">16</span> Ressources Backbone</a></li>
-<li><a href="#resthub-backbone-stack"><span class="toc-section-number">17</span> RestHub Backbone Stack</a></li>
+<li><a href="#resthub-backbone-stack"><span class="toc-section-number">17</span> RestHub Backbone Stack</a><ul>
+<li><a href="#resthub-backbone-stack-mais-quest-ce-donc"><span class="toc-section-number">17.1</span> RestHub Backbone Stack : mais qu'est-ce donc ?</a></li>
+<li><a href="#avant-de-sen-servir-nous-avons-besoin-dune-stack-serveur"><span class="toc-section-number">17.2</span> Avant de s'en servir, nous avons besoin d'une &quot;stack serveur&quot;</a></li>
+<li><a href="#installation-de-rbs"><span class="toc-section-number">17.3</span> Installation de RBS</a></li>
+<li><a href="#création-dun-modèle-et-dune-collection"><span class="toc-section-number">17.4</span> Création d'un modèle et d'une collection</a></li>
+<li><a href="#templates"><span class="toc-section-number">17.5</span> Templates</a><ul>
+<li><a href="#template-formulaire"><span class="toc-section-number">17.5.1</span> Template formulaire</a></li>
+<li><a href="#template-de-liste"><span class="toc-section-number">17.5.2</span> Template de liste</a></li>
+</ul></li>
+<li><a href="#vues-associées-aux-templates"><span class="toc-section-number">17.6</span> Vues associées aux templates</a><ul>
+<li><a href="#messages-view.js"><span class="toc-section-number">17.6.1</span> messages-view.js</a></li>
+<li><a href="#message-form-view.js"><span class="toc-section-number">17.6.2</span> message-form-view.js</a></li>
+</ul></li>
+<li><a href="#app.js"><span class="toc-section-number">17.7</span> app.js</a></li>
+<li><a href="#conclusion-3"><span class="toc-section-number">17.8</span> Conclusion</a></li>
+</ul></li>
 </ul>
 </div>
 <h1 id="préambule-remerciements"><a href="#TOC"><span class="header-section-number">1</span> Préambule &amp; Remerciements</a></h1>
-<p>J'ai eu la prétention d'écrire un livre, et sur Backbone en plus ! En fait il n'existe peu de littérature française spécialisée sur des frameworks, qui plus est des framework javascript, alors que nos amis anglo-saxons écrivent sur Dart, Coffeescript, Backbone, etc. ... Au départ ce &quot;bouquin&quot; est un projet un peu fou, puisque j'ai même contacté les éditions Eyrolles (quand je vous disais que j'étais prétentieux ;) ). Et ils ont été d'accord ! Alors vous vous demandez pourquoi, finalement je publie ça de manière open source ?</p>
+<p>J'ai eu la prétention d'écrire un livre, et sur Backbone en plus ! En fait il n'existe peu de littérature française spécialisée sur des frameworks, qui plus est des frameworks javascript, alors que nos amis anglo-saxons écrivent sur Dart, Coffeescript, Backbone, etc. ... Au départ ce &quot;bouquin&quot; est un projet un peu fou, puisque j'ai même contacté les éditions Eyrolles (quand je vous disais que j'étais prétentieux ;) ). Et ils ont été d'accord ! Alors vous vous demandez pourquoi, finalement je publie ça de manière open source ?</p>
 <p>Eh bien, écrire un livre est un travail de longue haleine, qui doit se faire dans la durée. D'un autre côté, les technologies, tout particulièrement ce qui gravite autour de javascript, progressent et changent à une allure vertigineuse. Mon constat est que, si je veux écrire tout ce que j'ai en tête, cela ne finira jamais, ou bien le contenu n'aura plus d'intérêt (obsolète) et qu'il me semble plus approprié de livrer déjà ce que j'ai &quot;gratté&quot; et de transformer ce livre en projet open-source.</p>
 <p>Ainsi, ceux qui souhaite se mettre à Backbone, peuvent commencer dès maintenant (même si on ne m'a pas attendu, j'imagine qu'un peu de documentation en français devrait faire des heureux). Pour les autres s'ils souhaitent compléter, corriger, modifier, discuter, je me tiens à leur disposition. C'est pour cela que j'ai publié le contenu sur Github = ainsi vous avez l'opportunité de faire des pull-requests (proposer des modifications) sur le contenu, ou créer des issues pour donner votre avis.</p>
 <p>Je vous attends, j'espère que cela vous sera utile. Je m'adresse à tous les publics (les plus forts n'apprendront rien, mais peuvent contribuer). Ceux qui connaissent déjà Backbone peuvent directement passer au chapitre 04.</p>
@@ -281,10 +310,11 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <li><a href="https://github.com/ehsavoie">ehsavoie</a> : 1ère pull request ;)</li>
 <li><a href="https://github.com/lodennan">lodennan</a></li>
 <li><a href="https://github.com/cbonnissent">cbonnissent</a> : format epub</li>
-<li><a href="https://github.com/loicdescotte">loicdescotte</a> : relecture</li>
+<li><a href="https://github.com/loicdescotte">loicdescotte</a> : relecture &amp; corrections</li>
+<li><a href="https://github.com/hasalex">hasalex</a> : relecture &amp; corrections</li>
 </ul>
 <h2 id="avertissement"><a href="#TOC"><span class="header-section-number">1.1</span> Avertissement</a></h2>
-<p>Cet ouvrage est destiné à être purement éducatif. donc dès fois le code n'est pas fait dans les &quot;règles de l'art&quot;, mais plutôt avec une &quot;vision&quot; pédagogique. Désolé donc pour les puristes, mais à priori vous n'êtes pas la cible ;). Cependant, je serais ravi de pouvoir inclure vos remarques et bonnes pratiques sous forme de notes dans chacun des chapitres. Donc à vos pull-requests !</p>
+<p>Cet ouvrage est destiné à être purement éducatif. Donc le code n'est pas toujours fait dans les &quot;règles de l'art&quot;, mais plutôt avec une &quot;vision&quot; pédagogique. Désolé donc pour les puristes, mais a priori vous n'êtes pas la cible ;). Cependant, je serais ravi de pouvoir inclure vos remarques et bonnes pratiques sous forme de notes dans chacun des chapitres. Donc à vos pull-requests !</p>
 <h1 id="présentation-de-backbone-rappels-mvc"><a href="#TOC"><span class="header-section-number">2</span> Présentation de Backbone &amp; rappels MVC</a></h1>
 <blockquote>
 <p><em>Sommaire</em></p>
@@ -303,10 +333,10 @@ code > span.er { color: #ff0000; font-weight: bold; }
 </blockquote>
 <p>Ce chapitre est très court, il présente les origines de Backbone.js, le pourquoi de son utilisation, et enfin un rappel sur le patron de conception Modèle-Vue-Contrôleur, essentiel pour la bonne compréhension du framework.</p>
 <h2 id="backbone-webapps-mvc"><a href="#TOC"><span class="header-section-number">2.1</span> Backbone ? Webapps ? MVC ?</a></h2>
-<p>Backbone est un framework javascript dédié à la création de <strong>Webapps</strong> en mode <strong>&quot;Single Page Application&quot;</strong>. Il implémente le pattern MVC (L'acronyme signifie : Model View Controller / Modèle Vue Contrôleur) mais, et c'est là qu'est la nouveauté, côté client, plus précisément au sein de votre navigateur. Il reproduit les mécanismes des frameworks MVC côté serveur tels Ruby on Rails, CakePHP, Play!&gt;Framework, ASP.Net MVC (avec Razor), ... Backbone a été écrit par Jeremy Ashkenas (le papa de Coffeescript et de Underscore) à l’origine pour ses propres besoin lors du développement du site DocumentCloud (<a href="http://www.documentcloud.org/home">http://www.documentcloud.org/home</a>). Son idée était de créer un framework qui permette de structurer ses développements en s’appuyant justement sur MVC. Mais avant toute chose, faisons quelques petits rappels (ou découvertes ?).</p>
+<p>Backbone est un framework javascript dédié à la création de <strong>Webapps</strong> en mode <strong>&quot;Single Page Application&quot;</strong>. Il implémente le pattern MVC (l'acronyme signifie : Model View Controller / Modèle Vue Contrôleur) mais, et c'est là qu'est la nouveauté, côté client, plus précisément au sein de votre navigateur. Il reproduit les mécanismes des frameworks MVC côté serveur tels Ruby on Rails, CakePHP, Play!&gt;Framework, ASP.Net MVC (avec Razor), ... Backbone a été écrit par Jeremy Ashkenas (le papa de Coffeescript et de Underscore) à l’origine pour ses propres besoins lors du développement du site DocumentCloud (<a href="http://www.documentcloud.org/home">http://www.documentcloud.org/home</a>). Son idée était de créer un framework qui permette de structurer ses développements en s’appuyant justement sur MVC. Mais avant toute chose, faisons quelques petits rappels (ou découvertes ?).</p>
 <h3 id="quest-ce-quune-webapp"><a href="#TOC"><span class="header-section-number">2.1.1</span> Qu’est-ce qu’une “Webapp” ?</a></h3>
-<p>Une “Webapp” n’a pas la même vocation qu’un site web même si les technologies mises en œuvre sont les mêmes. Elle a une réelle valeur applicative (gestion de catalogue produits, utilitaires, clients mails, agenda, etc. …) contrairement au site web qui le plus souvent est un medium de communication (journaux, blogs, etc. …). Assez rapidement, les technologies web ont été détournées pour tenter de remplacer les applications de gestion “client-riche” classique. Imaginez, le rêve des DSI : plus de déploiement, tout se passe dans le navigateur. Cependant, c’était sans compter les utilisateurs. Je me souviens avoir vu une gestion de catalogue il y a une dizaine d’années, en ASP 3 ou à chaque création d’article, il fallait attendre que toute la liste des articles se recharge. Ce qui avant en mode texte (sous dos) prenait 1 minute, venait de prendre 3 à 5 minutes dans la vue : 3 à 5 fois plus de temps ! Bravo la productivité ! Ensuite les technologies se sont cherchées longtemps pour tenter de remédier à ce problème : apparition des applets java, des ActiveX et là on commençait à retomber dans les travers de déploiements compliqués. Puis il y eu Flash, Flex et Silverlight, pas mal du tout il faut l’avouer, mais parallèlement le moteur javascript avait évolué, les navigateurs aussi et avec l’avènement du triptyque HTML5 – CSS3 – Javascript, un nouveau concept est apparu : la “Single Page Application” (probablement boosté par les mobiles et les tablettes … et Steve Jobs refusant que Flash/Air/Flex &amp; Java s’installent sur l’iPhone &amp; l’iPad). Mais qu’est donc une “Single Page Application” ? Il existe moult définitions, je vais donc vous donner la mienne, ensuite ce sera à vous de vous construire votre vision de “l’application web monopage”.</p>
-<p>Une &quot;Single Page Application est une application web qui embarque tous les éléments nécessaires à son fonctionnement dans une seule page HTML. Les scripts javascript liés seront chargés en même temps. Ensuite l’application web chargera les ressources nécessaires (généralement des données, des images …) à la demande en utilisant Ajax évitant ainsi tout rechargement de page et procurant une expérience utilisateur proche de celle que nous connaissions en mode “client-serveur”, voire meilleure dans certains cas. Ces webapps nouvelle génération peuvent aussi fonctionner offline en profitant des possibilités des derniers navigateurs (localstorage).</p>
+<p>Une “Webapp” n’a pas la même vocation qu’un site Web même si les technologies mises en œuvre sont les mêmes. Elle a une réelle valeur applicative (gestion de catalogue produits, utilitaires, client mails, agenda, etc. …) contrairement au site Web qui le plus souvent est un medium de communication (journaux, blogs, etc. …). Assez rapidement, les technologies Web ont été détournées pour tenter de remplacer les applications de gestion “client-riche” classique. Imaginez, le rêve des DSI : plus de déploiement, tout se passe dans le navigateur. Cependant, c’était compter sans les utilisateurs. Je me souviens avoir vu, il y a plus d'une dizaine d’années, une gestion de catalogue, en ASP 3 où à chaque création d’article, il fallait attendre que toute la liste des articles se recharge. Ce qui avant en mode texte (sous dos) prenait 1 minute, venait de prendre 3 à 5 minutes dans la vue : 3 à 5 fois plus de temps ! Bravo la productivité ! Ensuite les technologies se sont cherchées longtemps pour tenter de remédier à ce problème : utilisation des applets java (qui existaient depuis un moment), des ActiveX (MS qui veut faire comme Sun) et là on commençait à retomber dans les travers de déploiements compliqués. Puis il y eu Flash, Flex et Silverlight, pas mal du tout il faut l’avouer, mais parallèlement le moteur javascript avait évolué, les navigateurs aussi et avec l’avènement du triptyque HTML5 – CSS3 – Javascript, un nouveau concept est apparu la “Single Page Application” (probablement boosté par les mobiles et les tablettes … et Steve Jobs refusant que Flash/Air/Flex &amp; Java s’installent sur l’iPhone &amp; l’iPad). Mais qu’est donc une “Single Page Application” ? Il existe moult définitions, je vais donc vous donner la mienne, ensuite ce sera à vous de vous construire votre vision de “l’application Web monopage”.</p>
+<p>Une &quot;Single Page Application est une application Web qui embarque tous les éléments nécessaires à son fonctionnement dans une seule page HTML. Les scripts javascript liés seront chargés en même temps. Ensuite l’application Web chargera les ressources nécessaires (généralement des données, des images …) à la demande en utilisant Ajax évitant ainsi tout rechargement de page et procurant une expérience utilisateur proche de celle que nous connaissions en mode “client-serveur”, voire meilleure dans certains cas. Ces webapps nouvelle génération peuvent aussi fonctionner offline en profitant des possibilités des derniers navigateurs (localstorage).</p>
 <blockquote>
 <blockquote>
 <p><strong>Remarque</strong> <em>: ce qui est amusant, c’est que dès 1999 ou 2000, Microsoft avait déjà introduit cette possibilité avec Internet Explorer 4 qui intégrait une applet Java (si si !) qui permettait de faire du Remote Protocol Call d’une page html vers le serveur sans recharger la page et en s’abonnant en javascript à l’évènement de retour (à vérifier, c’est loin, tout ça). Mais ce fut éclipsé par l’apparente simplicité de mise en œuvre des ActiveX (Flash était alors utilisé principalement pour de l’animation, mais permettait aussi ce genre d’artifice).</em></p>
@@ -328,7 +358,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
 </ul>
 <blockquote>
 <blockquote>
-<p><strong>AVERTISSEMENT 1</strong> <em>: C’est la lisibilité qui importe. Il peut y avoir des interprétations différentes du modèle MVC quant aux responsabilités de ses composants. Par exemple, est-ce le modèle qui se sauvegarde lui-même ou est-ce un contrôleur qui se chargera de la persistance ? Peu importe (ce sont des querelles de chapelle), gardons juste à l'esprit qu'il y a trois grands modes de classement de nos objets et que l'important c'est d'avoir un code propre, structuré et maintenable (Dans 6 mois, vous devez être capables de relire votre code).</em></p>
+<p><strong>AVERTISSEMENT 1</strong> <em>: C’est la lisibilité qui importe. Il peut y avoir des interprétations différentes du modèle MVC quant aux responsabilités de ses composants. Par exemple, est-ce le modèle qui se sauvegarde lui-même ou est-ce un contrôleur qui se chargera de la persistance ? Peu importe (ce sont des querelles de chapelle), gardons juste à l'esprit qu'il y a trois grands modes de classement de nos objets et que l'important c'est d'avoir un code propre, structuré et maintenable (dans 6 mois, vous devez être capables de relire votre code).</em></p>
 </blockquote>
 </blockquote>
 <blockquote>
@@ -352,8 +382,8 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <p>Backbone &quot;embarque&quot; plusieurs composants qui vont nous permettre d'organiser notre webapp selon les &quot;préceptes&quot; MVC et simplifier les communications avec le serveur (avec le code applicatif côté serveur).</p>
 <p>Voyons l'interprétation que fait Backbone du modèle MVC :</p>
 <ul>
-<li>Le composant <strong>Modèle</strong> (selon Backbone : <code>Backbone.Model</code>) représente les données qui vont interagir avec votre code &quot;backend&quot; (côté serveur) via des requêtes Ajax. Ce sont eux qui auront la responsabilité de la logique métier et de la validations des données.</li>
-<li>Le composant <strong>Vue</strong> (selon Backbone : <code>Backbone.View</code>) n'est pas complètement une vue au sens où on l'entend habituellement (couche présentation). Dans le cas qui nous intéresse, la &quot;vraie&quot; vue est un fragment de code &quot;natif&quot; HTML dans la page web qui s'affiche dans le navigateur (il y a donc plusieurs vues dans une même page). Et <code>Backbone.View</code> est en fait un <strong>Contrôleur de vues</strong> (1) (vous verrez, ce sera plus facile à appréhender en le codant) qui va ordonnancer les évènements et interactions au sein de la page web.</li>
+<li>Le composant <strong>Modèle</strong> (selon Backbone : <code>Backbone.Model</code>) représente les données qui vont interagir avec votre code &quot;backend&quot; (côté serveur) via des requêtes Ajax. Ce sont eux qui auront la responsabilité de la logique métier et de la validation des données.</li>
+<li>Le composant <strong>Vue</strong> (selon Backbone : <code>Backbone.View</code>) n'est pas complètement une vue au sens où on l'entend habituellement (couche présentation). Dans le cas qui nous intéresse, la &quot;vraie&quot; vue est un fragment de code &quot;natif&quot; HTML dans la page Web qui s'affiche dans le navigateur (il y a donc plusieurs vues dans une même page). Et <code>Backbone.View</code> est en fait un <strong>Contrôleur de vues</strong> (1) (vous verrez, ce sera plus facile à appréhender en le codant) qui va ordonnancer les évènements et interactions au sein de la page Web.</li>
 </ul>
 <blockquote>
 <blockquote>
@@ -1308,7 +1338,7 @@ Bonjour, je suis un garçon</code></pre>
 <li><strong>nStore</strong> : une petite base de données noSQL simulée avec un fichier texte (nous n’allons pas nous embêter à faire des requêtes SQL, et le noSQL est à la mode ;) )</li>
 </ul>
 <h2 id="principes-http-get-post-put-delete"><a href="#TOC"><span class="header-section-number">6.1</span> Principes http : GET, POST, PUT, DELETE</a></h2>
-<p>Mon but est de faire une application web avec Node &amp; Express sur les principes REST (Representational State Transfer) qui permettra de faire des opérations de type <strong>CRUD</strong> avec les modèles BAckbone en utilisant des services basés sur le protocole http avec les verbes suivants :</p>
+<p>Mon but est de faire une application web avec Node &amp; Express sur les principes REST (Representational State Transfer) qui permettra de faire des opérations de type <strong>CRUD</strong> avec les modèles Backbone en utilisant des services basés sur le protocole http avec les verbes suivants :</p>
 <ul>
 <li><strong>C</strong>reate : POST</li>
 <li><strong>R</strong>ead : GET</li>
@@ -5498,11 +5528,658 @@ npm install express</code></pre>
 </blockquote>
 </blockquote>
 <h1 id="backbone-et-typescript"><a href="#TOC"><span class="header-section-number">15</span> Backbone et Typescript</a></h1>
-<pre><code>//TODO: 
-Où nous parlerons de Typescript et de sa cohabitation avec Backbone</code></pre>
+<blockquote>
+<p><em>Sommaire</em></p>
+</blockquote>
+<blockquote>
+<blockquote>
+<ul>
+<li><em>Installation de Typescript ...</em></li>
+<li><em>... des Classes, des interfaces, des modules et du typage !!!</em></li>
+<li><em>La cohabitation avec Backbone</em></li>
+</ul>
+</blockquote>
+</blockquote>
+<blockquote>
+<p><em>A l'heure où j'écris, Microsoft vient, il y a peu, de présenter au monde son nouveau bébé : TypeScript, un transpiler javascript (un autre !) qui préfigure ce que sera la future version de javascript. Sur le même principe que Coffescript, Typescript apporte les concepts qui manquent tant à de nombreux développeurs &quot;allergiques&quot; à javascript. C'est à dire les, les Classes mais aussi les modules (pensez namespaces ou packages), les interfaces, les propriétés, ... Mais il y a un petit plus : on conserve les {}, les (), les ; ... tout ce qui contribue finalement à rendre le code lisible.</em></p>
+</blockquote>
+<p>L'objectif n'est pas de vous expliquer Typescript de A à Z (ça pourrait faire un autre bouquin, si ça vous intéresse faites moi signe), mais de vous montrer rapidement ce que ça pourrait vous apporter utilisé conjointement avec Backbone.</p>
+<h2 id="typescript-on-installe"><a href="#TOC"><span class="header-section-number">15.1</span> TypeScript, on installe</a></h2>
+<p>Sachez le, Typescript fonctionne aussi bien sous Windows, Linux qu'OSX. Et oui Microsoft n'a pas fait du &quot;fermé&quot;, et en plus c'est <strong>opensource</strong> et ça respecte au plus proche les spécifications d'Ecmascript 6 en transpilant aussi bien de l'Ecmascript 5 ou 3, donc compatible avec nos navigateurs actuels.</p>
+<h3 id="pré-requis"><a href="#TOC"><span class="header-section-number">15.1.1</span> Pré-requis</a></h3>
+<p>Avant toute chose, il faut installer <strong>Node.js</strong>, vous trouverez tout ce qu'il faut sur le site :</p>
+<p><a href="http://nodejs.org/download/">http://nodejs.org/download/</a>.</p>
+<p>Pensez aussi à installer <strong>Npm</strong> (node package manager) dans le cas de linux.</p>
+<h3 id="installation-de-typescript"><a href="#TOC"><span class="header-section-number">15.1.2</span> Installation de Typescript</a></h3>
+<p>C'est extrêment simple :</p>
+<ul>
+<li>sous Windows : <code>npm install -g typescript</code></li>
+<li>sous Linux : <code>sudo npm install -g typescript</code></li>
+<li>sous OSX : <code>sudo npm install -g typescript</code></li>
+</ul>
+<h3 id="comment-transpiler"><a href="#TOC"><span class="header-section-number">15.1.3</span> Comment transpiler ?</a></h3>
+<p>Sous Windows vous pouvez utiliser le plugin Typescript pour Visual Studio 2012 (existe aussi en version express) mais nous, on va le faire à l'ancienne, à la mimine :</p>
+<pre><code>tsc nom_de_mon_script.ts</code></pre>
+<p>Et vous obtiendrez un fichier <code>nom_de_mon_script.js</code>.</p>
+<blockquote>
+<blockquote>
+<p>Vous l'aurez donc compris, l'extension d'un fichier typescript est <code>.ts</code></p>
+</blockquote>
+</blockquote>
+<h3 id="ide"><a href="#TOC"><span class="header-section-number">15.1.4</span> IDE ?</a></h3>
+<p>En plus de Visual Studio vous pouvez aussi utiliser <strong>Vim</strong>, <strong>Emacs</strong> ou <strong>SublimeText2</strong> pour lesquels vous trouverez &quot;la colorisation syntaxique&quot; ici <a href="http://blogs.msdn.com/b/interoperability/archive/2012/10/01/sublime-text-vi-emacs-typescript-enabled.aspx">http://blogs.msdn.com/b/interoperability/archive/2012/10/01/sublime-text-vi-emacs-typescript-enabled.aspx</a>.</p>
+<h3 id="typescript-quoi-de-plus-que-javascript-ou-coffeescript"><a href="#TOC"><span class="header-section-number">15.1.5</span> TypeScript, quoi de plus que Javascript ou Coffeescript ?</a></h3>
+<p>Sachez le, Typescript, c'est du javascript. Vous pouvez mettre du &quot;pur&quot; javascript dans un code Typescript sans problème, cela fonctionnera. Typescript apporte juste quelques notions supplémentaires, comme les types (qui sont juste vérifiés à la transpilation), les classes, les interfaces, mais aussi les modules qui sont très pratiques pour organiser votre code.</p>
+<blockquote>
+<blockquote>
+<p>le typage n'est pas obligatoire, c'est juste finalement très utile pour vérifier que l'on n'a pas codé n'importe quoi (je reste poli ;) ). Je n'en voyais pas l'utilité au début (je faisais juste une fixette sur les classes), mais finalement cela m'a évité pas mal d'erreur.</p>
+</blockquote>
+</blockquote>
+<h2 id="le-petit-tour-de-typescript-en-1-exemple"><a href="#TOC"><span class="header-section-number">15.2</span> Le (petit) tour de TypeScript en 1 exemple</a></h2>
+<p>Commencez par créer (dans un répertoire de travail) l'arborecence suivante (avec les fichiers correspondants) :</p>
+<pre><code>mon_repertoire_de_travail---|
+                            |-core\
+                            |      |-core.ts
+                            |
+                            |-models\   &lt;-- je mettrais mes fichiers modèles ici
+                            |        |-Animal.ts
+                            |        |-Human.ts
+                            |-index.html
+                            |-app.ts</code></pre>
+<h3 id="core.ts"><a href="#TOC"><span class="header-section-number">15.2.1</span> core.ts</a></h3>
+<p>Nous allons définir notre 1er module avec le mot clé <code>module</code>, notre 1ère classe <code>Model</code> qui implémente les interfaces <code>Persistable</code> et <code>Entity</code>. Notre classe <code>Model</code> dispose d'une variable <code>public</code> &amp; <code>static</code> appelée <code>store</code> de type <code>Entity[]</code> initialisé à vide <code>= [];</code>. Le modèle aura une méthode lui permettant de &quot;s'ajouter&quot; au store. La classe <code>Model</code> aura une méthode statique <code>getAll(kind:string)</code> qui permettra de retourner un tableau de modèles (d'un certain type).</p>
+<blockquote>
+<blockquote>
+<p><strong>Pourquoi Entity ?</strong> En fait je souhaite ajouter dans le même tableau <code>store</code> différents type de modèles, donc je leur ferais implémenter la même interface pour pouvoir tous les &quot;pousser&quot; à mon tableau.</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>Notez au passage la notion de &quot;fat arrow&quot; ou <code>=&gt;</code> appelée aussi &quot;arrow function expression&quot; (fonctionnalité prévue pour Ecmascript 6). Ca vous rappelle quelque chose ;) ?</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>Notez aussi au passage, par contre que mon code ne fonctionnera que pour des navigateur Ecmascript 5 &quot;compliant&quot;, puisque j'utilise le <code>filter</code> des <code>Array</code>, par contre j'ai un code plus &quot;sympa&quot; avec <code>=&gt;</code>.</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>Remarquez le mot clé <code>export</code> qui permet de rendre la classe accessible à partir du module : <code>Core.Model</code></p>
+</blockquote>
+</blockquote>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">module Core {
+
+    interface Persistable {     
+        <span class="dt">saved </span>: bool;
+        addToStore() : <span class="kw">void</span>;
+    }
+
+    export interface Entity {
+        <span class="dt">kind </span>: string;  
+    }
+
+    export class Model implements Persistable, Entity {
+        <span class="dt">saved </span>: bool = <span class="kw">false</span>;
+        <span class="dt">kind </span>: string = <span class="st">&quot;kindOfModel&quot;</span>;
+        public static <span class="dt">store </span>: Entity[] = [];
+
+        public addToStore() : <span class="kw">void</span> {
+            <span class="kw">if</span>(!<span class="kw">this</span>.<span class="fu">saved</span>) {
+                <span class="kw">this</span>.<span class="fu">saved</span> = <span class="kw">true</span>
+                <span class="kw">Model.store</span>.<span class="fu">push</span>(<span class="kw">this</span>);             
+            }
+        }
+
+        public static getAll(<span class="dt">kind</span>:string) : Entity[] {
+            <span class="kw">return</span> <span class="kw">Model.store</span>.<span class="fu">filter</span>((<span class="dt">model</span>:Entity) =&gt; {
+                    <span class="kw">return</span> <span class="kw">model</span>.<span class="fu">kind</span> == kind;
+                });
+        }
+    }
+
+}</code></pre>
+<h3 id="allons-créer-nos-modèles"><a href="#TOC"><span class="header-section-number">15.2.2</span> Allons créer nos modèles</a></h3>
+<p>Nous allons créer 2 modèles : Animal and Human (je sais ce n'est pas très original, un orignal, à Montréal ...).</p>
+<ul>
+<li>Pour hériter, nous utilisons <code>extends</code></li>
+<li>Pour référencer notre module <code>Core</code>, nous utilisons ceci en en-tête de fichier : <code>///&lt;reference path='../core/core.ts'/&gt;</code></li>
+</ul>
+<p><em>Animal.ts :</em></p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="co">///&lt;reference path=&#39;../core/core.ts&#39;/&gt;</span>
+module Models {
+    export class Animal extends <span class="kw">Core</span>.<span class="fu">Model</span> implements <span class="kw">Core</span>.<span class="fu">Entity</span> {
+        kind = <span class="st">&quot;Animal&quot;</span>;
+        constructor(public name?=<span class="st">&quot;Wolf&quot;</span>){
+            super();
+        }
+    }
+}</code></pre>
+<blockquote>
+<blockquote>
+<p>l'utilisation de <code>public name?=&quot;Wolf&quot;</code> dans le constructeur est un raccourci pour déclarer la propriété <code>name</code> tout en l'initialisant, la notation <code>?=</code> permet aussi de donner une valeur par défaut.</p>
+</blockquote>
+</blockquote>
+<p>De la même manière, codons notre modèle Human :</p>
+<p><em>Human.ts :</em></p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="co">///&lt;reference path=&#39;../core/core.ts&#39;/&gt;</span>
+<span class="co">///&lt;reference path=&#39;Animal.ts&#39;/&gt;</span>
+module Models {
+    export class Human extends <span class="kw">Core</span>.<span class="fu">Model</span> implements <span class="kw">Core</span>.<span class="fu">Entity</span> {
+        kind = <span class="st">&quot;Human&quot;</span>;
+        <span class="dt">animal </span>: <span class="kw">Models</span>.<span class="fu">Animal</span>;
+        constructor(public name?=<span class="st">&quot;John Doe&quot;</span>){
+            super();
+        }
+    }
+}</code></pre>
+<blockquote>
+<blockquote>
+<p>J'explique que le modèle Human a une propriété <code>animal</code> de type <code>Models.Animal</code>, si j'avais voulu être propre, j'aurais du faire la même chose pour <code>kind</code> avec <code>kind:string=&quot;Human&quot;</code>, mais bon ... Notez aussi l'utilisation de <code>super</code> pour appeler le constructeur de la &quot;maman&quot;.</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p><strong>Vous avez du vous apercevoir que nous pouvions utiliser le même nom de module dans 2 fichiers distincs, ce qui est extrêment pratique !</strong></p>
+</blockquote>
+</blockquote>
+<h3 id="utilisons-tout-cela"><a href="#TOC"><span class="header-section-number">15.2.3</span> Utilisons tout cela</a></h3>
+<p>Créez un fichier <code>index.html</code> avec le code ci-dessous :</p>
+<pre class="sourceCode html"><code class="sourceCode html"><span class="dt">&lt;!DOCTYPE </span>html<span class="dt">&gt;</span>
+<span class="kw">&lt;html&gt;</span>
+<span class="kw">&lt;head&gt;</span>
+    <span class="kw">&lt;meta</span><span class="ot"> http-equiv=</span><span class="st">&quot;Content-Type&quot;</span><span class="ot"> content=</span><span class="st">&quot;text/html; charset=utf-8&quot;</span><span class="kw">&gt;</span>
+    <span class="kw">&lt;title&gt;</span>TypeScript<span class="kw">&lt;/title&gt;</span>
+<span class="kw">&lt;/head&gt;</span>
+
+<span class="kw">&lt;body&gt;</span>
+    <span class="kw">&lt;ul&gt;&lt;/ul&gt;</span>
+<span class="kw">&lt;/body&gt;</span>
+<span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">&quot;core/core.js&quot;</span><span class="kw">&gt;&lt;/script&gt;</span>
+<span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">&quot;models/Animal.js&quot;</span><span class="kw">&gt;&lt;/script&gt;</span>
+<span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">&quot;models/Human.js&quot;</span><span class="kw">&gt;&lt;/script&gt;</span>
+<span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">&quot;app.js&quot;</span><span class="kw">&gt;&lt;/script&gt;</span>
+<span class="kw">&lt;/html&gt;</span></code></pre>
+<blockquote>
+<blockquote>
+<p><strong>Attention</strong> vous devez référencer les fichiers <code>.js</code> et non pas <code>.ts</code></p>
+</blockquote>
+</blockquote>
+<p>Et enfin codons notre fichier principal <code>app.ts</code> :</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="co">///&lt;reference path=&#39;models/Animal.ts&#39;/&gt;</span>
+<span class="co">///&lt;reference path=&#39;models/Human.ts&#39;/&gt;</span>
+
+<span class="kw">var</span> bob = <span class="kw">new</span> <span class="kw">Models</span>.<span class="fu">Human</span>(<span class="st">&quot;Bob Morane&quot;</span>);
+<span class="kw">var</span> wolf = <span class="kw">new</span> <span class="kw">Models</span>.<span class="fu">Animal</span>(<span class="st">&quot;Wolf&quot;</span>);
+<span class="kw">var</span> john = <span class="kw">new</span> <span class="kw">Models</span>.<span class="fu">Human</span>(<span class="st">&quot;John Doe&quot;</span>);
+
+<span class="kw">bob</span>.<span class="fu">animal</span> = wolf;
+
+<span class="kw">bob</span>.<span class="fu">addToStore</span>();
+<span class="kw">john</span>.<span class="fu">addToStore</span>();
+<span class="kw">wolf</span>.<span class="fu">addToStore</span>();
+
+<span class="kw">var</span> ul = <span class="kw">document</span>.<span class="fu">querySelector</span>(<span class="ch">&#39;ul&#39;</span>);
+
+<span class="kw">Core.Model</span>.<span class="fu">getAll</span>(<span class="st">&quot;Human&quot;</span>).<span class="fu">forEach</span>((<span class="dt">model</span>:<span class="kw">Models</span>.<span class="fu">Human</span>)=&gt;{
+        <span class="kw">var</span> li = <span class="kw">document</span>.<span class="fu">createElement</span>(<span class="ch">&#39;li&#39;</span>);
+        <span class="kw">li</span>.<span class="fu">innerHTML</span> = <span class="kw">model</span>.<span class="fu">name</span> 
+        <span class="kw">if</span>(<span class="kw">model</span>.<span class="fu">animal</span>) <span class="kw">li</span>.<span class="fu">innerHTML</span>+= <span class="st">&quot; / &quot;</span> + <span class="kw">model.animal</span>.<span class="fu">name</span>;
+        <span class="kw">ul</span>.<span class="fu">appendChild</span>(li);
+    });</code></pre>
+<p>Nous avons donc :</p>
+<ul>
+<li>Référencé nos 2 modèles en en-tête de fichier</li>
+<li>instancié 2 humains et un animal</li>
+<li>affecté l'animal <code>wolf</code> à <code>bob</code></li>
+<li>&quot;enregistré&quot; tous ces modèles dans le <code>Core.Model.store</code></li>
+<li>puis demandé d'afficher la liste des humains (<code>Core.Model.getAll(&quot;Human&quot;)</code>) dans une liste (<code>&lt;ul&gt;&lt;/ul&gt;</code>).</li>
+</ul>
+<p>et pour afficher tout ça, il va falloir transpiler :</p>
+<pre><code>tsc --target ES5 app.ts</code></pre>
+<p>Et maintenant, vous pouvez ouvrir votre page dans le navigateur, vous aurez la liste de vos Humains.</p>
+<h2 id="et-backbone-dans-tout-ça"><a href="#TOC"><span class="header-section-number">15.3</span> Et Backbone dans tout ça ?</a></h2>
+<p>Après ce bref aperçu, voyons comment nous pouvons profiter des possibilités de Typescript avec Backbone. Comme je le disais au début du chapitre, Typescript reste du javascript et est donc compatible avec les librairies existantes telles <strong>jQuery</strong> ou <strong>Underscore</strong>. pour les utiliser dans tu Typescript il suffit de les déclarer comme ceci :</p>
+<pre><code>declare var $: any;
+declare var _: any;</code></pre>
+<blockquote>
+<blockquote>
+<p>le type <code>any</code> est un peu à javascript ce que le Variant est à Visual Basic.</p>
+</blockquote>
+</blockquote>
+<p>Côté Backbone, nous pourrions aussi écrire <code>declare var Backbone</code>, mais ça serait dommage de ne pas pouvoir utiliser la notation de classe de TypeScript et continuer &quot;à l'ancienne&quot; avec le modèle objet de Backbone.</p>
+<p>Il est en fait possible de décrire des déclarations plus complexes pour que TypeScript &quot;comprennent&quot; Backbone, comme ceci par exemple :</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">declare module Backbone {
+
+    export class Model {
+        constructor (attr? , opts? );
+        intialize (attr? , opts? );
+        get(<span class="dt">name</span>: string): any;
+        set(<span class="dt">name</span>: string, <span class="dt">val</span>: any): <span class="kw">void</span>;
+        set(<span class="dt">obj</span>: any): <span class="kw">void</span>;
+        save(attr? , opts? ): <span class="kw">void</span>;
+        destroy(): <span class="kw">void</span>;
+        bind(<span class="dt">ev</span>: string, <span class="dt">f</span>: <span class="kw">Function</span>, ctx?: any): <span class="kw">void</span>;
+        toJSON(): any;
+    }
+}</code></pre>
+<p>Et ensuite vous pourrez écrire votre code Backbone en TypeScript de la façon suivante :</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">    class Human extends <span class="kw">Backbone</span>.<span class="fu">Model</span> {
+        intialize () {
+            <span class="kw">console</span>.<span class="fu">log</span>(<span class="st">&quot;Hello from Human constructor.&quot;</span>);
+        }
+    }
+
+    <span class="kw">var</span> Bob = <span class="kw">new</span> Human({<span class="dt">firstName</span>:<span class="st">&quot;Bob&quot;</span>, <span class="dt">lastName</span>:<span class="st">&quot;Morane&quot;</span>});
+    <span class="kw">console</span>.<span class="fu">log</span>(<span class="kw">Bob</span>.<span class="fu">get</span>(<span class="st">&quot;firstName&quot;</span>), <span class="kw">Bob</span>.<span class="fu">get</span>(<span class="st">&quot;lastName&quot;</span>));</code></pre>
+<blockquote>
+<blockquote>
+<p><em>J'utilise <code>initialize</code> car en fait dans Backbone c'est une méthode appelée par le constructeur et je préfère ne pas modifier le fonctionnement intrinsèque de Backbone.</em></p>
+</blockquote>
+</blockquote>
+<p>Dans la “vraie vie”, il faudra déclarer toutes les méthodes des autres composants Backbone. Mais pas de panique, il existe un repository GitHub avec les déclarations des librairies javascript les plus courantes : <a href="https://github.com/borisyankov/DefinitelyTyped">https://github.com/borisyankov/DefinitelyTyped</a>. Il suffit ensuite d'y faire référence dans le code de cette manière <code>/// &lt;reference path=&quot;backbone-0.9.d.ts&quot; /&gt;</code>.</p>
+<p>De mon point de vue, TypeScript a un potentiel énorme, si ce n'est pour son côté typé, cela peut être pour sa contribution à l'adoption de javascript par les réfractaires. En tous les cas, j'aime beaucoup, et j'avais très envie de vous en parler.</p>
+<p>Si vous voulez aller plus loin, d'un point de vue outillage par exemple, vous pouvez lire un de mes article ici qui explique comment préparer sont environnement de &quot;transpilation continue en TypeScript&quot; avec Grunt : <a href="http://k33g.github.com/2012/11/12/TSTRANSPIL.html">http://k33g.github.com/2012/11/12/TSTRANSPIL.html</a>.</p>
 <h1 id="ressources-backbone"><a href="#TOC"><span class="header-section-number">16</span> Ressources Backbone</a></h1>
 <pre><code>//TODO : une liste à faire vivre des ressources intéressantes concernant Backbone</code></pre>
 <h1 id="resthub-backbone-stack"><a href="#TOC"><span class="header-section-number">17</span> RestHub Backbone Stack</a></h1>
-<pre><code>//TODO : ou comment organiser son code de manière professionnelle</code></pre>
+<blockquote>
+<blockquote>
+<p><em>Ou comment organiser son code de manière professionnelle</em></p>
+</blockquote>
+</blockquote>
+<blockquote>
+<p><em>Sommaire</em></p>
+</blockquote>
+<blockquote>
+<blockquote>
+<ul>
+<li><em>Cht'ite intro</em></li>
+<li><em>Cht'ite stack server avant de commencer</em></li>
+<li><em>Cht'ite application</em></li>
+</ul>
+</blockquote>
+</blockquote>
+<h2 id="resthub-backbone-stack-mais-quest-ce-donc"><a href="#TOC"><span class="header-section-number">17.1</span> RestHub Backbone Stack : mais qu'est-ce donc ?</a></h2>
+<p>Pour faire court, RestHub est une stack technique Java orientée MVC et services REST, c'est un framework opensource (Lyonnais :) ) <a href="http://resthub.org/">http://resthub.org/</a>. Il se trouve que l'équipe projet est aussi friande de javascript et a livré il y a peu une stack javascript pour RestHub à base de Backbone pour la partie cliente <a href="http://resthub.org/backbone-stack.html">http://resthub.org/backbone-stack.html</a>. Comme l'équipe est sympa, ils ont fait une stack js indépendante de la stack serveur, ce qui permet de l'utiliser avec n'importe quelle autre stack serveur quelle que soit la technologie utilisée.</p>
+<p>Alors, RBS (je lui donne ce petit nom pour aller plus vite) ne vient pas seule, mais est bien accompagnée, puisqu'elle embarque :</p>
+<ul>
+<li>twitter bootstrap</li>
+<li>handelbars</li>
+<li>underscore (forcément)</li>
+<li>jquery (forcément)</li>
+<li>async.js</li>
+<li>reqire.js</li>
+<li>etc. ...</li>
+</ul>
+<p>Et notamment des composants maison tels <strong>backbone-datagrid</strong> :</p>
+<p><a href="https://github.com/loicfrering/backbone.datagrid">https://github.com/loicfrering/backbone.datagrid</a></p>
+<p>et plein d'autres bonnes choses.</p>
+<p>L'objet de ce chapitre n'étant pas de faire le tour complet de RBS, mais de vous mettre le pied à l'étrier, de vous donner des idées, de trouver des exemples de bonnes pratiques (l'utilisation de require.js est un modèle du genre), et surtout de vous faire plaisir.</p>
+<h2 id="avant-de-sen-servir-nous-avons-besoin-dune-stack-serveur"><a href="#TOC"><span class="header-section-number">17.2</span> Avant de s'en servir, nous avons besoin d'une &quot;stack serveur&quot;</a></h2>
+<p>Normalement, vous avez Node et npm installés, donc créez un répertoire <code>rbs</code> (par exemple), puis :</p>
+<pre><code>cd rbs
+npm install express
+npm install nstore</code></pre>
+<p>dans <code>rbs</code>, créez un répertoire <code>public</code>, puis toujours dans <code>rbs</code>, créez un fichier <code>app.js</code>, avec le code suivant :</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="co">/*--------------------------------------------</span>
+<span class="co">    Déclaration des librairies</span>
+<span class="co">--------------------------------------------*/</span>
+<span class="kw">var</span> express = require(<span class="ch">&#39;express&#39;</span>)
+    , nStore = require(<span class="ch">&#39;nstore&#39;</span>)
+    , app = express();
+
+nStore = <span class="kw">nStore</span>.<span class="fu">extend</span>(require(<span class="ch">&#39;nstore/query&#39;</span>)());
+
+<span class="co">/*--------------------------------------------</span>
+<span class="co">    Paramétrages de fonctionnement d&#39;Express</span>
+<span class="co">--------------------------------------------*/</span>
+<span class="kw">app</span>.<span class="fu">use</span>(<span class="kw">express</span>.<span class="fu">bodyParser</span>());
+<span class="kw">app</span>.<span class="fu">use</span>(<span class="kw">express</span>.<span class="fu">methodOverride</span>());
+<span class="kw">app</span>.<span class="fu">use</span>(<span class="kw">express</span>.<span class="fu">static</span>(__dirname + <span class="ch">&#39;/public&#39;</span>));
+<span class="kw">app</span>.<span class="fu">use</span>(<span class="kw">express</span>.<span class="fu">cookieParser</span>(<span class="ch">&#39;ilovebackbone&#39;</span>));
+<span class="kw">app</span>.<span class="fu">use</span>(<span class="kw">express</span>.<span class="fu">session</span>({ <span class="dt">secret</span>: <span class="st">&quot;ilovebackbone&quot;</span> }));
+
+<span class="co">/*--------------------------------------------</span>
+<span class="co">    Définition de la base</span>
+<span class="co">--------------------------------------------*/</span>
+<span class="kw">var</span> models;
+
+models = <span class="kw">nStore</span>.<span class="fu">new</span>(<span class="st">&quot;models.db&quot;</span>, <span class="kw">function</span>() {
+    Routes();
+    <span class="kw">app</span>.<span class="fu">listen</span>(<span class="dv">3000</span>);
+    <span class="kw">console</span>.<span class="fu">log</span>(<span class="ch">&#39;Express app started on port 3000&#39;</span>);
+});
+
+
+<span class="kw">function</span> Routes() {
+    <span class="co">/*</span>
+<span class="co">        Obtenir la liste de tous les models lorsque</span>
+<span class="co">        l&#39;on appelle http://localhost:3000/models</span>
+<span class="co">        en mode GET</span>
+<span class="co">    */</span>
+    <span class="kw">app</span>.<span class="fu">get</span>(<span class="ch">&#39;/models&#39;</span>,<span class="kw">function</span>(req, res){
+        <span class="kw">models</span>.<span class="fu">all</span>(<span class="kw">function</span>(err, results) {
+            <span class="kw">if</span>(err) { 
+                <span class="kw">console</span>.<span class="fu">log</span>(<span class="st">&quot;Erreur : &quot;</span>,err);
+                <span class="kw">res</span>.<span class="fu">json</span>(err); 
+            } <span class="kw">else</span> {
+                <span class="kw">var</span> models = [];
+                <span class="kw">for</span>(<span class="kw">var</span> key <span class="kw">in</span> results) {
+                    <span class="kw">var</span> model = results[key]; <span class="kw">model</span>.<span class="fu">id</span> = key;
+                    <span class="kw">models</span>.<span class="fu">push</span>(model);
+                }
+                <span class="kw">res</span>.<span class="fu">json</span>(models);
+            }
+        });
+    });
+
+    <span class="co">/*</span>
+<span class="co">        Obtenir la liste de tous les models correspondant à un critère</span>
+<span class="co">        lorsque l&#39;on appelle http://localhost:3000/models/ en</span>
+<span class="co">        mode GET avec une requête en paramètre</span>
+<span class="co">        ex : query : { &quot;kind&quot; : &quot;message&quot;} }</span>
+<span class="co">    */</span>
+    <span class="kw">app</span>.<span class="fu">get</span>(<span class="ch">&#39;/models/:query&#39;</span>,<span class="kw">function</span>(req, res){
+        <span class="kw">models</span>.<span class="fu">find</span>(<span class="kw">JSON</span>.<span class="fu">parse</span>(<span class="kw">req.params</span>.<span class="fu">query</span>), <span class="kw">function</span>(err, results) {
+            <span class="kw">if</span>(err) {
+                <span class="kw">console</span>.<span class="fu">log</span>(<span class="st">&quot;Erreur : &quot;</span>,err);
+                <span class="kw">res</span>.<span class="fu">json</span>(err); 
+            } <span class="kw">else</span> {
+                <span class="kw">var</span> models = [];
+                <span class="kw">for</span>(<span class="kw">var</span> key <span class="kw">in</span> results) {
+                    <span class="kw">var</span> model = results[key]; <span class="kw">model</span>.<span class="fu">id</span> = key;
+                    <span class="kw">models</span>.<span class="fu">push</span>(model);
+                }
+                <span class="kw">res</span>.<span class="fu">json</span>(models);
+            }
+        });
+
+    });
+
+    <span class="co">/*</span>
+<span class="co">        Retrouver un model par sa clé unique lorsque</span>
+<span class="co">        l&#39;on appelle http://localhost:3000/models/identifiant_du_model</span>
+<span class="co">        en mode GET</span>
+<span class="co">    */</span>
+
+    <span class="kw">app</span>.<span class="fu">get</span>(<span class="ch">&#39;/models/:id&#39;</span>, <span class="kw">function</span>(req, res){
+        <span class="kw">models</span>.<span class="fu">get</span>(<span class="kw">req.params</span>.<span class="fu">id</span>, <span class="kw">function</span>(err, post, key) {
+            <span class="kw">if</span>(err) {
+                <span class="kw">console</span>.<span class="fu">log</span>(<span class="st">&quot;Erreur : &quot;</span>,err);
+                <span class="kw">res</span>.<span class="fu">json</span>(err);
+            } <span class="kw">else</span> {
+                <span class="kw">model</span>.<span class="fu">id</span> = key;
+                <span class="kw">res</span>.<span class="fu">json</span>(model);
+            }
+        });
+    });
+
+    <span class="co">/*</span>
+<span class="co">        Créer un nouveau model lorsque</span>
+<span class="co">        l&#39;on appelle http://localhost:3000/models</span>
+<span class="co">        avec en paramètre le post au format JSON</span>
+<span class="co">        en mode POST</span>
+<span class="co">    */</span>
+    <span class="kw">app</span>.<span class="fu">post</span>(<span class="ch">&#39;/models&#39;</span>,<span class="kw">function</span>(req, res){
+        <span class="kw">var</span> d = <span class="kw">new</span> <span class="kw">Date</span>(), model = <span class="kw">req</span>.<span class="fu">body</span>;
+        <span class="kw">model</span>.<span class="fu">saveDate</span> = (<span class="kw">d</span>.<span class="fu">valueOf</span>());
+
+        <span class="kw">models</span>.<span class="fu">save</span>(null,model, <span class="kw">function</span> (err, key){
+            <span class="kw">if</span>(err) { 
+                <span class="kw">console</span>.<span class="fu">log</span>(<span class="st">&quot;Erreur : &quot;</span>,err);
+                <span class="kw">res</span>.<span class="fu">json</span>(err); 
+            } <span class="kw">else</span> {
+                <span class="kw">model</span>.<span class="fu">id</span> = key;
+                <span class="kw">res</span>.<span class="fu">json</span>(model);
+            }
+        });
+    });
+
+
+    <span class="co">/*</span>
+<span class="co">        Mettre à jour un model lorsque</span>
+<span class="co">        l&#39;on appelle http://localhost:3000/blogpost</span>
+<span class="co">        avec en paramètre le post au format JSON</span>
+<span class="co">        en mode PUT</span>
+<span class="co">    */</span>
+    <span class="kw">app</span>.<span class="fu">put</span>(<span class="ch">&#39;/models/:id&#39;</span>,<span class="kw">function</span>(req, res){
+        <span class="kw">var</span> d = <span class="kw">new</span> <span class="kw">Date</span>(), model = <span class="kw">req</span>.<span class="fu">body</span>;
+        <span class="kw">model</span>.<span class="fu">saveDate</span> = (<span class="kw">d</span>.<span class="fu">valueOf</span>());
+
+        <span class="kw">models</span>.<span class="fu">save</span>(<span class="kw">req.params</span>.<span class="fu">id</span>,model, <span class="kw">function</span> (err, key){
+            <span class="kw">if</span>(err) { 
+                <span class="kw">console</span>.<span class="fu">log</span>(<span class="st">&quot;Erreur : &quot;</span>,err);
+                <span class="kw">res</span>.<span class="fu">json</span>(err); 
+            } <span class="kw">else</span> {
+                <span class="kw">res</span>.<span class="fu">json</span>(model);
+            }
+        });
+    });
+
+    <span class="co">/*</span>
+<span class="co">        supprimer un model par sa clé unique lorsque</span>
+<span class="co">        l&#39;on appelle http://localhost:3000/blogpost/identifiant_du_post</span>
+<span class="co">        en mode DELETE</span>
+<span class="co">    */</span>
+    <span class="kw">app</span>.<span class="fu">delete</span>(<span class="ch">&#39;/models/:id&#39;</span>,<span class="kw">function</span>(req, res){
+        <span class="kw">models</span>.<span class="fu">remove</span>(<span class="kw">req.params</span>.<span class="fu">id</span>, <span class="kw">function</span>(err){
+            <span class="kw">if</span>(err) { 
+                <span class="kw">console</span>.<span class="fu">log</span>(<span class="st">&quot;Erreur : &quot;</span>,err);
+                <span class="kw">res</span>.<span class="fu">json</span>(err); 
+            } <span class="kw">else</span> { 
+                <span class="co">//petit correctif de contournement (bug ds nStore) : </span>
+                <span class="co">//ré-ouvrir la base lorsque la suppression a été faite</span>
+                models = <span class="kw">nStore</span>.<span class="fu">new</span>(<span class="st">&quot;models.db&quot;</span>, <span class="kw">function</span>() {
+                    <span class="kw">res</span>.<span class="fu">json</span>(<span class="kw">req.params</span>.<span class="fu">id</span>);
+                    <span class="co">//Le modèle est vide si on ne trouve rien</span>
+                });
+            }
+        });
+    });
+
+}</code></pre>
+<h2 id="installation-de-rbs"><a href="#TOC"><span class="header-section-number">17.3</span> Installation de RBS</a></h2>
+<p>Télécharger la stack complète ici : <a href="https://github.com/resthub/resthub-backbone-stack/downloads">https://github.com/resthub/resthub-backbone-stack/downloads</a>.</p>
+<p>Dézippez et coller le contenu de la racine dans le répertoire <code>rbs/public</code>.</p>
+<p>Vous devriez avoir une arborescence de ce type :</p>
+<pre><code>rbs-|
+    |-node_modules\
+    |-public\
+    |        |-css\
+    |        |-img\
+    |        |-js\
+    |             |-build\
+    |             |-lib\
+    |             |-router\
+    |             |-app.js
+    |             |-main.js
+    |-index.html</code></pre>
+<p>Le script <code>public/js/app.js</code> contiendra votre code applicatif (ou partie de code), le script <code>public/js/main.js</code> permet de &quot;charger&quot; l'ensemble des scripts nécessaires (par exemple, ceux qui sont dans <code>public/js/lib</code> comme Backbone, Underscore, jQuery, etc. ...), puis de lancer le code contenu dans <code>app.js</code>.</p>
+<p>La déclaration dans la page <code>index.html</code> se fait de la manière suivante <code>&lt;script data-main=&quot;js/main&quot; src=&quot;js/lib/require.js&quot;&gt;&lt;/script&gt;</code>.</p>
+<p>Ensuite dans <code>js</code>, créez les répertoires suivants <code>models</code>, <code>views</code>, <code>collections</code> et dans <code>public</code> un répertoire <code>templates</code>. Notre arborescence devrez ressemblez à ceci :</p>
+<pre><code>rbs-|
+    |-node_modules\
+    |-public\
+    |        |-css\
+    |        |-img\
+    |        |-templates\       
+    |        |-js\
+    |             |-models\
+    |             |-collections\
+    |             |-views\      
+    |             |-build\
+    |             |-lib\
+    |             |-router\
+    |             |-app.js
+    |             |-main.js
+    |-index.html</code></pre>
+<p>Il nous reste une petite modification du fichier <code>main.js</code> à faire, vers la fin du fichier, vous devez avoir une ligne <code>template: '../template'</code> que vous remplacez par <code>templates: '../templates',</code>. Oui, je sais, j'aurais pu nommer mon réperoire <code>templates</code> en <code>template</code>, mais que voulez vous, chacun ses petites habitudes.</p>
+<p>Maintenant nous pouvons coder rapidement une petite application : une liste de messages, avec un formulaire qui vous permet d'ajouter des messages, tout en les sauvegardant sur le serveur. Je sais, ce n'est pas mieux qu'une todo list, mais à vous d'être créatifs (moi, je fais du déblayage ;))</p>
+<h2 id="création-dun-modèle-et-dune-collection"><a href="#TOC"><span class="header-section-number">17.4</span> Création d'un modèle et d'une collection</a></h2>
+<p>Dans <code>js/models</code>, créez le fichier <code>message.js</code> avec le contenu suivant :</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">define([<span class="ch">&#39;backbone&#39;</span>], <span class="kw">function</span>(Backbone) {
+
+  <span class="kw">var</span> Message = <span class="kw">Backbone.Model</span>.<span class="fu">extend</span>({
+    <span class="dt">urlRoot </span>: <span class="st">&quot;/models&quot;</span>
+  });
+
+  <span class="kw">return</span> Message;
+
+});</code></pre>
+<p>Dans <code>js/collections</code>, créez le fichier <code>messages.js</code> avec le contenu suivant :</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">define([
+    <span class="ch">&#39;backbone&#39;</span>,
+    <span class="ch">&#39;models/message&#39;</span>
+],<span class="kw">function</span>(Backbone, Message) {
+
+    <span class="kw">var</span> Messages = <span class="kw">Backbone.Collection</span>.<span class="fu">extend</span>({
+        <span class="dt">url </span>: <span class="st">&quot;/models&quot;</span>,
+        <span class="dt">model</span>: Message
+    });
+
+    <span class="kw">return</span> Messages;
+
+});</code></pre>
+<blockquote>
+<blockquote>
+<p><strong>Premières remarques :</strong> vous pouvez voir que dans chacun des fichiers, on déclare les dépendances nécessaires (un peu comme le <code>import</code> en java) à Backbone et aux modèles.</p>
+</blockquote>
+</blockquote>
+<h2 id="templates"><a href="#TOC"><span class="header-section-number">17.5</span> Templates</a></h2>
+<p>Nous allons avoir besoin d'un formulaire de saisie de message, et d'une liste de messages.</p>
+<h3 id="template-formulaire"><a href="#TOC"><span class="header-section-number">17.5.1</span> Template formulaire</a></h3>
+<p>Dans <code>public/templates</code> créez un fichier <code>message-forms.hbs</code> avec le code suivant :</p>
+<pre class="sourceCode html"><code class="sourceCode html"><span class="kw">&lt;fieldset&gt;</span>
+    <span class="kw">&lt;legend&gt;</span>Your Message<span class="kw">&lt;/legend&gt;</span>
+    <span class="kw">&lt;input</span><span class="ot"> type=</span><span class="st">&quot;text&quot;</span><span class="ot"> data-field=</span><span class="st">&quot;from&quot;</span><span class="ot"> placeholder=</span><span class="st">&quot;from&quot;</span> <span class="kw">/&gt;</span>
+    <span class="kw">&lt;input</span><span class="ot"> type=</span><span class="st">&quot;text&quot;</span><span class="ot"> data-field=</span><span class="st">&quot;subject&quot;</span><span class="ot"> placeholder=</span><span class="st">&quot;subject&quot;</span> <span class="kw">/&gt;</span>
+    <span class="kw">&lt;input</span><span class="ot"> type=</span><span class="st">&quot;text&quot;</span><span class="ot"> data-field=</span><span class="st">&quot;body&quot;</span><span class="ot"> placeholder=</span><span class="st">&quot;body&quot;</span> <span class="kw">/&gt;</span>
+    <span class="kw">&lt;br&gt;</span>
+    <span class="kw">&lt;button</span><span class="ot"> data-action=</span><span class="st">&quot;add&quot;</span><span class="ot"> type=</span><span class="st">&quot;button&quot;</span><span class="kw">&gt;</span>Ajouter<span class="kw">&lt;/button&gt;</span>
+    <span class="kw">&lt;button</span><span class="ot"> data-action=</span><span class="st">&quot;cancel&quot;</span><span class="ot"> type=</span><span class="st">&quot;button&quot;</span><span class="kw">&gt;</span>Annuler<span class="kw">&lt;/button&gt;</span>
+<span class="kw">&lt;/fieldset&gt;</span></code></pre>
+<blockquote>
+<blockquote>
+<p><em>les attributs <code>data-field</code> ne sont pas une spécificité RestHub, c'est pour me faciliter la vie plus tard quand je vais devoir récupérer les valeurs de mon formulaire.</em></p>
+</blockquote>
+</blockquote>
+<h3 id="template-de-liste"><a href="#TOC"><span class="header-section-number">17.5.2</span> Template de liste</a></h3>
+<p>Dans <code>public/templates</code> créez un fichier <code>message.hbs</code> avec le code suivant :</p>
+<pre class="sourceCode html"><code class="sourceCode html"><span class="kw">&lt;ul&gt;</span>
+  {{#each this}}
+    <span class="kw">&lt;li&gt;</span>{{from}} : {{subject}} / {{body}}<span class="kw">&lt;/li&gt;</span>
+  {{/each}}
+<span class="kw">&lt;/ul&gt;</span></code></pre>
+<h2 id="vues-associées-aux-templates"><a href="#TOC"><span class="header-section-number">17.6</span> Vues associées aux templates</a></h2>
+<p>Nous allons créer dans <code>public/js/views</code> 2 vues backbone associées à chacun des templates.</p>
+<h3 id="messages-view.js"><a href="#TOC"><span class="header-section-number">17.6.1</span> messages-view.js</a></h3>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">define([
+  <span class="ch">&#39;backbone&#39;</span>, 
+  <span class="ch">&#39;hbs!templates/messages&#39;</span>
+  ], 
+  <span class="kw">function</span>(Backbone, messagesTemplate) {
+
+    <span class="kw">var</span> MessagesView = <span class="kw">Backbone.View</span>.<span class="fu">extend</span>({
+      <span class="dt">el</span>: $(<span class="ch">&#39;#messages&#39;</span>),
+
+      <span class="dt">initialize</span>: <span class="kw">function</span>() {
+        <span class="kw">this</span>.<span class="fu">collection</span>.<span class="fu">on</span>(<span class="ch">&#39;reset&#39;</span>, <span class="kw">this</span>.<span class="fu">render</span>, <span class="kw">this</span>);
+        <span class="kw">this</span>.<span class="fu">collection</span>.<span class="fu">on</span>(<span class="ch">&#39;add&#39;</span>, <span class="kw">this</span>.<span class="fu">render</span>, <span class="kw">this</span>);
+      },
+      <span class="dt">render</span>: <span class="kw">function</span>() {
+        <span class="kw">var</span> renderedContent = messagesTemplate(<span class="kw">this</span>.<span class="fu">collection</span>.<span class="fu">toJSON</span>());
+        <span class="kw">this</span>.$<span class="fu">el</span>.<span class="fu">html</span>(renderedContent);
+        <span class="kw">return</span> <span class="kw">this</span>;
+      }
+    });
+
+    <span class="kw">return</span> MessagesView;
+  }
+);</code></pre>
+<blockquote>
+<blockquote>
+<p><em>Remarquez ceci : <code>'hbs!templates/messages'</code> pour référencer les template</em></p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p><em>avec <code>this.collection.on('reset', this.render, this);</code>, j'explique qu'à chaque <code>reset</code> de la collection, je déclenche un rendu de ma vue, et il se trouve que la méthode <code>reset()</code> est déclenchée à chaque fois que l'on fait un <code>fetch</code> de la collection</em></p>
+</blockquote>
+</blockquote>
+<h3 id="message-form-view.js"><a href="#TOC"><span class="header-section-number">17.6.2</span> message-form-view.js</a></h3>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">define([
+  <span class="ch">&#39;backbone&#39;</span>, 
+  <span class="ch">&#39;hbs!templates/message-form&#39;</span>,
+  <span class="ch">&#39;models/message&#39;</span>
+  ], 
+  <span class="kw">function</span>(Backbone, messageFormTemplate, Message, MessagesView) {
+
+    <span class="kw">var</span> MessageFormView = <span class="kw">Backbone.View</span>.<span class="fu">extend</span>({
+      <span class="dt">el</span>: $(<span class="ch">&#39;#message_form&#39;</span>),
+
+      <span class="dt">events</span>: {
+          <span class="st">&quot;click button[data-action=&#39;add&#39;]&quot;</span>: <span class="ch">&#39;add&#39;</span>,
+          <span class="st">&quot;click button[data-action=&#39;cancel&#39;]&quot;</span>: <span class="ch">&#39;cancel&#39;</span>,
+      },
+
+      <span class="dt">add </span>: <span class="kw">function</span>() {
+        <span class="kw">var</span> model = <span class="kw">new</span> Message();
+        <span class="kw">var</span> view = <span class="kw">this</span>;
+
+        <span class="kw">this</span>.$<span class="fu">el</span>.<span class="fu">find</span>(<span class="st">&quot;input[data-field]&quot;</span>).<span class="fu">each</span>(<span class="kw">function</span>(){
+          <span class="kw">model</span>.<span class="fu">set</span>(<span class="kw">this</span>.<span class="fu">getAttribute</span>(<span class="st">&quot;data-field&quot;</span>), <span class="kw">this</span>.<span class="fu">value</span>);
+        })
+
+        <span class="kw">model</span>.<span class="fu">save</span>({},{
+          <span class="dt">success</span>:<span class="kw">function</span>(){
+            <span class="kw">view.collection</span>.<span class="fu">fetch</span>({
+              <span class="dt">success</span>:<span class="kw">function</span>(){
+                <span class="kw">view</span>.$<span class="fu">el</span>[<span class="dv">0</span>].<span class="fu">reset</span>();
+              },
+              <span class="dt">error</span>:<span class="kw">function</span>(err){<span class="kw">throw</span> err;}  
+            });  
+          },
+          <span class="dt">error</span>:<span class="kw">function</span>(err){<span class="kw">throw</span> err;}
+        });
+
+      },
+      <span class="dt">cancel </span>: <span class="kw">function</span>() {
+        <span class="kw">console</span>.<span class="fu">log</span>(<span class="st">&quot;CANCEL&quot;</span>);
+        <span class="kw">this</span>.$<span class="fu">el</span>[<span class="dv">0</span>].<span class="fu">reset</span>();
+      },
+      <span class="dt">render</span>: <span class="kw">function</span>() {
+        <span class="kw">var</span> renderedContent = messageFormTemplate();
+        <span class="kw">this</span>.$<span class="fu">el</span>.<span class="fu">html</span>(renderedContent);
+        <span class="kw">return</span> <span class="kw">this</span>;
+      }
+    });
+    <span class="kw">return</span> MessageFormView;
+  }
+);</code></pre>
+<blockquote>
+<blockquote>
+<p><em>Notez, qu'à chaque fois que je sauvegarde un modèle, je &quot;fetch&quot; ma collection qui va donc déclencher un <code>render</code> de l'instance de <code>MessagesView</code></em>;</p>
+</blockquote>
+</blockquote>
+<h2 id="app.js"><a href="#TOC"><span class="header-section-number">17.7</span> app.js</a></h2>
+<p>Il est temps d'apposer la touche finale, et de saisir le code suivant dans <code>app.js</code> :</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">define([
+    <span class="ch">&#39;collections/messages&#39;</span>, 
+    <span class="ch">&#39;views/messages-view&#39;</span>,
+    <span class="ch">&#39;views/message-form-view&#39;</span>
+    ], 
+    <span class="kw">function</span>(Messages, MessagesView, MessageFormView) {
+
+        <span class="kw">window</span>.<span class="fu">messages</span> = <span class="kw">new</span> Messages();
+        <span class="kw">window</span>.<span class="fu">messagesView</span> = <span class="kw">new</span> MessagesView({<span class="dt">collection</span>:messages});
+        <span class="kw">window</span>.<span class="fu">messageForm</span> = <span class="kw">new</span> MessageFormView({<span class="dt">collection</span>:messages}).<span class="fu">render</span>();
+
+        <span class="kw">messages</span>.<span class="fu">fetch</span>();
+});</code></pre>
+<p>Vous pouvez maintenant lancer votre application : <code>node app.js</code> et vérifier que tout fonctionne.</p>
+<p><img src="RSRC/16_01_RBS.png" alt="BB" /><br /></p>
+<h2 id="conclusion-3"><a href="#TOC"><span class="header-section-number">17.8</span> Conclusion</a></h2>
+<p>Voilà, il existe dans la stack RestHub Backbone, de nombreux autres composants que je n'ai pas encore eu le temps d'étudier et qui certainement permettent de faire du code plus simple que celui que je vous montre, mais je tenais à vous parler de cette stack car l'organisation des différents fichiers de scripts, templates, ... ainsi que la gestion des dépendance me plaît beaucoup, et est sans nul doute un critère de réussite sur un projet en équipe. Ce côté structurant peut paraître fastidieux au départ, mais au bout de quelques heures de code intensif, vous vous apercevrez que vous retrouvez beaucoup plus facilement vos petits.</p>
 </body>
 </html>

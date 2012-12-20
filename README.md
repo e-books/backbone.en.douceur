@@ -1,12 +1,10 @@
 <hr>
 
-###- [Au Menu les autres frameworks MVC : Télécharger le pdf (v° alpha du 09/12/2012)](https://github.com/downloads/k33g/backbone.en.douceur/backbone.en.douceur.20121209.pdf) *(10 chapitres)*
+###- [Au Menu Typescript, mais aussi un "quickstart" de la stack Backbone de Resthub : Télécharger le pdf (v° alpha du 20/12/2012)](backbone.en.douceur.20121220.pdf)
 
-###- [Format epub disponible aussi ...](https://github.com/downloads/k33g/backbone.en.douceur/backbone.en.douceur.20121209.epub)
+###- [Format epub disponible aussi ...](backbone.en.douceur.20121220.epub)
 
 ###- [Voir le code source ...](https://github.com/k33g/backbone.en.douceur)
-
-###- [Historique des downloads ...](https://github.com/k33g/backbone.en.douceur/downloads)
 
 
 <hr>
@@ -27,9 +25,9 @@ Cet ouvrage va traiter au moins les points suivants :
 - 12-Backbone.Sync *(à écrire)*
 - 13-Backbone & Coffeescript *(publié)*
 - 14-Autres frameworks MVC *(publié)*
-- 15-Backbone & Typescript *(à venir)*
+- 15-Backbone & Typescript *(publié)*
 - 16-Ressources *(à écrire)*
-- 17-Hors Serie : RestHub Backbone Stack : "quick start" *(en cours d'écriture)*
+- 17-Hors Serie : RestHub Backbone Stack : "quick start" *(publié)*
 
 Soyez patient, l'ensemble des chapitres sera publié avant fin décembre. J'ai juste besoin d'un peu de temps entre ma vie de famille, ma vie pro et ma vie de geek.
 
