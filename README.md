@@ -1,6 +1,6 @@
 <hr>
 
-###- [Au Menu Typescript, mais aussi un "quickstart" de la stack Backbone de Resthub : Télécharger le pdf (v° alpha du 20/12/2012)](backbone.en.douceur.20121220.pdf)
+###- [Au Menu Typescript, mais aussi un "quickstart" de la stack Backbone de RESThub : Télécharger le pdf (v° alpha du 20/12/2012)](backbone.en.douceur.20121220.pdf)
 
 ###- [Format epub disponible aussi ...](backbone.en.douceur.20121220.epub)
 

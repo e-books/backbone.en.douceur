@@ -1,4 +1,4 @@
-#RestHub Backbone Stack
+#RESThub Backbone Stack
 
 >>*Ou comment organiser son code de manière professionnelle*
 
