@@ -1,6 +1,6 @@
 <hr>
 
-###- Télécharger le "LIVRE" en pdf (v° alpha du 20/12/2012)](backbone.en.douceur.20121220.pdf)
+###- [Télécharger le "LIVRE" en pdf (v° alpha du 20/12/2012)](backbone.en.douceur.20121220.pdf)
 
 ###- [Format epub disponible aussi ...](backbone.en.douceur.20121220.epub)
 
