@@ -28,7 +28,7 @@ Mon but est de faire une application web avec Node & Express sur les principes R
 
 Si cela vous paraît obscur, pas d'inquiétude, la partie pratique qui suit devrait vous éclairer. Mais je vous engage fortement à lire [http://naholyr.fr/2011/08/ecrire-service-rest-nodejs-express-partie-1/](http://naholyr.fr/2011/08/ecrire-service-rest-nodejs-express-partie-1/) de [@naholyr](https://twitter.com/naholyr).
 
-	//TODO: vois si ça nécessite d'être développé
+  //TODO: vois si ça nécessite d'être développé
 
 ##Installation(s)
 
@@ -44,8 +44,8 @@ Express.js est un framework qui se greffe sur Node.js et vous permet de réalise
 Commençons à créer notre application serveur. Créez un répertoire `blog` sur votre disque dur.
 Quel que soit votre système d’exploitation, ouvrez une console ou un terminal et tapez les commandes suivante (et validez):
 
-	cd blog
-	npm install express
+  cd blog
+  npm install express
 
 >>**Remarque 1** : sous OSX ou linux vous devrez probablement passer en mode super utilisateur, faites donc précéder la commande par `sudo` : `sudo npm install express`
 
@@ -59,7 +59,7 @@ Nous venons donc d'installer le module **express** dans notre répertoire `blog`
 Nous aurons besoin d’un moyen de sauvegarde de nos données. Pour cela nous allons utiliser **nStore** qui est une sorte de base de données NoSQL clé/valeur pour node.js (il existe de nombreuses autre solutions telle MongoDB, CouchDB, des bases de donnée relationnelles,… mais ce n’est pas l’objet de cet ouvrage).
 Pour installer nStore (toujour dans le répertoire `blog`) tapez la commande suivante :
 
-	npm install nstore
+  npm install nstore
 
 >>**Remarque** : vous pouvez noter maintenant la présence d’un répertoire `node_modules` dans `blog`, contenant lui-même deux sous répertoires `express` et `nstore`.
 
@@ -83,48 +83,48 @@ Tout d’abord vous devez créer un sous-répertoire `public`, où nous allons c
 Et copiez aussi le répertoire `bootstrap` de notre exemple. Ensuite, préparez une page `index.html` dans le répertoire `public`, avec le code suivant :
 
 ```html
-	<!DOCTYPE html>
-	<html>
-	<head>
-	    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	    <title>Backbone</title>
-	    <link href="libs/vendors/bootstrap/css/bootstrap.css" rel="stylesheet">
-	    <style>
-	        body {
-	            padding-top: 60px;
-	            padding-bottom: 40px;
-	        }
-	    </style>
-	    <link href="libs/vendors/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
-	</head>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Backbone</title>
+    <link href="libs/vendors/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <style>
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+    </style>
+    <link href="libs/vendors/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+  </head>
 
-	<body>
+  <body>
 
-	    <div class="navbar navbar-fixed-top">
-	        <div class="navbar-inner">
-	            <div class="container">
-	                <a class="brand">Mon Blog</a>
-	            </div>
-	        </div>
-	    </div>
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand">Mon Blog</a>
+        </div>
+      </div>
+    </div>
 
-	    <div class="container">
-	        <div class="hero-unit">
-	            <h1>Backbone rocks !!!</h1>
-	        </div>
+    <div class="container">
+      <div class="hero-unit">
+        <h1>Backbone rocks !!!</h1>
+      </div>
 
-	    </div>
+    </div>
 
-	</body>
-	<!-- === Frameworks === -->
-	<script src="libs/vendors/jquery-1.7.2.js"></script>
-	<script src="libs/vendors/underscore.js"></script>
-	<script src="libs/vendors/backbone.js"></script>
+  </body>
+  <!-- === Frameworks === -->
+  <script src="libs/vendors/jquery-1.7.2.js"></script>
+  <script src="libs/vendors/underscore.js"></script>
+  <script src="libs/vendors/backbone.js"></script>
 
-	<!-- === code applicatif === -->
-	<script>
-	</script>
-	</html>
+  <!-- === code applicatif === -->
+  <script>
+  </script>
+</html>
 ```
 
 ###Ressources dynamiques
@@ -136,195 +136,198 @@ Toujours dans le répertoire `public`, créer un fichier `app.js` qui sera le pr
 Rapidement, le code serveur comporte :
 
 - l'intialisation de la base de données des posts et celle des users
-- 6 routes : 
+- 6 routes :
 
-    - `'/blogposts'` (`GET`) : pour récupérer tous les posts du blog
-    - `'/blogposts/query/:query'` (`GET`) : pour récupérer certains posts du blog
-    - `'/blogposts/:id'` (`GET`) : pour récupérer un post
-    - `'/blogposts` (`POST`) : pour créer un nouveau post
-    - `'/blogposts/:id'` (`PUT`) : pour modifier un post existant
-    - `'/blogposts/:id'` (`DELETE`) : pour supprimer un post
+  - `'/blogposts'` (`GET`) : pour récupérer tous les posts du blog
+  - `'/blogposts/query/:query'` (`GET`) : pour récupérer certains posts du blog
+  - `'/blogposts/:id'` (`GET`) : pour récupérer un post
+  - `'/blogposts` (`POST`) : pour créer un nouveau post
+  - `'/blogposts/:id'` (`PUT`) : pour modifier un post existant
+  - `'/blogposts/:id'` (`DELETE`) : pour supprimer un post
 
 ```javascript
-	/*--------------------------------------------
-		Déclaration des librairies
-	--------------------------------------------*/
-	var express = require('express')
-	    , nStore = require('nstore')
-	    , app = module.exports = express.createServer();
+/*--------------------------------------------
+Déclaration des librairies
+--------------------------------------------*/
+var express = require('express'),
+  nStore = require('nstore'),
+  app = module.exports = express.createServer();
 
-	nStore = nStore.extend(require('nstore/query')());
+nStore = nStore.extend(require('nstore/query')());
 
-	/*--------------------------------------------
-		Paramétrages de fonctionnement d'Express
-	--------------------------------------------*/
-	app.use(express.bodyParser());
-	app.use(express.methodOverride());
-	app.use(express.static(__dirname + '/public'));
-	app.use(express.cookieParser('ilovebackbone'));
-	app.use(express.session({ secret: "ilovebackbone" }));
+/*--------------------------------------------
+Paramétrages de fonctionnement d'Express
+--------------------------------------------*/
+app.use(express.bodyParser());
+app.use(express.methodOverride());
+app.use(express.static(__dirname + '/public'));
+app.use(express.cookieParser('ilovebackbone'));
+app.use(express.session({
+  secret: "ilovebackbone"
+}));
 
-	/*--------------------------------------------
-		Définition des "bases" posts & users
-	--------------------------------------------*/
-	var posts, users;
+/*--------------------------------------------
+Définition des "bases" posts & users
+--------------------------------------------*/
+var posts, users;
 
-	posts = nStore.new("blog.db", function() {
-	    users = nStore.new("users.db", function() {
-			/*
-				une fois les bases ouvertes, on passe
-				en attente de requête http (cf. code de
-				la fonction Routes())
-				Si les bases n'existent pas,
-				elles sont crées automatiquement
-	        */
-			Routes();
-	        app.listen(3000);
-	        console.log('Express app started on port 3000');
+posts = nStore.new("blog.db", function() {
+  users = nStore.new("users.db", function() {
+    /*
+      une fois les bases ouvertes, on passe
+      en attente de requête http (cf. code de
+      la fonction Routes())
+      Si les bases n'existent pas,
+      elles sont crées automatiquement
+    */
+    Routes();
+    app.listen(3000);
+    console.log('Express app started on port 3000');
 
-	    });
-	});
+  });
+});
 
-	function Routes() {
+function Routes() {
+  /*
+    Obtenir la liste de tous les posts lorsque
+    l'on appelle http://localhost:3000/blogposts
+    en mode GET
+  */
+  app.get('/blogposts', function(req, res) {
+    console.log("GET (ALL) : /blogposts");
+    posts.all(function(err, results) {
+      if (err) {
+        console.log("Erreur : ", err);
+        res.json(err);
+      } else {
+        var posts = [];
+        for (var key in results) {
+          var post = results[key];
+          post.id = key;
+          posts.push(post);
+        }
+        res.json(posts);
+      }
+    });
+  });
 
-	    /*
-			Obtenir la liste de tous les posts lorsque
-			l'on appelle http://localhost:3000/blogposts
-			en mode GET
-		*/
-	    app.get('/blogposts',function(req, res){
-	        console.log("GET (ALL) : /blogposts");
-	        posts.all(function(err, results) {
+  /*
+    Obtenir la liste de tous les posts correspondant à un critère
+    lorsque l'on appelle http://localhost:3000/blogposts/query/ en
+    mode GET avec une requête en paramètre
+    ex : query : { "title" : "Mon 1er post"} }
+  */
+  app.get('/blogposts/query/:query', function(req, res) {
+    console.log("GET (QUERY) : /blogposts/query/" + req.params.query);
 
-	            if(err) { 
-					console.log("Erreur : ",err);
-					res.json(err); 
-				} else {
-	                var posts = [];
-	                for(var key in results) {
-	                    var post = results[key]; post.id = key;
-	                    posts.push(post);
-	                }
-	                res.json(posts);
-	            }
-	        });
+    posts.find(JSON.parse(req.params.query), function(err, results) {
+      if (err) {
+        console.log("Erreur : ", err);
+        res.json(err);
+      } else {
+        var posts = [];
+        for (var key in results) {
+          var post = results[key];
+          post.id = key;
+          posts.push(post);
+        }
+        res.json(posts);
+      }
+    });
 
-	    });
+  });
 
-	    /*
-			Obtenir la liste de tous les posts correspondant à un critère
-			lorsque l'on appelle http://localhost:3000/blogposts/query/ en
-			mode GET avec une requête en paramètre
-			ex : query : { "title" : "Mon 1er post"} }
-		*/
-	    app.get('/blogposts/query/:query',function(req, res){
-	        console.log("GET (QUERY) : /blogposts/query/"+req.params.query);
+  /*
+    Retrouver un post par sa clé unique lorsque
+    l'on appelle http://localhost:3000/blogposts/identifiant_du_post
+    en mode GET
+  */
 
-	        posts.find(JSON.parse(req.params.query), function(err, results) {
-	            if(err) {
-					console.log("Erreur : ",err);
-					res.json(err); 
-				} else {
-	                var posts = [];
-	                for(var key in results) {
-	                    var post = results[key]; post.id = key;
-	                    posts.push(post);
-	                }
-	                res.json(posts);
-	            }
-	        });
+  app.get('/blogposts/:id', function(req, res) {
+    console.log("GET : /blogposts/" + req.params.id);
+    posts.get(req.params.id, function(err, post, key) {
+      if (err) {
+        console.log("Erreur : ", err);
+        res.json(err);
 
-	    });
+      } else {
+        post.id = key;
+        res.json(post);
+      }
+    });
+  });
 
-	    /*
-			Retrouver un post par sa clé unique lorsque
-			l'on appelle http://localhost:3000/blogposts/identifiant_du_post
-			en mode GET
-		*/
+  /*
+    Créer un nouveau post lorsque
+    l'on appelle http://localhost:3000/blogpost
+    avec en paramètre le post au format JSON
+    en mode POST
+  */
+  app.post('/blogposts', function(req, res) {
+    console.log("POST CREATE ", req.body);
 
-	    app.get('/blogposts/:id', function(req, res){
-	        console.log("GET : /blogposts/"+req.params.id);
-	        posts.get(req.params.id, function(err, post, key) {
-	            if(err) {
-	                console.log("Erreur : ",err);
-	                res.json(err);
+    var d = new Date(),
+      model = req.body;
+    model.saveDate = (d.valueOf());
 
-				} else {
-	                post.id = key;
-	                res.json(post);
-	            }
-	        });
-	    });
-
-	    /*
-			Créer un nouveau post lorsque
-			l'on appelle http://localhost:3000/blogpost
-			avec en paramètre le post au format JSON
-			en mode POST
-		*/
-	    app.post('/blogposts',function(req, res){
-	        console.log("POST CREATE ", req.body);
-
-	        var d = new Date(), model = req.body;
-	        model.saveDate = (d.valueOf());
-
-	        posts.save(null,model, function (err, key){
-	            if(err) { 
-					console.log("Erreur : ",err);
-					res.json(err); 
-				} else {
-	                model.id = key;
-	                res.json(model);
-				}
-	        });
-	    });
+    posts.save(null, model, function(err, key) {
+      if (err) {
+        console.log("Erreur : ", err);
+        res.json(err);
+      } else {
+        model.id = key;
+        res.json(model);
+      }
+    });
+  });
 
 
-	    /*
-			Mettre à jour un post lorsque
-			l'on appelle http://localhost:3000/blogpost
-			avec en paramètre le post au format JSON
-			en mode PUT
-		*/
-	    app.put('/blogposts/:id',function(req, res){
-	        console.log("PUT UPDATE", req.body, req.params.id);
+  /*
+    Mettre à jour un post lorsque
+    l'on appelle http://localhost:3000/blogpost
+    avec en paramètre le post au format JSON
+    en mode PUT
+  */
+  app.put('/blogposts/:id', function(req, res) {
+    console.log("PUT UPDATE", req.body, req.params.id);
 
-	        var d = new Date(), model = req.body;
-	        model.saveDate = (d.valueOf());
+    var d = new Date(),
+      model = req.body;
+    model.saveDate = (d.valueOf());
 
-	        posts.save(req.params.id,model, function (err, key){
-	            if(err) { 
-					console.log("Erreur : ",err);
-					res.json(err); 
-				} else { 
-	                res.json(model);
-				}
-	        });
-	    });
+    posts.save(req.params.id, model, function(err, key) {
+      if (err) {
+        console.log("Erreur : ", err);
+        res.json(err);
+      } else {
+        res.json(model);
+      }
+    });
+  });
 
-	    /*
-			supprimer un post par sa clé unique lorsque
-			l'on appelle http://localhost:3000/blogpost/identifiant_du_post
-			en mode DELETE
-		*/
-	    app.delete('/blogposts/:id',function(req, res){
-	        console.log("DELETE : /delete/"+req.params.id);
+  /*
+    supprimer un post par sa clé unique lorsque
+    l'on appelle http://localhost:3000/blogpost/identifiant_du_post
+    en mode DELETE
+  */
+  app.delete('/blogposts/:id', function(req, res) {
+    console.log("DELETE : /delete/" + req.params.id);
 
-	        posts.remove(req.params.id, function(err){
-	            if(err) { 
-					console.log("Erreur : ",err);
-					res.json(err); 
-				} else { 
-					//petit correctif de contournement (bug ds nStore) : 
-					//ré-ouvrir la base lorsque la suppression a été faite
-					posts = nStore.new("blog.db", function() {
-						res.json(req.params.id);
-	                    //Le modèle est vide si on ne trouve rien
-					});
-				}
-	        });
-	    });
-	}
+    posts.remove(req.params.id, function(err) {
+      if (err) {
+        console.log("Erreur : ", err);
+        res.json(err);
+      } else {
+        //petit correctif de contournement (bug ds nStore) :
+        //ré-ouvrir la base lorsque la suppression a été faite
+        posts = nStore.new("blog.db", function() {
+          res.json(req.params.id);
+          //Le modèle est vide si on ne trouve rien
+        });
+      }
+    });
+  });
+}
 ```
 
 Maintenant, nous allons faire un dernier travail avant de revenir à Backbone : Nous allons vérifier que notre serveur d’application fonctionne. Pour le lancer : en mode console, allez dans le répertoire `blog` et lancez la commande `node app.js `.
@@ -342,14 +345,21 @@ Dans la console tapez ceci (et validez) :
 *Requête http de type POST :*
 
 ```javascript
-	$.ajax({
-	    type:"POST",
-	    url:"/blogposts",
-	    data : { title : "My 1st post", message : "Once upon a time ..." } ,
-	    dataType : 'json',
-	    error:function(err){ console.log(err); },
-	    success:function(dataFromServer) { console.log(dataFromServer); }
-	})
+$.ajax({
+  type: "POST",
+  url: "/blogposts",
+  data: {
+    title: "My 1st post",
+    message: "Once upon a time ..."
+  },
+  dataType: 'json',
+  error: function(err) {
+    console.log(err);
+  },
+  success: function(dataFromServer) {
+    console.log(dataFromServer);
+  }
+})
 ```
 
 Vous venez donc de créer votre tout 1er post (vous avez appelé la route `'/blogposts'` de type `POST`), et vous devriez obtenir ceci dans la console du navigateur :
@@ -370,10 +380,16 @@ Dans la console tapez ceci :
 *Requête http de type GET :*
 
 ```javascript
-	$.ajax({type:"GET", url:"/blogposts",
-		error:function(err){ console.log(err); },
-		success:function(dataFromServer) { console.log(dataFromServer); }
-	})
+$.ajax({
+  type: "GET",
+  url: "/blogposts",
+  error: function(err) {
+    console.log(err);
+  },
+  success: function(dataFromServer) {
+    console.log(dataFromServer);
+  }
+})
 ```
 
 Vous obtenez un tableau d’objets correspondant à nos enregistrements :
@@ -393,10 +409,16 @@ Dans la console tapez ceci (vous remarquerez que j’utilise une des clés d’e
 *Requête http de type GET :*
 
 ```javascript
-	$.ajax({type:"GET", url:"/blogposts/2o03macl",
-		error:function(err){ console.log(err); },
-		success:function(dataFromServer) { console.log(dataFromServer); }
-	})
+$.ajax({
+  type: "GET",
+  url: "/blogposts/2o03macl",
+  error: function(err) {
+    console.log(err);
+  },
+  success: function(dataFromServer) {
+    console.log(dataFromServer);
+  }
+})
 ```
 
 Vous obtenez :
@@ -406,21 +428,28 @@ Vous obtenez :
 
 De même dans le terminal, vous obtiendrez le message `GET : /blogposts/2o03macl`, nous avons donc bien appelé la “route” `/blogposts` de type `GET` avec la clé du modèle en paramètre.
 
-###Mettre à jour un enregistrement 
+###Mettre à jour un enregistrement
 
 Dans la console tapez ceci :
 
 *Requête http de type PUT :*
 
 ```javascript
-	$.ajax({
-	    type:"PUT",
-	    url:"/blogposts/2o03macl",
-	    data : { title : "My 3rd post", message : "Red is really cute" },
-	    dataType : 'json',
-	    error:function(err){ console.log(err); },
-	    success:function(dataFromServer) { console.log(dataFromServer); }
-	})
+$.ajax({
+  type: "PUT",
+  url: "/blogposts/2o03macl",
+  data: {
+    title: "My 3rd post",
+    message: "Red is really cute"
+  },
+  dataType: 'json',
+  error: function(err) {
+    console.log(err);
+  },
+  success: function(dataFromServer) {
+    console.log(dataFromServer);
+  }
+})
 ```
 
 Puis appelez à nouveau pour vérifier :
@@ -428,10 +457,16 @@ Puis appelez à nouveau pour vérifier :
 *Requête http de type GET :*
 
 ```javascript
-	$.ajax({type:"GET", url:"/blogposts/2o03macl",
-		error:function(err){ console.log(err); },
-		success:function(dataFromServer) { console.log(dataFromServer); }
-	})
+$.ajax({
+  type: "GET",
+  url: "/blogposts/2o03macl",
+  error: function(err) {
+    console.log(err);
+  },
+  success: function(dataFromServer) {
+    console.log(dataFromServer);
+  }
+})
 ```
 
 La mise à jour a bien été prise en compte :
@@ -448,12 +483,16 @@ Dans la console tapez la commande "ajax" ci-dessous *(je veux les posts dont le 
 *Requête http de type GET :*
 
 ```javascript
-	$.ajax({
-	    type:"GET",
-	    url:'/blogposts/query/{ "title" : "My 3rd post"}',
-	    error:function(err){ console.log(err); },
-	    success:function(dataFromServer) { console.log(dataFromServer); }
-	})
+$.ajax({
+  type: "GET",
+  url: '/blogposts/query/{ "title" : "My 3rd post"}',
+  error: function(err) {
+    console.log(err);
+  },
+  success: function(dataFromServer) {
+    console.log(dataFromServer);
+  }
+})
 ```
 
 Vous obtenez :
@@ -463,19 +502,23 @@ Vous obtenez :
 
 Une fois de plus, vous pouvez vérifier dans le terminal, l’apparition du message `GET (QUERY)`, nous avons donc bien appelé la “route” `/blogposts` de type `GET` (avec les paramètres de requête en paramètres).
 
-###Supprimer un enregistrement 
+###Supprimer un enregistrement
 
 Supprimons l'enregistrement qui a la clé d'id égale à `2o03macl` *(chez vous c'est peut-être autre chose)*.Dans la console tapez ceci :
 
 *Requête http de type DELETE :*
 
 ```javascript
-	$.ajax({
-		type:"DELETE", 
-		url:"/blogposts/2o03macl",
-		error:function(err){ console.log(err); },
-		success:function(dataFromServer) { console.log(dataFromServer); }
-	})
+$.ajax({
+  type: "DELETE",
+  url: "/blogposts/2o03macl",
+  error: function(err) {
+    console.log(err);
+  },
+  success: function(dataFromServer) {
+    console.log(dataFromServer);
+  }
+})
 ```
 
 Puis recherchez à nouveau l’enregistrement :
@@ -483,10 +526,16 @@ Puis recherchez à nouveau l’enregistrement :
 *Requête http de type GET :*
 
 ```javascript
-	$.ajax({type:"GET", url:"/blogposts/2o03macl",
-		error:function(err){ console.log(err); },
-		success:function(dataFromServer) { console.log(dataFromServer); }
-	})
+$.ajax({
+  type: "GET",
+  url: "/blogposts/2o03macl",
+  error: function(err) {
+    console.log(err);
+  },
+  success: function(dataFromServer) {
+    console.log(dataFromServer);
+  }
+})
 ```
 
 Vous obtenez un objet vide :
