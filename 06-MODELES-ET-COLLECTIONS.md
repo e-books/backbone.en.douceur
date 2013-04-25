@@ -29,14 +29,11 @@ Si vous avez bien suivi les chapitres précédents vous devez disposer d’un sq
 Ouvrez la page `index.html` du répertoire `public` et à l’intérieur de la fonction de chargement (`$(function(){})`) vous allez saisir le code de votre premier modèle :
 
 ```javascript
-    $(function (){
-
-        window.Post = Backbone.Model.extend({
-            urlRoot :"/blogposts"
-
-        });
-
-    });
+$(function() {
+  window.Post = Backbone.Model.extend({
+    urlRoot: "/blogposts"
+  });
+});
 ```
 
 Cela fait peu de code mais nous avons déjà une « mécanique utilisable » avec un grand nombre de possibilités. Nous avons donc un modèle `Post` pour lequel nous avons juste précisé l’url (`urlRoot`) à appeler (`par Backbone.sync`) lors d’actions/traitement de type « CRUD ». En effet un modèle « arrive » avec entre autres les méthodes suivantes : `save` (pour créer et sauvegarder), `fetch` (pour lire des données en provenance du serveur) et `destroy` (pour supprimer le modèle du serveur).
@@ -52,11 +49,11 @@ Puis saisissez ceci dans la console (et validez) :
 *Nouvelle instance d'un modèle "Post" :*
 
 ```javascript
-	var message = new Post({
-	    title : "Premier Message",
-	    message : "Apprendre Backbone, c'est facile",
-	    author : "@K33G_ORG"
-	});
+var message = new Post({
+  title: "Premier Message",
+  message: "Apprendre Backbone, c'est facile",
+  author: "@K33G_ORG"
+});
 ```
 
 Nous avons maintenant une instance d’un modèle, jouons avec. Vous avez noté que la définition des champs du modèle (`title, message, author`) se fait à l’instanciation du modèle, personnellement je trouve ce la pratique et très lisible (un début programmation fonctionnelle), mais je comprends que cela puisse perturber (nous verrons comment faire autrement si vous le souhaitez).
@@ -92,14 +89,14 @@ Saisissez le code javascript ci-dessous dans la console du navigateur. Cela va d
 *Appel de la méthode save() du modèle :*
 
 ```javascript
-	message.save({},{
-	    success : function() {
-	        console.log("message sauvegardé.");
-	    },
-	    error : function() {
-	        console.log("oupss");
-	    }
-	});
+message.save({}, {
+  success: function() {
+    console.log("message sauvegardé.");
+  },
+  error: function() {
+    console.log("oupss");
+  }
+});
 ```
 
 ![BB](RSRC/06_03_MODS.png)\
@@ -121,35 +118,34 @@ Modifions maintenant le modèle en cours et sauvegardons le :
 *Appel de la méthode save() du modèle :*
 
 ```javascript
-	message.save({
-	        title : "=== PREMIER MESSAGE ===”,
-	        message : "Je m'amuse avec Backbone.js"
-	    },{
-	        success : function() {
-	            console.log("message sauvegardé.");
-	        },
-	        error : function() {
-	            console.log("oupss");
-	        }
-	});
+message.save({
+    title   : "=== PREMIER MESSAGE ===",
+    message : "Je m'amuse avec Backbone.js"
+  }, {
+  success: function() {
+    console.log("message sauvegardé.");
+  },
+  error: function() {
+    console.log("oupss");
+  }
+});
 ```
 
 Ce qui est équivalent à ceci (nous avons juste utilisé un raccourci) :
 
 ```javascript
-	message.set({
-	    title : "=== PREMIER MESSAGE ===”,
-	    message : "Je m'amuse avec Backbone.js"
-	});
-
-	message.save({},{
-	    success : function() {
-	        console.log("message sauvegardé.");
-	    },
-	    error : function() {
-	        console.log("oupss");
-	    }
-	});
+message.set({
+  title   : "=== PREMIER MESSAGE ===",
+  message : " Je m 'amuse avec Backbone.js"
+});
+message.save({},{
+  success: function() {
+    console.log("message sauvegardé.");
+  },
+  error: function() {
+    console.log("oupss");
+  }
+});
 ```
 
 Et vous obtiendrez :
@@ -171,7 +167,9 @@ Notez bien le numéro d’id affecté par le serveur (dans notre exemple : “17
 Créons maintenant une nouvelle fois un modèle avec simplement comme champ, un id prenant la valeur de la clé du modèle sauvegardé en base :
 
 ```javascript
-	var message = new Post({id:"17f0v3jv"});
+var message = new Post({
+  id: "17f0v3jv"
+});
 ```
 
 Puis appelons à nouveau la méthode `fetch()` du modèle :
@@ -179,16 +177,16 @@ Puis appelons à nouveau la méthode `fetch()` du modèle :
 *Appel de la méthode fetch() pour charger les données du serveur :*
 
 ```javascript
-	message.fetch({
-	    success : function(model) {
-	        console.log("message retrouvé.");
-	        console.log(model.get("title"), model.get("message"));
-	        console.log(message.get("title"), message.get("message"));
-	    },
-	    error : function() {
-	        console.log("oupss");
-	    }
-	});
+message.fetch({
+  success: function(model) {
+    console.log("message retrouvé.");
+    console.log(model.get("title"), model.get("message"));
+    console.log(message.get("title"), message.get("message"));
+  },
+  error: function() {
+    console.log("oupss");
+  }
+});
 ```
 
 Nous récupérons bien les données du modèle sauvegardé :
@@ -206,8 +204,14 @@ Le principe est le même que pour la méthode `fetch()`, à partir d’un modèl
 *Appel de la méthode destroy() :*
 
 ```javascript
-	var message = new Post({id:"17f0v3jv"});
-	message.destroy({success:function(){ console.log("supprimé");}})
+var message = new Post({
+  id: "17f0v3jv"
+});
+message.destroy({
+  success: function() {
+    console.log("supprimé");
+  }
+})
 ```
 
 
@@ -222,19 +226,18 @@ Et côté serveur, nous avons bien une requête de type `DELETE` avec en paramè
 
 ###Evénements
 
-Il est possible de “s’abonner” aux changements effectués sur un modèle grâce à la méthode `on()` (anciennement `bind()`) de l’instance du modèle : 
+Il est possible de “s’abonner” aux changements effectués sur un modèle grâce à la méthode `on()` (anciennement `bind()`) de l’instance du modèle :
 
 *Abonnement à un événement avec la méthode on() :*
 
 ```javascript
-	message.on("change", function(){
-	    console.log("quelque chose a changé");
-	    if (message.hasChanged("title")) {
-	        console.log("vous avez changé le titre : ", message.get("title"));
-	        console.log("l'ancien titre est : ",message.previous("title"));
-	    }
-
-	});
+message.on("change", function() {
+  console.log("quelque chose a changé");
+  if (message.hasChanged("title")) {
+    console.log("vous avez changé le titre : ", message.get("title"));
+    console.log("l'ancien titre est : ", message.previous("title"));
+  }
+});
 ```
 
 Nous venons de nous abonner aux changements de valeurs des champs de l’instance de modèle `message`. C’est à dire que nous serons notifiés dès qu’une valeur d’un champ de `message` est modifiée :
@@ -246,9 +249,9 @@ Nous venons de nous abonner aux changements de valeurs des champs de l’instanc
 Vous pouvez aussi "écouter" les changements spécifiques à un attribut bien particulier de cette façon :
 
 ```javascript
-	message.on("change:message", function(){
-	    console.log("le message a changé :", this.get("message"));
-	})
+message.on("change:message", function() {
+  console.log("le message a changé :", this.get("message"));
+})
 ```
 
 ![BB](RSRC/06_12_MODS.png)\
@@ -257,7 +260,7 @@ Vous pouvez aussi "écouter" les changements spécifiques à un attribut bien pa
 On s’apperçoit que les abonnements se cumulent.
 Ce que nous venons de faire n’est par contre valable que pour une instance de modèle de type Post. Comment faire pour que cela soit valable pour tous les Posts ? En utilisant le constructeur du modèle, ou plus spécifiquement la méthode `initialize()` qui est appelée par le constructeur du modèle.
 
-	//TODO: parler de off()
+  //TODO: parler de off()
 
 
 ###Constructeur : initialize
@@ -267,19 +270,18 @@ Retournez modifier le code de notre modèle dans la page `index.html` du répert
 *Méthode initialize() et utilisation de on() :*
 
 ```javascript
-	window.Post = Backbone.Model.extend({
-	    urlRoot :"/blogposts",
+window.Post = Backbone.Model.extend({
+  urlRoot: "/blogposts",
 
-	    initialize : function () {
-	        this.on("change:message", function(){
-	            console.log("le message a changé :", this.get("message"));
-	        });
-	        this.on("change:title", function(){
-	            console.log("le titre a changé :", this.get("title"));
-	        });
-	    }
-
-	});
+  initialize: function() {
+    this.on("change:message", function() {
+      console.log("le message a changé :", this.get("message"));
+    });
+    this.on("change:title", function() {
+      console.log("le titre a changé :", this.get("title"));
+    });
+  }
+});
 ```
 
 Nous venons d’expliquer que pour chacun des modèles de type `Post`, si son titre ou son message change, alors nous sommes notifiés.
@@ -302,46 +304,46 @@ Vous pouvez éprouver le besoin de coder de manière plus classique (à la java)
 *Ajouts de propriétés et de méthodes au model :*
 
 ```javascript
-	window.Post = Backbone.Model.extend({
-	    urlRoot :"/blogposts",
+window.Post = Backbone.Model.extend({
+  urlRoot: "/blogposts",
 
-	    /* valeurs par défaut du modèle */
-	    defaults : {
-	        title : "???",
-	        message : "...",
-	        author : "John Doe"
-	    },
+  /* valeurs par défaut du modèle */
+  defaults: {
+    title: "???",
+    message: "...",
+    author: "John Doe"
+  },
 
-	    initialize : function () {
-	        this.on("change:message", function(){
-	            console.log("le message a changé :", this.get("message"));
-	        });
-	        this.on("change:title", function(){
-	            console.log("le titre a changé :", this.get("title"));
-	        });
-	    },
-	    
-	    /* les getters et les setters à l'ancienne */
-	    getTitle : function () {
-	        return this.get("title");
-	    },
-	    setTitle : function (value) {
-	        this.set("title", value);
-	    },
-	    getMessage : function () {
-	        return this.get("message");
-	    },
-	    setMessage : function (value) {
-	        this.set("message", value);
-	    },
-	    getAuthor : function () {
-	        return this.get("author");
-	    },
-	    setAuthor : function (value) {
-	        this.set("author", value);
-	    }
+  initialize: function() {
+    this.on("change:message", function() {
+      console.log("le message a changé :", this.get("message"));
+    });
+    this.on("change:title", function() {
+      console.log("le titre a changé :", this.get("title"));
+    });
+  },
 
-	});
+  /* les getters et les setters à l'ancienne */
+  getTitle: function() {
+    return this.get("title");
+  },
+  setTitle: function(value) {
+    this.set("title", value);
+  },
+  getMessage: function() {
+    return this.get("message");
+  },
+  setMessage: function(value) {
+    this.set("message", value);
+  },
+  getAuthor: function() {
+    return this.get("author");
+  },
+  setAuthor: function(value) {
+    this.set("author", value);
+  }
+
+});
 ```
 
 Que nous pouvons utiliser de la manière suivante :
@@ -351,7 +353,7 @@ Que nous pouvons utiliser de la manière suivante :
 
 ###Validation
 
-	//TODO: à faire
+  //TODO: à faire
 
 
 ###Comment détecter qu’un modèle a été changé par quelqu’un d’autre ?
@@ -361,11 +363,13 @@ Dans la “rubrique trucs & astuces”, il est possible de détecter un changeme
 *Appel de la méthode fetch() à intervalles réguliers :*
 
 ```javascript
-	var message = new Post({id:"17f0v3jv"});
+var message = new Post({
+  id: "17f0v3jv"
+});
 
-	setInterval(function(){
-	    message.fetch();
-	},1000)
+setInterval(function() {
+  message.fetch();
+}, 1000)
 ```
 
 Nous venons de créer un nouveau `Post`, en lui renseignant son id (car nous savons qu’il existe côté serveur) et demandons à javascript d’aller chercher les données toutes les 1000 millisecondes (donc toutes les 1 secondes).
@@ -373,14 +377,18 @@ Nous venons de créer un nouveau `Post`, en lui renseignant son id (car nous sav
 Ensuite, ouvrez un autre navigateur (par exemple FireFox) et connectez-vous sur [http://localhost:3000](http://localhost:3000), puis dans la console de ce navigateur tapez ceci :
 
 ```javascript
-	var message = new Post({id:"17f0v3jv"});
-	message.set({title:"LE TITRE DU 1ER MESSAGE"});
+var message = new Post({
+  id: "17f0v3jv"
+});
+message.set({
+  title: "LE TITRE DU 1ER MESSAGE"
+});
 ```
 
 puis sauvegardez :
 
 ```javascript
-	message.save()
+message.save()
 ```
 
 Et dans la console du précédent navigateur, vous allez voir s’afficher un message expliquant que le modèle a changé. La méthode `change()` que nous avons définie dans `initialize` est aussi appelée/déclenchée lorsque que Backbone détecte un changement (lors d’un `fetch()`) entre les données clientes et les données serveurs :
@@ -397,20 +405,20 @@ Pour le moment nous avons fait le tour de l’essentiel du fonctionnement des mo
 Changeons à nouveau le code de notre modèle dans notre page `index.html` :
 
 ```javascript
-	window.Post = Backbone.Model.extend({
-	    urlRoot :"/blogposts"
+window.Post = Backbone.Model.extend({
+  urlRoot: "/blogposts"
 
-	});
+});
 ```
 
 Puis définissons une collection : `Backbone.Collection`
 
 ```javascript
-	window.Posts = Backbone.Collection.extend({
-	    url :"/blogposts",
-	    model : Post
+window.Posts = Backbone.Collection.extend({
+  url: "/blogposts",
+  model: Post
 
-	});
+});
 ```
 
 
@@ -422,45 +430,60 @@ Et rechargeons notre page, pour une nouvelle fois passer en mode commande (et do
 Tout d’abord, il faut créer(instancier) une nouvelle collection :
 
 ```javascript
-	var postsList = new Posts();
+var postsList = new Posts();
 ```
 
 Puis créer(instancier) 3 nouveaux modèles Post :
 
 ```javascript
-	var post1 = new Post({title:"Titre Post1", message:"message 1"})
-	var post2 = new Post({title:"Titre Post2", message:"message 2"})
-	var post3 = new Post({title:"Titre Post3", message:"message 3"})
+var post1 = new Post({
+  title: "Titre Post1",
+  message: "message 1"
+})
+var post2 = new Post({
+  title: "Titre Post2",
+  message: "message 2"
+})
+var post3 = new Post({
+  title: "Titre Post3",
+  message: "message 3"
+})
 ```
 
 Que vous pouvez ajouter à la collection de cette manière :
 
 ```javascript
-	postsList.add(post1)
+postsList.add(post1)
 ```
 
 Ou de cette façon :
 
 ```javascript
-	postsList.add([post2, post3])
+postsList.add([post2, post3])
 ```
 
 Il est possible de créer directement un modèle dans la collection de cette façon :
 
 ```javascript
-	postsList.add(new Post({title:"Titre Post4", message:"message 4"}))
+postsList.add(new Post({
+  title: "Titre Post4",
+  message: "message 4"
+}))
 ```
 
 ou de cette manière :
 
 ```javascript
-	postsList.create({title:"Titre Post5", message:"message 5"})
+postsList.create({
+  title: "Titre Post5",
+  message: "message 5"
+})
 ```
 
 Et enfin, saisissez ceci :
 
 ```javascript
-	postsList.models
+postsList.models
 ```
 
 Et vous obtenez un tableau des 5 modèles de la collection :
@@ -472,13 +495,13 @@ Et vous obtenez un tableau des 5 modèles de la collection :
 Et vous pouvez accéder aux modèles et à leurs propriétés par exemple de cette façon-ci :
 
 ```javascript
-	postsList.models[0].get("title")
+postsList.models[0].get("title")
 ```
 
 Ou bien de cette manière :
 
 ```javascript
-	postsList.at(0).get("title")
+postsList.at(0).get("title")
 ```
 
 `at()` utilise le numéro d’index du modèle dans la collection.
@@ -486,7 +509,7 @@ Ou bien de cette manière :
 Ou bien comme ceci :
 
 ```javascript
-	postsList.get("3chk57hl").get("title")
+postsList.get("3chk57hl").get("title")
 ```
 
 `get()` utilise le numéro d’id affecté (par le serveur) au modèle lorsqu’il est sauvegardé.
@@ -494,7 +517,7 @@ Ou bien comme ceci :
 Ou encore :
 
 ```javascript
-	postsList.getByCid("c18").get("title")
+postsList.getByCid("c18").get("title")
 ```
 
 `getByCid()` utilise la propriété cid du modèle automatiquement affectée lorsqu’il est créé/instancié (new), cela peut être pratique pour les modèles qui ne sont pas encore sauvegardés et qui donc n’ont pas encore d’id.
@@ -507,9 +530,9 @@ Les collections Backbone dispose d’une méthode `each()` (issue de la librairi
 *Appel de la méthode each() :*
 
 ```javascript
-	postsList.each(function(post){
-	    console.log(post.get("title"));
-	})
+postsList.each(function(post) {
+  console.log(post.get("title"));
+})
 ```
 
 Vous obtiendrez le résultat suivant :
@@ -525,9 +548,9 @@ De la même façon que `each()` il existe une méthode `filter()` (toujours issu
 *Appel de la méthode filter() :*
 
 ```javascript
-	var somePosts = postsList.filter(function(post){
-	    return parseInt(post.get("title")[10]) > 3;
-	})
+  var somePosts = postsList.filter(function(post){
+      return parseInt(post.get("title")[10]) > 3;
+  })
 ```
 
 
@@ -541,9 +564,9 @@ La méthode `find()` fonctionne comme `filter()` mais retourne le premier élém
 *Appel de la méthode find() :*
 
 ```javascript
-	var onePost = postsList.find(function(post){
-	    return parseInt(post.get("title")[10]) > 3;
-	})
+  var onePost = postsList.find(function(post){
+      return parseInt(post.get("title")[10]) > 3;
+  })
 ```
 
 
@@ -552,7 +575,7 @@ La méthode `find()` fonctionne comme `filter()` mais retourne le premier élém
 
 ###Autres méthodes de la collection
 
-	//TODO: à faire ... en attendant lisez la doc de Backbone (ou faites moi une PR ;) )
+  //TODO: à faire ... en attendant lisez la doc de Backbone (ou faites moi une PR ;) )
 
 
 ##Les collections “parlent” au serveur
@@ -562,15 +585,15 @@ Sauvegardons d’abord nos modèles (en utilisant `each()` pour aller plus vite)
 *Sauvegarder tous les modèles :*
 
 ```javascript
-	postsList.each(function(post){
-	    post.save({},{
-	        success :  function (post) {
-	            console.log(post.get("title")," sauvegardé");
-	        },
-	        error : function () { console.log("Oupss"); }
-	    });
-	    
-	})
+  postsList.each(function(post){
+      post.save({},{
+          success :  function (post) {
+              console.log(post.get("title")," sauvegardé");
+          },
+          error : function () { console.log("Oupss"); }
+      });
+
+  })
 ```
 
 
@@ -582,7 +605,7 @@ Sauvegardons d’abord nos modèles (en utilisant `each()` pour aller plus vite)
 Maintenant nous souhaitons interroger le serveur pour qu’il nous fournisse l’ensemble des modèles de type Post. Rechargez la page pour être sûr de remettre toutes les variables en mémoire à zéro. Ensuite créez une nouvelle instance de collection de Post :
 
 ```javascript
-	var postsList = new Posts();
+  var postsList = new Posts();
 ```
 
 Et chargez celle-ci à partir des données du serveur :
@@ -590,16 +613,16 @@ Et chargez celle-ci à partir des données du serveur :
 *Appel de la méthode fetch() :*
 
 ```javascript
-	postsList.fetch({
-	    success : function () {
-	        postsList.each(function(post){
-	            console.log(post.get("title"));
-	        })
-	    },
-	    error : function () {
-	        console.log("Oupss");
-	    }
-	})
+  postsList.fetch({
+      success : function () {
+          postsList.each(function(post){
+              console.log(post.get("title"));
+          })
+      },
+      error : function () {
+          console.log("Oupss");
+      }
+  })
 ```
 
 Nous avons donc bien une collection avec les modèles initialisés à partir des données du serveur :
@@ -615,24 +638,24 @@ Lorsque nous avons créé notre application côté serveur, nous avions prévu d
 *Ajouter des méthodes à la collection :*
 
 ```javascript
-	window.Posts = Backbone.Collection.extend({
-	    model : Post,
-	    all : function () {
-	        this.url = "/blogposts";
-	        return this;
-	    },
-	    query : function (query) {
-	        this.url = "/blogposts/query/"+query;
-	        return this;
-	    }
+  window.Posts = Backbone.Collection.extend({
+      model : Post,
+      all : function () {
+          this.url = "/blogposts";
+          return this;
+      },
+      query : function (query) {
+          this.url = "/blogposts/query/"+query;
+          return this;
+      }
 
-	});
+  });
 ```
 
 Rechargez ensuite la page, puis créez une nouvelle collection (dans la console du navigateur) :
 
 ```javascript
-	var postsList = new Posts();
+  var postsList = new Posts();
 ```
 
 puis faites une requête :
@@ -640,12 +663,12 @@ puis faites une requête :
 *Ne charger que certains titres dans la collection :*
 
 ```javascript
-	postsList.query('{"title" : "Titre Post2"}')
-	    .fetch({
-	        success:function(result){
-	            console.log(result);
-	        }
-	})
+  postsList.query('{"title" : "Titre Post2"}')
+      .fetch({
+          success:function(result){
+              console.log(result);
+          }
+  })
 ```
 
 Vous obtenez ceci :
@@ -659,12 +682,12 @@ Ensuite si vous souhaitez charger tous les modèles (toujours dans la console de
 *Charger tous les modèles dans la collection :*
 
 ```javascript
-	postsList.all()
-	    .fetch({
-	        success:function(result){
-	            console.log(result);
-	        }
-	})
+  postsList.all()
+      .fetch({
+          success:function(result){
+              console.log(result);
+          }
+  })
 ```
 
 
@@ -680,18 +703,18 @@ Comme pour les modèles, il est possible de s’abonner à des événements issu
 *Affecter un événement à tous les modèles :*
 
 ```javascript
-	postsList.on('change', function (model) {
-	    console.log("Changement : ", model.get("title"));
-	});
+  postsList.on('change', function (model) {
+      console.log("Changement : ", model.get("title"));
+  });
 ``
 
 Puis :
 
 ```javascript
-	postsList.at(0).set("title","=== Titre Post 4 ===")
+  postsList.at(0).set("title","=== Titre Post 4 ===")
 ```
 
-Vous obtenez ceci : 
+Vous obtenez ceci :
 
 
 ![BB](RSRC/06_25_MODS.png)\
