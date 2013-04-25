@@ -20,20 +20,20 @@ L’objet de ce chapitre n’est pas de vous apprendre Coffeescript, mais de vou
 
 Donc, selon moi (et d’autres), Coffeescript permet de simplifier le javascript, générer du javascript « propre » et apporte des évolutions de langage qui vont simplifier et rendre le code plus lisible. Nous allons tenter de voir ça par le biais de quelques exemples.
 
-###Les fonctions 
+###Les fonctions
 
 Le terme `function` disparaît au profit d’une « flèche » ! `return` disparaît complètement !!! (par défaut c'est la dernière ligne qui fait office de return) et les parenthèses ne sont pas partout obligatoires (ce qui facilite l’écriture de DSL) ... Et plus de point-virgule.
 
 *Fonction d’addition en javascript :*
 
 ```javascript
-	function addition (a,b) {
-		return a+b
-	}
+function addition(a, b) {
+  return a + b
+}
 
-	//Utilisation :
+//Utilisation :
 
-	var c = addition(45, 12)
+var c = addition(45, 12)
 ```
 
 Deviendra :
@@ -41,12 +41,12 @@ Deviendra :
 *Fonction d’addition en Coffeescript :*
 
 ```python
-	addition = (a,b)->
-		a+b
+  addition = (a,b)->
+  a+b
 
-	#Utilisation :
+  #Utilisation :
 
-	c = addition 45, 12
+  c = addition 45, 12
 ```
 
 ###Interopérabilité
@@ -56,20 +56,20 @@ Coffeescript reste compatible avec les librairies existantes (pas besoin de ré-
 *Attendre le chargement de la page pour lancer les commandes :*
 
 ```javascript
-	$(function() {
-		some() ;
-		init() ;
-		calls() ;
-	}) ;
+$(function() {
+  some();
+  init();
+  calls();
+});
 ```
 
 *La même chose en Coffeescript :*
 
 ```python
-	$ ->
-		some()
-		init()
-		calls()
+$ ->
+  some()
+  init()
+  calls()
 ```
 
 ###Interpolation et Chaînes de caractères
@@ -79,24 +79,26 @@ Imaginons un objet bob :
 *En Javascript :*
 
 ```javascript
-	var bob = {
-		firstName : "Bob",
-		lastName : "Morane",
-		sayHello : function() { return "Hello !"}
-	}
+var bob = {
+  firstName : "Bob",
+  lastName  : "Morane",
+  sayHello  : function() {
+  return "Hello !"
+  }
+}
 ```
 
 Nous voulons afficher un message à partir des propriétés de Bob, aujourd’hui nous faisons comme ceci :
 
 *En Javascript :*
 
-```python
-	console.log(
-		"Firstname : " + bob.firstName + 
-		" Lastname : " + bob.lastName + 
-		"Hello : " + 
-		bob.sayHello()
-	) ;
+```javascript
+console.log(
+  "Firstname : " + bob.firstName +
+  " Lastname : " + bob.lastName +
+  "Hello : " +
+  bob.sayHello()
+) ;
 ```
 
 Coffeescript introduit des nouveaux concepts à propos des chaînes de caractères et particulièrement `#{variable}` qui permet d’insérer la valeur de variable dans une chaîne. Nous aurons donc ceci :
@@ -104,17 +106,17 @@ Coffeescript introduit des nouveaux concepts à propos des chaînes de caractèr
 *Version Coffeescript :*
 
 ```python
-	bob = 
-		firstName : "Bob"
-		lastName : "Morane"
-		sayHello : ->
-			"Hello !"
+bob =
+  firstName : "Bob"
+  lastName : "Morane"
+  sayHello : ->
+  "Hello !"
 
-	console.log "
-		Firstname : #{bob.firstName}
-		Lastname : #{bob.lastName}
-		Hello : #{bob.sayHello()}
-	"
+console.log "
+  Firstname : #{bob.firstName}
+  Lastname : #{bob.lastName}
+  Hello : #{bob.sayHello()}
+"
 ```
 
 >>**Remarquez au passage**, la possibilité d’écrire vos chaînes de caractères sur plusieurs lignes (dans ce cas les saut de lignes ne sont pas pris en comptes, pour les prendre en comptes utilisez des triples « doubles-quotes » : """)
@@ -126,11 +128,11 @@ Nous avons le tableau suivant (en Coffeescript) :
 *Copains :*
 
 ```python
-	copains = [
-		{ nom : "Bob", age : 30 }
-		{ nom : "Sam", age : 50 }
-		{ nom : "John", age : 20 }
-	]
+copains = [
+  { nom : "Bob", age : 30 }
+  { nom : "Sam", age : 50 }
+  { nom : "John", age : 20 }
+]
 ```
 
 Nous voudrions obtenir tous les copains de moins de 50 ans :
@@ -138,7 +140,7 @@ Nous voudrions obtenir tous les copains de moins de 50 ans :
 *Jeunes copains :*
 
 ```python
-	Result = (copain for copain in copains when copain.age < 50)
+  Result = (copain for copain in copains when copain.age < 50)
 ```
 
 ##Et enfin (et surtout ?) les classes
@@ -150,20 +152,20 @@ Maintenant, grâce à Coffeescript, nous pouvons écrire des classes. Il faut au
 *Classe “Human” :*
 
 ```python
-	class Human
-	    constructor : (firstName, lastName) ->
-	        #fields : @ = this
-	        @firstName = firstName
-	        @lastName = lastName
+class Human
+  constructor : (firstName, lastName) ->
+    #fields : @ = this
+    @firstName = firstName
+    @lastName = lastName
 
-	    #method
-	    hello : ->
-	        console.log "Hello #{@firstName} #{@lastName}"
+  #method
+  hello : ->
+    console.log "Hello #{@firstName} #{@lastName}"
 
-	#Utilisation
-	Bob = new Human "Bob", "Morane"
+#Utilisation
+Bob = new Human "Bob", "Morane"
 
-	Bob.hello()
+Bob.hello()
 ```
 
 ###Propriétés & valeurs par défaut
@@ -173,10 +175,10 @@ Vous pouvez aller encore plus vite et déclarer vos propriétés et leur valeur 
 *Classe “Human”, autre version, même résultats :*
 
 ```python
-	class Human
-	    constructor : (@firstName = "John", @lastName = "Doe") ->
-	    hello : ->
-	            console.log "Hello #{@firstName} #{@lastName}"
+class Human
+  constructor : (@firstName = "John", @lastName = "Doe") ->
+  hello : ->
+  console.log "Hello #{@firstName} #{@lastName}"
 ```
 
 ###Comme en Java : Composition, Association, Encapsulation
@@ -186,28 +188,28 @@ La notion de classe apportée par Coffeescript (même s’il existe en javascrip
 *Composition de classes :*
 
 ```python
-	class Dog
-	    constructor:(@name)->
-		
-	class Human
-	    constructor:(@first, @last, @dog)->
-		
-	Bob = new Human "Bob", "Morane", new Dog "Wolf"
-	console.log "Le chien de Bob s'appelle #{Bob.dog.name}"
+class Dog
+  constructor:(@name)->
+
+class Human
+  constructor:(@first, @last, @dog)->
+
+Bob = new Human "Bob", "Morane", new Dog "Wolf"
+console.log "Le chien de Bob s'appelle #{Bob.dog.name}"
 ```
 
 *Encapsulation de classes :*
 
 ```python
-	class Human
-	    class Hand
-	        constructor:(@whichOne)->
-		
-	    constructor:(@first, @last)->
-	        @leftHand = new Hand "left"
-	        @rightHand = new Hand "right"
+class Human
+  class Hand
+    constructor:(@whichOne)->
 
-	console.log JSON.stringify new Human "Bob", "Morane"
+  constructor:(@first, @last)->
+    @leftHand = new Hand "left"
+    @rightHand = new Hand "right"
+
+console.log JSON.stringify new Human "Bob", "Morane"
 ```
 
 ###Comme en Java : les membres statiques
@@ -217,18 +219,18 @@ La définition/déclaration de membres statiques se fait pour les propriétés e
 *Toujours et encore notre classe « Human » :*
 
 ```python
-	class Human
-    	@counter : 0 #static property
+class Human
+  @counter : 0 #static property
 
-    	constructor : (@firstName, @lastName) ->
-            Human.counter += 1
-    
-    	#static method
-    	@howMany : ->
-        	Human.counter
+  constructor : (@firstName, @lastName) ->
+    Human.counter += 1
 
-	Bob = new Human "Bob", "Morane"
-	console.log "Human.counter #{Human.howMany()}"
+  #static method
+  @howMany : ->
+    Human.counter
+
+Bob = new Human "Bob", "Morane"
+console.log "Human.counter #{Human.howMany()}"
 ```
 
 ###Mais aussi (comme en Java) : l’héritage !
@@ -238,20 +240,20 @@ Coffeescript introduit le mot clé `extends` pour permettre à une classe d’h�
 *Un humain, et un super héros qui hérite d’humain … :*
 
 ```python
-	class Human
-	    constructor : (@firstName, @lastName) ->
-		
-	    hello : ->
-	        "Hello #{@firstName} #{@lastName}"
+  class Human
+    constructor : (@firstName, @lastName) ->
 
-	class Superhero extends Human
-	    constructor : (@firstName, @lastName, @name) ->
-		
-	    hello : ->
-	        super + " known as #{@name}"
+    hello : ->
+      "Hello #{@firstName} #{@lastName}"
 
-	SuperMan = new Superhero "Clark", "Kent", "SuperMan"
-	console.log SuperMan.hello()
+  class Superhero extends Human
+    constructor : (@firstName, @lastName, @name) ->
+
+    hello : ->
+      super + " known as #{@name}"
+
+SuperMan = new Superhero "Clark", "Kent", "SuperMan"
+console.log SuperMan.hello()
 ```
 
 >>**Notez au passage** l’apparition du mot-clé super qui permet « d’appeler » la méthode du « parent ».
@@ -279,7 +281,7 @@ On pourrait ensuite se demander, mais que va devenir Coffeescript dans le futur 
 
 Brendan Heich (le papa de javascript) a officiellement donné sa bénédiction « publique » à Coffeescript, nul doute que Jeremy Ashkenas ne fasse évoluer Coffeescript en fonction des spécifications javascript pour garder une compatibilté ascendante et descendante. Pour rappel, en début de page du site de Coffeescript, il est écrit : **« The golden rule of CoffeeScript is: "It's just JavaScript" »**.
 
->>Pour ma part, je pense que c’est un excellent outil d’apprentissage (il génère du code javascript « propre ») mais sur un projet de réalisation professionnel, il est à réserver aux « gurus » qui maîtrise déjà javascript. 
+>>Pour ma part, je pense que c’est un excellent outil d’apprentissage (il génère du code javascript « propre ») mais sur un projet de réalisation professionnel, il est à réserver aux « gurus » qui maîtrise déjà javascript.
 
 Attention, un challenger de poids vient de naître dans le monde des transpilers javascript : **TypeScript**, porté par Microsoft, développé entre autre par le papa de l’ancêtre du Turbo Pascal mais aussi du C# et qui tend à gommer une grande partie des défauts reprochés à Coffeescript. Cela fera l’objet d’un prochain chapitre, mais avant cela, passons à la ré-écriture de notre Blog en Coffeescript.
 
@@ -291,13 +293,13 @@ Avant toute chose, sauvegardez votre arborescence applicative à un autre emplac
 
 L’installation de Coffeescript est très simple, elle s’effectue en mode commande avec npm (installé en même temps que Node.js) :
 
-	npm install –g coffee-script
+  npm install –g coffee-script
 
 >>**Remarque :** pour les utilisateurs sous OSX, vous devez normalement utiliser la commande `sudo npm install –g coffee-script`
 
 A partir de maintenant, vous pouvez compiler/transpiler du code Coffeescript en javascript avec la commande suivante :
 
-	coffee –compile Human.coffee
+  coffee –compile Human.coffee
 
 qui produira un fichier javascript `Human.js`.
 
@@ -307,20 +309,20 @@ Pour plus d’informations : [http://jashkenas.github.com/coffee-script/#usage](
 
 Nous avons donc décidé de re-écrire la partie javascript cliente de notre blog. Pour cela dans le répertoire de notre application, créez un répertoire `public.coffee` avec un sous-répertoire `models` et un sous répertoire `views`. Ce répertoire et ces deux sous-répertoires contiendrons les fichiers source coffeescript (que vous pouvez d’ores et déjà créer “vides” dans les répertoires correspondants) :
 
-	public.coffee\
-			      |-models\
-			      |        |-post.coffee
-			      |-views\
-			      |       |-AdminView.coffee
-			      |       |-LoginView.coffee
-			      |       |-MainView.coffee
-			      |       |-PostsListView.coffee
-			      |       |-PostView.coffee
-			      |       |-SidebarView.coffee
-			      |       
-			      |-Blog.coffee
-			      |-main.coffee
-			      |-routes.coffee
+  public.coffee\
+      |-models\
+      |        |-post.coffee
+      |-views\
+      |       |-AdminView.coffee
+      |       |-LoginView.coffee
+      |       |-MainView.coffee
+      |       |-PostsListView.coffee
+      |       |-PostView.coffee
+      |       |-SidebarView.coffee
+      |
+      |-Blog.coffee
+      |-main.coffee
+      |-routes.coffee
 
 Le “but du jeu” étant de transpiler tous les fichiers `.coffee` en fichier javascript `.js` dans le répertoire `public` (et ses sous-répertoire).
 Faire ceci “à la main” en prenant les fichiers un par un peut devenir très rapidement fastidieux. Mais heureusement, l’installation de Coffeescript inclut un système simple de “build” qui s’appelle **Cake**, qui est capable d’effectuer des tâches simples décrites dans un fichier `Cakefile`. Plus d’information ici : [http://jashkenas.github.com/coffee-script/#cake](http://jashkenas.github.com/coffee-script/#cake).
@@ -330,21 +332,21 @@ Donc à la racine de votre application, créez un fichier `Cakefile` avec le con
 *Cakefile :*
 
 ```python
-	fs = require 'fs'
-	{print} = require 'util'
-	{spawn} = require 'child_process'
-	                          
-	build = (callback) ->
-		coffee = spawn 'coffee', ['-c', '-o', 'public', 'public.coffee'] 
-		coffee.stderr.on 'data', (data) ->
-			process.stderr.write data.toString()
-		coffee.stdout.on 'data', (data) -> 
-			print data.toString()
-		coffee.on 'exit', (code) -> 
-			callback?() if code is 0
+fs = require 'fs'
+{print} = require 'util'
+{spawn} = require 'child_process'
 
-	task 'build', 'Build public/ from public.coffee/', -> 
-		build()
+build = (callback) ->
+coffee = spawn 'coffee', ['-c', '-o', 'public', 'public.coffee']
+coffee.stderr.on 'data', (data) ->
+  process.stderr.write data.toString()
+coffee.stdout.on 'data', (data) ->
+  print data.toString()
+coffee.on 'exit', (code) ->
+  callback?() if code is 0
+
+task 'build', 'Build public/ from public.coffee/', ->
+build()
 ```
 
 En fait nous expliquons à Cake que nous souhaitons transpiler en javascript tous les fichiers du répertoire source `public.coffee` vers le répertoire cible `public`. Et pour cela, il suffira, dans un terminal (ou une console) de lancer la commande : `cake build` (à la racine de notre application, là où est situé le fichier `Cakefile`).
@@ -356,337 +358,337 @@ Alors, l’objectif n’est pas d’apprendre Coffeescript (cela pourrait donner
 ###Blog.coffee
 
 ```python
-	window.Blog = 
-	  Models : {}
-	  Collections : {}
-	  Views : {}
-	  Router : {}
+window.Blog =
+Models : {}
+Collections : {}
+Views : {}
+Router : {}
 ```
 
 ###main.coffee
 
 ```python
-	yepnope
-	  load:
-	    jquery: "libs/vendors/jquery-1.7.2.js"
-	    underscore: "libs/vendors/underscore.js"
-	    backbone: "libs/vendors/backbone.js"
-	    mustache: "libs/vendors/mustache.js"
-	    
-	    #NameSpace
-	    blog: "Blog.js"
-	    
-	    #Models
-	    posts: "models/post.js"
-	    
-	    #Controllers
-	    sidebarview: "views/SidebarView.js"
-	    postslistviews: "views/PostsListView.js"
-	    mainview: "views/MainView.js"
-	    loginview: "views/LoginView.js"
-	    postview: "views/PostView.js"
-	    adminview: "views/AdminView.js"
-	    
-	    #Routes
-	    routes: "routes.js"
+yepnope
+load:
+  jquery: "libs/vendors/jquery-1.7.2.js"
+  underscore: "libs/vendors/underscore.js"
+  backbone: "libs/vendors/backbone.js"
+  mustache: "libs/vendors/mustache.js"
 
-	  callback:
-	    routes: ->
-	      console.log "routes loaded ..."
+  #NameSpace
+  blog: "Blog.js"
 
-	  complete: ->
-	    $ ->
-	      console.log "Lauching application ..."
-	      window.blogPosts = new Blog.Collections.Posts()
-	      window.mainView = new Blog.Views.MainView(collection: blogPosts)
-	      
-	      #======= Admin =======
-	      window.adminView = new Blog.Views.AdminView(collection: blogPosts)
-	      
-	      
-	      #======= Authentification =======
-	      window.loginView = new Blog.Views.LoginView(adminView: adminView)
-	      
-	      window.postView = new Blog.Views.PostView()
-	      window.router = new Blog.Router.RoutesManager(collection: blogPosts)
-	      
-	      Backbone.history.start()
+  #Models
+  posts: "models/post.js"
+
+  #Controllers
+  sidebarview: "views/SidebarView.js"
+  postslistviews: "views/PostsListView.js"
+  mainview: "views/MainView.js"
+  loginview: "views/LoginView.js"
+  postview: "views/PostView.js"
+  adminview: "views/AdminView.js"
+
+  #Routes
+  routes: "routes.js"
+
+callback:
+  routes: ->
+  console.log "routes loaded ..."
+
+complete: ->
+  $ ->
+  console.log "Lauching application ..."
+  window.blogPosts = new Blog.Collections.Posts()
+  window.mainView = new Blog.Views.MainView(collection: blogPosts)
+
+  #======= Admin =======
+  window.adminView = new Blog.Views.AdminView(collection: blogPosts)
+
+
+  #======= Authentification =======
+  window.loginView = new Blog.Views.LoginView(adminView: adminView)
+
+  window.postView = new Blog.Views.PostView()
+  window.router = new Blog.Router.RoutesManager(collection: blogPosts)
+
+  Backbone.history.start()
 ```
 
 ###post.coffee
 
 ```python
-	class Blog.Models.Post extends Backbone.Model
-	  urlRoot:"/blogposts"
+class Blog.Models.Post extends Backbone.Model
+urlRoot:"/blogposts"
 
-	class Blog.Collections.Posts extends Backbone.Collection
+class Blog.Collections.Posts extends Backbone.Collection
 
-	  model: Blog.Models.Post
+model: Blog.Models.Post
 
-	  all: ->
-	    @url = "/blogposts"
-	    @
+all: ->
+  @url = "/blogposts"
+  @
 
-	  query: (query) ->
-	    @url = "/blogposts/query/" + query
-	    @    
+query: (query) ->
+  @url = "/blogposts/query/" + query
+  @
 ```
 
 ###AdminView.coffee
 
 ```python
-	class Blog.Views.AdminView extends Backbone.View
-	  el: $ "#admin"
-	  initialize: ->
-	    @template = $("#admin_template").html()
-	    
-	    #je prévois de trier ma collection
-	    @collection.comparator = (model) ->
-	      -(new Date(model.get("date")).getTime())
+class Blog.Views.AdminView extends Backbone.View
+el: $ "#admin"
+initialize: ->
+  @template = $("#admin_template").html()
 
-	  render: ->
-	    renderedContent = Mustache.to_html(@template,
-	      posts: @collection.toJSON()
-	    )
-	    @$el.html renderedContent
+  #je prévois de trier ma collection
+  @collection.comparator = (model) ->
+  -(new Date(model.get("date")).getTime())
 
-	  events:
-	    "click  #btn_update": "onClickBtnUpdate"
-	    "click  #btn_create": "onClickBtnCreate"
-	    "click  #btn_send": "sendPost"
+render: ->
+  renderedContent = Mustache.to_html(@template,
+  posts: @collection.toJSON()
+  )
+  @$el.html renderedContent
 
-	  onClickBtnUpdate: ->
-	    selectedId = $("#post_choice").val()
-	    post = @collection.get(selectedId)
-	    
-	    #Je récupère les informations du post et les affiche
-	    $("#admin > [name='id']").html post.get("id")
-	    $("#admin > [name='author']").val post.get("author")
-	    $("#admin > [name='title']").val post.get("title")
-	    $("#admin > [name='message']").val post.get("message")
+events:
+  "click  #btn_update": "onClickBtnUpdate"
+  "click  #btn_create": "onClickBtnCreate"
+  "click  #btn_send": "sendPost"
 
-	  onClickBtnCreate: ->
-	    
-	    #je ré-initialise les zones de saisie
-	    $("#admin > [name='id']").html ""
-	    $("#admin > [name='author']").val ""
-	    $("#admin > [name='title']").val ""
-	    $("#admin > [name='message']").val ""
+onClickBtnUpdate: ->
+  selectedId = $("#post_choice").val()
+  post = @collection.get(selectedId)
 
-	  sendPost: -> #Sauvegarde
-	    #that = this #pour conserver le contexte
-	    id = $("#admin > [name='id']").html()
-	    post = undefined
-	    if id is "" #si l'id est vide c'est une création
-	      post = new Blog.Models.Post()
-	    else #l'id n'est pas vide c'est une mise à jour
-	      post = new Blog.Models.Post(id: $("#admin > [name='id']").html())
-	    post.save
-	      author: $("#admin > [name='author']").val()
-	      title: $("#admin > [name='title']").val()
-	      message: $("#admin > [name='message']").val()
-	      date: new Date()
-	    ,
-	      success: ->
-	        
-	        #Si la transaction côté serveur a fonctionné
-	        
-	        #je recharge ma collection
-	        @collection.fetch success: =>
-	          
-	          #mise à jour de la vue admin
-	          @render()
+  #Je récupère les informations du post et les affiche
+  $("#admin > [name='id']").html post.get("id")
+  $("#admin > [name='author']").val post.get("author")
+  $("#admin > [name='title']").val post.get("title")
+  $("#admin > [name='message']").val post.get("message")
+
+onClickBtnCreate: ->
+
+  #je ré-initialise les zones de saisie
+  $("#admin > [name='id']").html ""
+  $("#admin > [name='author']").val ""
+  $("#admin > [name='title']").val ""
+  $("#admin > [name='message']").val ""
+
+sendPost: -> #Sauvegarde
+  #that = this #pour conserver le contexte
+  id = $("#admin > [name='id']").html()
+  post = undefined
+  if id is "" #si l'id est vide c'est une création
+  post = new Blog.Models.Post()
+  else #l'id n'est pas vide c'est une mise à jour
+  post = new Blog.Models.Post(id: $("#admin > [name='id']").html())
+  post.save
+  author: $("#admin > [name='author']").val()
+  title: $("#admin > [name='title']").val()
+  message: $("#admin > [name='message']").val()
+  date: new Date()
+  ,
+  success: ->
+
+  #Si la transaction côté serveur a fonctionné
+
+  #je recharge ma collection
+  @collection.fetch success: =>
+
+  #mise à jour de la vue admin
+  @render()
 
 
-	      
-	      #La vue principale se re-mettra à jour
-	      #automatiquement, car elle est "abonnée"
-	      #aux changement de la collection
-	      error: ->
+
+#La vue principale se re-mettra à jour
+#automatiquement, car elle est "abonnée"
+#aux changement de la collection
+error: ->
 ```
 
-	//TODO : parler de fat arrow =>
+  //TODO : parler de fat arrow =>
 
 ###LoginView.coffee
 
 ```python
-	class Blog.Views.LoginView extends Backbone.View
-	  el: $ "#blog_login_form"
-	  initialize: (args) ->
-	    that = this
-	    @adminView = args.adminView
-	    @template = $("#blog_login_form_template").html()
-	    
-	    #on vérifie si pas déjà authentifié
-	    $.ajax
-	      type: "GET"
-	      url: "/alreadyauthenticated"
-	      error: (err) ->
-	        console.log err
+class Blog.Views.LoginView extends Backbone.View
+el: $ "#blog_login_form"
+initialize: (args) ->
+  that = this
+  @adminView = args.adminView
+  @template = $("#blog_login_form_template").html()
 
-	      success: (dataFromServer) ->
-	        if dataFromServer.firstName
-	          that.render "Bienvenue", dataFromServer
-	        else
-	          that.render "???",
-	            firstName: "John"
-	            lastName: "Doe"
+  #on vérifie si pas déjà authentifié
+  $.ajax
+  type: "GET"
+  url: "/alreadyauthenticated"
+  error: (err) ->
+    console.log err
 
-
-
-	  render: (message, user) ->
-	    renderedContent = Mustache.to_html(@template,
-	      message: message
-	      firstName: (if user then user.firstName else "")
-	      lastName: (if user then user.lastName else "")
-	      
-	      #adminLink : user.isAdmin ? '#/admin' : "",
-	      adminLinkLabel: 
-	      	(if user then (if user.isAdmin then "Administration" else "") else "")
-	    )
-	    @$el.html renderedContent
-
-	  events:
-	    "click  .btn-primary": "onClickBtnLogin"
-	    "click  .btn-inverse": "onClickBtnLogoff"
-	    "click #adminbtn": "displayAdminPanel"
-
-	  displayAdminPanel: ->
-	    @adminView.render()
-
-	  onClickBtnLogin: (domEvent) ->
-	    fields = $("#blog_login_form :input")
-	    #that = this
-	    $.ajax
-	      type: "POST"
-	      url: "/authenticate"
-	      data:
-	        email: fields[0].value
-	        password: fields[1].value
-
-	      dataType: "json"
-	      error: (err) ->
-	        console.log err
-
-	      success: (dataFromServer) =>
-	        if dataFromServer.infos
-	          @render dataFromServer.infos
-	        else
-	          if dataFromServer.error
-	            @render dataFromServer.error
-	          else
-	            @render "Bienvenue", dataFromServer
+  success: (dataFromServer) ->
+    if dataFromServer.firstName
+    that.render "Bienvenue", dataFromServer
+    else
+    that.render "???",
+      firstName: "John"
+      lastName: "Doe"
 
 
-	  onClickBtnLogoff: =>
-	    #that = this
-	    $.ajax
-	      type: "GET"
-	      url: "/logoff"
-	      error: (err) ->
-	        console.log err
 
-	      success: (dataFromServer) ->
-	        console.log dataFromServer
-	        @render "???",
-	          firstName: "John"
-	          lastName: "Doe"	
+render: (message, user) ->
+  renderedContent = Mustache.to_html(@template,
+  message: message
+  firstName: (if user then user.firstName else "")
+  lastName: (if user then user.lastName else "")
+
+  #adminLink : user.isAdmin ? '#/admin' : "",
+  adminLinkLabel:
+    (if user then (if user.isAdmin then "Administration" else "") else "")
+  )
+  @$el.html renderedContent
+
+events:
+  "click  .btn-primary": "onClickBtnLogin"
+  "click  .btn-inverse": "onClickBtnLogoff"
+  "click #adminbtn": "displayAdminPanel"
+
+displayAdminPanel: ->
+  @adminView.render()
+
+onClickBtnLogin: (domEvent) ->
+  fields = $("#blog_login_form :input")
+  #that = this
+  $.ajax
+  type: "POST"
+  url: "/authenticate"
+  data:
+    email: fields[0].value
+    password: fields[1].value
+
+  dataType: "json"
+  error: (err) ->
+    console.log err
+
+  success: (dataFromServer) =>
+    if dataFromServer.infos
+    @render dataFromServer.infos
+    else
+    if dataFromServer.error
+      @render dataFromServer.error
+    else
+      @render "Bienvenue", dataFromServer
+
+
+onClickBtnLogoff: =>
+  #that = this
+  $.ajax
+  type: "GET"
+  url: "/logoff"
+  error: (err) ->
+    console.log err
+
+  success: (dataFromServer) ->
+    console.log dataFromServer
+    @render "???",
+    firstName: "John"
+    lastName: "Doe"
 ```
 
 ###PostsListView.coffee
 
 ```python
-	class Blog.Views.PostsListView extends Backbone.View
-	  el: $ "#posts_list"
-	  initialize: ->
-	    @template = $("#posts_list_template").html()
+class Blog.Views.PostsListView extends Backbone.View
+el: $ "#posts_list"
+initialize: ->
+  @template = $("#posts_list_template").html()
 
-	  render: ->
-	    renderedContent = Mustache.to_html(@template,
-	      posts: @collection.toJSON()
-	    )
-	    @$el.html renderedContent
+render: ->
+  renderedContent = Mustache.to_html(@template,
+  posts: @collection.toJSON()
+  )
+  @$el.html renderedContent
 ```
 
 ###PostView.coffee
 
 ```python
-	class Blog.Views.PostView extends Backbone.View
-	  el: $ "#posts_list"
-	  initialize: ->
-	    @template = $("#post_details_template").html()
+class Blog.Views.PostView extends Backbone.View
+el: $ "#posts_list"
+initialize: ->
+  @template = $("#post_details_template").html()
 
-	  render: (post) ->
-	    renderedContent = Mustache.to_html(@template,
-	      post: post.toJSON()
-	    )
-	    @$el.html renderedContent
+render: (post) ->
+  renderedContent = Mustache.to_html(@template,
+  post: post.toJSON()
+  )
+  @$el.html renderedContent
 ```
 
 ###SidebarView.coffee
 
 ```python
-	class Blog.Views.SidebarView extends Backbone.View
-	  el: $ "#blog_sidebar"
-	  initialize: ->
-	    @template = $("#blog_sidebar_template").html()
+class Blog.Views.SidebarView extends Backbone.View
+el: $ "#blog_sidebar"
+initialize: ->
+  @template = $("#blog_sidebar_template").html()
 
-	  render: ->
-	    renderedContent = Mustache.to_html(@template,
-	      posts: @collection.toJSON()
-	    )
-	    @$el.html renderedContent
+render: ->
+  renderedContent = Mustache.to_html(@template,
+  posts: @collection.toJSON()
+  )
+  @$el.html renderedContent
 ```
 
 ###MainView.coffee
 
 ```python
-	class Blog.Views.MainView extends Backbone.View
-	  initialize: ->
-	    @collection.comparator = (model) ->
-	      -(new Date(model.get("date")).getTime())
+class Blog.Views.MainView extends Backbone.View
+initialize: ->
+  @collection.comparator = (model) ->
+  -(new Date(model.get("date")).getTime())
 
-	    _.bindAll this, "render"
-	    @collection.bind "reset", @render
-	    @collection.bind "change", @render
-	    @collection.bind "add", @render
-	    @collection.bind "remove", @render
-	    @sidebarView = new Blog.Views.SidebarView()
-	    @postsListView = new Blog.Views.PostsListView(collection: @collection)
+  _.bindAll this, "render"
+  @collection.bind "reset", @render
+  @collection.bind "change", @render
+  @collection.bind "add", @render
+  @collection.bind "remove", @render
+  @sidebarView = new Blog.Views.SidebarView()
+  @postsListView = new Blog.Views.PostsListView(collection: @collection)
 
-	  render: ->
-	    
-	    @sidebarView.collection = new Blog.Collections.Posts(@collection.first(3))
-	    @sidebarView.render()
-	    @postsListView.render()
+render: ->
+
+  @sidebarView.collection = new Blog.Collections.Posts(@collection.first(3))
+  @sidebarView.render()
+  @postsListView.render()
 ```
 
 ###routes.coffee
 
 ```python
-	class Blog.Router.RoutesManager extends Backbone.Router
-	  initialize: (args) ->
-	    @collection = args.collection
+class Blog.Router.RoutesManager extends Backbone.Router
+initialize: (args) ->
+  @collection = args.collection
 
-	  routes:
-	    "post/:id_post": "displayPost"
-	    hello: "hello"
-	    "*path": "root"
+routes:
+  "post/:id_post": "displayPost"
+  hello: "hello"
+  "*path": "root"
 
-	  root: ->
-	    @collection.all().fetch success: (result) ->
-	      
-	      #ça marche !!!
-	      console.log "fetching collection", result
+root: ->
+  @collection.all().fetch success: (result) ->
+
+  #ça marche !!!
+  console.log "fetching collection", result
 
 
-	  hello: ->
-	    $(".hero-unit > h1").html "Hello World !!!"
+hello: ->
+  $(".hero-unit > h1").html "Hello World !!!"
 
-	  displayPost: (id_post) ->
-	    tmp = new Blog.Models.Post(id: id_post)
-	    tmp.fetch success: (result) ->
-	      postView.render result
+displayPost: (id_post) ->
+  tmp = new Blog.Models.Post(id: id_post)
+  tmp.fetch success: (result) ->
+  postView.render result
 ```
 
 Ouf, c'est fini.
