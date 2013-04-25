@@ -21,44 +21,44 @@ Créer une application Backbone, c’est écrire des modèles, des vues, des tem
 *Namespace Blog :*
 
 ```javascript
-	var Blog = {
-	    Models : {},
-	    Collections : {},
-	    Views : {},
-	    Router : {}
-	}
+var Blog = {
+	Models: {},
+	Collections: {},
+	Views: {},
+	Router: {}
+}
 ```
 
-Vous enregistrez ceci dans un fichier `Blog.js`, que vous pensez à référencer dans votre page html : 
+Vous enregistrez ceci dans un fichier `Blog.js`, que vous pensez à référencer dans votre page html :
 
 ```html
-	<script src="Blog.js"></script>
+<script src="Blog.js"></script>
 ```
 
-Ainsi par la suite vous pourrez déclarer et faire référence à vos composants de la manière suivante : 
+Ainsi par la suite vous pourrez déclarer et faire référence à vos composants de la manière suivante :
 
 ```javascript
-	Blog.Models.Post = Backbone.Model.extend({
-	    //...
-	});
+Blog.Models.Post = Backbone.Model.extend({
+	//...
+});
 
-	Blog.Collections.Posts = Backbone.Collection.extend({
-	    //...
-	});
-	Blog.Views.PostForm = Backbone.View.extend({
-	    //...
-	});
+Blog.Collections.Posts = Backbone.Collection.extend({
+	//...
+});
+Blog.Views.PostForm = Backbone.View.extend({
+	//...
+});
 
-	//etc…
+//etc…
 ```
 
 
 Puis les utiliser comme ceci :
 
 ```javascript
-	var myPost = new Blog.Models.Post();
-	var posts = new Blog.Collections.Posts();
-	var postForm = new Blog.Views.PostForm();
+var myPost = new Blog.Models.Post();
+var posts = new Blog.Collections.Posts();
+var postForm = new Blog.Views.PostForm();
 ```
 
 Du coup, à la lecture du code, on voit tout de suite que `myPost` est un modèle, `posts` une collection et `postForm` une vue.
@@ -73,49 +73,52 @@ Je crée un répertoire `libs/vendors` pour tous les scripts « qui ne sont pas 
 
 
 ```html
-	<!-- === Frameworks === -->
-	<script src="libs/vendors/jquery-1.7.2.js"></script>
-	<script src="libs/vendors/underscore.js"></script>
-	<script src="libs/vendors/backbone.js"></script>
-	<script src="libs/vendors/mustache.js"></script>
+<!-- === Frameworks === -->
+<script src="libs/vendors/jquery-1.7.2.js"></script>
+<script src="libs/vendors/underscore.js"></script>
+<script src="libs/vendors/backbone.js"></script>
+<script src="libs/vendors/mustache.js"></script>
 
-	<!-- === code applicatif === -->
+<!-- === code applicatif === -->
 
-	<script src="Blog.js"></script>
-	<script src="models/Post.js"></script> <!-- Models & Collection -->
+<script src="Blog.js"></script>
+<script src="models/Post.js"></script> <!-- Models & Collection -->
 
-	<!-- Backbone Views -->
-	<script src="views/SidebarView.js"></script> 
-	<script src="views/PostsListView.js"></script> 
-	<script src="views/MainView.js"></script>
-	<script src="views/LoginView.js"></script> 
-	<script src="views/PostView.js"></script> 
+<!-- Backbone Views -->
+<script src="views/SidebarView.js"></script>
+<script src="views/PostsListView.js"></script>
+<script src="views/MainView.js"></script>
+<script src="views/LoginView.js"></script>
+<script src="views/PostView.js"></script>
 
-	<script src="routes.js"></script>
+<script src="routes.js"></script>
 ```
 
 Pour ensuite écrire mon code javascript de « lancement », clairement simplifié par rapport à ce que nous avons fait jusqu’ici :
 
 ```html
-	<script>
-	    $(function (){
+<script>
+	$(function (){
 
-	        window.blogPosts = new Blog.Collections.Posts();
+	window.blogPosts = new Blog.Collections.Posts();
 
-	        window.mainView = new Blog.Views.MainView({collection : blogPosts});
+	window.mainView = new Blog.Views.MainView({
+		collection: blogPosts
+	});
 
-	        /*======= Authentification =======*/
-	        window.loginView = new Blog.Views.LoginView();
-	        /*======= Fin authentification =======*/
+	/*======= Authentification =======*/
+	window.loginView = new Blog.Views.LoginView();
+	/*======= Fin authentification =======*/
 
-	        window.postView = new Blog.Views.PostView();
-	        
+	window.postView = new Blog.Views.PostView();
 
-	        window.router = new Blog.Router.RoutesManager({collection:blogPosts});
-	        Backbone.history.start();
 
-	    });
-	</script>
+	window.router = new Blog.Router.RoutesManager({
+		collection: blogPosts
+	});
+	Backbone.history.start();
+	});
+</script>
 ```
 
 >>**Remarque** : Vous n’êtes pas obligés de faire comme moi, adaptez selon vos goûts ou les normes imposées sur les projets. Et n’hésitez pas à me contacter pour me donner des astuces pour améliorer mon organisation de code.
@@ -130,12 +133,12 @@ Avant nous avions donc ceci :
 *Namespace Blog :*
 
 ```javascript
-	var Blog = {
-	    Models : {},
-	    Collections : {},
-	    Views : {},
-	    Router : {}
-	}
+var Blog = {
+  Models: {},
+  Collections: {},
+  Views: {},
+  Router: {}
+}
 ```
 
 Que nous allons changer par ceci :
@@ -143,16 +146,16 @@ Que nous allons changer par ceci :
 *Module+Namespace :*
 
 ```javascript
-	var Blog = (function () {
-	    var blog = {};
+var Blog = (function() {
+  var blog = {};
 
-	    blog.Models = {};
-	    blog.Collections = {};
-	    blog.Views = {};
-	    blog.Router = {};
+  blog.Models = {};
+  blog.Collections = {};
+  blog.Views = {};
+  blog.Router = {};
 
-	    return blog;
-	}());
+  return blog;
+  }());
 ```
 
 Cela signifie que seul la variable `blog` sera exposée par l’entremise de la variable `Blog`. Tout ce qui est entre `(function () {` et `}());` sera exécuté. A l’intérieur de cette closure vous pouvez coder des variables et des méthodes privées.
@@ -160,28 +163,28 @@ Cela signifie que seul la variable `blog` sera exposée par l’entremise de la 
 Ensuite vous allez pouvoir déclarer des « plug-ins » à votre module de la manière suivante (par exemple):
 
 ```javascript
-	var Blog = (function (blog) {
+var Blog = (function(blog) {
 
-	    blog.Models.Post = Backbone.Model.extend({
-	    	urlRoot :"/blogposts"
+  blog.Models.Post = Backbone.Model.extend({
+    urlRoot: "/blogposts"
 
-	    });
+  });
 
-	    blog.Collections.Posts = Backbone.Collection.extend({
-	        model : blog.Models.Post,
-	        all : function () {
-	            this.url = "/blogposts";
-	            return this;
-	        },
-	        query : function (query) {
-	            this.url = "/blogposts/query/"+query;
-	            return this;
-	        }
+  blog.Collections.Posts = Backbone.Collection.extend({
+    model: blog.Models.Post,
+    all: function() {
+      this.url = "/blogposts";
+      return this;
+    },
+    query: function(query) {
+      this.url = "/blogposts/query/" + query;
+      return this;
+    }
 
-	    });    
+  });
 
-	    return blog;
-	}(Blog));
+  return blog;
+}(Blog));
 ```
 
 ###Au final, nous aurons ...
@@ -191,274 +194,294 @@ Avec les principes décrits plus haut, nous allons donc pouvoir "découper" notr
 *Blog.js :*
 
 ```javascript
-	var Blog = (function () {
-	    var blog = {};
+var Blog = (function() {
+  var blog = {};
 
-	    blog.Models = {};
-	    blog.Collections = {};
-	    blog.Views = {};
-	    blog.Router = {};
+  blog.Models = {};
+  blog.Collections = {};
+  blog.Views = {};
+  blog.Router = {};
 
-	    return blog;
-	}());
+  return blog;
+}());
 ```
 
 *routes.js :*
 
 ```javascript
-	var Blog = (function (blog) {
+var Blog = (function(blog) {
 
-	    blog.Router.RoutesManager = Backbone.Router.extend({
-	        initialize : function(args) {
-	            this.collection = args.collection;
-	        },
-	        routes : {
-	            "post/:id_post" : "displayPost",
-	            "hello" : "hello",
-	            "*path" : "root"
-	        },
-	        root : function () {
-	            this.collection.all().fetch({
-	                success:function(result){
-	                    //ça marche !!!
-	                }
-	            });
-	        },
+  blog.Router.RoutesManager = Backbone.Router.extend({
+    initialize: function(args) {
+      this.collection = args.collection;
+    },
+    routes: {
+      "post/:id_post": "displayPost",
+      "hello": "hello",
+      "*path": "root"
+    },
+    root: function() {
+      this.collection.all().fetch({
+        success: function(result) {
+          //ça marche !!!
+        }
+      });
+    },
 
-	        hello : function () {
-	            $(".hero-unit > h1").html("Hello World !!!");
-	        },
+    hello: function() {
+      $(".hero-unit > h1").html("Hello World !!!");
+    },
 
-	        displayPost : function (id_post) {
+    displayPost: function(id_post) {
 
-	            var tmp = new blog.Models.Post({id:id_post});
+      var tmp = new blog.Models.Post({
+        id: id_post
+      });
 
-	            tmp.fetch({
-	                success : function(result) {
-	                    postView.render(result);
-	                }
-	            });   
-	        }
-	    });
+      tmp.fetch({
+        success: function(result) {
+          postView.render(result);
+        }
+      });
+    }
+  });
 
-	    return blog;
-	}(Blog));
+  return blog;
+}(Blog));
 ```
 
 *models/post.js :*
 
 ```javascript
-	var Blog = (function (blog) {
+var Blog = (function(blog) {
 
-	    blog.Models.Post = Backbone.Model.extend({
-	    	urlRoot :"/blogposts"
-	    });
+  blog.Models.Post = Backbone.Model.extend({
+    urlRoot: "/blogposts"
+  });
 
-	    blog.Collections.Posts = Backbone.Collection.extend({
-	        model : blog.Models.Post,
-	        all : function () {
-	            this.url = "/blogposts";
-	            return this;
-	        },
-	        query : function (query) {
-	            this.url = "/blogposts/query/"+query;
-	            return this;
-	        }
-	    });    
+  blog.Collections.Posts = Backbone.Collection.extend({
+    model: blog.Models.Post,
+    all: function() {
+      this.url = "/blogposts";
+      return this;
+    },
+    query: function(query) {
+      this.url = "/blogposts/query/" + query;
+      return this;
+    }
+  });
 
-	    return blog;
-	}(Blog));
+  return blog;
+}(Blog));
 ```
 
 *views/SidebarView.js :*
 
 ```javascript
-	var Blog = (function (blog) {
+var Blog = (function(blog) {
 
-	    blog.Views.SidebarView = Backbone.View.extend({
-	         el : $("#blog_sidebar"),
-	        initialize : function () {
-	            this.template = $("#blog_sidebar_template").html();
-	        },
-	        render : function () {
-	            var renderedContent = Mustache.to_html(this.template, 
-	            	{posts : this.collection.toJSON()} 
-	            );
+  blog.Views.SidebarView = Backbone.View.extend({
+    el: $("#blog_sidebar"),
+    initialize: function() {
+      this.template = $("#blog_sidebar_template").html();
+    },
+    render: function() {
+      var renderedContent = Mustache.to_html(this.template, {
+        posts: this.collection.toJSON()
+      });
 
-	            this.$el.html(renderedContent);
-	        }
-	    });
+      this.$el.html(renderedContent);
+    }
+  });
 
-	    return blog;
-	}(Blog));
+  return blog;
+}(Blog));
 ```
 
 *views/PostsListViews.js :*
 
 ```javascript
-	var Blog = (function (blog) {
+var Blog = (function(blog) {
 
-	    blog.Views.PostsListView = Backbone.View.extend({
-	        el : $("#posts_list"),
-	        initialize : function () {
-	            this.template = $("#posts_list_template").html();
-	        },
-	        render : function () {
-	            var renderedContent = Mustache.to_html(this.template, 
-	            	{posts : this.collection.toJSON()} 
-	            );
+blog.Views.PostsListView = Backbone.View.extend({
+  el: $("#posts_list"),
+  initialize: function() {
+    this.template = $("#posts_list_template").html();
+  },
+  render: function() {
+    var renderedContent = Mustache.to_html(this.template, {
+      posts: this.collection.toJSON()
+    });
 
-	            this.$el.html(renderedContent);
-	        }
-	    });
+    this.$el.html(renderedContent);
+  }
+});
 
-	    return blog;
-	}(Blog));
+return blog;
+}(Blog));
 ```
 
 *views/MainView.js :*
 
 ```javascript
-	var Blog = (function (blog) {
+var Blog = (function(blog) {
 
-	    blog.Views.MainView = Backbone.View.extend({
-	        initialize : function () {
+  blog.Views.MainView = Backbone.View.extend({
+    initialize: function() {
 
-	            this.collection.comparator = function (model) {
-	                return -(new Date(model.get("date")).getTime());
-	            }
+      this.collection.comparator = function(model) {
+        return -(new Date(model.get("date")).getTime());
+      }
 
-	            _.bindAll(this, 'render');
-	            this.collection.bind('reset', this.render);
-	            this.collection.bind('change', this.render);
-	            this.collection.bind('add', this.render);
-	            this.collection.bind('remove', this.render);
+      _.bindAll(this, 'render');
+      this.collection.bind('reset', this.render);
+      this.collection.bind('change', this.render);
+      this.collection.bind('add', this.render);
+      this.collection.bind('remove', this.render);
 
-	            this.sidebarView = new blog.Views.SidebarView();
-	            this.postsListView = new blog.Views.PostsListView({
-	            	collection : this.collection
-	            });
+      this.sidebarView = new blog.Views.SidebarView();
+      this.postsListView = new blog.Views.PostsListView({
+        collection: this.collection
+      });
 
-	        },
-	        render : function () {
+    },
+    render: function() {
 
-	            //this.collection.models = this.collection.models.reverse();
-	            this.sidebarView.collection = 
-	            	new blog.Collections.Posts(this.collection.first(3));
-	            this.sidebarView.render();
-	            this.postsListView.render();
-	        }
-	    });
+      //this.collection.models = this.collection.models.reverse();
+      this.sidebarView.collection = new blog.Collections.Posts(this.collection.first(3));
+      this.sidebarView.render();
+      this.postsListView.render();
+    }
+  });
 
-	    return blog;
-	}(Blog));
+  return blog;
+}(Blog));
 ```
 
 *views/LoginView.js :*
 
 ```javascript
-	var Blog = (function (blog) {
+var Blog = (function(blog) {
 
-	    blog.Views.LoginView = Backbone.View.extend({
-	        el : $("#blog_login_form"),
-	        
-	        initialize : function () {
-	            var that = this;
-	            this.template = $("#blog_login_form_template").html();
-	            
-	            //on vérifie si pas déjà authentifié
-	             $.ajax({type:"GET", url:"/alreadyauthenticated",
-	                error:function(err){ console.log(err); },
-	                success:function(dataFromServer) { 
+  blog.Views.LoginView = Backbone.View.extend({
+    el: $("#blog_login_form"),
 
-	                    if(dataFromServer.firstName) {
-	                        that.render("Bienvenue",dataFromServer);
-	                    } else {
-	                        that.render("???",{firstName:"John", lastName:"Doe"});
-	                    }
-	                }
-	            })    
+    initialize: function() {
+      var that = this;
+      this.template = $("#blog_login_form_template").html();
 
-	        },
+      //on vérifie si pas déjà authentifié
+      $.ajax({
+        type: "GET",
+        url: "/alreadyauthenticated",
+        error: function(err) {
+          console.log(err);
+        },
+        success: function(dataFromServer) {
 
-	        render : function (message, user) {
-	            
-	            var renderedContent = Mustache.to_html(this.template, {
-	                message : message,
-	                firstName : user ? user.firstName : "",
-	                lastName : user ? user.lastName : ""
-	            });
-	            this.$el.html(renderedContent);  
-	        },
-	        events : {
-	            "click  .btn-primary"  : "onClickBtnLogin",
-	            "click  .btn-inverse"  : "onClickBtnLogoff"
-	        },
-	        onClickBtnLogin : function (domEvent) {
+          if (dataFromServer.firstName) {
+            that.render("Bienvenue", dataFromServer);
+          } else {
+            that.render("???", {
+              firstName: "John",
+              lastName: "Doe"
+            });
+          }
+        }
+      })
 
-	            var fields = $("#blog_login_form :input")
-	            ,   that = this;
+    },
 
-	            $.ajax({
-	                type:"POST",
-	                url:"/authenticate",
-	                data : { email : fields[0].value, password : fields[1].value } ,
-	                dataType : 'json',
-	                error:function(err){ console.log(err); },
-	                success:function(dataFromServer) { 
+    render: function(message, user) {
 
-	                    if(dataFromServer.infos) {
-	                        that.render(dataFromServer.infos);
-	                    } else {
-	                        if(dataFromServer.error) {
-	                            that.render(dataFromServer.error);
-	                        } else {
-	                            that.render("Bienvenue",dataFromServer);
-	                        }
-	                    }
+      var renderedContent = Mustache.to_html(this.template, {
+        message: message,
+        firstName: user ? user.firstName : "",
+        lastName: user ? user.lastName : ""
+      });
+      this.$el.html(renderedContent);
+    },
+    events: {
+      "click  .btn-primary": "onClickBtnLogin",
+      "click  .btn-inverse": "onClickBtnLogoff"
+    },
+    onClickBtnLogin: function(domEvent) {
 
-	                }
-	            });                  
-	        },
-	        onClickBtnLogoff : function() {
+      var fields = $("#blog_login_form :input"),
+        that = this;
 
-	            var that = this;
-	            $.ajax({type:"GET", url:"/logoff",
-	                error:function(err){ console.log(err); },
-	                success:function(dataFromServer) { 
-	                    console.log(dataFromServer); 
-	                    that.render("???",{firstName:"John", lastName:"Doe"});
-	                }
-	            })
-	        }
+      $.ajax({
+        type: "POST",
+        url: "/authenticate",
+        data: {
+          email: fields[0].value,
+          password: fields[1].value
+        },
+        dataType: 'json',
+        error: function(err) {
+          console.log(err);
+        },
+        success: function(dataFromServer) {
 
-	    });
+          if (dataFromServer.infos) {
+            that.render(dataFromServer.infos);
+          } else {
+            if (dataFromServer.error) {
+              that.render(dataFromServer.error);
+            } else {
+              that.render("Bienvenue", dataFromServer);
+            }
+          }
 
-	    return blog;
-	}(Blog));
+        }
+      });
+    },
+    onClickBtnLogoff: function() {
+
+      var that = this;
+      $.ajax({
+        type: "GET",
+        url: "/logoff",
+        error: function(err) {
+          console.log(err);
+        },
+        success: function(dataFromServer) {
+          console.log(dataFromServer);
+          that.render("???", {
+            firstName: "John",
+            lastName: "Doe"
+          });
+        }
+      })
+    }
+
+  });
+
+  return blog;
+}(Blog));
 ```
 
 *views/PostView.js :*
 
 ```javascript
-	var Blog = (function (blog) {
+var Blog = (function(blog) {
 
-	    blog.Views.PostView = Backbone.View.extend({
-	        el : $("#posts_list"),
-	        initialize : function () {
-	            this.template = $("#post_details_template").html();
-	        },
-	        render : function (post) {               
-	            var renderedContent = Mustache.to_html(this.template, 
-	            	{post : post.toJSON()} 
-	            );
+  blog.Views.PostView = Backbone.View.extend({
+    el: $("#posts_list"),
+    initialize: function() {
+      this.template = $("#post_details_template").html();
+    },
+    render: function(post) {
+      var renderedContent = Mustache.to_html(this.template, {
+        post: post.toJSON()
+      });
 
-	            this.$el.html(renderedContent);
-	        }
-	    });
+      this.$el.html(renderedContent);
+    }
+  });
 
-	    return blog;
-	}(Blog));
+  return blog;
+  }(Blog));
 ```
 
 ... Sauvegardez tout ça et essayez, normalement cela devrait fonctionner et vous verrez qu'à l'usage, le code en devient plus lisible. Mais passons donc à la 2ème méthode.
@@ -471,7 +494,7 @@ Pour répondre à ces types de problématiques, il existe ce que l’on appelle 
 
 - Require.js (probalement le plus connu et le plus utilisé) [http://requirejs.org/](http://requirejs.org/)
 - Head.js [http://headjs.com/](http://headjs.com/)
-- YepNope [http://yepnopejs.com/](http://yepnopejs.com/) d'Alex Sexton 
+- YepNope [http://yepnopejs.com/](http://yepnopejs.com/) d'Alex Sexton
 - Etc. ...
 
 Il y a beaucoup de débats autour des « javascript resources loaders », « est-ce bien ou mal ? » « Cela ralentit le chargement de la page web », « c’est génial il faut généraliser son utilisation » , ... Mon propos n’est pas de participer au débat mais de vous montrer « rapidement » de quelle façon on peut les utiliser. (Cependant si votre application est simple, cela ne vaut pas la peine d’en utiliser, si ce n’est à titre éducatif ou pour le plaisir).
@@ -482,7 +505,7 @@ En ce qui nous concerne, j’ai choisi **YepNope** parce que nettement plus simp
 
 ###Préparation
 
-Commencez par télécharger la dernière version de YepNope ici : 
+Commencez par télécharger la dernière version de YepNope ici :
 
 - [https://github.com/SlexAxton/yepnope.js/archives/master](https://github.com/SlexAxton/yepnope.js/archives/master)
 
@@ -491,32 +514,32 @@ Puis, dézipper et copier ensuite le fichier `yepnope.js` ou sa version minifié
 Nous allons maitenant supprimer toutes les références de script que nous avions dans la page index.html :
 
 ```html
-	<!-- === Frameworks === -->
-	<script src="libs/vendors/jquery-1.7.2.js"></script>
-	<script src="libs/vendors/underscore.js"></script>
-	<script src="libs/vendors/backbone.js"></script>
-	<script src="libs/vendors/mustache.js"></script>
+<!-- === Frameworks === -->
+<script src="libs/vendors/jquery-1.7.2.js"></script>
+<script src="libs/vendors/underscore.js"></script>
+<script src="libs/vendors/backbone.js"></script>
+<script src="libs/vendors/mustache.js"></script>
 
-	<!-- === code applicatif === -->
+<!-- === code applicatif === -->
 
-	<script src="Blog.js"></script>
-	<script src="models/Post.js"></script> <!-- Models & Collection -->
+<script src="Blog.js"></script>
+<script src="models/Post.js"></script> <!-- Models & Collection -->
 
-	<!-- Backbone Views -->
-	<script src="views/SidebarView.js"></script> 
-	<script src="views/PostsListView.js"></script> 
-	<script src="views/MainView.js"></script>
-	<script src="views/LoginView.js"></script> 
-	<script src="views/PostView.js"></script> 
+<!-- Backbone Views -->
+<script src="views/SidebarView.js"></script>
+<script src="views/PostsListView.js"></script>
+<script src="views/MainView.js"></script>
+<script src="views/LoginView.js"></script>
+<script src="views/PostView.js"></script>
 
-	<script src="routes.js"></script>
+<script src="routes.js"></script>
 ```
 
 Et nous écrivons ceci à la place :
 
 ```html
-	<script src="libs/vendors/yepnope.1.5.4-min.js"></script>
-	<script src="main.js"></script>
+<script src="libs/vendors/yepnope.1.5.4-min.js"></script>
+<script src="main.js"></script>
 ```
 
 Et c’est donc dans le script `main.js` que nous allons procéder au chargement de nos différents scripts de la manière suivante :
@@ -524,40 +547,40 @@ Et c’est donc dans le script `main.js` que nous allons procéder au chargement
 *1ère utilisation de yepnope :*
 
 ```javascript
-	yepnope({
-	    load: {
-	        jquery              : 'libs/vendors/jquery-1.7.2.js',
-	        underscore          : 'libs/vendors/underscore.js',
-	        backbone            : 'libs/vendors/backbone.js',
-	        mustache            : 'libs/vendors/mustache.js',
+yepnope({
+  load: {
+    jquery: 'libs/vendors/jquery-1.7.2.js',
+    underscore: 'libs/vendors/underscore.js',
+    backbone: 'libs/vendors/backbone.js',
+    mustache: 'libs/vendors/mustache.js',
 
-	        //NameSpace
-	        blog                : 'Blog.js',
+    //NameSpace
+    blog: 'Blog.js',
 
-	        //Models
-	        posts               : 'models/post.js',
+    //Models
+    posts: 'models/post.js',
 
-	        //Controllers
-	        sidebarview         : 'views/SidebarView.js',
-	        postslistviews      : 'views/PostsListView.js',
-	        mainview            : 'views/MainView.js',
-	        loginview           : 'views/LoginView.js',
-	        postview            : 'views/PostView.js',
-	        
-	        //Routes
-	        routes              : 'routes.js'
-	           
-	    },
+    //Controllers
+    sidebarview: 'views/SidebarView.js',
+    postslistviews: 'views/PostsListView.js',
+    mainview: 'views/MainView.js',
+    loginview: 'views/LoginView.js',
+    postview: 'views/PostView.js',
 
-	    callback : {
-	        "routes" : function () {
-	            console.log("routes loaded ...");          
-	        }
-	    },
-	    complete : function () {
-	        //...
-	    }
-	});
+    //Routes
+    routes: 'routes.js'
+
+  },
+
+  callback: {
+    "routes": function() {
+      console.log("routes loaded ...");
+    }
+  },
+  complete: function() {
+    //...
+  }
+});
 ```
 
 Vous l’aurez compris, le paramètre `load` sert à définir les scripts à charger. Vous notez aussi que l’on peut donner un alias à chacun des scripts (sinon YepNope le fera automatiquement à partir du nom du fichier javascript), alias que l’on peut ensuite utiliser dans le paramètre `callback` pour déclencher un traitement une fois que le script est inclus dans la page (dans notre exemple c’est au moment de l’inclusion du fichier `routes.js`).
@@ -569,58 +592,62 @@ Nous allons donc déplacer le javascript restant dans notre page à l’intérie
 *Code définitif :*
 
 ```javascript
-	yepnope({
-	    load: {
-	        jquery              : 'libs/vendors/jquery-1.7.2.js',
-	        underscore          : 'libs/vendors/underscore.js',
-	        backbone            : 'libs/vendors/backbone.js',
-	        mustache            : 'libs/vendors/mustache.js',
+yepnope({
+  load: {
+    jquery: 'libs/vendors/jquery-1.7.2.js',
+    underscore: 'libs/vendors/underscore.js',
+    backbone: 'libs/vendors/backbone.js',
+    mustache: 'libs/vendors/mustache.js',
 
-	        //NameSpace
-	        blog                : 'Blog.js',
+    //NameSpace
+    blog: 'Blog.js',
 
-	        //Models
-	        posts               : 'models/post.js',
+    //Models
+    posts: 'models/post.js',
 
-	        //Controllers
-	        sidebarview         : 'views/SidebarView.js',
-	        postslistviews      : 'views/PostsListView.js',
-	        mainview            : 'views/MainView.js',
-	        loginview           : 'views/LoginView.js',
-	        postview            : 'views/PostView.js',
-	        
-	        //Routes
-	        routes              : 'routes.js'
-	           
-	    },
+    //Controllers
+    sidebarview: 'views/SidebarView.js',
+    postslistviews: 'views/PostsListView.js',
+    mainview: 'views/MainView.js',
+    loginview: 'views/LoginView.js',
+    postview: 'views/PostView.js',
 
-	    callback : {
-	        "routes" : function () {
-	            console.log("routes loaded ...");          
-	        }
-	    },
-	    complete : function () {
-	        $(function (){
+    //Routes
+    routes: 'routes.js'
 
-	            console.log("Lauching application ...");
+  },
 
-	            window.blogPosts = new Blog.Collections.Posts();
+  callback: {
+    "routes": function() {
+      console.log("routes loaded ...");
+    }
+  },
+  complete: function() {
+    $(function() {
 
-	            window.mainView = new Blog.Views.MainView({collection : blogPosts});
+      console.log("Lauching application ...");
 
-	            /*======= Authentification =======*/
-	            window.loginView = new Blog.Views.LoginView();
-	            /*======= Fin authentification =======*/
+      window.blogPosts = new Blog.Collections.Posts();
 
-	            window.postView = new Blog.Views.PostView();
-	            
-	            window.router = new Blog.Router.RoutesManager({collection:blogPosts});
-	 
-	            Backbone.history.start();
+      window.mainView = new Blog.Views.MainView({
+        collection: blogPosts
+      });
 
-	        });  
-	    }
-	});
+      /*======= Authentification =======*/
+      window.loginView = new Blog.Views.LoginView();
+      /*======= Fin authentification =======*/
+
+      window.postView = new Blog.Views.PostView();
+
+      window.router = new Blog.Router.RoutesManager({
+        collection: blogPosts
+      });
+
+      Backbone.history.start();
+
+    });
+  }
+});
 ```
 
 Et voilà ! Vous disposez maintenant d’un code structuré, d’un outil de chargement de script facile à utiliser et modifier : désactivation ou changement provisoire de librairie pour tests par exemple mais aussi chargement conditionnel de script en fonction du contexte, … Je ne vous ai dévoilé qu’une infime partie de YepNope qui en dépit de sa taille est très puissant. Lisez la documentation, vous verrez …
