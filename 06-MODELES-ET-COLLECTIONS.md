@@ -610,7 +610,7 @@ Nous avons donc bien une collection avec les modèles initialisés à partir des
 
 ###Requêtes
 
-Lorsque nous avons créé notre application côté serveur, nous avions prévu de pouvoir requêter les données. Nous voudrions pouvoir faire ça à partir de la collection que nous avons créée. Pour cela il faudra pouvoir changer la propriété `url` de la collection. Modifions alors le code source de notre collection de la façon suivante (dnas la page `index.html`) :
+Lorsque nous avons créé notre application côté serveur, nous avions prévu de pouvoir requêter les données. Nous voudrions pouvoir faire ça à partir de la collection que nous avons créée. Pour cela il faudra pouvoir changer la propriété `url` de la collection. Modifions alors le code source de notre collection de la façon suivante (dans la page `index.html`) :
 
 *Ajouter des méthodes à la collection :*
 
