@@ -17,46 +17,48 @@ Nous allons transformer notre vue d’affichages de posts, pour qu’elle n’af
 Dans la page index.html, modifions le template « posts_list_template » afin qu’il n’affiche plus le contenu du post (`{{message}}`). A la place nous ajoutons un lien dont l’url sera post-fixée de l’id du post (`#post/{{id}}`) :
 
 ```html
-	<script type="text/template" id="posts_list_template">
+<script type="text/template" id="posts_list_template">
 
-	    {{#posts}}
-	        <h2>{{title}}</h2>
-	        <b>par : {{author}}</b> le : {{date}}
-	        <a href="#post/{{id}}">Lire ...</a>
+  {{#posts}}
+    <h2>{{title}}</h2>
+    <b>par : {{author}}</b> le : {{date}}
+    <a href="#post/{{id}}">Lire ...</a>
 
-	    {{/posts}}
+  {{/posts}}
 
-	</script>
+</script>
 ```
 
 Ensuite nous ajoutons un nouveau template (pour voir le détail du post) qui sera utilisé lorsque nous cliquerons sur le lien « Lire … », avec un lien (`#/`) qui déclenchera l’affichage de l’ensemble de la liste des posts :
 
 ```html
-	<script type="text/template" id="post_details_template">
-	        <h2>{{post.title}}</h2>
-	        <b>par : {{post.author}}</b> le : {{post.date}}
-	        <p>{{post.message}}</p>
+<script type="text/template" id="post_details_template">
+  <h2>{{post.title}}</h2>
+  <b>par : {{post.author}}</b> le : {{post.date}}
+  <p>{{post.message}}</p>
 
-	        <a href="#/">Tous les messages</a>
-	</script>
+  <a href="#/">Tous les messages</a>
+</script>
 ```
 
 Nous créons ensuite un nouvel objet de type `Backbone.View` qui sera « chargé » d’afficher le détail du message du post, à partir du nouveau template (`#post_details_template`), en lieu et place de la liste des posts (`#posts_list`) :
 
 ```javascript
-	window.PostView = Backbone.View.extend({
-	    el : $("#posts_list"),
-	    initialize : function () {
-	        this.template = $("#post_details_template").html();
-	    },
-	    render : function (post) {               
-	        var renderedContent = Mustache.to_html(this.template, {post : post.toJSON()} );
-	        this.$el.html(renderedContent);
-	    }
+window.PostView = Backbone.View.extend({
+  el: $("#posts_list"),
+  initialize: function() {
+    this.template = $("#post_details_template").html();
+  },
+  render: function(post) {
+    var renderedContent = Mustache.to_html(this.template, {
+      post: post.toJSON()
+    });
+    this.$el.html(renderedContent);
+  }
 
-	});
+});
 
-	window.postView = new PostView();
+window.postView = new PostView();
 ```
 
 ##Création du routeur
@@ -72,42 +74,44 @@ Le code qui sert à récupérer la liste des posts en provenance du serveur est 
 *Le routeur de notre application de blog :*
 
 ```javascript
-	window.RoutesManager = Backbone.Router.extend({
-	    routes : {
-	        "post/:id_post" : "displayPost",
-	        "hello" : "hello",
-	        "*path" : "root"
-	    },
-	    root : function () {
-	        blogPosts.all().fetch({
-	            success:function(result){
-	                //ça marche !!!
-	            }
-	        });
-	    },
+window.RoutesManager = Backbone.Router.extend({
+  routes: {
+    "post/:id_post": "displayPost",
+    "hello": "hello",
+    "*path": "root"
+  },
+  root: function() {
+    blogPosts.all().fetch({
+      success: function(result) {
+        //ça marche !!!
+      }
+    });
+  },
 
-	    hello : function () {
-	        $(".hero-unit > h1").html("Hello World !!!");
-	    },
+  hello: function() {
+    $(".hero-unit > h1").html("Hello World !!!");
+  },
 
-	    displayPost : function (id_post) {
+  displayPost: function(id_post) {
 
-	        var tmp = new Post({id:id_post});
+    var tmp = new Post({
+      id: id_post
+    });
 
-	        tmp.fetch({
-	            success : function(result) {
-	                postView.render(result);
-	            }
-	        });   
-	    }
-	});
+    tmp.fetch({
+      success: function(result) {
+        postView.render(result);
+      }
+    });
+  }
+});
 
-	window.router = new RoutesManager();
-	
-	Backbone.history.start();
+window.router = new RoutesManager();
+
+Backbone.history.start();
 ```
 
-	//TODO: faire un § sur Backbone.history.start({pushState: true}); 
+  //TODO: faire un § sur Backbone.history.start({pushState: true});
 
 Sauvegardez le tout, rafraichissez la page, et testez :
 

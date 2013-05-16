@@ -72,32 +72,32 @@ Nous allons aussi récupérer le framework css **TwitterBootstrap** qui nous per
 A la racine de votre répertoire de travail, créez une page index.html avec le code suivant :
 
 ```html
-	<!DOCTYPE html>
-	<html>
-	<head>
-	    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	    <title>Backbone</title>
+<!DOCTYPE html>
+<html>
+  <head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>Backbone</title>
 
-	    <!-- === Styles Twitter Bootstrap -->
-	    <link href="libs/vendors/bootstrap/css/bootstrap.css" rel="stylesheet">
-	    <link href="libs/vendors/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
-	</head>
+		<!-- === Styles Twitter Bootstrap -->
+		<link href="libs/vendors/bootstrap/css/bootstrap.css" rel="stylesheet">
+		<link href="libs/vendors/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+  </head>
 
-	<!-- === ici votre IHM === -->
-	<body>
+  <!-- === ici votre IHM === -->
+  <body>
 
 
-	</body>
-	<!-- === Références aux Frameworks === -->
-	<script src="libs/vendors/jquery-1.7.2.js"></script>
-	<script src="libs/vendors/underscore.js"></script>
-	<script src="libs/vendors/backbone.js"></script>
+  </body>
+  <!-- === Références aux Frameworks === -->
+  <script src="libs/vendors/jquery-1.7.2.js"></script>
+  <script src="libs/vendors/underscore.js"></script>
+  <script src="libs/vendors/backbone.js"></script>
 
-	<!-- === ici votre code applicatif === -->
-	<script>
+  <!-- === ici votre code applicatif === -->
+  <script>
 
-	</script>
-	</html>
+  </script>
+</html>
 ```
 
 A ce niveau, vous devriez avoir un squelette de projet fonctionnel avec l'arborescence suivante :
@@ -113,71 +113,71 @@ JQuery est un framework javascript initialement créé par John Resig qui vous p
 Dans notre toute nouvelle page `index.html`, préparons un peu notre bac à sable et saisissons le code suivant :
 
 ```html
-	<!DOCTYPE html>
-	<html>
+<!DOCTYPE html>
+<html>
 	<head>
-	    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	    <title>Backbone</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>Backbone</title>
 
-	    <!-- === Styles Twitter Bootstrap -->
-	    <link href="libs/vendors/bootstrap/css/bootstrap.css" rel="stylesheet">
+		<!-- === Styles Twitter Bootstrap -->
+		<link href="libs/vendors/bootstrap/css/bootstrap.css" rel="stylesheet">
 
-	    <!-- === à insérer entre les 2 <link> === -->
-	    <style>
-	        body {
-	            padding-top: 60px; 
-	            /* 60px pour mettre un peu d'espace entre la barre de titre et le contenu */
-	            padding-bottom: 40px;
-	        }
-	    </style>
+		<!-- === à insérer entre les 2 <link> === -->
+		<style>
+			body {
+				padding-top: 60px;
+				/* 60px pour mettre un peu d'espace entre la barre de titre et le contenu */
+				padding-bottom: 40px;
+			}
+		</style>
 
-	    <link href="libs/vendors/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+		<link href="libs/vendors/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
 
 	</head>
 
-	<!-- === ici votre IHM === -->
+<!-- === ici votre IHM === -->
 	<body>
-	    <!--
-	       les classe css "navbar navbar-fixed-top", "navbar-inner", "container", 
-	       "brand", "hero-unit"
-	       viennent de la feuille de style "twitter bootstrap "
-	    -->
-	    <div class="navbar navbar-fixed-top">
-	        <div class="navbar-inner">
-	            <div class="container">
-	                <a class="brand">Mon Blog</a>
-	            </div>
-	        </div>
-	    </div>
+		<!--
+		 les classe css "navbar navbar-fixed-top", "navbar-inner", "container",
+		 "brand", "hero-unit"
+		 viennent de la feuille de style "twitter bootstrap "
+		-->
+		<div class="navbar navbar-fixed-top">
+			<div class="navbar-inner">
+				<div class="container">
+					<a class="brand">Mon Blog</a>
+				</div>
+			</div>
+		</div>
 
-	    <div class="container">
+		<div class="container">
 
-	        <div class="hero-unit">
-	            <h1>Backbone rocks !!!</h1>
-	            <p>
-	                "Ma vie mon oeuvre"
-	            </p>
-	        </div>
+			<div class="hero-unit">
+				<h1>Backbone rocks !!!</h1>
+				<p>
+					"Ma vie mon oeuvre"
+				</p>
+			</div>
 
-	        <div id="articles_box">
+			<div id="articles_box">
 
-	            <h1 id="current_articles_title">les articles du blogs</h1>
+				<h1 id="current_articles_title">les articles du blogs</h1>
 
-	            <ul id="current_articles_list">
-	                <li>Backbone et les modèles</li>
-	                <li>Backbone et les vues</li>
-	                <li>Backbone : mais y a-t-il vraiment un contrôleur dans l'avion ?</li>
-	            </ul>
+				<ul id="current_articles_list">
+					<li>Backbone et les modèles</li>
+					<li>Backbone et les vues</li>
+					<li>Backbone : mais y a-t-il vraiment un contrôleur dans l'avion ?</li>
+				</ul>
 
-	            <h1 id="next_articles_title">les articles à venir</h1>
+				<h1 id="next_articles_title">les articles à venir</h1>
 
-	            <ul id="next_articles_list">
-	                <li>Backbone et le localstorage</li>
-	                <li>Backbone.sync : comment ça marche</li>
-	            </ul>
+				<ul id="next_articles_list">
+					<li>Backbone et le localstorage</li>
+					<li>Backbone.sync : comment ça marche</li>
+				</ul>
 
-	        </div>
-	    </div>
+			</div>
+		</div>
 
 	</body>
 	<!-- === Références aux Frameworks === -->
@@ -189,7 +189,7 @@ Dans notre toute nouvelle page `index.html`, préparons un peu notre bac à sabl
 	<script>
 
 	</script>
-	</html>
+</html>
 ```
 
 Une fois votre page terminée, sauvegardez là et ouvrez là dans votre navigateur préféré (qui je le rappelle, pour des raisons purement pédagogique est Chrome) :
@@ -232,11 +232,11 @@ Je voudrais :
 
 - changer le titre de mon blog : `$('h1').first().text("Backbone c'est top !")`, attention pensez bien au `first()` sinon vous allez changer tous les textes de tous les `H1` de la page.
 - récupérer le code HTML de la "boîte de titre" (le div avec la classe css : `class="hero-unit"`) : `$('[class="hero-unit"]').html()`, notez bien que `$('[class="hero-unit"]').text()` ne retourne pas le même résultat. On peut aussi écrire ceci plus simplement : `$('.hero-unit').html()` : le `"."` correspond à une classe css, comme le `"#"` permet de rechercher un élément par son id.
-- changer les couleurs de police et de fond de tous les tags H1 : 
+- changer les couleurs de police et de fond de tous les tags H1 :
 
-       `$('h1').css("color","white").css("background-color","black")`, vous voyez que vous pouvez faire des appels chaînés, mais une autre possibilité serait la suivante : 
+	  `$('h1').css("color","white").css("background-color","black")`, vous voyez que vous pouvez faire des appels chaînés, mais une autre possibilité serait la suivante :
 
-			$('h1').css({color:"yellow", backgroundColor:"green"})
+	  $('h1').css({color:"yellow", backgroundColor:"green"})
 
 ![jQuery](RSRC/02_07_JQUERY.png)\
 
@@ -251,9 +251,9 @@ Je voudrais :
 
 - la valeur de l'id de la deuxième liste (`UL`) : `$('ul').eq(1).attr("id")`, je cherche la liste d'index 1 (le 1er élément possède l'index 0).
 - parcourir les lignes (`LI`) de la liste dont l'id est `"next_articles_list"` et obtenir leur texte : `$('#next_articles_list').find('li').each(function (index) { console.log( $(this).text() ); })`
-- ajouter une nouvelle ligne à la 2ème liste : 
+- ajouter une nouvelle ligne à la 2ème liste :
 
-        $('<li>Templating et Backbone</li>').appendTo('#next_articles_list')
+		$('<li>Templating et Backbone</li>').appendTo('#next_articles_list')
 
 - cacher la 1ère liste : `$('#current_articles_list').hide()`
 - l'afficher à nouveau : `$('#current_articles_list').show()`
@@ -265,7 +265,7 @@ Je voudrais :
 
 ###Les évènements
 
-	//À traiter ...
+  //À traiter ...
 
 ###Quelques bonnes pratiques
 
@@ -275,22 +275,22 @@ Je voudrais :
 Si vous devez utiliser plusieurs fois le même élément de votre page : par exemple `$('#current_articles_list')`, sachez qu'à chaque fois jQuery "interroge" le DOM. Pour des raisons de performances, il est conseillé d'affecter le résultat de la sélection à une variable que vous réutiliserez ensuite. De cette manière, le DOM n'est interrogé qu'une seule fois. Vous pouvez tester ceci dans la console :
 
 ```javascript
-	var currArtList = $('#current_articles_list'); 
-	currArtList.hide('slow'); 
-	currArtList.show('fast');
+var currArtList = $('#current_articles_list');
+currArtList.hide('slow');
+currArtList.show('fast');
 ```
 
 ####Soyez sûr que les éléments de votre page sont tous chargés :
 
 
-Il est intéressant (indispensable) d'avoir la garantie que son code javascript n'est exécuté qu'une seule fois la page HTML chargée dans son entièreté, surtout si ce code accède à des éléments du DOM. jQuery a une fonction pour ça : `$(document).ready(handler)` ou encore plus court : `$(handler)` où `handler` est une fonction. 
+Il est intéressant (indispensable) d'avoir la garantie que son code javascript n'est exécuté qu'une seule fois la page HTML chargée dans son entièreté, surtout si ce code accède à des éléments du DOM. jQuery a une fonction pour ça : `$(document).ready(handler)` ou encore plus court : `$(handler)` où `handler` est une fonction.
 Mettez ce code dans la balise `<script>` de votre page `index.html` :
 
 ```javascript
-	console.log("est-ce que le DOM est chargé ??? ", $('#current_articles_list')); 
-	$(function (){ 
-	    console.log("je suis sûr que le DOM est chargé ", $('#current_articles_list')); 
-	});
+console.log("est-ce que le DOM est chargé ??? ", $('#current_articles_list'));
+$(function (){
+  console.log("je suis sûr que le DOM est chargé ", $('#current_articles_list'));
+});
 ```
 
 Puis ouvrez la page dans votre navigateur et activez la console :
@@ -307,7 +307,7 @@ Et là on voit bien qu'au 1er appel `$('#current_articles_list')` jQuery ne trou
 
 Vous venez de voir une infime partie des possibilités de jQuery, mais cela vous donne déjà un aperçu et vous permet de commencer à jouer avec et aller plus loin. jQuery permet aussi de faire des requêtes AJAX (http) vers des serveurs web, mais nous verrons cela un peu plus tard.
 
-	//TODO: traiter la notion d’id versus la notion de name
+  //TODO: traiter la notion d’id versus la notion de name
 
 
 ##Jouons avec Underscore
@@ -325,11 +325,11 @@ Pour les tester, nous continuons avec la console de notre navigateur (toujours a
 Commencez par saisir ceci :
 
 ```javascript
-    var buddies = [],
-        bob = { name : "Bob Morane", age : 32 },
-        sam = { name : "Sammy", age : 43 },
-        tom = { name : "Tommy", age : 25 };
-    buddies.push(bob, sam, tom);
+var buddies = [],
+	bob = { name : "Bob Morane", age : 32 },
+	sam = { name : "Sammy", age : 43 },
+	tom = { name : "Tommy", age : 25 };
+buddies.push(bob, sam, tom);
 ```
 
 Nous avons donc un tableau de 3 objets :
@@ -340,9 +340,9 @@ Nous avons donc un tableau de 3 objets :
 Je souhaite maintenant parcourir le tableau d’objets et afficher les informations de chacun d’eux. Pour cela utilisez la commande `each()` de la manière suivante :
 
 ```javascript
-	_.each(buddies, function (buddy) { 
-	    console.log (buddy.name, buddy.age); 
-	});
+_.each(buddies, function (buddy) {
+  console.log (buddy.name, buddy.age);
+});
 ```
 
 Et vous obtiendrez ceci :
@@ -353,9 +353,9 @@ Et vous obtiendrez ceci :
 Je voudrais maintenant les “buddies” dont l’âge est inférieur à 43 ans. Nous allons utiliser la commande `filter()` :
 
 ```javascript
-	_.filter(buddies, function (filteredBuddies) { 
-	    return filteredBuddies.age < 43; 
-	});
+_.filter(buddies, function (filteredBuddies) {
+  return filteredBuddies.age < 43;
+});
 ```
 
 Et nous obtenons bien :
@@ -368,18 +368,18 @@ Et nous obtenons bien :
 
 Je vous en parle maintenant, car ce "bijou" va nous servir très rapidement. Je voudrais générer une liste au sens HTML (`<ul><li></li></ul>`) à partir de mon tableau d'objets buddies. Nous allons donc créer une variable “template” (un peu comme une page JSP ou ASP) :
 
-
-    var templateList =
-    "<ul> <% _.each(buddies, function (buddy) { %>\
-    <li><%= buddy.name %> : <%= buddy.age %> </li>\
-    <% }); %>\
-    </ul>";
-
+```html
+	var templateList =
+	"<ul> <% _.each(buddies, function (buddy) { %>\
+	<li><%= buddy.name %> : <%= buddy.age %> </li>\
+	<% }); %>\
+	</ul>";
+```
 
 Que nous utiliserons de cette façon (nous passons à la méthode le template et les données):
 
 ```javascript
-	_.template(templateList, buddies);
+  _.template(templateList, buddies);
 ```
 
 Pour le résultat suivant :

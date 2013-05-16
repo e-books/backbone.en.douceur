@@ -16,34 +16,34 @@ Je vais vous présenter de quelle façon Backbone gère son « Orientation objet
 Si vous avez la curiosité d’aller lire le code de Backbone (je vous engage à le faire, le code est clair et simple et avec le temps très instructif), vous « tomberez » sur une ligne particulièrement intéressante (vers la fin du code source dans `backbone.js` pour ceux qui iront réellement lire le code) :
 
 ```javascript
-	// Set up inheritance for the model, collection, and view.
-	Model.extend = Collection.extend = Router.extend = View.extend = extend;
+// Set up inheritance for the model, collection, and view.
+Model.extend = Collection.extend = Router.extend = View.extend = extend;
 ```
 
 Il existe une méthode (privée) `extend` dans Backbone qui permet à un objet d’hériter des membres d’un autre objet, par exemple, si j’écris:
 
 ```javascript
-	/*--- Modèle article ---*/
+/*--- Modèle article ---*/
 
-	// une "sorte" de classe Article
-	var Article = Backbone.Model.extend({
+// une "sorte" de classe Article
+var Article = Backbone.Model.extend({
 
-	});
+});
 ```
 
 Je signifie que je crée une “sorte” de classe `Article` qui hérite des fonctionnalités de `Model`. De la même façon je pourrais ensuite définir une autre classe `ArticleSpecial` qui héritera de `Article` (et qui conservera les spécificités (membres de classe) de `Model`):
 
 ```javascript
-	var ArticleSpecial = Article.extend({
+var ArticleSpecial = Article.extend({
 
-	});
+});
 ```
 
 Je vous expliquais que la méthode `extend` était privée, Backbone ne l’expose pas directement, mais il est tout à fait possible d’y accéder par un des composants de Backbone, de la façon suivante :
 
 ```javascript
-	var Kind = function() {}; 
-	Kind.extend = Backbone.Model.extend;	
+var Kind = function() {};
+Kind.extend = Backbone.Model.extend;
 ```
 
 >>**Remarque 1** : J’ai utilisé « Kind » pour ne pas utiliser « Class » ou « class » qui est un terme réservé pour les futures versions de javascript.
@@ -53,7 +53,7 @@ Je vous expliquais que la méthode `extend` était privée, Backbone ne l’expo
 Nous pouvons donc maintenant écrire :
 
 ```javascript
-	var Personne = Kind.extend({ });
+var Personne = Kind.extend({});
 ```
 
 ##1ère "classe"
@@ -67,18 +67,18 @@ La déclaration d’un constructeur se fait avec le mot clé `constructor` :
 <u>Utilisation de `Kind.extend()` et définition de `constructor()`</u>
 
 ```javascript
-	var Personne = Kind.extend({
-		constructor : function (){
-			console.log("Bonjour, je suis le constructeur de Personne");
-		}
-	});
+var Personne = Kind.extend({
+  constructor: function() {
+    console.log("Bonjour, je suis le constructeur de Personne");
+  }
+});
 
-	var bob = new Personne();
+var bob = new Personne();
 ```
 
 Nous obtiendrons à l’éxécution :
 
-	Bonjour, je suis le constructeur de Personne
+  Bonjour, je suis le constructeur de Personne
 
 ###Des propriétés
 
@@ -87,25 +87,25 @@ Les propriétés se déclarent dans le constructeur (elles sont générées à l
 <u>Ajout de propriétés</u>
 
 ```javascript
-	var Personne = Kind.extend({
-		prenom : "John",
-		nom : "Doe",
-		constructor : function (prenom, nom){
-			if(prenom) this.prenom = prenom;
-			if(nom) this.nom = nom;
+var Personne = Kind.extend({
+  prenom: "John",
+  nom: "Doe",
+  constructor: function(prenom, nom) {
+    if (prenom) this.prenom = prenom;
+    if (nom) this.nom = nom;
 
-			console.log("Bonjour, je suis ", this.prenom, this.nom);
-		}
-	});
+    console.log("Bonjour, je suis ", this.prenom, this.nom);
+  }
+});
 
-	var john = new Personne();
-	var bob = new Personne("Bob", "Morane");
+var john = new Personne();
+var bob = new Personne("Bob", "Morane");
 ```
 
 Nous obtiendrons à l’éxécution :
 
-	Bonjour, je suis  John Doe
-	Bonjour, je suis  Bob Morane
+  Bonjour, je suis  John Doe
+  Bonjour, je suis  Bob Morane
 
 
 ###Des méthodes
@@ -115,30 +115,30 @@ Les méthodes se déclarent de la même façon que le constructeur, ajoutons une
 <u>Ajout d’une méthode</u>
 
 ```javascript
-	var Personne = Kind.extend({
-		prenom : "John",
-		nom : "Doe",
-		constructor : function (prenom, nom){
-			if(prenom) this.prenom = prenom;
-			if(nom) this.nom = nom;
-		},
-		bonjour : function () {
-			console.log("Bonjour, je suis ", this.prenom, this.nom);
-		}
+var Personne = Kind.extend({
+  prenom: "John",
+  nom: "Doe",
+  constructor: function(prenom, nom) {
+    if (prenom) this.prenom = prenom;
+    if (nom) this.nom = nom;
+  },
+  bonjour: function() {
+    console.log("Bonjour, je suis ", this.prenom, this.nom);
+  }
 
-	});
+});
 
-	var john = new Personne();
-	var bob = new Personne("Bob", "Morane");
+var john = new Personne();
+var bob = new Personne("Bob", "Morane");
 
-	john.bonjour();
-	bob.bonjour();
+john.bonjour();
+bob.bonjour();
 ```
 
 Nous obtiendrons à l’éxécution :
 
-	Bonjour, je suis  John Doe
-	Bonjour, je suis  Bob Morane
+  Bonjour, je suis  John Doe
+  Bonjour, je suis  Bob Morane
 
 ###Des membres statiques
 
@@ -147,77 +147,77 @@ La méthode `extend` accepte un deuxième paramètre qui permet de déclarer des
 <u>Ajout & utilisation de membres statiques</u>
 
 ```javascript
-	var Personne = Kind.extend({
-		prenom : "John",
-		nom : "Doe",
-		constructor : function (prenom, nom){
-			if(prenom) this.prenom = prenom;
-			if(nom) this.nom = nom;
+var Personne = Kind.extend({
+  prenom: "John",
+  nom: "Doe",
+  constructor: function(prenom, nom) {
+    if (prenom) this.prenom = prenom;
+    if (nom) this.nom = nom;
 
-			//Utilisation de la propriété statique
-            Personne.compteur += 1;
-		},
-		bonjour : function () {
-			console.log("Bonjour, je suis ", this.prenom, this.nom);
-		}
+    //Utilisation de la propriété statique
+    Personne.compteur += 1;
+  },
+  bonjour: function() {
+    console.log("Bonjour, je suis ", this.prenom, this.nom);
+  }
 
-	},{ //ici les membres statiques
-		compteur : 0,
-		combien : function () {
-			return Personne.compteur;
-		}
-	});
+}, { //ici les membres statiques
+  compteur: 0,
+  combien: function() {
+    return Personne.compteur;
+  }
+});
 
-	var john = new Personne();
-	var bob = new Personne("Bob", "Morane");
+var john = new Personne();
+var bob = new Personne("Bob", "Morane");
 
-	console.log("Il y a ", Personne.combien(), " personnes");
+console.log("Il y a ", Personne.combien(), " personnes");
 ```
 
 Nous avons donc une propriété statique `compteur` et une méthode statique `combien()`. Nous obtiendrons ceci à l’exécution :
- 
-	Il y a  2  personnes
+
+  Il y a  2  personnes
 
 ##Sans héritage point de salut ! … ?
 
-Même s’il ne faut pas abuser de l’héritage en programmation objet (mais c’est un autre débat), il faut avouer que cela peut être pratique pour la structuration de notre code. Dès le départ, dans ce chapitre nous avons fait de l’héritage : 
+Même s’il ne faut pas abuser de l’héritage en programmation objet (mais c’est un autre débat), il faut avouer que cela peut être pratique pour la structuration de notre code. Dès le départ, dans ce chapitre nous avons fait de l’héritage :
 
-	var Personne = Kind.extend({ });
+  var Personne = Kind.extend({ });
 
 Donc `Personne` hérite de `Kind`. Mais essayons un exemple plus complet pour bien appréhender les possibilités de Backbone. `Personne` héritant de `Kind` possède donc aussi une méthode `extend`, nous allons donc pouvoir créer une `Femme` et un `Homme` :
 
 ```javascript
-	var Homme = Personne.extend({
-		sexe : "male"
-	});
+var Homme = Personne.extend({
+  sexe: "male"
+});
 
-	var Femme = Personne.extend({
-		prenom : "Jane",
-		sexe : "femelle"
-	});
+var Femme = Personne.extend({
+  prenom: "Jane",
+  sexe: "femelle"
+});
 
-	var jane = new Femme();
-	var john = new Homme();
+var jane = new Femme();
+var john = new Homme();
 
-	var angelina = new Femme("Angelina", "Jolie");
-	var bob = new Homme("Bob", "Morane");
+var angelina = new Femme("Angelina", "Jolie");
+var bob = new Homme("Bob", "Morane");
 
-	jane.bonjour();
-	john.bonjour();
+jane.bonjour();
+john.bonjour();
 
-	angelina.bonjour();
-	bob.bonjour();
+angelina.bonjour();
+bob.bonjour();
 
-	console.log("Il y a ", Personne.combien(), " personnes");
+console.log("Il y a ", Personne.combien(), " personnes");
 ```
 
 A l’exécution nous obtiendrons ceci :
 
-	Bonjour, je suis  Jane Doe
-	Bonjour, je suis  John Doe
-	Bonjour, je suis  Angelina Jolie
-	Bonjour, je suis  Bob Morane
-	Il y a  4  personnes
+  Bonjour, je suis  Jane Doe
+  Bonjour, je suis  John Doe
+  Bonjour, je suis  Angelina Jolie
+  Bonjour, je suis  Bob Morane
+  Il y a  4  personnes
 
 Nous pouvons donc vérifier que l’on a bien hérité de la méthode `bonjour()`, du constructeur `constructor()` et de `nom` et `prenom` (ainsi que de leurs valeurs par défaut). Nous remarquons aussi que l’incrémentation des “personnes” continue puisque `Homme` et `Femme` héritent de `Personne`.
 Voyons maintenant, comment surcharger les méthodes du parent et continuer à appeler les méthodes du parent.
@@ -230,54 +230,54 @@ Modifions le code des “pseudo classes” de la façon suivante :
 <u>Surcharge et utilisation de `super()`</u>
 
 ```javascript
-	var Homme = Personne.extend({
-		sexe : "male",
-		//surcharge du constructeur
-		constructor : function (prenom, nom) {
-			//appeler le constructeur de Personne
-			Homme.__super__.constructor.call(this, prenom, nom);
-			console.log("Hello, je suis un ", this.sexe);
-		},
-		bonjour : function () {
-			//appeler la methode bonjour() du parent
-			Homme.__super__.bonjour.call(this);
-			console.log("Bonjour, je suis un garçon");
-		}
-	});
+var Homme = Personne.extend({
+  sexe: "male",
+  //surcharge du constructeur
+  constructor: function(prenom, nom) {
+    //appeler le constructeur de Personne
+    Homme.__super__.constructor.call(this, prenom, nom);
+    console.log("Hello, je suis un ", this.sexe);
+  },
+  bonjour: function() {
+    //appeler la methode bonjour() du parent
+    Homme.__super__.bonjour.call(this);
+    console.log("Bonjour, je suis un garçon");
+  }
+});
 
-	var Femme = Personne.extend({
-		prenom : "Jane",
-		sexe : "femelle",
-		//surcharge du constructeur
-		constructor : function (prenom, nom) {
-			//appeler le constructeur de Personne
-			Femme.__super__.constructor.call(this, prenom, nom);
-			console.log("Hello, je suis une ", this.sexe);
-		},
-		bonjour : function () {
-			//appeler la methode bonjour() du parent
-			Femme.__super__.bonjour.call(this);
-			console.log("Bonjour, je suis une fille");
-		}
-	});
+var Femme = Personne.extend({
+  prenom: "Jane",
+  sexe: "femelle",
+  //surcharge du constructeur
+  constructor: function(prenom, nom) {
+    //appeler le constructeur de Personne
+    Femme.__super__.constructor.call(this, prenom, nom);
+    console.log("Hello, je suis une ", this.sexe);
+  },
+  bonjour: function() {
+    //appeler la methode bonjour() du parent
+    Femme.__super__.bonjour.call(this);
+    console.log("Bonjour, je suis une fille");
+  }
+});
 
-	var angelina = new Femme("Angelina", "Jolie");
-	var bob = new Homme("Bob", "Morane");
+var angelina = new Femme("Angelina", "Jolie");
+var bob = new Homme("Bob", "Morane");
 
-	angelina.bonjour();
-	bob.bonjour();
+angelina.bonjour();
+bob.bonjour();
 ```
 
 Nous avons surchargé les constructeurs pour pouvoir afficher un message au moment de l’instanciation et nous avons appelé le constructeur du parent pour continuer à permettre l’affectation de `nom` et `prenom`. Nous avons appliqué le même principe pour la méthode `bonjour()`. Donc l’appel d’une méthode du parent se fait de la manière suivante : `Nom_de_la_classe_courante.__super__.methode.call(this, paramètres)`.
 
 A l’exécution nous obtiendrons donc :
 
-	Hello, je suis une  femelle
-	Hello, je suis un  male
-	Bonjour, je suis  Angelina Jolie
-	Bonjour, je suis une fille
-	Bonjour, je suis  Bob Morane
-	Bonjour, je suis un garçon
+  Hello, je suis une  femelle
+  Hello, je suis un  male
+  Bonjour, je suis  Angelina Jolie
+  Bonjour, je suis une fille
+  Bonjour, je suis  Bob Morane
+  Bonjour, je suis un garçon
 
 ##Conclusion
 
