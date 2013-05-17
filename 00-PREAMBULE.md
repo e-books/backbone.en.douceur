@@ -24,6 +24,8 @@ Remerciements aussi pour :
 - [hasalex](https://github.com/hasalex) : relecture & corrections (nombreuses)
 - [iammichiel](https://github.com/iammichiel) : typo
 - [sdeleuze](https://github.com/sdeleuze) : optimisation de code et typo
+- [Prestaspirit](https://github.com/Prestaspirit) : corrections
+- [lionelB](https://github.com/lionelB) : amélioration de l'epub
 
 
 ##Avertissement
