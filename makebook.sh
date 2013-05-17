@@ -53,7 +53,11 @@ pandoc -s --toc --latex-engine=xelatex --template=latex.template.tex -N \
 
 
 #Epub version
-pandoc -S --epub-metadata=epub-metadata.xml -o backbone.en.douceur.epub \
+pandoc
+	--epub-stylesheet=epub.css \
+	--highlight-style=kate \
+	--epub-metadata=epub-metadata.xml \
+	-o backbone.en.douceur.epub \
 	epub-title.txt \
 	00-PREAMBULE.md \
 	01-PRESENTATION.md \
@@ -72,5 +76,5 @@ pandoc -S --epub-metadata=epub-metadata.xml -o backbone.en.douceur.epub \
 	14-BACKBONE-ET-TYPESCRIPT.md \
 	15-RESSOURCES.md \
 	16-HS-RESTHUB-BB-STACK.md
-	
+
 

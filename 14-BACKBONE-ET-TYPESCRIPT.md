@@ -19,7 +19,7 @@ Sachez le, Typescript fonctionne aussi bien sous Windows, Linux qu'OSX. Et oui M
 
 Avant toute chose, il faut installer **Node.js**, vous trouverez tout ce qu'il faut sur le site :
 
-[http://nodejs.org/download/](http://nodejs.org/download/). 
+[http://nodejs.org/download/](http://nodejs.org/download/).
 
 Pensez aussi à installer **Npm** (node package manager) dans le cas de linux.
 
@@ -35,7 +35,7 @@ C'est extrêment simple :
 
 Sous Windows vous pouvez utiliser le plugin Typescript pour Visual Studio 2012 (existe aussi en version express) mais nous, on va le faire à l'ancienne, à la mimine :
 
-	tsc nom_de_mon_script.ts
+  tsc nom_de_mon_script.ts
 
 Et vous obtiendrez un fichier `nom_de_mon_script.js`.
 
@@ -55,15 +55,15 @@ Sachez le, Typescript, c'est du javascript. Vous pouvez mettre du "pur" javascri
 
 Commencez par créer (dans un répertoire de travail) l'arborecence suivante (avec les fichiers correspondants) :
 
-	mon_repertoire_de_travail---|
-								|-core\
-								|      |-core.ts
-								|
-	      						|-models\   <-- je mettrais mes fichiers modèles ici
-	      						|        |-Animal.ts
-	      						|        |-Human.ts
-	      						|-index.html
-	      						|-app.ts
+  mon_repertoire_de_travail---|
+        |-core\
+        |      |-core.ts
+        |
+          |-models\   <-- je mettrais mes fichiers modèles ici
+          |        |-Animal.ts
+          |        |-Human.ts
+          |-index.html
+          |-app.ts
 
 ###core.ts
 
@@ -80,33 +80,33 @@ Nous allons définir notre 1er module avec le mot clé `module`, notre 1ère cla
 ```javascript
 module Core {
 
-	interface Persistable {		
-		saved : bool;
-		addToStore() : void;
-	}
+  interface Persistable {
+  saved : bool;
+  addToStore() : void;
+  }
 
-	export interface Entity {
-		kind : string;	
-	}
+  export interface Entity {
+  kind : string;
+  }
 
-	export class Model implements Persistable, Entity {
-		saved : bool = false;
-		kind : string = "kindOfModel";
-		public static store : Entity[] = [];
+  export class Model implements Persistable, Entity {
+  saved : bool = false;
+  kind : string = "kindOfModel";
+  public static store : Entity[] = [];
 
-		public addToStore() : void {
-			if(!this.saved) {
-				this.saved = true
-				Model.store.push(this);				
-			}
-		}
+  public addToStore() : void {
+    if(!this.saved) {
+    this.saved = true
+    Model.store.push(this);
+    }
+  }
 
-		public static getAll(kind:string) : Entity[] {
-			return Model.store.filter((model:Entity) => {
-					return model.kind == kind;
-				});
-		}
-	}
+  public static getAll(kind:string) : Entity[] {
+    return Model.store.filter((model:Entity) => {
+      return model.kind == kind;
+    });
+  }
+  }
 
 }
 ```
@@ -123,14 +123,14 @@ Nous allons créer 2 modèles : Animal and Human (je sais ce n'est pas très ori
 ```javascript
 ///<reference path='../core/core.ts'/>
 module Models {
-	export class Animal extends Core.Model implements Core.Entity {
-		kind = "Animal";
-		constructor(public name?="Wolf"){
-			super();
-		}
-	}
+  export class Animal extends Core.Model implements Core.Entity {
+  kind = "Animal";
+  constructor(public name?="Wolf"){
+    super();
+  }
+  }
 }
-```	
+```
 
 >> l'utilisation de `public name?="Wolf"` dans le constructeur est un raccourci pour déclarer la propriété `name` tout en l'initialisant, la notation `?=` permet aussi de donner une valeur par défaut.
 
@@ -142,15 +142,15 @@ De la même manière, codons notre modèle Human :
 ///<reference path='../core/core.ts'/>
 ///<reference path='Animal.ts'/>
 module Models {
-	export class Human extends Core.Model implements Core.Entity {
-		kind = "Human";
-		animal : Models.Animal;
-		constructor(public name?="John Doe"){
-			super();
-		}
-	}
+  export class Human extends Core.Model implements Core.Entity {
+  kind = "Human";
+  animal : Models.Animal;
+  constructor(public name?="John Doe"){
+    super();
+  }
+  }
 }
-```	
+```
 
 >>J'explique que le modèle Human a une propriété `animal` de type `Models.Animal`, si j'avais voulu être propre, j'aurais du faire la même chose pour `kind` avec `kind:string="Human"`, mais bon ... Notez aussi l'utilisation de `super` pour appeler le constructeur de la "maman".
 
@@ -163,18 +163,18 @@ Créez un fichier `index.html` avec le code ci-dessous :
 ```html
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>TypeScript</title>
-</head>
+  </head>
 
-<body>
-	<ul></ul>
-</body>
-<script src="core/core.js"></script>
-<script src="models/Animal.js"></script>
-<script src="models/Human.js"></script>
-<script src="app.js"></script>
+  <body>
+  <ul></ul>
+  </body>
+  <script src="core/core.js"></script>
+  <script src="models/Animal.js"></script>
+  <script src="models/Human.js"></script>
+  <script src="app.js"></script>
 </html>
 ```
 
@@ -199,12 +199,12 @@ wolf.addToStore();
 var ul = document.querySelector('ul');
 
 Core.Model.getAll("Human").forEach((model:Models.Human)=>{
-		var li = document.createElement('li');
-		li.innerHTML = model.name 
-		if(model.animal) li.innerHTML+= " / " + model.animal.name;
-		ul.appendChild(li);
-	});
-```	 
+  var li = document.createElement('li');
+  li.innerHTML = model.name
+  if(model.animal) li.innerHTML+= " / " + model.animal.name;
+  ul.appendChild(li);
+  });
+```
 
 Nous avons donc :
 
@@ -216,7 +216,7 @@ Nous avons donc :
 
 et pour afficher tout ça, il va falloir transpiler :
 
-	tsc --target ES5 app.ts
+  tsc --target ES5 app.ts
 
 Et maintenant, vous pouvez ouvrir votre page dans le navigateur, vous aurez la liste de vos Humains.
 
@@ -224,8 +224,8 @@ Et maintenant, vous pouvez ouvrir votre page dans le navigateur, vous aurez la l
 
 Après ce bref aperçu, voyons comment nous pouvons profiter des possibilités de Typescript avec Backbone. Comme je le disais au début du chapitre, Typescript reste du javascript et est donc compatible avec les librairies existantes telles **jQuery** ou **Underscore**. pour les utiliser dans tu Typescript il suffit de les déclarer comme ceci :
 
-	declare var $: any;
-	declare var _: any;
+  declare var $: any;
+  declare var _: any;
 
 >>le type `any` est un peu à javascript ce que le Variant est à Visual Basic.
 
@@ -236,31 +236,31 @@ Il est en fait possible de décrire des déclarations plus complexes pour que Ty
 ```javascript
 declare module Backbone {
 
-    export class Model {
-	    constructor (attr? , opts? );
-	    intialize (attr? , opts? );
-	    get(name: string): any;
-	    set(name: string, val: any): void;
-	    set(obj: any): void;
-	    save(attr? , opts? ): void;
-	    destroy(): void;
-	    bind(ev: string, f: Function, ctx?: any): void;
-	    toJSON(): any;
-    }
+  export class Model {
+  constructor (attr? , opts? );
+  intialize (attr? , opts? );
+  get(name: string): any;
+  set(name: string, val: any): void;
+  set(obj: any): void;
+  save(attr? , opts? ): void;
+  destroy(): void;
+  bind(ev: string, f: Function, ctx?: any): void;
+  toJSON(): any;
+  }
 }
 ```
 
 Et ensuite vous pourrez écrire votre code Backbone en TypeScript de la façon suivante :
 
 ```javascript
-    class Human extends Backbone.Model {
-        intialize () {
-            console.log("Hello from Human constructor.");
-        }
-    }
+class Human extends Backbone.Model {
+  intialize () {
+    console.log("Hello from Human constructor.");
+  }
+}
 
-    var Bob = new Human({firstName:"Bob", lastName:"Morane"});
-    console.log(Bob.get("firstName"), Bob.get("lastName"));
+var Bob = new Human({firstName:"Bob", lastName:"Morane"});
+console.log(Bob.get("firstName"), Bob.get("lastName"));
 ```
 
 >>*J'utilise `initialize` car en fait dans Backbone c'est une méthode appelée par le constructeur et je préfère ne pas modifier le fonctionnement intrinsèque de Backbone.*

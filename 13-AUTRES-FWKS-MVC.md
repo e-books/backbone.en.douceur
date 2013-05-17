@@ -23,25 +23,25 @@ L'objectif de ce chapitre n'est pas de faire un cours sur tous les frameworks ja
 **Définition d’un modèle :**
 
 ```javascript
-	var Post = can.Model({
-	  findAll : 'GET /blogposts',
-	  findOne : 'GET /blogposts/{id}',
-	  create  : 'POST /blogposts',
-	  update  : 'PUT /blogposts/{id}',
-	  destroy : 'DELETE /blogposts/{id}'
-	}, {});
+var Post = can.Model({
+  findAll : 'GET /blogposts',
+  findOne : 'GET /blogposts/{id}',
+  create  : 'POST /blogposts',
+  update  : 'PUT /blogposts/{id}',
+  destroy : 'DELETE /blogposts/{id}'
+}, {});
 ```
 
-Ensuite si je souhaite “récupérer” du serveur un modèle particulier par son id : 
+Ensuite si je souhaite “récupérer” du serveur un modèle particulier par son id :
 
 ```javascript
-	Blog.Post.findOne({id:"2o03macl"},function(post){console.log(post);})
+Blog.Post.findOne({id:"2o03macl"},function(post){console.log(post);})
 ```
 
 Puis, si je veux tous les modèles :
 
 ```javascript
-	Blog.Post.findAll({}, function(posts){ console.log(posts);});
+Blog.Post.findAll({}, function(posts){ console.log(posts);});
 ```
 
 ... qui me retournera un tableau de modèles.
@@ -60,90 +60,90 @@ Dans notre répertoire public (à la racine), créez une page `index.canjs.html`
 *Index.canjs.html :*
 
 ```html
-    <!DOCTYPE html>
-    <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-        <title>CanJS</title>
-        <link href="libs/vendors/bootstrap/css/bootstrap.css" rel="stylesheet">
-        <style>
-            body {
-                padding-top: 60px;
-                padding-bottom: 40px;
-            }
-        </style>
-        <link href="libs/vendors/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
-    </head>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>CanJS</title>
+  <link href="libs/vendors/bootstrap/css/bootstrap.css" rel="stylesheet">
+  <style>
+    body {
+      padding-top: 60px;
+      padding-bottom: 40px;
+    }
+  </style>
+  <link href="libs/vendors/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+</head>
 
-    <body>
+<body>
 
-        <div class="navbar navbar-fixed-top">
-            <div class="navbar-inner">
-                <div class="container">
-                    <a class="brand">Mon Blog avec CanJS</a>
-                </div>
-            </div>
-        </div>
+  <div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container">
+        <a class="brand">Mon Blog avec CanJS</a>
+      </div>
+    </div>
+  </div>
 
-        <div class="container-fluid">
+  <div class="container-fluid">
 
-            <div class="row-fluid">
+    <div class="row-fluid">
 
-                <script type="text/ejs" id="myposts_template">
-                  <% for( var i = 0; i < this.length; i++ ) { %>
-                    <li>
-                        <b><%= this[i].title %></b>
-                        <br>
-                        <p><%= this[i].message %></p>
-                        <hr>
-                    </li>
-                  <% } %>
-                </script>
+      <script type="text/ejs" id="myposts_template">
+        <% for( var i = 0; i < this.length; i++ ) { %>
+        <li>
+          <b><%= this[i].title %></b>
+          <br>
+          <p><%= this[i].message %></p>
+          <hr>
+        </li>
+        <% } %>
+      </script>
 
-                <ul id="myposts"></ul>
+      <ul id="myposts"></ul>
 
-            </div>
+    </div>
 
-        </div>
+  </div>
 
-    </body>
+</body>
 
-    <script src="libs/vendors/yepnope.1.5.4-min.js"></script>
+<script src="libs/vendors/yepnope.1.5.4-min.js"></script>
 
-    <script type="text/javascript">
-    yepnope({
-        load: {
-            jquery              : 'libs/vendors/jquery-1.7.2.js',
-            canjs               : 'libs/vendors/can.jquery-1.0.7.js'
-        },
+<script type="text/javascript">
+yepnope({
+  load: {
+    jquery              : 'libs/vendors/jquery-1.7.2.js',
+    canjs               : 'libs/vendors/can.jquery-1.0.7.js'
+  },
 
-        complete : function () {
-            $(function (){
+  complete : function () {
+    $(function (){
 
-                window.Blog = {}
+      window.Blog = {}
 
-                Blog.Post = can.Model({
-                  findAll : 'GET /blogposts',
-                  findOne : 'GET /blogposts/{id}',
-                  create  : 'POST /blogposts',
-                  update  : 'PUT /blogposts/{id}',
-                  destroy : 'DELETE /blogposts/{id}'
-                }, {});
+      Blog.Post = can.Model({
+        findAll : 'GET /blogposts',
+        findOne : 'GET /blogposts/{id}',
+        create  : 'POST /blogposts',
+        update  : 'PUT /blogposts/{id}',
+        destroy : 'DELETE /blogposts/{id}'
+      }, {});
 
-                Blog.Post.findAll({}, function(posts){ 
-                    $('#myposts').html(can.view( 'myposts_template', posts ))
-                });
-            });  
-        }
+      Blog.Post.findAll({}, function(posts){
+        $('#myposts').html(can.view( 'myposts_template', posts ))
+      });
     });
+  }
+});
 
-    </script>
-    </html>
+</script>
+</html>
 ```
 
 Nous avons conservé le mécanisme de chargement de yepnope et jQuery, donc une fois le chargement de la page terminé, nous avons défini notre modèle avec les routes nécessaires pour accéder aux services de données, puis nous exécutons un `findAll` pour obtenir la liste des posts sur le serveur et l’affichons dans la page une fois les données récupérées grâce à l’objet `can.view`.
 
-Vous n’avez plus qu’à enregistrer et relancer votre application et ouvrir l’url : 
+Vous n’avez plus qu’à enregistrer et relancer votre application et ouvrir l’url :
 
 `http://localhost:3000/index.canjs.html` dans votre navigateur, pour obtenir la liste des posts :
 
@@ -175,10 +175,10 @@ Spine peut s'installer avec **npm** (node package manager) et ainsi proposer des
 Un modèle Spine se décrit de la manière suivante :
 
 ```python
-    class window.Post extends Spine.Model
-      @configure "Post", "title", "message", "author"
-      @extend Spine.Model.Ajax
-      @url: "/blogposts"
+class window.Post extends Spine.Model
+  @configure "Post", "title", "message", "author"
+  @extend Spine.Model.Ajax
+  @url: "/blogposts"
 ```
 
 la ligne `@configure "Post", "title", "message", "author"` définit le nom du modèle et de ses propriétés, ce qui permettra de faire référence ensuite à celles-ci de la façon suivante : `@title, @message, @author`, comme ceci par exemple, si nous ajoutons une méthode `toString()` à notre modèle :
@@ -186,13 +186,13 @@ la ligne `@configure "Post", "title", "message", "author"` définit le nom du mo
 *Utilisation des “propriétés” :*
 
 ```python
-    class Post extends Spine.Model
-      @configure "Post", "title", "message", "author"
-      @extend Spine.Model.Ajax
-      @url: "/blogposts"
+class Post extends Spine.Model
+  @configure "Post", "title", "message", "author"
+  @extend Spine.Model.Ajax
+  @url: "/blogposts"
 
-      toString:()->
-        "#{@title} : #{@message} / #{@author}"
+  toString:()->
+  "#{@title} : #{@message} / #{@author}"
 ```
 
 Vous remarquerez que l'on ne définit qu'une seule url. Par contre le système de getter et de setter de Backbone disparaît (à vous de les écrire).
@@ -202,12 +202,12 @@ En ce qui concerne le contrôleur, il prend la forme suivante :
 *Contrôleur spine :*
 
 ```python
-    class Blog extends Spine.Controller
+class Blog extends Spine.Controller
 
-      constructor:()->
-        super
+  constructor:()->
+  super
 
-      render:()->
+  render:()->
 ```
 
 ###Mise en oeuvre rapide
@@ -222,64 +222,64 @@ Téléchargez la distribution [http://spinejs.com/pages/download](http://spinejs
 - relation.js
 - route.js
 
-Cette fois-ci, nous allons utiliser 2 fichiers : une page `index.spine.html` qui affichera nos données et un fichier de script coffeescript `main.spine.coffee` qui contiendra notre code applicatif. 
+Cette fois-ci, nous allons utiliser 2 fichiers : une page `index.spine.html` qui affichera nos données et un fichier de script coffeescript `main.spine.coffee` qui contiendra notre code applicatif.
 
 A nouveau, dans notre répertoire `public` (à la racine), créez une page `index.spine.html` avec le code suivant :
 
 *Index.spine.html :*
 
 ```html
-    <!DOCTYPE html>
-    <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-        <title>Spine</title>
-        <link href="libs/vendors/bootstrap/css/bootstrap.css" rel="stylesheet">
-        <style>
-            body {
-                padding-top: 60px;
-                padding-bottom: 40px;
-            }
-        </style>
-        <link href="libs/vendors/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
-    </head>
+  <!DOCTYPE html>
+  <html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Spine</title>
+    <link href="libs/vendors/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <style>
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+    </style>
+    <link href="libs/vendors/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+  </head>
 
-    <body>
+  <body>
 
-        <div class="navbar navbar-fixed-top">
-            <div class="navbar-inner">
-                <div class="container">
-                    <a class="brand">Mon Blog avec Spine</a>
-                </div>
-            </div>
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand">Mon Blog avec Spine</a>
         </div>
+      </div>
+    </div>
 
-        <div class="container-fluid">
+    <div class="container-fluid">
 
-            <div class="row-fluid">
+      <div class="row-fluid">
 
-                <script type="text/template" id="myposts_template">
-                    {{#posts}}
-                        <li>
-                            <b>{{title}}</b><br>
-                            <p>{{message}}</p>
-                            <hr>
-                        </li>
-                    {{/posts}}
-                </script>
+        <script type="text/template" id="myposts_template">
+          {{#posts}}
+            <li>
+              <b>{{title}}</b><br>
+              <p>{{message}}</p>
+              <hr>
+            </li>
+          {{/posts}}
+        </script>
 
-                <ul id="myposts"></ul>
+        <ul id="myposts"></ul>
 
-            </div>
+      </div>
 
-        </div>
+    </div>
 
-    </body>
+  </body>
 
-    <script src="libs/vendors/yepnope.1.5.4-min.js"></script>
-    <script src="main.spine.js"></script>
+  <script src="libs/vendors/yepnope.1.5.4-min.js"></script>
+  <script src="main.spine.js"></script>
 
-    </html>
+  </html>
 ```
 
 et enfin dans le répertoire `public.coffee`, créez un fichier `main.spine.coffee` avec le code ci-dessous :
@@ -289,52 +289,52 @@ et enfin dans le répertoire `public.coffee`, créez un fichier `main.spine.coff
 ```python
 yepnope
   load:
-    jquery  : "libs/vendors/jquery-1.7.2.js"
-    mustache: "libs/vendors/mustache.js"
-    spine   : "libs/vendors/spine.js"
-    ajax    : "libs/vendors/ajax.js"
-    list    : "libs/vendors/list.js"
-    local   : "libs/vendors/local.js"
-    manager : "libs/vendors/manager.js"
-    relation: "libs/vendors/relation.js"
-    route   : "libs/vendors/route.js"
+  jquery  : "libs/vendors/jquery-1.7.2.js"
+  mustache: "libs/vendors/mustache.js"
+  spine   : "libs/vendors/spine.js"
+  ajax    : "libs/vendors/ajax.js"
+  list    : "libs/vendors/list.js"
+  local   : "libs/vendors/local.js"
+  manager : "libs/vendors/manager.js"
+  relation: "libs/vendors/relation.js"
+  route   : "libs/vendors/route.js"
 
   complete: ->
-    $ ->
+  $ ->
 
-      class Post extends Spine.Model
-        @configure "Post", "title", "message", "author"
-        @extend Spine.Model.Ajax
-        @url: "/blogposts"
+    class Post extends Spine.Model
+    @configure "Post", "title", "message", "author"
+    @extend Spine.Model.Ajax
+    @url: "/blogposts"
 
-        toString:()->
-          "#{@title} : #{@message} / #{@author}"
+    toString:()->
+      "#{@title} : #{@message} / #{@author}"
 
 
-      class Blog extends Spine.Controller
+    class Blog extends Spine.Controller
 
-        constructor:()->
-          super
-          @posts = []
-          @template = $("#myposts_template").html()
-          @el = $ "ul"
+    constructor:()->
+      super
+      @posts = []
+      @template = $("#myposts_template").html()
+      @el = $ "ul"
 
-          # on s'abonne au "rafraîchissement" de la liste des posts
-          # lorsque la liste est rafraîchie, on affiche la liste (méthode render)
-          Post.bind 'refresh', => 
-            @posts = Post.all()
-            @render()
+      # on s'abonne au "rafraîchissement" de la liste des posts
+      # lorsque la liste est rafraîchie, on affiche la liste (méthode render)
+      Post.bind 'refresh', =>
+      @posts = Post.all()
+      @render()
 
-          # on charge les posts à partir du serveur
-          # cela va déclencher l'évènement "refresh"
-          Post.fetch()
+      # on charge les posts à partir du serveur
+      # cela va déclencher l'évènement "refresh"
+      Post.fetch()
 
-        render:()->
-          @el.html Mustache.to_html(@template,
-            posts: @posts
-          )
+    render:()->
+      @el.html Mustache.to_html(@template,
+      posts: @posts
+      )
 
-      window.myBlog = new Blog()
+    window.myBlog = new Blog()
 ```
 
 Maintenant positionnez vous au même endroit que le fichier `Cakefile`, lancez la commande cake `build`, lancez votre application serveur si ce n'est pas déjà fait et connectez vous, comme pour CanJS, vous obtiendrez à nouveau la même liste des posts dans votre navigateur :
@@ -355,17 +355,17 @@ Knockout [http://knockoutjs.com](http://knockoutjs.com), l'OVNI de l’équipe, 
 
 En ce qui concerne **Knockout**, nous n'allons pas repartir de nos exemples précédents, car ce qui caractérise **Knockout**, c'est son système de **"binding"** qui "frise" le **"magique"** : vos actions sur les modèles sont directement impactées sur les vues (le DOM HTML) et inversement vos actions sur le DOM (saisie dans une zone de texte par exemple) sont directement reflétées sur les modèles. Le concept de modèle en tant que tel (comme dans Backbone par exemple) n'existe pas, donc à vous de les écrire, mais **Knockout** apporte les outils nécessaires pour "faire" des **"propriétés observables"** et des **"tableaux observables"** qui seront ensuite "liés" aux vues qui ne sont ni plus ni moins que votre code html.
 
-Donc vous l'aurez compris, **Knockout** met en oeuvre le pattern **Observer** : 
+Donc vous l'aurez compris, **Knockout** met en oeuvre le pattern **Observer** :
 
-[http://en.wikipedia.org/wiki/Observer_pattern](http://en.wikipedia.org/wiki/Observer_pattern) 
+[http://en.wikipedia.org/wiki/Observer_pattern](http://en.wikipedia.org/wiki/Observer_pattern)
 
-Ou encore mieux, la version "javascript" par Addy Osmani : 
+Ou encore mieux, la version "javascript" par Addy Osmani :
 
 [http://addyosmani.com/resources/essentialjsdesignpatterns/book/#observerpatternjavascript](http://addyosmani.com/resources/essentialjsdesignpatterns/book/#observerpatternjavascript).
 
 ###Mise en oeuvre très très rapide ... Mais suffisante
 
-Récupérez donc la librairie Knockout.js par ici : 
+Récupérez donc la librairie Knockout.js par ici :
 
 [http://cloud.github.com/downloads/SteveSanderson/knockout/knockout-2.2.0.js](http://cloud.github.com/downloads/SteveSanderson/knockout/knockout-2.2.0.js)
 
@@ -373,48 +373,49 @@ Puis copiez la dans un répertoire, dans lequel vous allez créer une page `inde
 
 
 ```html
-    <!DOCTYPE html>
-    <html>
-    <head>
-        <script src="knockout-2.2.0.js"></script>
-    </head>
-    <body>
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="knockout-2.2.0.js"></script>
+  </head>
+  <body>
 
-        <h1>Tuto KnockOut</h1>
-        <!-- ICI VIENDRONT LES VUES -->
-    </body>
-    <script>
-        /* ICI VIENDRA NOTRE CODE */
-    </script>
-    </html>
+    <h1>Tuto KnockOut</h1>
+    <!-- ICI VIENDRONT LES VUES -->
+  </body>
+
+  <script>
+    /* ICI VIENDRA NOTRE CODE */
+  </script>
+</html>
 ```
 
 ###Un modèle selon Knockout
 
 Avec **Knockout**, pour définir qu'une propriété est "observable", on utilise la méthode :
 
-    ko.observable(nom_de_la_propriété)
+  ko.observable(nom_de_la_propriété)
 
  Définissons donc notre 1er modèle :
 
 ```javascript
-    var Message = function (from, subject, body) {
-        this.from = ko.observable(from);
-        this.subject = ko.observable(subject);
-        this.body = ko.observable(body);
+var Message = function (from, subject, body) {
+  this.from = ko.observable(from);
+  this.subject = ko.observable(subject);
+  this.body = ko.observable(body);
 
-        //je m'abonne aux modification de from
-        this.from.subscribe(function(value){console.log("value : ", value);});
-    }
+  //je m'abonne aux modification de from
+  this.from.subscribe(function(value){console.log("value : ", value);});
+}
 ```
 
 Toute propriété "observable" du modèle `Message` va ensuite s'utiliser de la manière suivante (pour instancier, faites un `myMessage = new Message("Bob", "Important", "Hello World !")`):
 
 - changer la valeur de `from` : `myMessage.from("Bob Morane")`
 - obtenir la valeur de `from` : `myMessage.from()`
-- s'abonner aux changements de valeur de `from` : 
+- s'abonner aux changements de valeur de `from` :
 
-    `this.from.subscribe(function(value){ //do something ... })`
+  `this.from.subscribe(function(value){ //do something ... })`
 
 Simple, non ?
 
@@ -423,11 +424,11 @@ Simple, non ?
 La notion de collection de Backbone n'existe plus, nous travaillons simplement avec des tableaux (`Array`). Je souhaite donc un tablea u "observable" de messages, je vais procéder comme ceci (en utilisant `ko.observableArray`):
 
 ```javascript
-    var Messages = ko.observableArray([
-        new Message("John Doe", "First Message", "Hello World"),
-        new Message("Bob Morane", "hello", "hello world"),
-        new Message("Sam Le Pirate", "Salut", "Salut à Tous")
-    ]);
+var Messages = ko.observableArray([
+  new Message("John Doe", "First Message", "Hello World"),
+  new Message("Bob Morane", "hello", "hello world"),
+  new Message("Sam Le Pirate", "Salut", "Salut à Tous")
+]);
 ```
 
 Donc encore plus simple que pour les modèles !!! *(donc j'ai un tableau observable de modèles observables ...)*
@@ -437,19 +438,19 @@ Donc encore plus simple que pour les modèles !!! *(donc j'ai un tableau observa
 Imaginons, que j'ai une portion de mon code html qui est dédiée à affiché un message bien précis :
 
 ```html
-    <div id="messageView">
-        <span data-bind="text: from"></span>
-        <span data-bind="text: subject"></span>
-        <span data-bind="text: body"></span>
-    </div>
+<div id="messageView">
+  <span data-bind="text: from"></span>
+  <span data-bind="text: subject"></span>
+  <span data-bind="text: body"></span>
+</div>
 ```
 
 Le code javascript pour attacher le message à `messageView` sera le suivant :
 
 ```javascript
-    msg = new Message("bob", "hello", "hello world");
+msg = new Message("bob", "hello", "hello world");
 
-    ko.applyBindings(msg, document.querySelector("#messageView"));
+ko.applyBindings(msg, document.querySelector("#messageView"));
 ```
 
 >>Le lien sera fait avec les attributs html `data-bind`. Toute modification de notre modèle sera reflétée instantanément dans le code html (mais nous y reviendrons plus tard dans la démonstration).
@@ -457,9 +458,9 @@ Le code javascript pour attacher le message à `messageView` sera le suivant :
 De la même façon, si je souhaite faire un formulaire de saisie lié à mon message :
 
 ```html
-    <form>
-        <input data-bind="value: from"/> <input data-bind="value: subject"/>
-    </form>
+<form>
+  <input data-bind="value: from"/> <input data-bind="value: subject"/>
+</form>
 ```
 
 >>Notez cette fois `data-bind="value: from"` au lieu de `data-bind="text: from"`, `value` exprime le "binding à double sens" (là aussi nous y reviendrons plus tard).
@@ -467,10 +468,10 @@ De la même façon, si je souhaite faire un formulaire de saisie lié à mon mes
 Et le code javascript pour attacher le message au formulaire sera le suivant :
 
 ```javascript
-    ko.applyBindings(msg, document.querySelector("form"));
+ko.applyBindings(msg, document.querySelector("form"));
 ```
 
->>Au fait, l'utilisation de jQuery n'est pas obligatoire (mais tellement pratique), avec jQuery, à la place de `document.querySelector("selector")` nous aurions donc `$("selector")`. 
+>>Au fait, l'utilisation de jQuery n'est pas obligatoire (mais tellement pratique), avec jQuery, à la place de `document.querySelector("selector")` nous aurions donc `$("selector")`.
 
 >>**Pas d'objet vue !** La vue est entièrement représentée par les bouts de code HTML.
 
@@ -479,26 +480,26 @@ Et le code javascript pour attacher le message au formulaire sera le suivant :
 En ce qui concerne notre tableau "observable", cela reste aussi simple :
 
 ```html
-    <div id="messagesList">
-        <table>
-            <thead>
-                <tr><th>From</th><th>Subject</th><th>Body</th></tr>
-            </thead>
-            <tbody data-bind="foreach: messages">
-                <tr>
-                    <td data-bind="text: from"></td>
-                    <td data-bind="text: subject"></td>
-                    <td data-bind="text: body"></td>
-                </tr>
-            </tbody>
-        </table>        
-    </div>
+<div id="messagesList">
+  <table>
+    <thead>
+      <tr><th>From</th><th>Subject</th><th>Body</th></tr>
+    </thead>
+    <tbody data-bind="foreach: messages">
+      <tr>
+        <td data-bind="text: from"></td>
+        <td data-bind="text: subject"></td>
+        <td data-bind="text: body"></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 ```
 
 Pour exprimer à **Knockout** que l'on veut afficher une liste d'éléments, on utilise l'attribut `data-bind="foreach: messages"`. Et en javascript, nous devrons écrire ceci :
 
 ```javascript
-    ko.applyBindings({messages:Messages}, document.querySelector("#messagesList"));
+ko.applyBindings({messages:Messages}, document.querySelector("#messagesList"));
 ```
 
 Donc, toujours aussi simple !!!
@@ -508,69 +509,69 @@ Donc, toujours aussi simple !!!
 Avant de "lancer" notre page, vérifions que le code ressemble à ceci :
 
 ```html
-    <!DOCTYPE html>
-    <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-        <script src="knockout-2.2.0.js"></script>
-    </head>
-    <body>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <script src="knockout-2.2.0.js"></script>
+  </head>
+  <body>
 
-        <h1>Tuto KnockOut</h1>
+    <h1>Tuto KnockOut</h1>
 
-        <div id="messageView">
-            <span data-bind="text: from"></span>
-            <span data-bind="text: subject"></span>
-            <span data-bind="text: body"></span>
-        </div>
-        <hr>
-        <div id="messagesList">
-            <table>
-                <thead>
-                    <tr><th>From</th><th>Subject</th><th>Body</th></tr>
-                </thead>
-                <tbody data-bind="foreach: messages">
-                    <tr>
-                        <td data-bind="text: from"></td>
-                        <td data-bind="text: subject"></td>
-                        <td data-bind="text: body"></td>
-                    </tr>
-                </tbody>
-            </table>        
-        </div>
-        <hr>
-        <form>
-            <input data-bind="value: from"/><input data-bind="value: subject"/>
-        </form>
+    <div id="messageView">
+      <span data-bind="text: from"></span>
+      <span data-bind="text: subject"></span>
+      <span data-bind="text: body"></span>
+    </div>
+    <hr>
+    <div id="messagesList">
+      <table>
+        <thead>
+          <tr><th>From</th><th>Subject</th><th>Body</th></tr>
+        </thead>
+        <tbody data-bind="foreach: messages">
+          <tr>
+            <td data-bind="text: from"></td>
+            <td data-bind="text: subject"></td>
+            <td data-bind="text: body"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <hr>
+    <form>
+      <input data-bind="value: from"/><input data-bind="value: subject"/>
+    </form>
 
 
-    </body>
-    <script>
+  </body>
+  <script>
 
-        var Message = function (from, subject, body) {
-            this.from = ko.observable(from);
-            this.subject = ko.observable(subject);
-            this.body = ko.observable(body);
+    var Message = function (from, subject, body) {
+      this.from = ko.observable(from);
+      this.subject = ko.observable(subject);
+      this.body = ko.observable(body);
 
-            this.from.subscribe(function(value){console.log("value : ", value);});
-        }
+      this.from.subscribe(function(value){console.log("value : ", value);});
+    }
 
-        var Messages = ko.observableArray([
-            new Message("John Doe", "First Message", "Hello World"),
-            new Message("Bob Morane", "hello", "hello world"),
-            new Message("Sam Le Pirate", "Salut", "Salut à Tous")
-        ]);
+    var Messages = ko.observableArray([
+      new Message("John Doe", "First Message", "Hello World"),
+      new Message("Bob Morane", "hello", "hello world"),
+      new Message("Sam Le Pirate", "Salut", "Salut à Tous")
+    ]);
 
-        msg = new Message("bob", "hello", "hello world");
+    msg = new Message("bob", "hello", "hello world");
 
-        ko.applyBindings(msg, document.querySelector("#messageView"));
+    ko.applyBindings(msg, document.querySelector("#messageView"));
 
-        ko.applyBindings(msg, document.querySelector("form"));
+    ko.applyBindings(msg, document.querySelector("form"));
 
-        ko.applyBindings({messages:Messages}, document.querySelector("#messagesList"));
+    ko.applyBindings({messages:Messages}, document.querySelector("#messagesList"));
 
-    </script>
-    </html>
+  </script>
+</html>
 ```
 
 ###Démonstration !!!
@@ -605,17 +606,17 @@ Et enfin, si vous modifiez les données dans les zones de saisie, vous pouvez vo
 
 "Je ne sais pas vous", mais je trouve **Knockout** particulièrement intéressant :). Si vous souhaitez aller plus loin, faites un tour dans la documentation et tout particulièrement ceci :
 
-- Pour les interaction avec le serveur (ajax & jQuery) : 
+- Pour les interaction avec le serveur (ajax & jQuery) :
 
-    [http://knockoutjs.com/documentation/json-data.html](http://knockoutjs.com/documentation/json-data.html)
+  [http://knockoutjs.com/documentation/json-data.html](http://knockoutjs.com/documentation/json-data.html)
 
-- Mapping des données : 
+- Mapping des données :
 
-    [http://knockoutjs.com/documentation/plugins-mapping.html](http://knockoutjs.com/documentation/plugins-mapping.html)
+  [http://knockoutjs.com/documentation/plugins-mapping.html](http://knockoutjs.com/documentation/plugins-mapping.html)
 
-Et si vous rêvez de combiner Backbone et Knockout, à voir : **Knockback** : 
+Et si vous rêvez de combiner Backbone et Knockout, à voir : **Knockback** :
 
-[http://kmalakoff.github.com/knockback/](http://kmalakoff.github.com/knockback/) 
+[http://kmalakoff.github.com/knockback/](http://kmalakoff.github.com/knockback/)
 
 qui fera certainement l'objet d'un chapitre de cet "ouvrage".
 

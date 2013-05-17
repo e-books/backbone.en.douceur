@@ -19,7 +19,7 @@ Alors, RBS (je lui donne ce petit nom pour aller plus vite) ne vient pas seule, 
 - underscore (forcément)
 - jquery (forcément)
 - async.js
-- reqire.js
+- require.js
 - etc. ...
 
 Et notamment des composants maison tels **backbone-datagrid** :
@@ -34,168 +34,174 @@ L'objet de ce chapitre n'étant pas de faire le tour complet de RBS, mais de vou
 
 Normalement, vous avez Node et npm installés, donc créez un répertoire `rbs` (par exemple), puis :
 
-	cd rbs
-	npm install express
-	npm install nstore
+  cd rbs
+  npm install express
+  npm install nstore
 
 dans `rbs`, créez un répertoire `public`, puis toujours dans `rbs`, créez un fichier `app.js`, avec le code suivant :
 
 ```javascript
 /*--------------------------------------------
-	Déclaration des librairies
+  Déclaration des librairies
 --------------------------------------------*/
-var express = require('express')
-    , nStore = require('nstore')
-    , app = express();
+var express = require('express'),
+  nStore = require('nstore'),
+  app = express();
 
 nStore = nStore.extend(require('nstore/query')());
 
 /*--------------------------------------------
-	Paramétrages de fonctionnement d'Express
+  Paramétrages de fonctionnement d'Express
 --------------------------------------------*/
 app.use(express.bodyParser());
 app.use(express.methodOverride());
 app.use(express.static(__dirname + '/public'));
 app.use(express.cookieParser('ilovebackbone'));
-app.use(express.session({ secret: "ilovebackbone" }));
+app.use(express.session({
+  secret: "ilovebackbone"
+}));
 
 /*--------------------------------------------
-	Définition de la base
+  Définition de la base
 --------------------------------------------*/
 var models;
 
 models = nStore.new("models.db", function() {
-	Routes();
-    app.listen(3000);
-    console.log('Express app started on port 3000');
+  Routes();
+  app.listen(3000);
+  console.log('Express app started on port 3000');
 });
 
 
 function Routes() {
-    /*
-		Obtenir la liste de tous les models lorsque
-		l'on appelle http://localhost:3000/models
-		en mode GET
-	*/
-    app.get('/models',function(req, res){
-        models.all(function(err, results) {
-            if(err) { 
-				console.log("Erreur : ",err);
-				res.json(err); 
-			} else {
-                var models = [];
-                for(var key in results) {
-                    var model = results[key]; model.id = key;
-                    models.push(model);
-                }
-                res.json(models);
-            }
-        });
+  /*
+    Obtenir la liste de tous les models lorsque
+    l'on appelle http://localhost:3000/models
+    en mode GET
+  */
+  app.get('/models', function(req, res) {
+    models.all(function(err, results) {
+      if (err) {
+        console.log("Erreur : ", err);
+        res.json(err);
+      } else {
+        var models = [];
+        for (var key in results) {
+          var model = results[key];
+          model.id = key;
+          models.push(model);
+        }
+        res.json(models);
+      }
+    });
+  });
+
+  /*
+    Obtenir la liste de tous les models correspondant à un critère
+    lorsque l'on appelle http://localhost:3000/models/ en
+    mode GET avec une requête en paramètre
+    ex : query : { "kind" : "message"} }
+  */
+  app.get('/models/:query', function(req, res) {
+    models.find(JSON.parse(req.params.query), function(err, results) {
+      if (err) {
+        console.log("Erreur : ", err);
+        res.json(err);
+      } else {
+        var models = [];
+        for (var key in results) {
+          var model = results[key];
+          model.id = key;
+          models.push(model);
+        }
+        res.json(models);
+      }
     });
 
-    /*
-		Obtenir la liste de tous les models correspondant à un critère
-		lorsque l'on appelle http://localhost:3000/models/ en
-		mode GET avec une requête en paramètre
-		ex : query : { "kind" : "message"} }
-	*/
-    app.get('/models/:query',function(req, res){
-        models.find(JSON.parse(req.params.query), function(err, results) {
-            if(err) {
-				console.log("Erreur : ",err);
-				res.json(err); 
-			} else {
-                var models = [];
-                for(var key in results) {
-                    var model = results[key]; model.id = key;
-                    models.push(model);
-                }
-                res.json(models);
-            }
-        });
+  });
 
+  /*
+    Retrouver un model par sa clé unique lorsque
+    l'on appelle http://localhost:3000/models/identifiant_du_model
+    en mode GET
+  */
+
+  app.get('/models/:id', function(req, res) {
+    models.get(req.params.id, function(err, post, key) {
+      if (err) {
+        console.log("Erreur : ", err);
+        res.json(err);
+      } else {
+        model.id = key;
+        res.json(model);
+      }
     });
+  });
 
-    /*
-		Retrouver un model par sa clé unique lorsque
-		l'on appelle http://localhost:3000/models/identifiant_du_model
-		en mode GET
-	*/
+  /*
+    Créer un nouveau model lorsque
+    l'on appelle http://localhost:3000/models
+    avec en paramètre le post au format JSON
+    en mode POST
+  */
+  app.post('/models', function(req, res) {
+    var d = new Date(),
+      model = req.body;
+    model.saveDate = (d.valueOf());
 
-    app.get('/models/:id', function(req, res){
-        models.get(req.params.id, function(err, post, key) {
-            if(err) {
-                console.log("Erreur : ",err);
-                res.json(err);
-			} else {
-                model.id = key;
-                res.json(model);
-            }
-        });
+    models.save(null, model, function(err, key) {
+      if (err) {
+        console.log("Erreur : ", err);
+        res.json(err);
+      } else {
+        model.id = key;
+        res.json(model);
+      }
     });
+  });
 
-    /*
-		Créer un nouveau model lorsque
-		l'on appelle http://localhost:3000/models
-		avec en paramètre le post au format JSON
-		en mode POST
-	*/
-    app.post('/models',function(req, res){
-        var d = new Date(), model = req.body;
-        model.saveDate = (d.valueOf());
 
-        models.save(null,model, function (err, key){
-            if(err) { 
-				console.log("Erreur : ",err);
-				res.json(err); 
-			} else {
-                model.id = key;
-                res.json(model);
-			}
-        });
+  /*
+    Mettre à jour un model lorsque
+    l'on appelle http://localhost:3000/blogpost
+    avec en paramètre le post au format JSON
+    en mode PUT
+  */
+  app.put('/models/:id', function(req, res) {
+    var d = new Date(),
+      model = req.body;
+    model.saveDate = (d.valueOf());
+
+    models.save(req.params.id, model, function(err, key) {
+      if (err) {
+        console.log("Erreur : ", err);
+        res.json(err);
+      } else {
+        res.json(model);
+      }
     });
+  });
 
-
-    /*
-		Mettre à jour un model lorsque
-		l'on appelle http://localhost:3000/blogpost
-		avec en paramètre le post au format JSON
-		en mode PUT
-	*/
-    app.put('/models/:id',function(req, res){
-        var d = new Date(), model = req.body;
-        model.saveDate = (d.valueOf());
-
-        models.save(req.params.id,model, function (err, key){
-            if(err) { 
-				console.log("Erreur : ",err);
-				res.json(err); 
-			} else {
-                res.json(model);
-			}
+  /*
+    supprimer un model par sa clé unique lorsque
+    l'on appelle http://localhost:3000/blogpost/identifiant_du_post
+    en mode DELETE
+  */
+  app.delete('/models/:id', function(req, res) {
+    models.remove(req.params.id, function(err) {
+      if (err) {
+        console.log("Erreur : ", err);
+        res.json(err);
+      } else {
+        //petit correctif de contournement (bug ds nStore) :
+        //ré-ouvrir la base lorsque la suppression a été faite
+        models = nStore.new("models.db", function() {
+          res.json(req.params.id);
+          //Le modèle est vide si on ne trouve rien
         });
+      }
     });
-
-    /*
-		supprimer un model par sa clé unique lorsque
-		l'on appelle http://localhost:3000/blogpost/identifiant_du_post
-		en mode DELETE
-	*/
-    app.delete('/models/:id',function(req, res){
-        models.remove(req.params.id, function(err){
-            if(err) { 
-				console.log("Erreur : ",err);
-				res.json(err); 
-			} else { 
-				//petit correctif de contournement (bug ds nStore) : 
-				//ré-ouvrir la base lorsque la suppression a été faite
-				models = nStore.new("models.db", function() {
-					res.json(req.params.id);
-                    //Le modèle est vide si on ne trouve rien
-				});
-			}
-        });
-    });
+  });
 
 }
 
@@ -209,18 +215,18 @@ Dézippez et coller le contenu de la racine dans le répertoire `rbs/public`.
 
 Vous devriez avoir une arborescence de ce type :
 
-	rbs-|
-		|-node_modules\
-		|-public\
-		|		 |-css\
-		|		 |-img\
-		|		 |-js\
-		|		 	  |-build\
-		|		 	  |-lib\
-		|		 	  |-router\
-		|		 	  |-app.js
-		|		 	  |-main.js
-		|-index.html
+  rbs-|
+    |-node_modules\
+    |-public\
+    |    |-css\
+    |    |-img\
+    |    |-js\
+    |       |-build\
+    |       |-lib\
+    |       |-router\
+    |       |-app.js
+    |       |-main.js
+    |-index.html
 
 Le script `public/js/app.js` contiendra votre code applicatif (ou partie de code), le script `public/js/main.js` permet de "charger" l'ensemble des scripts nécessaires (par exemple, ceux qui sont dans `public/js/lib` comme Backbone, Underscore, jQuery, etc. ...), puis de lancer le code contenu dans `app.js`.
 
@@ -228,22 +234,22 @@ La déclaration dans la page `index.html` se fait de la manière suivante `<scri
 
 Ensuite dans `js`, créez les répertoires suivants `models`, `views`, `collections` et dans `public` un répertoire `templates`. Notre arborescence devrez ressemblez à ceci :
 
-	rbs-|
-		|-node_modules\
-		|-public\
-		|		 |-css\
-		|		 |-img\
-		|		 |-templates\		
-		|		 |-js\
-		|		 	  |-models\
-		|		 	  |-collections\
-		|		 	  |-views\		
-		|		 	  |-build\
-		|		 	  |-lib\
-		|		 	  |-router\
-		|		 	  |-app.js
-		|		 	  |-main.js
-		|-index.html
+  rbs-|
+    |-node_modules\
+    |-public\
+    |    |-css\
+    |    |-img\
+    |    |-templates\
+    |    |-js\
+    |       |-models\
+    |       |-collections\
+    |       |-views\
+    |       |-build\
+    |       |-lib\
+    |       |-router\
+    |       |-app.js
+    |       |-main.js
+    |-index.html
 
 Il nous reste une petite modification du fichier `main.js` à faire, vers la fin du fichier, vous devez avoir une ligne `template: '../template'` que vous remplacez par `templates: '../templates',`. Oui, je sais, j'aurais pu nommer mon réperoire `templates` en `template`, mais que voulez vous, chacun ses petites habitudes.
 
@@ -257,7 +263,7 @@ Dans `js/models`, créez le fichier `message.js` avec le contenu suivant :
 define(['backbone'], function(Backbone) {
 
   var Message = Backbone.Model.extend({
-  	urlRoot : "/models"
+    urlRoot: "/models"
   });
 
   return Message;
@@ -269,16 +275,15 @@ Dans `js/collections`, créez le fichier `messages.js` avec le contenu suivant :
 
 ```javascript
 define([
-    'backbone',
-    'models/message'
-],function(Backbone, Message) {
+  'backbone',
+  'models/message'], function(Backbone, Message) {
 
-    var Messages = Backbone.Collection.extend({
-    	url : "/models",
-        model: Message
-    });
+  var Messages = Backbone.Collection.extend({
+    url: "/models",
+    model: Message
+  });
 
-    return Messages;
+  return Messages;
 
 });
 ```
@@ -296,13 +301,13 @@ Dans `public/templates` créez un fichier `message-forms.hbs` avec le code suiva
 
 ```html
 <fieldset>
-	<legend>Your Message</legend>
-	<input type="text" data-field="from" placeholder="from" />
-	<input type="text" data-field="subject" placeholder="subject" />
-	<input type="text" data-field="body" placeholder="body" />
-	<br>
-	<button data-action="add" type="button">Ajouter</button>
-	<button data-action="cancel" type="button">Annuler</button>
+  <legend>Your Message</legend>
+  <input type="text" data-field="from" placeholder="from" />
+  <input type="text" data-field="subject" placeholder="subject" />
+  <input type="text" data-field="body" placeholder="body" />
+  <br>
+  <button data-action="add" type="button">Ajouter</button>
+  <button data-action="cancel" type="button">Annuler</button>
 </fieldset>
 ```
 
@@ -328,24 +333,23 @@ Nous allons créer dans `public/js/views` 2 vues backbone associées à chacun d
 
 ```javascript
 define([
-  'resthub', 
-  'hbs!templates/messages'
-  ], 
-  function(Resthub, messagesTemplate) {
+  'resthub',
+  'hbs!templates/messages'],
 
-    var MessagesView = Resthub.View.extend({
-      el: $('#messages'),
-      template: messagesTemplate,
-      
-      initialize: function() {
-        this.collection.on('reset', this.render, this);
-        this.collection.on('add', this.render, this);
-      }
-    });
+function(Resthub, messagesTemplate) {
 
-    return MessagesView;
-  }
-);
+  var MessagesView = Resthub.View.extend({
+    el: $('#messages'),
+    template: messagesTemplate,
+
+    initialize: function() {
+      this.collection.on('reset', this.render, this);
+      this.collection.on('add', this.render, this);
+    }
+  });
+
+  return MessagesView;
+});
 ```
 
 >>*Notez l'utilisation de Resthub.View qui est une version améliorée de Backbone.View fournissant notamment une implémentation par défaut du render() ainsi que la gestion de l'élément $root sur lequel est attaché la vue ($el représentant l'élément DOM de la vue elle même) ainsi que tout un tas de fonctionnalités très pratiques*
@@ -358,54 +362,57 @@ define([
 
 ```javascript
 define([
-  'backbone', 
+  'backbone',
   'hbs!templates/message-form',
-  'models/message'
-  ], 
-  function(Resthub, messageFormTemplate, Message, MessagesView) {
+  'models/message'],
 
-    var MessageFormView = Resthub.View.extend({
-      el: $('#message_form'),
-      template: messageFormTemplate,
+function(Resthub, messageFormTemplate, Message, MessagesView) {
 
-      events: {
-          "click button[data-action='add']": 'add',
-          "click button[data-action='cancel']": 'cancel',
-      },
-      
-      initialize : function() {
-        this.render();
-      },
+  var MessageFormView = Resthub.View.extend({
+    el: $('#message_form'),
+    template: messageFormTemplate,
 
-      add : function() {
-        var model = new Message();
-        var view = this;
+    events: {
+      "click button[data-action='add']": 'add',
+      "click button[data-action='cancel']": 'cancel',
+    },
 
-        this.$el.find("input[data-field]").each(function(){
-          model.set(this.getAttribute("data-field"), this.value);
-        })
+    initialize: function() {
+      this.render();
+    },
 
-        model.save({},{
-          success:function(){
-            view.collection.fetch({
-              success:function(){
-                view.$el[0].reset();
-              },
-              error:function(err){throw err;}  
-            });  
-          },
-          error:function(err){throw err;}
-        });
-        
-      },
-      cancel : function() {
-        console.log("CANCEL");
-        this.$el[0].reset();
-      }
-    });
-    return MessageFormView;
-  }
-);
+    add: function() {
+      var model = new Message();
+      var view = this;
+
+      this.$el.find("input[data-field]").each(function() {
+        model.set(this.getAttribute("data-field"), this.value);
+      })
+
+      model.save({}, {
+        success: function() {
+          view.collection.fetch({
+            success: function() {
+              view.$el[0].reset();
+            },
+            error: function(err) {
+              throw err;
+            }
+          });
+        },
+        error: function(err) {
+          throw err;
+        }
+      });
+
+    },
+    cancel: function() {
+      console.log("CANCEL");
+      this.$el[0].reset();
+    }
+  });
+  return MessageFormView;
+});
 ```
 
 >>*Notez, qu'à chaque fois que je sauvegarde un modèle, je "fetch" ma collection qui va donc déclencher un `render` de l'instance de `MessagesView`*;
@@ -416,17 +423,21 @@ Il est temps d'apposer la touche finale, et de saisir le code suivant dans `app.
 
 ```javascript
 define([
-	'collections/messages', 
-	'views/messages-view',
-	'views/message-form-view'
-	], 
-	function(Messages, MessagesView, MessageFormView) {
-    	
-	    window.messages = new Messages();
-	    window.messagesView = new MessagesView({collection:messages});
-	    window.messageForm = new MessageFormView({collection:messages});
+  'collections/messages',
+  'views/messages-view',
+  'views/message-form-view'],
 
-	    messages.fetch();
+function(Messages, MessagesView, MessageFormView) {
+
+  window.messages = new Messages();
+  window.messagesView = new MessagesView({
+    collection: messages
+  });
+  window.messageForm = new MessageFormView({
+    collection: messages
+  });
+
+  messages.fetch();
 });
 ```
 

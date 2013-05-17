@@ -1,0 +1,37 @@
+body { margin: 5%; text-align: justify; font-size: medium; }
+
+pre,
+code { font-family: monospace; margin: 10px 0;}
+
+ul,
+ol {margin: 20px; }
+
+p code,
+pre.sourceCode {
+  border:1px solid #eaeaea;
+  background: #f8f8f8;
+  border-radius: 4px;
+}
+
+p code {
+	margin: 0 2px;
+	padding: 0 5px;
+}
+
+pre.sourceCode {
+	padding: 10px;
+}
+
+ /* For source-code highlighting */
+.kw { color: #007020; font-weight: bold; }
+.dt { color: #902000; }
+.dv { color: #40a070; }
+.bn { color: #40a070; }
+.fl { color: #40a070; }
+.ch { color: #4070a0; }
+.st { color: #4070a0; }
+.co { color: #60a0b0; font-style: italic; }
+.ot { color: #007020; }
+.al { color: red; font-weight: bold; }
+.fu { color: #06287e; }
+.er { color: red; font-weight: bold; }
