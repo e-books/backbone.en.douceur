@@ -123,7 +123,7 @@ Si vous cliquez sur un des liens « Lire … », la liste des posts disparaît a
 ![BB](RSRC/08_02_routeur.png)\
 
 
->>**Remarque IMPORTANTE** : Il est maintenant possible d'utiliser des marque-pages pour pointer directement sur les urls des posts du blog.
+>>**Remarque IMPORTANTE** : Il est maintenant possible d'utiliser des bookmarks pour pointer directement sur les urls des posts du blog.
 
 Maintenant, essayez aussi de taper directement l'url suivante dans la barre d’url : `http://localhost:3000/#hello`. Et là, le titre de notre blog change. Donc l’url peut bien déclencher directement des actions javascript. Vous pouvez donc réagir, prévenir, … toute modification de l’url (comme le retour à la page précédente) pour déclencher l’action nécessaire (par exemple la sauvegarde des données en cours).
 
