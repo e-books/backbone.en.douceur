@@ -406,7 +406,7 @@ Le code final de votre page devrait ressembler à ceci :
   <script src="libs/vendors/backbone.js"></script>
 
   <!-- === code applicatif === -->
-  < script >
+  <script>
   $(function() {
     window.blog = {};
 
