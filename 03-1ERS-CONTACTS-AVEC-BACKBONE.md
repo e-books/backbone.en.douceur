@@ -146,7 +146,7 @@ blog.ArticlesCollection = Backbone.Collection.extend({
 });
 ```
 
->>**Notez** *qu'il faut bien préciser le type de modèle adressé par la collection (on pourrait dire que la collection est typée).*
+>>**Notez** *qu'il faut bien préciser le type de modèle associé à la collection (on pourrait dire que la collection est typée).*
 
 Sauvegarder, relancer dans le navigateur, et retournez à nouveau dans la console et saisissez les commandes suivantes :
 
