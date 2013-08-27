@@ -152,14 +152,17 @@ Sauvegarder, relancer dans le navigateur, et retournez à nouveau dans la consol
 
 - Création de la collection :
 
-    listeArticles = new blog.ArticlesCollection()
+```javascript
+listeArticles = new blog.ArticlesCollection()
+```
 
 - Ajout d’articles à la collection :
 
-    listeArticles.add(new blog.Article({ title : "titre1", content : "contenu1" }))
-    listeArticles.add(new blog.Article({ title : "titre2", content : "contenu2" }))
-    listeArticles.add(new blog.Article({ title : "titre3", content : "contenu3" }))
-
+```javascript
+listeArticles.add(new blog.Article({ title : "titre1", content : "contenu1" }))
+listeArticles.add(new blog.Article({ title : "titre2", content : "contenu2" }))
+listeArticles.add(new blog.Article({ title : "titre3", content : "contenu3" }))
+```
 Nous venons donc d'ajouter 3 articles à notre collection,
 
 - Si vous tapez la commande `listeArticles.models` vous obtiendrez un tableau de modèles
