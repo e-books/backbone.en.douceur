@@ -79,8 +79,9 @@ A la racine de votre répertoire de travail, créez une page index.html avec le 
 		<title>Backbone</title>
 
 		<!-- === Styles Twitter Bootstrap -->
+		<!--V 3.0.1 ...-->
 		<link href="libs/vendors/bootstrap/css/bootstrap.css" rel="stylesheet">
-		<link href="libs/vendors/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+        	<link href="libs/vendors/css/bootstrap-theme.css" rel="stylesheet">
   </head>
 
   <!-- === ici votre IHM === -->
@@ -89,9 +90,9 @@ A la racine de votre répertoire de travail, créez une page index.html avec le 
 
   </body>
   <!-- === Références aux Frameworks === -->
-  <script src="libs/vendors/jquery-1.7.2.js"></script>
-  <script src="libs/vendors/underscore.js"></script>
-  <script src="libs/vendors/backbone.js"></script>
+  <script src="libs/vendors/jquery.js"></script><!--V 1.10.2 -->
+  <script src="libs/vendors/underscore.js"></script><!--V 1.5.2 -->
+  <script src="libs/vendors/backbone.js"></script><!--V 1.1.0 -->
 
   <!-- === ici votre code applicatif === -->
   <script>
@@ -120,8 +121,10 @@ Dans notre toute nouvelle page `index.html`, préparons un peu notre bac à sabl
 		<title>Backbone</title>
 
 		<!-- === Styles Twitter Bootstrap -->
+		<!--V 3.0.1 ...-->
 		<link href="libs/vendors/bootstrap/css/bootstrap.css" rel="stylesheet">
-
+		<link href="libs/vendors/css/bootstrap-theme.css" rel="stylesheet">
+		
 		<!-- === à insérer entre les 2 <link> === -->
 		<style>
 			body {
@@ -131,28 +134,26 @@ Dans notre toute nouvelle page `index.html`, préparons un peu notre bac à sabl
 			}
 		</style>
 
-		<link href="libs/vendors/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
-
 	</head>
 
 <!-- === ici votre IHM === -->
 	<body>
 		<!--
-		 les classe css "navbar navbar-fixed-top", "navbar-inner", "container",
-		 "brand", "hero-unit"
-		 viennent de la feuille de style "twitter bootstrap "
+		 les classes css "navbar navbar-inverse navbar-fixed-top", "navbar-header", "container",
+		 "brand", "jumbotron" (anciennement hero-unit)
+		 viennent de la feuille de style "twitter bootstrap v3 !"
 		-->
-		<div class="navbar navbar-fixed-top">
-			<div class="navbar-inner">
-				<div class="container">
-					<a class="brand">Mon Blog</a>
-				</div>
-			</div>
-		</div>
+		<div class="navbar navbar-inverse navbar-fixed-top">
+	            <div class="navbar-header">
+	                <div class="container">
+	                    <a class="navbar-brand">Mon Blog</a>
+	                </div>
+	            </div>
+	        </div>
 
 		<div class="container">
 
-			<div class="hero-unit">
+			<div class="jumbotron">
 				<h1>Backbone rocks !!!</h1>
 				<p>
 					"Ma vie mon oeuvre"
@@ -181,9 +182,9 @@ Dans notre toute nouvelle page `index.html`, préparons un peu notre bac à sabl
 
 	</body>
 	<!-- === Références aux Frameworks === -->
-	<script src="libs/vendors/jquery-1.7.2.js"></script>
-	<script src="libs/vendors/underscore.js"></script>
-	<script src="libs/vendors/backbone.js"></script>
+	<script src="libs/vendors/jquery.js"></script><!--V 1.10.2 -->
+	<script src="libs/vendors/underscore.js"></script><!--V 1.5.2 -->
+	<script src="libs/vendors/backbone.js"></script><!--V 1.1.0 -->
 
 	<!-- === ici votre code applicatif === -->
 	<script>
