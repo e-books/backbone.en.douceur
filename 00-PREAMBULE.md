@@ -26,6 +26,7 @@ Remerciements aussi pour :
 - [sdeleuze](https://github.com/sdeleuze) : optimisation de code et typo
 - [Prestaspirit](https://github.com/Prestaspirit) : corrections
 - [lionelB](https://github.com/lionelB) : amélioration de l'epub
+- [FlorianBruniaux ](https://github.com/FlorianBruniaux) : update versions, twitter bootstrap etc ...
 
 
 ##Avertissement
