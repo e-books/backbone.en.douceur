@@ -18,7 +18,7 @@ Je tiens à remercier très fortement et tout particulièrement, pour leur écou
 Remerciements aussi pour :
 
 - [ehsavoie](https://github.com/ehsavoie) : 1ère pull request ;)
-- [lodennan](https://github.com/lodennan)
+- [lodennan](https://github.com/lodennan) : correctifs
 - [cbonnissent](https://github.com/cbonnissent) : format epub
 - [loicdescotte](https://github.com/loicdescotte) : relecture & corrections
 - [hasalex](https://github.com/hasalex) : relecture & corrections (nombreuses)
@@ -27,6 +27,8 @@ Remerciements aussi pour :
 - [Prestaspirit](https://github.com/Prestaspirit) : corrections
 - [lionelB](https://github.com/lionelB) : amélioration de l'epub
 - [FlorianBruniaux ](https://github.com/FlorianBruniaux) : update versions, twitter bootstrap etc ...
+- [htulipe](https://github.com/htulipe) : correctifs
+- [cedricmessiant](https://github.com/cedricmessiant) : routeur et fixes
 
 
 ##Avertissement
