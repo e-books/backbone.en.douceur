@@ -89,7 +89,7 @@ window.RoutesManager = Backbone.Router.extend({
   },
 
   hello: function() {
-    $(".hero-unit > h1").html("Hello World !!!");
+    $(".jumbotron > h1").html("Hello World !!!");
   },
 
   displayPost: function(id_post) {

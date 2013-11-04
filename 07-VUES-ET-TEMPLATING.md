@@ -162,7 +162,7 @@ Dans notre page `index.html` nous allons ajouter un tag `<div id="posts_list"></
 
 ```html
 <div class="container">
-  <div class="hero-unit">
+  <div class="jumbotron">
   <h1>Backbone rocks !!!</h1>
   </div>
   <div id="posts_list"></div>
@@ -590,12 +590,12 @@ Nous allons donc profiter des possibilités de Twitter Bootstrap pour revoir un 
 Modifions notre code html de la manière suivante :
 
 ```html
-<div class="navbar navbar-fixed-top">
-  <div class="navbar-inner">
-    <div class="container">
-      <a class="brand">Mon Blog</a>
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-header">
+        <div class="container">
+            <a class="navbar-brand">Mon Blog</a>
+        </div>
     </div>
-  </div>
 </div>
 
 <div class="container-fluid">
@@ -617,7 +617,7 @@ Modifions notre code html de la manière suivante :
     </div>
 
     <div class="span9">
-      <div class="hero-unit">
+      <div class="jumbotron">
         <h1>Backbone rocks !!!</h1>
       </div>
 

@@ -683,7 +683,7 @@ root: ->
 
 
 hello: ->
-  $(".hero-unit > h1").html "Hello World !!!"
+  $(".jumbotron > h1").html "Hello World !!!"
 
 displayPost: (id_post) ->
   tmp = new Blog.Models.Post(id: id_post)
