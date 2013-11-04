@@ -232,7 +232,7 @@ Les commandes sont toujours à saisir dans la console du navigateur.
 Je voudrais :
 
 - changer le titre de mon blog : `$('h1').first().text("Backbone c'est top !")`, attention pensez bien au `first()` sinon vous allez changer tous les textes de tous les `H1` de la page.
-- récupérer le code HTML de la "boîte de titre" (le div avec la classe css : `class="hero-unit"`) : `$('[class="hero-unit"]').html()`, notez bien que `$('[class="hero-unit"]').text()` ne retourne pas le même résultat. On peut aussi écrire ceci plus simplement : `$('.hero-unit').html()` : le `"."` correspond à une classe css, comme le `"#"` permet de rechercher un élément par son id.
+- récupérer le code HTML de la "boîte de titre" (le div avec la classe css : `class="jumbotron"`) : `$('[class="jumbotron"]').html()`, notez bien que `$('[class="jumbotron"]').text()` ne retourne pas le même résultat. On peut aussi écrire ceci plus simplement : `$('.jumbotron').html()` : le `"."` correspond à une classe css, comme le `"#"` permet de rechercher un élément par son id.
 - changer les couleurs de police et de fond de tous les tags H1 :
 
 	  `$('h1').css("color","white").css("background-color","black")`, vous voyez que vous pouvez faire des appels chaînés, mais une autre possibilité serait la suivante :

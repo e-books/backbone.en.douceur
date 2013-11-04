@@ -65,23 +65,26 @@ Dans notre répertoire public (à la racine), créez une page `index.canjs.html`
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <title>CanJS</title>
+  <!--V 3.0.1 ...-->
   <link href="libs/vendors/bootstrap/css/bootstrap.css" rel="stylesheet">
+  <link href="libs/vendors/css/bootstrap-theme.css" rel="stylesheet">
+  
   <style>
     body {
       padding-top: 60px;
       padding-bottom: 40px;
     }
   </style>
-  <link href="libs/vendors/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+
 </head>
 
 <body>
 
-  <div class="navbar navbar-fixed-top">
-    <div class="navbar-inner">
-      <div class="container">
-        <a class="brand">Mon Blog avec CanJS</a>
-      </div>
+  <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-header">
+        <div class="container">
+            <a class="navbar-brand">Mon Blog avec CanJS</a>
+        </div>
     </div>
   </div>
 
@@ -234,24 +237,27 @@ A nouveau, dans notre répertoire `public` (à la racine), créez une page `inde
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Spine</title>
+    <!--V 3.0.1 ...-->
     <link href="libs/vendors/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="libs/vendors/css/bootstrap-theme.css" rel="stylesheet">
+    
     <style>
       body {
         padding-top: 60px;
         padding-bottom: 40px;
       }
     </style>
-    <link href="libs/vendors/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+
   </head>
 
   <body>
 
-    <div class="navbar navbar-fixed-top">
-      <div class="navbar-inner">
-        <div class="container">
-          <a class="brand">Mon Blog avec Spine</a>
+<div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar-header">
+            <div class="container">
+                <a class="navbar-brand">Mon Blog avec SPINE</a>
+            </div>
         </div>
-      </div>
     </div>
 
     <div class="container-fluid">
@@ -634,6 +640,8 @@ Vous trouverez aussi des frameworks javascript MVC “Client et Serveur”, tels
 - **Matador** [http://obvious.github.com/matador](http://obvious.github.com/matador) : celui-ci est essentiellement un framework MVC côté serveur en javascript s’appuyant sur express, il servirait donc plutôt à, par exemple, re-écrire la partie serveur de notre blog. Mais il est intéressant de voir de quelle manière il utilise des frameworks javascript initialement développés pour le navigateur, côté serveur, tel le modèle objet Klass (https://github.com/ded/klass).
 - **Chaplin** [https://github.com/chaplinjs/chaplin](https://github.com/chaplinjs/chaplin) : qui est une architecture complète autour de Backbone, une fois de plus “programmable” en coffeescript.
 - et beaucoup d'autres ...
+
+>>**Remarque** : Pour en savoir plus, vous pouvez aller lire cet article [http://coding.smashingmagazine.com/2012/07/27/journey-through-the-javascript-mvc-jungle](http://coding.smashingmagazine.com/2012/07/27/journey-through-the-javascript-mvc-jungle/) : Comparatif très complet des fwk MVC JavaScript réalisé par les développeurs de Smashing Magazine. 
 
 ##Conclusion
 

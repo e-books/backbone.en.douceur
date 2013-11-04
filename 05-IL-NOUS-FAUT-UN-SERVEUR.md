@@ -88,38 +88,39 @@ Et copiez aussi le répertoire `bootstrap` de notre exemple. Ensuite, préparez 
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Backbone</title>
+    <!--V 3.0.1 ...-->
     <link href="libs/vendors/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="libs/vendors/css/bootstrap-theme.css" rel="stylesheet">
     <style>
       body {
         padding-top: 60px;
         padding-bottom: 40px;
       }
     </style>
-    <link href="libs/vendors/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
   </head>
 
   <body>
 
-    <div class="navbar navbar-fixed-top">
-      <div class="navbar-inner">
-        <div class="container">
-          <a class="brand">Mon Blog</a>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar-header">
+            <div class="container">
+                <a class="navbar-brand">Mon Blog</a>
+            </div>
         </div>
-      </div>
     </div>
 
     <div class="container">
-      <div class="hero-unit">
+      <div class="jumbotron">
         <h1>Backbone rocks !!!</h1>
       </div>
 
     </div>
 
   </body>
-  <!-- === Frameworks === -->
-  <script src="libs/vendors/jquery-1.7.2.js"></script>
-  <script src="libs/vendors/underscore.js"></script>
-  <script src="libs/vendors/backbone.js"></script>
+  <!-- === Références aux Frameworks === -->
+  <script src="libs/vendors/jquery.js"></script><!--V 1.10.2 -->
+  <script src="libs/vendors/underscore.js"></script><!--V 1.5.2 -->
+  <script src="libs/vendors/backbone.js"></script><!--V 1.1.0 -->
 
   <!-- === code applicatif === -->
   <script>
@@ -135,7 +136,7 @@ Toujours dans le répertoire `public`, créer un fichier `app.js` qui sera le pr
 
 Rapidement, le code serveur comporte :
 
-- l'intialisation de la base de données des posts et celle des users
+- l'initialisation de la base de données des posts et celle des users
 - 6 routes :
 
   - `'/blogposts'` (`GET`) : pour récupérer tous les posts du blog

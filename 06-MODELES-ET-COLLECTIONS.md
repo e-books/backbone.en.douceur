@@ -42,7 +42,7 @@ Cela fait peu de code mais nous avons déjà une « mécanique utilisable » ave
 
 Nous n’avons pas défini de « champs » comme on peut le faire en java, nous allons voir qu’il existe diverses manières de le faire.
 
-Lancez votre navigateur et connectez-vous sur [http://localhost:3000](http://localhost:3000) (la page `index.html `est chargée par défaut si on ne le précise pas) et ouvrez votre console (celle du navigateur).
+Lancez votre navigateur et connectez-vous sur [http://localhost:3000](http://localhost:3000) (la page `index.html` est chargée par défaut si on ne le précise pas) et ouvrez votre console (celle du navigateur).
 
 Puis saisissez ceci dans la console (et validez) :
 
@@ -56,7 +56,7 @@ var message = new Post({
 });
 ```
 
-Nous avons maintenant une instance d’un modèle, jouons avec. Vous avez noté que la définition des champs du modèle (`title, message, author`) se fait à l’instanciation du modèle, personnellement je trouve ce la pratique et très lisible (un début programmation fonctionnelle), mais je comprends que cela puisse perturber (nous verrons comment faire autrement si vous le souhaitez).
+Nous avons maintenant une instance d’un modèle, jouons avec. Vous avez noté que la définition des champs du modèle (`title, message, author`) se fait à l’instanciation du modèle, personnellement je trouve cela pratique et très lisible (un début programmation fonctionnelle), mais je comprends que cela puisse perturber (nous verrons comment faire autrement si vous le souhaitez).
 
 >>**Remarque (importante)** : la propriété `urlRoot` du modèle n’est utile que si l’on se « sert » d’un modèle hors d’une collection de modèles (le modèle est indépendant), sinon, si le modèle appartient à une collection est qu’il n’a pas de propriété urlRoot renseignée, il « utilise » la propriété `url` de la collection à laquelle il appartient.
 
@@ -84,7 +84,7 @@ Vous notez que les propriétés de notre modèle sont contenues dans un objet `a
 
 ####Méthodes save() : création & mise à jour\
 
-Saisissez le code javascript ci-dessous dans la console du navigateur. Cela va déclancher une requête ajax vers le serveur pour sauvegarder votre modèle (instance de modèle). Si tout se passe bien, c’est la méthode `success()` qui est appelée.
+Saisissez le code javascript ci-dessous dans la console du navigateur. Cela va déclencher une requête ajax vers le serveur pour sauvegarder votre modèle (instance de modèle). Si tout se passe bien, c’est la méthode `success()` qui est appelée.
 
 *Appel de la méthode save() du modèle :*
 

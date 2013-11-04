@@ -539,7 +539,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
     <span class="kw">&lt;body&gt;</span>
         <span class="co">&lt;!--</span>
 <span class="co">           les classe css &quot;navbar navbar-fixed-top&quot;, &quot;navbar-inner&quot;, &quot;container&quot;, </span>
-<span class="co">           &quot;brand&quot;, &quot;hero-unit&quot;</span>
+<span class="co">           &quot;brand&quot;, &quot;jumbotron&quot;</span>
 <span class="co">           viennent de la feuille de style &quot;twitter bootstrap &quot;</span>
 <span class="co">        --&gt;</span>
         <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;navbar navbar-fixed-top&quot;</span><span class="kw">&gt;</span>
@@ -552,7 +552,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
 
         <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;container&quot;</span><span class="kw">&gt;</span>
 
-            <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;hero-unit&quot;</span><span class="kw">&gt;</span>
+            <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;jumbotron&quot;</span><span class="kw">&gt;</span>
                 <span class="kw">&lt;h1&gt;</span>Backbone rocks !!!<span class="kw">&lt;/h1&gt;</span>
                 <span class="kw">&lt;p&gt;</span>
                     &quot;Ma vie mon oeuvre&quot;
@@ -606,7 +606,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <p>Les commandes sont toujours à saisir dans la console du navigateur. Je voudrais :</p>
 <ul>
 <li>changer le titre de mon blog : <code>$('h1').first().text(&quot;Backbone c'est top !&quot;)</code>, attention pensez bien au <code>first()</code> sinon vous allez changer tous les textes de tous les <code>H1</code> de la page.</li>
-<li>récupérer le code HTML de la &quot;boîte de titre&quot; (le div avec la classe css : <code>class=&quot;hero-unit&quot;</code>) : <code>$('[class=&quot;hero-unit&quot;]').html()</code>, notez bien que <code>$('[class=&quot;hero-unit&quot;]').text()</code> ne retourne pas le même résultat. On peut aussi écrire ceci plus simplement : <code>$('.hero-unit').html()</code> : le <code>&quot;.&quot;</code> correspond à une classe css, comme le <code>&quot;#&quot;</code> permet de rechercher un élément par son id.</li>
+<li>récupérer le code HTML de la &quot;boîte de titre&quot; (le div avec la classe css : <code>class=&quot;jumbotron&quot;</code>) : <code>$('[class=&quot;jumbotron&quot;]').html()</code>, notez bien que <code>$('[class=&quot;jumbotron&quot;]').text()</code> ne retourne pas le même résultat. On peut aussi écrire ceci plus simplement : <code>$('.jumbotron').html()</code> : le <code>&quot;.&quot;</code> correspond à une classe css, comme le <code>&quot;#&quot;</code> permet de rechercher un élément par son id.</li>
 <li><p>changer les couleurs de police et de fond de tous les tags H1 :</p>
 <p><code>$('h1').css(&quot;color&quot;,&quot;white&quot;).css(&quot;background-color&quot;,&quot;black&quot;)</code>, vous voyez que vous pouvez faire des appels chaînés, mais une autre possibilité serait la suivante :</p>
 <pre><code>    $(&#39;h1&#39;).css({color:&quot;yellow&quot;, backgroundColor:&quot;green&quot;})</code></pre></li>
@@ -734,7 +734,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
 
         <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;container&quot;</span><span class="kw">&gt;</span>
 
-            <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;hero-unit&quot;</span><span class="kw">&gt;</span>
+            <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;jumbotron&quot;</span><span class="kw">&gt;</span>
                 <span class="kw">&lt;h1&gt;</span>Backbone rocks !!!<span class="kw">&lt;/h1&gt;</span>
             <span class="kw">&lt;/div&gt;</span>
 
@@ -872,7 +872,7 @@ listeArticles.add(new blog.Article({ title : &quot;titre3&quot;, content : &quot
 
         <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;container&quot;</span><span class="kw">&gt;</span>
 
-            <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;hero-unit&quot;</span><span class="kw">&gt;</span>
+            <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;jumbotron&quot;</span><span class="kw">&gt;</span>
                 <span class="kw">&lt;h1&gt;</span>Backbone rocks !!!<span class="kw">&lt;/h1&gt;</span>
             <span class="kw">&lt;/div&gt;</span>
 
@@ -998,7 +998,7 @@ listeArticles.add(new blog.Article({ title : &quot;titre3&quot;, content : &quot
 
         <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;container&quot;</span><span class="kw">&gt;</span>
 
-            <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;hero-unit&quot;</span><span class="kw">&gt;</span>
+            <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;jumbotron&quot;</span><span class="kw">&gt;</span>
                 <span class="kw">&lt;h1&gt;</span>Backbone rocks !!!<span class="kw">&lt;/h1&gt;</span>
             <span class="kw">&lt;/div&gt;</span>
 
@@ -1417,7 +1417,7 @@ npm install express</code></pre>
         <span class="kw">&lt;/div&gt;</span>
 
         <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;container&quot;</span><span class="kw">&gt;</span>
-            <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;hero-unit&quot;</span><span class="kw">&gt;</span>
+            <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;jumbotron&quot;</span><span class="kw">&gt;</span>
                 <span class="kw">&lt;h1&gt;</span>Backbone rocks !!!<span class="kw">&lt;/h1&gt;</span>
             <span class="kw">&lt;/div&gt;</span>
 
@@ -2255,7 +2255,7 @@ npm install express</code></pre>
 </blockquote>
 <p>Dans notre page <code>index.html</code> nous allons ajouter un tag <code>&lt;div id=&quot;posts_list&quot;&gt;&lt;/div&gt;</code> comme ceci :</p>
 <pre class="sourceCode html"><code class="sourceCode html">    <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;container&quot;</span><span class="kw">&gt;</span>
-        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;hero-unit&quot;</span><span class="kw">&gt;</span>
+        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;jumbotron&quot;</span><span class="kw">&gt;</span>
             <span class="kw">&lt;h1&gt;</span>Backbone rocks !!!<span class="kw">&lt;/h1&gt;</span>
         <span class="kw">&lt;/div&gt;</span>
 
@@ -2584,7 +2584,7 @@ npm install express</code></pre>
             <span class="kw">&lt;/div&gt;</span>
 
             <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;span9&quot;</span><span class="kw">&gt;</span>
-                <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;hero-unit&quot;</span><span class="kw">&gt;</span>
+                <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;jumbotron&quot;</span><span class="kw">&gt;</span>
                     <span class="kw">&lt;h1&gt;</span>Backbone rocks !!!<span class="kw">&lt;/h1&gt;</span>
                 <span class="kw">&lt;/div&gt;</span>
 
@@ -3513,7 +3513,7 @@ npm install express</code></pre>
         },
 
         <span class="dt">hello </span>: <span class="kw">function</span> () {
-            $(<span class="st">&quot;.hero-unit &gt; h1&quot;</span>).<span class="fu">html</span>(<span class="st">&quot;Hello World !!!&quot;</span>);
+            $(<span class="st">&quot;.jumbotron &gt; h1&quot;</span>).<span class="fu">html</span>(<span class="st">&quot;Hello World !!!&quot;</span>);
         },
 
         <span class="dt">displayPost </span>: <span class="kw">function</span> (id_post) {
@@ -3722,7 +3722,7 @@ npm install express</code></pre>
             },
 
             <span class="dt">hello </span>: <span class="kw">function</span> () {
-                $(<span class="st">&quot;.hero-unit &gt; h1&quot;</span>).<span class="fu">html</span>(<span class="st">&quot;Hello World !!!&quot;</span>);
+                $(<span class="st">&quot;.jumbotron &gt; h1&quot;</span>).<span class="fu">html</span>(<span class="st">&quot;Hello World !!!&quot;</span>);
             },
 
             <span class="dt">displayPost </span>: <span class="kw">function</span> (id_post) {
@@ -4091,7 +4091,7 @@ npm install express</code></pre>
 <p>Je retourne donc dans le code html de ma page <code>index.html</code>. Ajoutons ceci juste après le “grand titre” de notre blog :</p>
 <p><em>Template de l’écran d’administration :</em></p>
 <pre class="sourceCode html"><code class="sourceCode html"><span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;span9&quot;</span><span class="kw">&gt;</span>
-    <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;hero-unit&quot;</span><span class="kw">&gt;</span>
+    <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;jumbotron&quot;</span><span class="kw">&gt;</span>
         <span class="kw">&lt;h1&gt;</span>Backbone rocks !!!<span class="kw">&lt;/h1&gt;</span>
     <span class="kw">&lt;/div&gt;</span>
 
@@ -5004,7 +5004,7 @@ npm install express</code></pre>
 
 
       hello: -&gt;
-        $(<span class="st">&quot;.hero-unit &gt; h1&quot;</span>).html <span class="st">&quot;Hello World !!!&quot;</span>
+        $(<span class="st">&quot;.jumbotron &gt; h1&quot;</span>).html <span class="st">&quot;Hello World !!!&quot;</span>
 
       displayPost: (id_post) -&gt;
         tmp = new Blog.Models.Post(<span class="dt">id</span>: id_post)

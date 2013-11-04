@@ -19,7 +19,7 @@ Je retourne donc dans le code html de ma page `index.html`. Ajoutons ceci juste 
 
 ```html
 <div class="span9">
-  <div class="hero-unit">
+  <div class="jumbotron">
       <h1>Backbone rocks !!!</h1>
   </div>
 
