@@ -112,17 +112,17 @@ $(function() {
 < /script>
 ```
 
-Sauvegardez, relancez dans le navigateur, et allez dans la console :
+Sauvegardez, relancez dans le navigateur et allez dans la console :
 
 - Pour créer un nouvel article : tapez la commande `myFirstArticle = new blog.Article()`
 - Pour "voir" le titre de l'article : tapez la commande `myFirstArticle.get("title")`
 - Pour "voir" le contenu de l'article : tapez la commande `myFirstArticle.get("content")`
 - Pour changer le titre de l'article : tapez la commande `myFirstArticle.set("title","MON TITRE")` ou `myFirstArticle.set({title : "MON TITRE"})`
-- Pour changer simultanément le titre et le contenu : tapez la commande `myFirstArticle.set({title : "MON TITRE ...", content : "blablabla"})`
-- Pour créer un article directement avec un titre et du contenu : tapez la commande `mySecondArticle = new blog.Article({title : "MON AUTRE ARTICLE", content : "lore ipsum ..."})`
+- Pour changer simultanément le titre et le contenu : tapez la commande `myFirstArticle.set({title : "MON TITRE...", content : "blablabla"})`
+- Pour créer un article directement avec un titre et du contenu : tapez la commande `mySecondArticle = new blog.Article({title : "MON AUTRE ARTICLE", content : "lorem ipsum..."})`
 
 
-![BB](RSRC/03_01_BB.png)\
+![BB](RSRC/03_01_BB.png)
 
 
 Vous venez donc de voir que nous avons défini le modèle article “un peu” comme une classe qui hériterait (`extend`) de la classe `Backbone.Model`, que nous lui avons défini des valeurs par défauts (`defaults`), et affecté une méthode d’initialisation (`initialize`). Et qu’il existe un système de getter et de setter un peu particulier (`model.get(property_name)`, `model.set(property_name, value)`), mais nous verrons ultérieurement dans le détail comment fonctionnent les modèles.
@@ -148,7 +148,7 @@ blog.ArticlesCollection = Backbone.Collection.extend({
 
 >>**Notez** *qu'il faut bien préciser le type de modèle associé à la collection (on pourrait dire que la collection est typée).*
 
-Sauvegarder, relancer dans le navigateur, et retournez à nouveau dans la console et saisissez les commandes suivantes :
+Sauvegarder, relancer dans le navigateur, retournez à nouveau dans la console et saisissez les commandes suivantes :
 
 - Création de la collection :
 
@@ -177,7 +177,7 @@ Nous venons donc d'ajouter 3 articles à notre collection,
 >>Cela vous rappelle quelque chose ? Le `each` de Backbone est implémenté grâce à Underscore.
 
 
-![BB](RSRC/03_02_BB.png)\
+![BB](RSRC/03_02_BB.png)
 
 
 **Maintenant que nous avons de quoi gérer nos données, il est temps de les afficher dans notre page HTML.**
@@ -269,22 +269,20 @@ blog.ArticlesView = Backbone.View.extend({
 
 Eh bien, nous avons défini une vue avec :
 
-- Une propriété `el` (pour élément) à laquelle on “attache” le `<div>` dont l’id est :
-
-  `“articles-collection-container”`. C’est dans ce `<div>` que seront affichés les articles
+- Une propriété `el` (pour élément) à laquelle on “attache” le `<div>` dont l’id est : `“articles-collection-container”`. C’est dans ce `<div>` que seront affichés les articles
 
 - Une méthode `initialize`, qui affecte une méthode `template()` à l’instance de la vue en lui précisant que nous utiliserons le modèle de code html définit dans le `<div>` dont l’id est `“articles-collection-template”`
 - Une méthode `render`, qui va passer les données en paramètre à la méthode `template()` puis les afficher dans la page
 
-Sauvegarder, relancer dans le navigateur, et retournez encore dans la console pour saisir les commandes suivantes :
+Sauvegarder, relancer dans le navigateur et retournez encore dans la console pour saisir les commandes suivantes :
 
 - Pour instancier une vue : `articlesView = new blog.ArticlesView({ collection : blog.listeArticles })` à laquelle nous passons la collection d’articles en paramètre
 - Pour afficher les données : `articlesView.render()`
 
-**Et là la "magie" de Backbone s'opère, vos articles s'affichent instantanément dans votre page :** :)
+**Et là, la "magie" de Backbone opère, vos articles s'affichent instantanément dans votre page :** :)
 
 
-![BB](RSRC/03_03_BB.png)\
+![BB](RSRC/03_03_BB.png)
 
 
 >>**Remarque** : Notez bien que la collection doit être transformée en chaîne JSON pour être interprétée dans le template ( `this.template({ articles : this.collection.toJSON() })` ) et que nous avons nommé le paramètre `articles` pour faire le lien avec le template ( `_.each(articles, function(article) {}` ).
@@ -305,11 +303,11 @@ this.collection.bind('remove', this.render);
 
 ###Que venons-nous de faire ?
 
-Nous venons "d'expliquer" à Backbone, qu'à chaque changement dans la collection, la vue doit rafraîchir son contenu. `_.bindAll` est une méthode d'Underscore ([http://documentcloud.github.com/underscore/#bind](http://documentcloud.github.com/underscore/#bind)) qui permet de conserver le contexte initial, c'est à dire : quel que soit "l'endroit" d'où l'on appelle la méthode `render`, ce sera bien l'instance de la vue (attachée à `this`) qui sera utilisée.
+Nous venons "d'expliquer" à Backbone, qu'à chaque changement dans la collection, la vue doit rafraîchir son contenu. `_.bindAll` est une méthode d'Underscore ([http://documentcloud.github.com/underscore/#bindAll](http://documentcloud.github.com/underscore/#bindAll)) qui permet de conserver le contexte initial, c'est à dire : quel que soit "l'endroit" d'où l'on appelle la méthode `render`, ce sera bien l'instance de la vue (attachée à `this`) qui sera utilisée.
 
   //TODO: à expliquer plus simplement
 
-Une dernière fois, sauvegarder, relancer le navigateur, et retournez encore dans la console pour saisir les commandes suivantes :
+Une dernière fois, sauvegarder, relancer le navigateur et retournez encore dans la console pour saisir les commandes suivantes :
 
 - Création de la vue : `articlesView = new blog.ArticlesView({ collection : blog.listeArticles })`
 - Afficher les données : `articlesView.render()`
@@ -320,7 +318,7 @@ Une dernière fois, sauvegarder, relancer le navigateur, et retournez encore dan
 
 ###Oh la vilaine erreur !!!
 
-Si vous avez bien suivi, j'ai fait une grossière erreur (je l’ai laissé volontairement, car c'est une erreur que j'ai déjà faite, et il n'est donc pas impossible que d'autres la fassent), la date de publication ne change pas ! En effet, je l'affecte dans les valeurs par défaut qui ne sont "settées" qu'une seule et unique fois lors de la définition de la "pseudo" classe `Backbone.Model`. Il faut donc initialiser la date de publication lors de l'instanciation du modèle, et ce dans la méthode `initialize()`. Modifiez donc le code du modèle de la manière suivante :
+Si vous avez bien suivi, j'ai fait une grossière erreur (je l’ai laissée volontairement, car c'est une erreur que j'ai déjà faite, et il n'est donc pas impossible que d'autres la fassent), la date de publication ne change pas ! En effet, je l'affecte dans les valeurs par défaut qui ne sont "settées" qu'une seule et unique fois lors de la définition de la "pseudo" classe `Backbone.Model`. Il faut donc initialiser la date de publication lors de l'instanciation du modèle, et ce dans la méthode `initialize()`. Modifiez donc le code du modèle de la manière suivante :
 
 ```javascript
 /*--- Modèle article ---*/
@@ -341,12 +339,12 @@ blog.Article = Backbone.Model.extend({ // une "sorte" de classe Article
 Refaites les manipulations précédentes, et là (si vous avez laissez suffisamment de temps entre la création des articles), vous pourrez noter que la date est bien mise à jour :
 
 
-![BB](RSRC/03_04_BB.png)\
+![BB](RSRC/03_04_BB.png)
 
-![BB](RSRC/03_05_BB.png)\
+![BB](RSRC/03_05_BB.png)
 
 
->>**Remarque** : la propriété date n’existe plus dans les valeurs par défaut, elle est créée à l’instanciation du modèle lors de l’appel de `this.set("publicationDate",new Date())` dans la méthode `initialize`. De la même manière, vous pouvez créer à la volée des propriétés “à posteriori” pour les instances des modèles.
+>>**Remarque** : la propriété date n’existe plus dans les valeurs par défaut, elle est créée à l’instanciation du modèle lors de l’appel de `this.set("publicationDate",new Date())` dans la méthode `initialize`. De la même manière, vous pouvez créer à la volée des propriétés “a posteriori” pour les instances des modèles.
 
 **Et voilà, l’initiation est terminée. Nous allons pouvoir passer “aux choses sérieuses” et découvrir jusqu’où nous pouvons “pousser” Backbone.**
 

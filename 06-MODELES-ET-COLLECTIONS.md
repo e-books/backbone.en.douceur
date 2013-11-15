@@ -65,7 +65,7 @@ Nous avons maintenant une instance d’un modèle, jouons avec. Vous avez noté 
 Pour lire ou modifier les valeurs des propriétés de notre message, le réflexe serait, par exemple pour obtenir la valeur du titre, de taper la commande `message.title`, et bien cela ne fonctionne pas ! Backbone a une mécanique différente, si vous souhaitez obtenir la valeur du titre il faudra taper la commande `message.get("title")` et pour la modifier `message.set("title", "mon nouveau titre")` ou `message.set({title : "mon nouveau titre"})`, cette dernière notation permet de changer plusieurs propriétés en une seule passe. Cela peut surprendre mais cela a beaucoup d’avantages d’utiliser des méthodes plutôt qu’une simple affectation, on peut ainsi s’abonner aux changements des valeurs pour déclencher automatiquement un traitement (comme le rafraîchissement d’une vue par exemple). Faites donc l’exercice dans la console :
 
 
-![BB](RSRC/06_01_MODS.png)\
+![BB](RSRC/06_01_MODS.png)
 
 
 
@@ -74,7 +74,7 @@ Pour lire ou modifier les valeurs des propriétés de notre message, le réflexe
 Mais allons voir comment est structuré un modèle : dans la console, tapez `message` (notre instance de modèle `Post`) et déroulez la structure « child » (child pour instance de modèle) :
 
 
-![BB](RSRC/06_02_MODS.png)\
+![BB](RSRC/06_02_MODS.png)
 
 
 Vous notez que les propriétés de notre modèle sont contenues dans un objet `attributes` (c’est pour cela que nous n’y avons pas accès directement et que l'on utilise `get` et `set`).
@@ -99,19 +99,19 @@ message.save({}, {
 });
 ```
 
-![BB](RSRC/06_03_MODS.png)\
+![BB](RSRC/06_03_MODS.png)
 
 
 Vous pouvez noter au passage que côté serveur, c’est bien une méthode de type POST qui a été faite et qu’un modèle a été créé en base de données.
 
 
-![BB](RSRC/06_04_MODS.png)\
+![BB](RSRC/06_04_MODS.png)
 
 
 Si dans la console du navigateur, vous saisissez `message` (notre modèle) et validez, vous aurez l’opportunité de pouvoir dérouler l’ensemble des membres (propriétés et méthodes) de message. Vous noterez l’apparition de la propriété `id`, avec une valeur (valeur unique qui a été affectée par le serveur).
 
 
-![BB](RSRC/06_05_MODS.png)\
+![BB](RSRC/06_05_MODS.png)
 
 Modifions maintenant le modèle en cours et sauvegardons le :
 
@@ -151,13 +151,13 @@ message.save({},{
 Et vous obtiendrez :
 
 
-![BB](RSRC/06_06_MODS.png)\
+![BB](RSRC/06_06_MODS.png)
 
 
 Cette fois ci, côté serveur, la requête ajax a été détectée comme une requête de type `PUT`, donc une requête de mise à jour du modèle.
 
 
-![BB](RSRC/06_07_MODS.png)\
+![BB](RSRC/06_07_MODS.png)
 
 
 ####Méthode fetch() : retrouver un modèle
@@ -192,7 +192,7 @@ message.fetch({
 Nous récupérons bien les données du modèle sauvegardé :
 
 
-![BB](RSRC/06_08_MODS.png)\
+![BB](RSRC/06_08_MODS.png)
 
 
 Et côté serveur, on peut vérifier le message affiché dans le terminal : nous avons bien une requête de type `GET` avec en paramètre la clé unique (identifiant) du modèle.
@@ -215,13 +215,13 @@ message.destroy({
 ```
 
 
-![BB](RSRC/06_09_MODS.png)\
+![BB](RSRC/06_09_MODS.png)
 
 
 Et côté serveur, nous avons bien une requête de type `DELETE` avec en paramètre la clé unique (identifiant) du modèle :
 
 
-![BB](RSRC/06_10_MODS.png)\
+![BB](RSRC/06_10_MODS.png)
 
 
 ###Événements
@@ -243,7 +243,7 @@ message.on("change", function() {
 Nous venons de nous abonner aux changements de valeurs des champs de l’instance de modèle `message`. C’est-à-dire que nous serons notifiés dès qu’une valeur d’un champ de `message` est modifiée :
 
 
-![BB](RSRC/06_11_MODS.png)\
+![BB](RSRC/06_11_MODS.png)
 
 
 Vous pouvez aussi "écouter" les changements spécifiques à un attribut bien particulier de cette façon :
@@ -254,7 +254,7 @@ message.on("change:message", function() {
 })
 ```
 
-![BB](RSRC/06_12_MODS.png)\
+![BB](RSRC/06_12_MODS.png)
 
 
 On s’aperçoit que les abonnements se cumulent.
@@ -288,13 +288,13 @@ Nous venons d’expliquer que pour chacun des modèles de type `Post`, si son ti
 Rechargez votre page, et rappelez par un `fetch` votre modèle (les données du serveur) :
 
 
-![BB](RSRC/06_13_MODS.png)\
+![BB](RSRC/06_13_MODS.png)
 
 
 Mais vous pouvez essayer avec un nouveau Post :
 
 
-![BB](RSRC/06_14_MODS.png)\
+![BB](RSRC/06_14_MODS.png)
 
 
 ###“Augmenter” le modèle : ajouter des valeurs par défaut et des méthodes au modèle
@@ -349,7 +349,7 @@ window.Post = Backbone.Model.extend({
 Que nous pouvons utiliser de la manière suivante :
 
 
-![BB](RSRC/06_15_MODS.png)\
+![BB](RSRC/06_15_MODS.png)
 
 ###Validation
 
@@ -394,7 +394,7 @@ message.save()
 Et dans la console du précédent navigateur, vous allez voir s’afficher un message expliquant que le modèle a changé. La méthode `change()` que nous avons définie dans `initialize` est aussi appelée/déclenchée lorsque que Backbone détecte un changement (lors d’un `fetch()`) entre les données clientes et les données serveurs :
 
 
-![BB](RSRC/06_16_MODS.png)\
+![BB](RSRC/06_16_MODS.png)
 
 
 Pour le moment nous avons fait le tour de l’essentiel du fonctionnement des modèles (je vous engage cependant à lire la documentation de Backbone ([http://backbonejs.org/#Model](http://backbonejs.org/#Model)), pour en découvrir toutes les possibilités). Passons donc aux collections.
@@ -489,7 +489,7 @@ postsList.models
 Et vous obtenez un tableau des 5 modèles de la collection :
 
 
-![BB](RSRC/06_17_MODS.png)\
+![BB](RSRC/06_17_MODS.png)
 
 
 Et vous pouvez accéder aux modèles et à leurs propriétés par exemple de cette façon-ci :
@@ -538,7 +538,7 @@ postsList.each(function(post) {
 Vous obtiendrez le résultat suivant :
 
 
-![BB](RSRC/06_18_MODS.png)\
+![BB](RSRC/06_18_MODS.png)
 
 
 ###Filtrer les modèles d’une collection
@@ -554,7 +554,7 @@ De la même façon que `each()` il existe une méthode `filter()` (toujours issu
 ```
 
 
-![BB](RSRC/06_19_MODS.png)\
+![BB](RSRC/06_19_MODS.png)
 
 
 ###Trouver le 1er modèle d’une collection correspondant à un critère
@@ -570,12 +570,12 @@ La méthode `find()` fonctionne comme `filter()` mais retourne le premier élém
 ```
 
 
-![BB](RSRC/06_20_MODS.png)\
+![BB](RSRC/06_20_MODS.png)
 
 
 ###Autres méthodes de la collection
 
-  //TODO: à faire ... en attendant lisez la doc de Backbone (ou faites moi une PR ;) )
+  //TODO: à faire... en attendant lisez la doc de Backbone (ou faites moi une PR ;) )
 
 
 ##Les collections “parlent” au serveur
@@ -597,7 +597,7 @@ Sauvegardons d’abord nos modèles (en utilisant `each()` pour aller plus vite)
 ```
 
 
-![BB](RSRC/06_21_MODS.png)\
+![BB](RSRC/06_21_MODS.png)
 
 
 ###Charger les données
@@ -628,7 +628,7 @@ Et chargez celle-ci à partir des données du serveur :
 Nous avons donc bien une collection avec les modèles initialisés à partir des données du serveur :
 
 
-![BB](RSRC/06_22_MODS.png)\
+![BB](RSRC/06_22_MODS.png)
 
 
 ###Requêtes
@@ -674,7 +674,7 @@ puis faites une requête :
 Vous obtenez ceci :
 
 
-![BB](RSRC/06_23_MODS.png)\
+![BB](RSRC/06_23_MODS.png)
 
 
 Ensuite si vous souhaitez charger tous les modèles (toujours dans la console de votre navigateur) :
@@ -691,7 +691,7 @@ Ensuite si vous souhaitez charger tous les modèles (toujours dans la console de
 ```
 
 
-![BB](RSRC/06_24_MODS.png)\
+![BB](RSRC/06_24_MODS.png)
 
 
 >>**A Noter** : il se trouve que les collections dans Backbone ont une méthode `url()` qui est appelée si la propriété `url` n’existe pas, cela peut être un autre moyen d’adresser la problématique de changement d’url. De même si les modèles ajoutés à une collection n’ont pas de propriété `url` (ni `urlRoot`), ils héritent de celle de la collection (mais cela demande à revoir la politique de « routage » utilisée côté serveur ou de modifier `Backbone.sync()` qui construira les requêtes http en fonction du type d’objet faisant une requête (modèle ou collection)). Pour plus d’informations sur le sujet, aller voir : [http://backbonejs.org/#Model-url](http://backbonejs.org/#Model-url) ainsi que [http://backbonejs.org/#Collection-url](http://backbonejs.org/#Collection-url).
@@ -717,7 +717,7 @@ Puis :
 Vous obtenez ceci :
 
 
-![BB](RSRC/06_25_MODS.png)\
+![BB](RSRC/06_25_MODS.png)
 
 
 **Il n’est donc plus obligatoire d’affecter un événement de façon individuelle aux modèles, tous les modèles appartenant à une collection héritent de l’événement (trigger) associé à celle-ci.**

@@ -123,7 +123,7 @@ blogPosts.each(function(post) {
 
 Vous devriez au final obtenir ceci :
 
-![BB](RSRC/07_01_VIEWS.png)\
+![BB](RSRC/07_01_VIEWS.png)
 
 
 Pour vérifier que la sauvegarde a bien fonctionné, rafraîchissez votre page et lancez ce code dans la console du navigateur :
@@ -141,7 +141,7 @@ blogPosts.all()
 
 Si tout va bien (il n’y a pas de raison), vous devriez obtenir ceci :
 
-![BB](RSRC/07_02_VIEWS.png)\
+![BB](RSRC/07_02_VIEWS.png)
 
 
 Ainsi, quoiqu’il se passe, vous disposez de tous vos messages et ne serez plus obligés de les ressaisir pour la suite des exercices. Nous pouvons donc entrer dans le vif du sujet.
@@ -228,7 +228,7 @@ postsListView.render()
 
 Et vous obtenez la liste de vos messages :
 
-![BB](RSRC/07_03_VIEWS.png)\
+![BB](RSRC/07_03_VIEWS.png)
 
 
 Souvenez vous, dans les chapitres précédents nous avions « donné » aux collections la possibilité de faire des requêtes sur les données avant de lancer un `fetch`. Essayez donc ceci dans la console de votre navigateur :
@@ -252,10 +252,10 @@ postsListView.render()
 
 Et là, l’affichage s’actualise automatiquement :
 
-![BB](RSRC/07_04_VIEWS.png)\
+![BB](RSRC/07_04_VIEWS.png)
 
 
-##Maintenant, un peu de magie ...
+##Maintenant, un peu de magie...
 
 ###S'abonner aux événements
 
@@ -576,7 +576,7 @@ Nous avons inséré dans la méthode `initialize` : `this.template = _.template(
 
 Vous pouvez sauvegarder et rafraîchir, les résultats sont identiques aux précédents, mais il est beaucoup plus facile de créer et modifier vos templates html.
 
-![BB](RSRC/07_05_VIEWS.png)\
+![BB](RSRC/07_05_VIEWS.png)
 
 
 ##Sous-vue(s)
@@ -725,7 +725,7 @@ window.mainView = new MainView({
 
 Vous pouvez sauvegarder votre code et rafraîchir votre page :
 
-![BB](RSRC/07_06_VIEWS.png)\
+![BB](RSRC/07_06_VIEWS.png)
 
 
 Et si vous faites ceci en mode console :
@@ -783,7 +783,7 @@ window.MainView = Backbone.View.extend({
 
 Et le rendu dans le navigateur devrait vous donner ceci :
 
-![BB](RSRC/07_07_VIEWS.png)\
+![BB](RSRC/07_07_VIEWS.png)
 
 
   //TODO : faire un paragraphe sur le comparator dans le chapitre sur les collections
@@ -857,7 +857,7 @@ Et nous allons une fois de plus "casser" notre code html.
 
 Nous obtenons donc des templates html plus lisibles, utilisables moyennant une petite modification de nos vues :
 
-*5] Avant (avec le moteur de template d’underscore) :*
+*5] Avant (avec le moteur de template d’Underscore) :*
 
 ```javascript
 window.PostsListView = Backbone.View.extend({
@@ -981,7 +981,7 @@ function addUsers() {
     lastName  : "Le Pirate"
   });
 
-  //etc. ...
+  //etc.
 }
 ```
 
@@ -1207,7 +1207,7 @@ function addUsers() {
     lastName: "Le Pirate"
   });
 
-  //etc. ...
+  //etc.
 }
 
 function findUserBySession(sessionID) {
@@ -1679,19 +1679,19 @@ function addUsers() {
 
 Lançons donc notre page web :
 
-![BB](RSRC/07_08_VIEWS.png)\
+![BB](RSRC/07_08_VIEWS.png)
 
 
 Authentifiez-vous en tapant n’importe quoi :
 
-![BB](RSRC/07_09_VIEWS.png)\
+![BB](RSRC/07_09_VIEWS.png)
 
 
 Vous obtenez le message **"Ouups loupé !!!"**
 
 Authentifiez-vous en utilisant un des utilisateurs existant :
 
-![BB](RSRC/07_10_VIEWS.png)\
+![BB](RSRC/07_10_VIEWS.png)
 
 
 Vous obtenez un message de bienvenue.
@@ -1700,12 +1700,12 @@ Vous pouvez essayer de rafraîchir la page, vous restez connecté.
 
 Si vous ouvrez un autre navigateur (une autre marque de navigateur pour être sûr de ne pas partager la session), vous vous apercevez qu’il ne considère pas que vous êtes authentifié :
 
-![BB](RSRC/07_11_VIEWS.png)\
+![BB](RSRC/07_11_VIEWS.png)
 
 
 Essayez de vous connecter avec un utilisateur déjà loggé sur une autre session :
 
-![BB](RSRC/07_12_VIEWS.png)\
+![BB](RSRC/07_12_VIEWS.png)
 
 
 Vous obtenez le message **"Utilisateur déjà connecté"**
