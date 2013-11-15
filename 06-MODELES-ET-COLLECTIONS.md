@@ -9,16 +9,16 @@
 >*Nous allons voir comment définir nos modèles, jouer avec, interagir avec le serveur. Nous allons étudier l’intérêt d’une collection de modèles. **Attention, pas un gramme d’HTML** (ou presque) dans ce chapitre, nous faisons tout en « mode commande », pour l’HTML il faudra patienter jusqu’au chapitre sur les Vues.*
 
 
-Dans une application « de gestion », les modèles sont le cœur de l’application, ils représentent des concepts « informatisés » de la « vraie vie » : Les articles d’un catalogue, le client d’une entreprise, … Ils peuvent avoir des interactions entre eux : un client a plusieurs facture, la commande d’un fournisseur ; … Nous avons là 4 modèles : client, facture, fournisseur, commande … sans parler des articles de la facture et de la commande. D’ailleurs en parlant d’article, on pense catalogue, et dans notre cas le catalogue pourrait être une collection d’articles. Et tout cela doit être sauvegardé, doit pouvoir être retrouvé facilement, etc. … Mais voyons donc le fonctionnement intrinsèque des modèles et collections de Backbone.
+Dans une application « de gestion », les modèles sont le cœur de l’application, ils représentent des concepts « informatisés » de la « vraie vie » : Les articles d’un catalogue, le client d’une entreprise… Ils peuvent avoir des interactions entre eux : un client a plusieurs factures, la commande d’un fournisseur… Nous avons là 4 modèles : client, facture, fournisseur, commande… sans parler des articles de la facture et de la commande. D’ailleurs en parlant d’article, on pense catalogue et, dans notre cas, le catalogue pourrait être une collection d’articles. Et tout cela doit être sauvegardé, doit pouvoir être retrouvé facilement, etc.  Mais voyons donc le fonctionnement intrinsèque des modèles et collections de Backbone.
 
 ##Fonctionnement général
 
-Un modèle Backbone (`Backbone.Model`) représente une entité unique (une instance du modèle), par exemple nous avons la définition du modèle « Client », et si Bob est un client, alors c’est une instance de client. En général, il est lié à une vue (un composant d’affichage) qui changera (modifiera son affichage) lorsque que le modèle changera. Mais les changements du modèle sont aussi synchronisés avec le serveur. La synchronisation avec le serveur se fait avec la méthode `Backbone.sync()`, à chaque fois qu’un modèle fait une opération « CRUD », `Backbone.sync()` est appelée pour « discuter » avec le serveur (pour le moment cela va fonctionner tout seul, mais nous reviendrons plus tard à Backbone.sync() pour comprendre son fonctionnement et même modifier celui-ci).
+Un modèle Backbone (`Backbone.Model`) représente une entité unique (une instance du modèle), par exemple nous avons la définition du modèle « Client », et si Bob est un client, alors c’est une instance de client. En général, il est lié à une vue (un composant d’affichage) qui changera (modifiera son affichage) lorsque que le modèle changera. Mais les changements du modèle sont aussi synchronisés avec le serveur. La synchronisation avec le serveur se fait avec la méthode `Backbone.sync()`, à chaque fois qu’un modèle fait une opération « CRUD », `Backbone.sync()` est appelée pour « discuter » avec le serveur (pour le moment cela va fonctionner tout seul, mais nous reviendrons plus tard à `Backbone.sync()` pour comprendre son fonctionnement et même modifier celui-ci).
 
 
->>**Remarque** : l’acronyme CRUD signifie Create, Read, Update, Delete (Créer, Lire, Mettre à jour, Supprimer). Si vous faites le lien avec le chapitre précédent, lorsque nous allons sauvegarder un nouveau modèle, ce sera une création et une requête de type POST sera envoyée au serveur, dans le cas de la lecture ce sera une requête de type GET, PUT pour les mises à jour de modèles et enfin DELETE pour la suppression. Et c’est la méthode Backbone.sync() qui va se charger de faire la bonne requête au serveur en fonction de l’action du modèle.
+>>**Remarque** : l’acronyme CRUD signifie Create, Read, Update, Delete (Créer, Lire, Mettre à jour, Supprimer). Si vous faites le lien avec le chapitre précédent, lorsque nous allons sauvegarder un nouveau modèle, ce sera une création et une requête de type POST sera envoyée au serveur, dans le cas de la lecture ce sera une requête de type GET, PUT pour les mises à jour de modèles et enfin DELETE pour la suppression. Et c’est la méthode `Backbone.sync()` qui va se charger de faire la bonne requête au serveur en fonction de l’action du modèle.
 
-La collection Backbone (`Backbone.Collection`) sert à stocker (en mémoire) un ensemble de modèles de même type. Elle permettra de les trier par exemple, les filtrer, etc. ... Elle aussi est généralement liée à une vue et permet de « récupérer » un ensemble de modèles en provenance du serveur. Là aussi, c’est `Backbone.sync()` qui s’occupe de faire le travail.
+La collection Backbone (`Backbone.Collection`) sert à stocker (en mémoire) un ensemble de modèles de même type. Elle permettra de les trier par exemple, les filtrer, etc. Elle est aussi généralement liée à une vue et permet de « récupérer » un ensemble de modèles en provenance du serveur. Là aussi, c’est `Backbone.sync()` qui s’occupe de faire le travail.
 
 ##Modèles
 
@@ -36,7 +36,7 @@ $(function() {
 });
 ```
 
-Cela fait peu de code mais nous avons déjà une « mécanique utilisable » avec un grand nombre de possibilités. Nous avons donc un modèle `Post` pour lequel nous avons juste précisé l’url (`urlRoot`) à appeler (`par Backbone.sync`) lors d’actions/traitement de type « CRUD ». En effet un modèle « arrive » avec entre autres les méthodes suivantes : `save` (pour créer et sauvegarder), `fetch` (pour lire des données en provenance du serveur) et `destroy` (pour supprimer le modèle du serveur).
+Cela fait peu de code mais nous avons déjà une « mécanique utilisable » avec un grand nombre de possibilités. Nous avons donc un modèle `Post` pour lequel nous avons juste précisé l’url (`urlRoot`) à appeler (par `Backbone.sync`) lors d’actions/traitements de type « CRUD ». En effet un modèle « arrive » avec entre autres les méthodes suivantes : `save` (pour créer et sauvegarder), `fetch` (pour lire des données en provenance du serveur) et `destroy` (pour supprimer le modèle du serveur).
 
 >>**Remarque** : j'ai préfixé `Post` par `window` pour y avoir accès en tant que variable globale (dans ma console par exemple).
 
@@ -58,11 +58,11 @@ var message = new Post({
 
 Nous avons maintenant une instance d’un modèle, jouons avec. Vous avez noté que la définition des champs du modèle (`title, message, author`) se fait à l’instanciation du modèle, personnellement je trouve cela pratique et très lisible (un début programmation fonctionnelle), mais je comprends que cela puisse perturber (nous verrons comment faire autrement si vous le souhaitez).
 
->>**Remarque (importante)** : la propriété `urlRoot` du modèle n’est utile que si l’on se « sert » d’un modèle hors d’une collection de modèles (le modèle est indépendant), sinon, si le modèle appartient à une collection est qu’il n’a pas de propriété urlRoot renseignée, il « utilise » la propriété `url` de la collection à laquelle il appartient.
+>>**Remarque (importante)** : la propriété `urlRoot` du modèle n’est utile que si l’on se « sert » d’un modèle hors d’une collection de modèles (le modèle est indépendant), sinon, si le modèle appartient à une collection et qu’il n’a pas de propriété `urlRoot` renseignée, il « utilise » la propriété `url` de la collection à laquelle il appartient.
 
 ###Getters et Setters
 
-Pour lire ou modifier les valeurs des propriétés de notre message, le réflexe serait pour par exemple obtenir la valeur du titre de taper la commande `message.title`, et bien cela ne fonctionne pas ! Backbone a une mécanique différente, si vous souhaitez obtenir la valeur du titre il faudra taper la commande `message.get("title")` et pour la modifier `message.set("title", "mon nouveau titre")` ou `message.set({title : "mon nouveau titre"})`, cette dernière notation permet de changer plusieurs propriétés en une seule passe. Cela peut surprendre mais cela a beaucoup d’avantages d’utiliser des méthodes plutôt qu’une simple affectation, on peut ainsi s’abonner aux changements des valeurs pour déclencher automatiquement un traitement (comme le rafraichissement d’une vue par exemple). Faites donc l’exercice dans la console :
+Pour lire ou modifier les valeurs des propriétés de notre message, le réflexe serait, par exemple pour obtenir la valeur du titre, de taper la commande `message.title`, et bien cela ne fonctionne pas ! Backbone a une mécanique différente, si vous souhaitez obtenir la valeur du titre il faudra taper la commande `message.get("title")` et pour la modifier `message.set("title", "mon nouveau titre")` ou `message.set({title : "mon nouveau titre"})`, cette dernière notation permet de changer plusieurs propriétés en une seule passe. Cela peut surprendre mais cela a beaucoup d’avantages d’utiliser des méthodes plutôt qu’une simple affectation, on peut ainsi s’abonner aux changements des valeurs pour déclencher automatiquement un traitement (comme le rafraîchissement d’une vue par exemple). Faites donc l’exercice dans la console :
 
 
 ![BB](RSRC/06_01_MODS.png)\
@@ -82,7 +82,7 @@ Vous notez que les propriétés de notre modèle sont contenues dans un objet `a
 
 ###Méthodes “CRUD” du modèle
 
-####Méthodes save() : création & mise à jour\
+####Méthode save() : création & mise à jour
 
 Saisissez le code javascript ci-dessous dans la console du navigateur. Cela va déclencher une requête ajax vers le serveur pour sauvegarder votre modèle (instance de modèle). Si tout se passe bien, c’est la méthode `success()` qui est appelée.
 
@@ -160,9 +160,9 @@ Cette fois ci, côté serveur, la requête ajax a été détectée comme une req
 ![BB](RSRC/06_07_MODS.png)\
 
 
-####Méthode fetch() : retrouver un modèle\
+####Méthode fetch() : retrouver un modèle
 
-Notez bien le numéro d’id affecté par le serveur (dans notre exemple : “17f0v3jv”, attention c’est une valeur aléatoire unique affectée par le serveur) et raffraichissez votre page dans le navigateur (le modèle `message` disparaît donc de la mémoire).
+Notez bien le numéro d’id affecté par le serveur (dans notre exemple : “17f0v3jv”, attention c’est une valeur aléatoire unique affectée par le serveur) et rafraîchissez votre page dans le navigateur (le modèle `message` disparaît donc de la mémoire).
 
 Créons maintenant une nouvelle fois un modèle avec simplement comme champ, un id prenant la valeur de la clé du modèle sauvegardé en base :
 
@@ -197,7 +197,7 @@ Nous récupérons bien les données du modèle sauvegardé :
 
 Et côté serveur, on peut vérifier le message affiché dans le terminal : nous avons bien une requête de type `GET` avec en paramètre la clé unique (identifiant) du modèle.
 
-####Méthode destroy() : supprimer un modèle du serveur\
+####Méthode destroy() : supprimer un modèle du serveur
 
 Le principe est le même que pour la méthode `fetch()`, à partir d’un modèle en cours d’utilisation ou un nouveau modèle créé avec un id existant, il suffit ensuite d’appeler la méthode `destroy()` du modèle pour le supprimer de la base de données :
 
@@ -224,7 +224,7 @@ Et côté serveur, nous avons bien une requête de type `DELETE` avec en paramè
 ![BB](RSRC/06_10_MODS.png)\
 
 
-###Evénements
+###Événements
 
 Il est possible de “s’abonner” aux changements effectués sur un modèle grâce à la méthode `on()` (anciennement `bind()`) de l’instance du modèle :
 
@@ -240,7 +240,7 @@ message.on("change", function() {
 });
 ```
 
-Nous venons de nous abonner aux changements de valeurs des champs de l’instance de modèle `message`. C’est à dire que nous serons notifiés dès qu’une valeur d’un champ de `message` est modifiée :
+Nous venons de nous abonner aux changements de valeurs des champs de l’instance de modèle `message`. C’est-à-dire que nous serons notifiés dès qu’une valeur d’un champ de `message` est modifiée :
 
 
 ![BB](RSRC/06_11_MODS.png)\
@@ -257,7 +257,7 @@ message.on("change:message", function() {
 ![BB](RSRC/06_12_MODS.png)\
 
 
-On s’apperçoit que les abonnements se cumulent.
+On s’aperçoit que les abonnements se cumulent.
 Ce que nous venons de faire n’est par contre valable que pour une instance de modèle de type Post. Comment faire pour que cela soit valable pour tous les Posts ? En utilisant le constructeur du modèle, ou plus spécifiquement la méthode `initialize()` qui est appelée par le constructeur du modèle.
 
   //TODO: parler de off()
@@ -372,7 +372,7 @@ setInterval(function() {
 }, 1000)
 ```
 
-Nous venons de créer un nouveau `Post`, en lui renseignant son id (car nous savons qu’il existe côté serveur) et demandons à javascript d’aller chercher les données toutes les 1000 millisecondes (donc toutes les 1 secondes).
+Nous venons de créer un nouveau `Post`, en renseignant son id (car nous savons qu’il existe côté serveur) et demandons à javascript d’aller chercher les données toutes les 1000 millisecondes (donc toutes les 1 secondes).
 
 Ensuite, ouvrez un autre navigateur (par exemple FireFox) et connectez-vous sur [http://localhost:3000](http://localhost:3000), puis dans la console de ce navigateur tapez ceci :
 
@@ -427,13 +427,13 @@ Et rechargeons notre page, pour une nouvelle fois passer en mode commande (et do
 
 ###Comment ajouter des modèles à une collection
 
-Tout d’abord, il faut créer(instancier) une nouvelle collection :
+Tout d’abord, il faut créer (instancier) une nouvelle collection :
 
 ```javascript
 var postsList = new Posts();
 ```
 
-Puis créer(instancier) 3 nouveaux modèles Post :
+Puis créer (instancier) 3 nouveaux modèles Post :
 
 ```javascript
 var post1 = new Post({
@@ -525,7 +525,7 @@ postsList.getByCid("c18").get("title")
 
 ###Parcourir les modèles d’une collection
 
-Les collections Backbone dispose d’une méthode `each()` (issue de la librairie Underscore.js) qui permet de parcourir chacun des éléments de la collection et de faire un traitement pour chacun de ces éléments. Par exemple, nous souhaitons afficher le titre de chacun des Posts de la collection, pour cela saisissez le code suivant dans la console :
+Les collections Backbone disposent d’une méthode `each()` (issue de la librairie Underscore.js) qui permet de parcourir chacun des éléments de la collection et de faire un traitement pour chacun de ces éléments. Par exemple, nous souhaitons afficher le titre de chacun des Posts de la collection, pour cela saisissez le code suivant dans la console :
 
 *Appel de la méthode each() :*
 
@@ -694,9 +694,9 @@ Ensuite si vous souhaitez charger tous les modèles (toujours dans la console de
 ![BB](RSRC/06_24_MODS.png)\
 
 
->>**A Noter** : il se trouve que les collections dans Backbone ont une méthode `url()` qui est appelée si la propriété `url` n’existe pas, cela peut être un autre moyen d’adresser la problématique de changement d’url. De même si les modèles ajoutés à une collection, n’ont pas de propriété `url` (ni `urlRoot`), ils héritent de celle de la collection (mais cela demande à revoir la politique de « routage » utilisée côté serveur ou de modifier `Backbone.sync()` qui construira les requêtes http en fonction du type d’objet faisant une requête (modèle ou collection)). Pour plus d’information sur le sujet, aller voir : [http://backbonejs.org/#Model-url](http://backbonejs.org/#Model-url) ainsi que [http://backbonejs.org/#Collection-url](http://backbonejs.org/#Collection-url).
+>>**A Noter** : il se trouve que les collections dans Backbone ont une méthode `url()` qui est appelée si la propriété `url` n’existe pas, cela peut être un autre moyen d’adresser la problématique de changement d’url. De même si les modèles ajoutés à une collection n’ont pas de propriété `url` (ni `urlRoot`), ils héritent de celle de la collection (mais cela demande à revoir la politique de « routage » utilisée côté serveur ou de modifier `Backbone.sync()` qui construira les requêtes http en fonction du type d’objet faisant une requête (modèle ou collection)). Pour plus d’informations sur le sujet, aller voir : [http://backbonejs.org/#Model-url](http://backbonejs.org/#Model-url) ainsi que [http://backbonejs.org/#Collection-url](http://backbonejs.org/#Collection-url).
 
-##Evénements
+##Événements
 
 Comme pour les modèles, il est possible de s’abonner à des événements issus des collections. Nous souhaitons être notifié de tout changement dans un modèle de la collection. Saisissez donc ceci (dans la console) :
 
@@ -706,7 +706,7 @@ Comme pour les modèles, il est possible de s’abonner à des événements issu
   postsList.on('change', function (model) {
       console.log("Changement : ", model.get("title"));
   });
-``
+```
 
 Puis :
 
