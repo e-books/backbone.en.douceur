@@ -14,7 +14,7 @@ Pour ce chapitre, je me suis longuement posé la question : «  quelle technolog
 Nous aurons besoin de :
 
 - **Node.js** pour le serveur d’application
-- **Express.js** qui vas nous permettre de construire notre application (gestion des routes, sessions, etc.)
+- **Express.js** qui va nous permettre de construire notre application (gestion des routes, sessions, etc.)
 - **nStore** : une petite base de données noSQL simulée avec un fichier texte (nous n’allons pas nous embêter à faire des requêtes SQL, et le noSQL est à la mode ;) )
 
 ##Principes http : GET, POST, PUT, DELETE
@@ -35,17 +35,19 @@ Si cela vous paraît obscur, pas d'inquiétude, la partie pratique qui suit devr
 ###Installer Node.js
 
 Tout d’abord, allez sur le site [http://nodejs.org/](http://nodejs.org/), si vous êtes sous OSX ou Windows, vous avez de la chance, il existe des installeurs tout prêts, si vous êtes sous Linux, les manipulations ne sont pas compliquées, je vous engage à lire ceci : [https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager](https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager).
-Une fois les installeurs utilisés (ou les manipulations Linux) vous disposerez de Node.js ainsi que du gestionnaire de packets NPM qui va nous permettre d’installer de nombreux modules pour Node.js.
+Une fois les installeurs utilisés (ou les manipulations Linux) vous disposerez de Node.js ainsi que du gestionnaire de paquets NPM qui va nous permettre d’installer de nombreux modules pour Node.js.
 
 ###Installer Express.js
 
-Express.js est un framework qui se greffe sur Node.js et vous permet de réaliser rapidement des applications web, en vous apportant quelques facilités comme la gestion des routes, des sessions, etc. ...
+Express.js est un framework qui se greffe sur Node.js et vous permet de réaliser rapidement des applications web, en vous apportant quelques facilités comme la gestion des routes, des sessions, etc.
 
 Commençons à créer notre application serveur. Créez un répertoire `blog` sur votre disque dur.
-Quel que soit votre système d’exploitation, ouvrez une console ou un terminal et tapez les commandes suivante (et validez):
+Quel que soit votre système d’exploitation, ouvrez une console ou un terminal et tapez les commandes suivantes (et validez):
 
+```
   cd blog
   npm install express
+```
 
 >>**Remarque 1** : sous OSX ou linux vous devrez probablement passer en mode super utilisateur, faites donc précéder la commande par `sudo` : `sudo npm install express`
 
@@ -56,12 +58,14 @@ Nous venons donc d'installer le module **express** dans notre répertoire `blog`
 
 ###Installer nStore
 
-Nous aurons besoin d’un moyen de sauvegarde de nos données. Pour cela nous allons utiliser **nStore** qui est une sorte de base de données NoSQL clé/valeur pour node.js (il existe de nombreuses autre solutions telle MongoDB, CouchDB, des bases de donnée relationnelles,… mais ce n’est pas l’objet de cet ouvrage).
-Pour installer nStore (toujour dans le répertoire `blog`) tapez la commande suivante :
+Nous aurons besoin d’un moyen de sauvegarder de nos données. Pour cela nous allons utiliser **nStore** qui est une sorte de base de données NoSQL clé/valeur pour node.js (il existe de nombreuses autres solutions telles MongoDB, CouchDB, des bases de donnée relationnelles,… mais ce n’est pas l’objet de cet ouvrage).
+Pour installer nStore (toujours dans le répertoire `blog`) tapez la commande suivante :
 
+```
   npm install nstore
+```
 
->>**Remarque** : vous pouvez noter maintenant la présence d’un répertoire `node_modules` dans `blog`, contenant lui-même deux sous répertoires `express` et `nstore`.
+>>**Remarque** : vous pouvez noter maintenant la présence d’un répertoire `node_modules` dans `blog`, contenant lui-même deux sous-répertoires `express` et `nstore`.
 
 Voilà, nous avons tout ce qu'il faut pour commencer à créer notre application.
 
@@ -130,7 +134,7 @@ Et copiez aussi le répertoire `bootstrap` de notre exemple. Ensuite, préparez 
 
 ###Ressources dynamiques
 
-Toujours dans le répertoire `public`, créer un fichier `app.js` qui sera le programme principal de notre application et qui contiendra le code suivant :
+Toujours dans le répertoire `public`, créez un fichier `app.js` qui sera le programme principal de notre application et qui contiendra le code suivant :
 
 >>**Remarque** : ce n’est pas grave si vous ne comprenez pas le code à ce stade, l’important c’est que cela fonctionne. Mais vous allez voir, à l’utilisation « tout s’éclaire ».
 
@@ -337,7 +341,7 @@ Maintenant, nous allons faire un dernier travail avant de revenir à Backbone : 
 
 ##Testons notre application serveur
 
-Une fois notre application lancée, ouvrez un navigateur, appelez l’url [http://localhost:3000](http://localhost:3000) et ouvrez la console de debug du navigateur. Et c'est parti pour les tests, où nous allons utiliser intensivement les fonctionnalité ajax de jQuery. Rappelez vous, nous l'avons inclus(e) dans notre projet, via notre page `index.html`, et au début de notre code dans `app.js`, nous avons la ligne suivante : `app.use(express.static(__dirname + '/public'));`, donc si à l'appel de [http://localhost:3000](http://localhost:3000), le serveur ne trouve pas de route `"/"`, il nous dirigera directement vers `index.html`.
+Une fois notre application lancée, ouvrez un navigateur, appelez l’url [http://localhost:3000](http://localhost:3000) et ouvrez la console de debug du navigateur. Et c'est parti pour les tests, où nous allons utiliser intensivement les fonctionnalité Ajax de jQuery. Rappelez vous, nous l'avons inclus(e) dans notre projet, via notre page `index.html`, et au début de notre code dans `app.js`, nous avons la ligne suivante : `app.use(express.static(__dirname + '/public'));`, donc si à l'appel de [http://localhost:3000](http://localhost:3000), le serveur ne trouve pas de route `"/"`, il nous dirigera directement vers `index.html`.
 
 ###Ajoutons un enregistrement
 
@@ -351,7 +355,7 @@ $.ajax({
   url: "/blogposts",
   data: {
     title: "My 1st post",
-    message: "Once upon a time ..."
+    message: "Once upon a time..."
   },
   dataType: 'json',
   error: function(err) {
@@ -365,18 +369,18 @@ $.ajax({
 
 Vous venez donc de créer votre tout 1er post (vous avez appelé la route `'/blogposts'` de type `POST`), et vous devriez obtenir ceci dans la console du navigateur :
 
-![BB](RSRC/05_01_SERV.png)\
+![BB](RSRC/05_01_SERV.png)
 
 
-Vous noterez que vous obtenez en retour le numéro de clé unique de votre enregistrement (généré par la base nStore) et aussi une date de sauvegarde. **Renouvelez l’opération plusieurs fois pour ajouter plusieurs enregistrements** *(si, si, faites le)*.
+Vous noterez que vous obtenez en retour le numéro de clé unique de votre enregistrement (généré par la base nStore) et aussi une date de sauvegarde. **Renouvelez l’opération plusieurs fois pour ajouter plusieurs enregistrements** *(si, si, faites-le)*.
 De même dans le terminal, vous noterez l’apparition du message `POST CREATE`, nous avons donc bien appelé la “route” `/blogposts` de type `POST` :
 
-![BB](RSRC/05_02_SERV.png)\
+![BB](RSRC/05_02_SERV.png)
 
 
 ###Obtenir tous les enregistrements
 
-Dans la console tapez ceci :
+Dans la console, tapez ceci :
 
 *Requête http de type GET :*
 
@@ -395,17 +399,17 @@ $.ajax({
 
 Vous obtenez un tableau d’objets correspondant à nos enregistrements :
 
-![BB](RSRC/05_03_SERV.png)\
+![BB](RSRC/05_03_SERV.png)
 
 
 De même dans le terminal, vous noterez l’apparition du message `GET (ALL)`, nous avons donc bien appelé la “route” `/blogposts` de type `GET` :
 
-![BB](RSRC/05_04_SERV.png)\
+![BB](RSRC/05_04_SERV.png)
 
 
 ###Retrouver un enregistrement particulier (par sa clé)
 
-Dans la console tapez ceci (vous remarquerez que j’utilise une des clés d’enregistrement):
+Dans la console, tapez ceci (vous remarquerez que j’utilise une des clés d’enregistrement):
 
 *Requête http de type GET :*
 
@@ -424,14 +428,14 @@ $.ajax({
 
 Vous obtenez :
 
-![BB](RSRC/05_05_SERV.png)\
+![BB](RSRC/05_05_SERV.png)
 
 
 De même dans le terminal, vous obtiendrez le message `GET : /blogposts/2o03macl`, nous avons donc bien appelé la “route” `/blogposts` de type `GET` avec la clé du modèle en paramètre.
 
 ###Mettre à jour un enregistrement
 
-Dans la console tapez ceci :
+Dans la console, tapez ceci :
 
 *Requête http de type PUT :*
 
@@ -472,14 +476,14 @@ $.ajax({
 
 La mise à jour a bien été prise en compte :
 
-![BB](RSRC/05_06_SERV.png)\
+![BB](RSRC/05_06_SERV.png)
 
 
 De même, vous pouvez vérifier dans le terminal, l’apparition des messages correspondant à chacune de nos requêtes.
 
 ###Faire une requête
 
-Dans la console tapez la commande "ajax" ci-dessous *(je veux les posts dont le titre est égal à “My 3rd post”)* :
+Dans la console, tapez la commande Ajax ci-dessous *(je veux les posts dont le titre est égal à “My 3rd post”)* :
 
 *Requête http de type GET :*
 
@@ -498,14 +502,14 @@ $.ajax({
 
 Vous obtenez :
 
-![BB](RSRC/05_07_SERV.png)\
+![BB](RSRC/05_07_SERV.png)
 
 
 Une fois de plus, vous pouvez vérifier dans le terminal, l’apparition du message `GET (QUERY)`, nous avons donc bien appelé la “route” `/blogposts` de type `GET` (avec les paramètres de requête en paramètres).
 
 ###Supprimer un enregistrement
 
-Supprimons l'enregistrement qui a la clé d'id égale à `2o03macl` *(chez vous c'est peut-être autre chose)*.Dans la console tapez ceci :
+Supprimons l'enregistrement qui a la clé d'id égale à `2o03macl` *(chez vous c'est sans doute autre chose)*. Dans la console, tapez ceci :
 
 *Requête http de type DELETE :*
 
@@ -541,9 +545,9 @@ $.ajax({
 
 Vous obtenez un objet vide :
 
-![BB](RSRC/05_08_SERV.png)\
+![BB](RSRC/05_08_SERV.png)
 
-De même dans le terminal, vous noterez l’apparition du message `DELETE` puis `GET`, nous avons donc bien appelé la “route” `/blogpost` de type `DELETE` (puis `GET`) avec la clé du modèle en paramètre. Puis un message d’erreur apparaît car le document (post) n’existe plus.
+De même dans le terminal, vous noterez l’apparition du message `DELETE` puis `GET`, nous avons donc bien appelé la “route” `/blogpost` de type `DELETE` (puis `GET`) avec la clé du modèle en paramètre. Puis un message d’erreur apparaît car l'enregistrement (post) n’existe plus.
 
 La base de notre application côté serveur est donc posée. Nous la ferons évoluer en fonction de nos besoins. **Maintenant, passons aux choses sérieuses** :-).
 
