@@ -6,12 +6,12 @@
 >>- *Mise à jour automatique de l’affichage*
 >>- *Sous-vues*
 >>- *Templating*
->>- *évènements*
+>>- *Évènements*
 
 >*Nous avons joué avec les données dans le chapitre précédent, nous allons maintenant voir comment les afficher dynamiquement dans notre page web.*
 
 
-Le composant View de Backbone est peut-être celui qui génère le plus de polémiques. Est-ce vraiment une vue ? Ne serait-ce pas plutôt un contrôleur ? Il se trouve que dans une version plus ancienne de Backbone, le composant Controller existait, aujourd’hui il est le devenu le composant Router que nous verrons par la suite … Cependant, un routeur est-il réellement un contrôleur ?... Mais, rappelez-vous que l’on est dans un contexte client (navigateur) et que le concept MVC « classique » n’est pas forcément « portable » en l’état. L’essentiel est que cela fonctionne, et si les contrôleurs vous manquent à ce point, nous verrons comment en créer quelques chapitres plus loin.
+Le composant View de Backbone est peut-être celui qui génère le plus de polémiques. Est-ce vraiment une vue ? Ne serait-ce pas plutôt un contrôleur ? Il se trouve que dans une version plus ancienne de Backbone, le composant Controller existait, aujourd’hui il est le devenu le composant Router que nous verrons par la suite… Cependant, un routeur est-il réellement un contrôleur ? Mais rappelez-vous que l’on est dans un contexte client (navigateur) et que le concept MVC « classique » n’est pas forcément « portable » en l’état. L’essentiel est que cela fonctionne et, si les contrôleurs vous manquent à ce point, nous verrons comment en créer quelques chapitres plus loin.
 
 ##Préparons le terrain
 
@@ -123,10 +123,10 @@ blogPosts.each(function(post) {
 
 Vous devriez au final obtenir ceci :
 
-![BB](RSRC/07_01_VIEWS.png)\
+![BB](RSRC/07_01_VIEWS.png)
 
 
-Pour vérifier que la sauvegarde a bien fonctionné, raffraichissez votre page et lancez ce code dans la console du navigateur :
+Pour vérifier que la sauvegarde a bien fonctionné, rafraîchissez votre page et lancez ce code dans la console du navigateur :
 
 *Charger la collection avec les modèles sauvegardés en base :*
 
@@ -141,7 +141,7 @@ blogPosts.all()
 
 Si tout va bien (il n’y a pas de raison), vous devriez obtenir ceci :
 
-![BB](RSRC/07_02_VIEWS.png)\
+![BB](RSRC/07_02_VIEWS.png)
 
 
 Ainsi, quoiqu’il se passe, vous disposez de tous vos messages et ne serez plus obligés de les ressaisir pour la suite des exercices. Nous pouvons donc entrer dans le vif du sujet.
@@ -149,16 +149,16 @@ Ainsi, quoiqu’il se passe, vous disposez de tous vos messages et ne serez plus
 
 ##1ère vue
 
-Un objet Vue dans Backbone (`Backbone.View`) et généralement composé (au minimum) par convention de :
+Un objet Vue dans Backbone (`Backbone.View`) est généralement composé (au minimum) par convention de :
 
 - une propriété `el` : c'est l'élément du DOM (la partie de votre page html à laquelle on rattache l'objet `View`)
 - une méthode `initialize` (déclenchée à l’instanciation de la vue)
 - une méthode `render` (chargée d’afficher les données liées à la vue)
 
 
->>**Remarque** : Libre à vous de vous faire vos propres bonnes pratiques concernant les responsabilités de l’objet View afin de rendre votre code lisible et maintenable … Vous trouverez toujours quelqu’un pour les discuter mais c’est comme cela que l’on apprend et s’améliore … Et vous pouvez aussi avoir raison :-).
+>>**Remarque** : Libre à vous de vous faire vos propres bonnes pratiques concernant les responsabilités de l’objet View afin de rendre votre code lisible et maintenable… Vous trouverez toujours quelqu’un pour les discuter mais c’est comme cela que l’on apprend et s’améliore… Et vous pouvez aussi avoir raison :-).
 
-Dans notre page `index.html` nous allons ajouter un tag `<div id="posts_list"></div>` comme ceci :
+Dans notre page `index.html`, nous allons ajouter un tag `<div id="posts_list"></div>` comme ceci :
 
 ```html
 <div class="container">
@@ -199,7 +199,7 @@ window.PostsListView = Backbone.View.extend({
 
 ###Explications & utilisation
 
-Notre vue `PostsListView` est reliée au tag `<div id="posts_list"></div>` par la propriété `el` qui n’est ni plus ni moins un objet **jQuery**. La méthode `initialize` (qui sera appelée à l’instanciation de la vue), prend en paramètre les données que nous souhaitons afficher, et les affecte à la propriété `collection` de la vue. La méthode `render`, vide le contenu du tag `<div id="posts_list"></div>`, parcourt la collection de données pour construire le code html, et enfin affiche celui-ci par la commande `$(this.el).append(html)`. Mais utilisons directement notre code, ce sera plus « parlant ».
+Notre vue `PostsListView` est reliée au tag `<div id="posts_list"></div>` par la propriété `el` qui n’est ni plus ni moins qu'un objet **jQuery**. La méthode `initialize` (qui sera appelée à l’instanciation de la vue) prend en paramètre les données que nous souhaitons afficher et les affecte à la propriété `collection` de la vue. La méthode `render`, vide le contenu du tag `<div id="posts_list"></div>`, parcourt la collection de données pour construire le code html, et enfin affiche celui-ci par la commande `$(this.el).append(html)`. Mais utilisons directement notre code, ce sera plus « parlant ».
 
 Sauvegardez, rafraichissez la page et en mode console, passez les étapes qui suivent :
 
@@ -228,7 +228,7 @@ postsListView.render()
 
 Et vous obtenez la liste de vos messages :
 
-![BB](RSRC/07_03_VIEWS.png)\
+![BB](RSRC/07_03_VIEWS.png)
 
 
 Souvenez vous, dans les chapitres précédents nous avions « donné » aux collections la possibilité de faire des requêtes sur les données avant de lancer un `fetch`. Essayez donc ceci dans la console de votre navigateur :
@@ -252,10 +252,10 @@ postsListView.render()
 
 Et là, l’affichage s’actualise automatiquement :
 
-![BB](RSRC/07_04_VIEWS.png)\
+![BB](RSRC/07_04_VIEWS.png)
 
 
-##Maintenant, un peu de magie ...
+##Maintenant, un peu de magie...
 
 ###S'abonner aux événements
 
@@ -266,7 +266,7 @@ _.bindAll(this, 'render');
 this.collection.bind('reset', this.render);
 ```
 
-Nous venons d’expliquer que tous les évènement déclarés déclencheront la méthode `render` de la vue. Et ensuite nous avons expliqué que la méthode `reset` de la collection déclenchera la méthode `render` de la vue.
+Nous venons d’expliquer que tous les événements déclarés déclencheront la méthode `render` de la vue. Et ensuite nous avons expliqué que la méthode `reset` de la collection déclenchera la méthode `render` de la vue.
 
 >>**Remarque** : Une collection Backbone déclenche un `reset` lors de l’appel d’un `fetch`. La méthode `reset` vide la collection.
 
@@ -304,7 +304,7 @@ window.PostsListView = Backbone.View.extend({
 });
 ```
 
-Sauvegardez ensuite la page, puis retournez dans le navigateur, rafraichissez la page et retournez dans la console du navigateur pour instancier une nouvelle vue :
+Sauvegardez ensuite la page, puis retournez dans le navigateur, rafraîchissez la page et retournez dans la console du navigateur pour instancier une nouvelle vue :
 
 ```javascript
 postsListView = new PostsListView(blogPosts)
@@ -349,7 +349,7 @@ this.collection.bind('remove', this.render);
 
 Maintenant, si vous changez la valeur d'un attribut d'un modèle, que vous ajoutez ou supprimez un modèle de la collection, la vue sera réactualisée à chaque fois.
 
-Sauvegardez la page, puis retournez dans le navigateur, rafraichissez la page et retournez dans la console du navigateur pour instancier une nouvelle vue et charger les données de la collection :
+Sauvegardez la page, puis retournez dans le navigateur, rafraîchissez la page et retournez dans la console du navigateur pour instancier une nouvelle vue et charger les données de la collection :
 
 ```javascript
 postsListView = new PostsListView(blogPosts)
@@ -385,7 +385,7 @@ Là encore, votre page s’actualise instantanément.
 
 Avant de passer à l’utilisation des templates dans les vue, nous allons apporter quelques modifications et améliorer un peu notre code pour nous préparer à la suite.
 
-Dans ses dernières versions, Backbone a hérité d’un raccourcis concernant la propriété `el` de la vue qui consiste à remplacer (avec pour objectif l’optimisation d’exécution de code) le sélecteur `$(this.el)` par `this.$el`.
+Dans ses dernières versions, Backbone a hérité d’un raccourci concernant la propriété `el` de la vue qui consiste à remplacer (avec pour objectif l’optimisation d’exécution de code) le sélecteur `$(this.el)` par `this.$el`.
 
 De plus, vous devez savoir qu’il n’est pas obligatoire de déclarer l’affectation de la collection dans la méthode initialize de la vue, mais que l’on peut faire ceci directement en paramètre du constructeur à l’instanciation de la vue. Comme ceci :
 
@@ -521,9 +521,9 @@ $(function() {
 
 Nous avons fait un peu de magie, passons donc à la sorcellerie ;) ...
 
-##Utilisation du templating ... 1ère fois
+##Utilisation du templating... 1ère fois
 
-Vous vous souvenez ? Je vous avez parlé d'underscore avec les templates ? Eh bien il est temps de les mettre en œuvre.
+Vous vous souvenez ? Je vous avais parlé d'Underscore avec les templates ? Eh bien il est temps de les mettre en œuvre.
 
 ###Définition de notre 1er template
 
@@ -544,7 +544,7 @@ Dans la partie HTML de notre page, juste avant  `<div id="posts_list"></div>`, a
 
 >>**Remarque** : le fait de définir le template à l'intérieur de `<script type="text/template"></script>` fait que le modèle de template ne sera pas affiché dans la page.
 
-En fait (grace à underscore), nous venons de définir le template dont la vue backbone va se servir pour afficher les données. Il faudra lui passer pour cela un **tableau** de posts.
+En fait (grace à Underscore), nous venons de définir le template dont la vue Backbone va se servir pour afficher les données. Il faudra lui passer pour cela un **tableau** de posts.
 Modifions donc notre vue de la façon suivante :
 
 ```javascript
@@ -574,14 +574,14 @@ Nous avons inséré dans la méthode `initialize` : `this.template = _.template(
 
 >>**Remarque** : notez bien que `this.collection.models` est un tableau de modèles.
 
-Vous pouvez sauvegarder et rafraichir, les résultats sont identiques aux précédent, mais il est beaucoup plus facile de créer et modifier vos templates html.
+Vous pouvez sauvegarder et rafraîchir, les résultats sont identiques aux précédents, mais il est beaucoup plus facile de créer et modifier vos templates html.
 
-![BB](RSRC/07_05_VIEWS.png)\
+![BB](RSRC/07_05_VIEWS.png)
 
 
 ##Sous-vue(s)
 
-Il est possible de faire des sous vues pour gérer différentes parties de votre page web. En fait il s’agit de vues encapsulées dans une autre vue, ce qui peut être pratique en termes d’organisation, mais aussi dans les cas où les comportements de chacunes des vues dépendent les uns des autres.
+Il est possible de faire des sous-vues pour gérer différentes parties de votre page web. En fait il s’agit de vues encapsulées dans une autre vue, ce qui peut être pratique en termes d’organisation, mais aussi dans les cas où les comportements de chacunes des vues dépendent les uns des autres.
 
 Nous allons donc profiter des possibilités de Twitter Bootstrap pour revoir un peu la mise en page de notre « site » et du même coup mettre en œuvre le concept de sous-vue.
 
@@ -723,9 +723,9 @@ window.mainView = new MainView({
 });
 ```
 
-Vous pouvez sauvegarder votre code et raffraichir votre page :
+Vous pouvez sauvegarder votre code et rafraîchir votre page :
 
-![BB](RSRC/07_06_VIEWS.png)\
+![BB](RSRC/07_06_VIEWS.png)
 
 
 Et si vous faites ceci en mode console :
@@ -738,7 +738,7 @@ Vous verrez que les modifications sont bien propagées dans les 2 vues simultan�
 
 ###Un dernier petit réglage : tri des collections
 
-Nous souhaitons avant d’aller plus loin trier la collection de posts pour avoir les message en ordre décroissant. Pour cela nous allons créer ce que l’on appelle un **« comparator »** dans la méthode `initialize` de la vue principale `MainView` :
+Nous souhaitons avant d’aller plus loin trier la collection de posts pour avoir les message en ordre chronologiquement décroissant. Pour cela nous allons créer ce que l’on appelle un **« comparator »** dans la méthode `initialize` de la vue principale `MainView` :
 
 *Trier la collection par ordre décroissant de date :*
 
@@ -783,7 +783,7 @@ window.MainView = Backbone.View.extend({
 
 Et le rendu dans le navigateur devrait vous donner ceci :
 
-![BB](RSRC/07_07_VIEWS.png)\
+![BB](RSRC/07_07_VIEWS.png)
 
 
   //TODO : faire un paragraphe sur le comparator dans le chapitre sur les collections
@@ -791,7 +791,7 @@ Et le rendu dans le navigateur devrait vous donner ceci :
 ##Utilisation d’autre(s) moteur(s) de template
 
 Vous lirez souvent que Backbone est "framwork agnostic", donc vous pouvez par exemple l'utiliser avec **zepto**, plutôt que **jQuery** en ce qui concerne la gestion du DOM et des appels Ajax. Il en est de même avec le moteur de template. Rien ne vous oblige à utiliser celui d’**Underscore**.
-Un des plus utilisé est Mustache.js ([http://mustache.github.com/](http://mustache.github.com/)). Vous pouvez récupérer le code ici : [https://github.com/janl/mustache.js/](https://github.com/janl/mustache.js/). En fait, plus précisément,  enregistrez le fichier  [https://raw.github.com/janl/mustache.js/master/mustache.js](https://raw.github.com/janl/mustache.js/master/mustache.js) dans votre répertoire `public/libs/vendors`. Puis faites y référence dans votre page `index.html` :
+Un des plus utilisé est Mustache.js ([http://mustache.github.com/](http://mustache.github.com/)). Vous pouvez récupérer le code ici : [https://github.com/janl/mustache.js/](https://github.com/janl/mustache.js/). En fait, plus précisément,  enregistrez le fichier  [https://raw.github.com/janl/mustache.js/master/mustache.js](https://raw.github.com/janl/mustache.js/master/mustache.js) dans votre répertoire `public/libs/vendors`. Puis faites-y référence dans votre page `index.html` :
 
 ```javascript
 <script src="libs/vendors/mustache.js"></script>
@@ -855,9 +855,9 @@ Et nous allons une fois de plus "casser" notre code html.
 </script>
 ```
 
-Nous obtenons donc des templates html plus lisibles, utilisable moyennant une petite modification de nos vues :
+Nous obtenons donc des templates html plus lisibles, utilisables moyennant une petite modification de nos vues :
 
-*5] Avant (avec le moteur de template d’underscore) :*
+*5] Avant (avec le moteur de template d’Underscore) :*
 
 ```javascript
 window.PostsListView = Backbone.View.extend({
@@ -921,21 +921,21 @@ window.SidebarView = Backbone.View.extend({
 });
 ```
 
-Vous noterez l'utilisation de `this.collection.toJSON()` plutôt que `this.collection.models`. En effet Mustache a besoin d’objets au format JSON, et (cela tombe bien), les collections Backbone dispose d’une méthode d’exportation/mise en forme au format JSON.
+Vous noterez l'utilisation de `this.collection.toJSON()` plutôt que `this.collection.models`. En effet Mustache a besoin d’objets au format JSON, et (cela tombe bien) les collections Backbone disposent d’une méthode d’exportation/mise en forme au format JSON.
 
-Sauvegardez, lancez, il n’y a pas de changement, l'affichages est identique (heureusement), vous avez juste utilisé une autre façon de travailler.
+Sauvegardez, lancez, il n’y a pas de changement, l'affichage est identique (heureusement), vous avez juste utilisé une autre façon de travailler.
 
 ##Gestion des événements dans les vues
 
-Les objets de type Backbone.View peuvent aussi gérer les évènements (mouseover, click, etc. …). Nous allons donc profiter de ce paragraphe pour mettre en œuvre un système d’authentification dans notre application, qui utilisera donc cette possibilité. Il est temps de retourner travailler côté serveur quelques instants.
+Les objets de type Backbone.View peuvent aussi gérer les événements (mouseover, click, etc.). Nous allons donc profiter de ce paragraphe pour mettre en œuvre un système d’authentification dans notre application, qui utilisera cette possibilité. Il est temps de retourner travailler côté serveur quelques instants.
 
 Si vous voulez en savoir plus sur les événements dans les vues Backbone, je vous engage fortement à lire la documentation : [http://backbonejs.org/#View-delegateEvents](http://backbonejs.org/#View-delegateEvents).
 
-Donc ...
+Donc…
 
 ##Authentification (côté serveur) : les utilisateurs
 
->>*Ce paragraphe ne parle pas des vues, mais est nécessaire pour la mise en place des paragraphes suivants.*
+>>*Ce paragraphe ne parle pas des vues mais est nécessaire pour la mise en place des paragraphes suivants.*
 
 Nous aurons besoin d’une liste des utilisateurs connectés (je vous le rappelle, nous sommes côté serveur, donc dans le fichier `app.js`) que nous représenterons sous la forme d’un tableau de variables (ou d’objets) :
 
@@ -960,7 +960,7 @@ function addUser(user) {
 }
 ```
 
-Nous appellerons n fois cette fonctions pour ajouter des utilisateurs :
+Nous appellerons n fois cette fonction pour ajouter des utilisateurs :
 
 *Ajouter des utilisateurs :*
 
@@ -981,11 +981,11 @@ function addUsers() {
     lastName  : "Le Pirate"
   });
 
-  //etc. ...
+  //etc.
 }
 ```
 
-Et pour déclencher l’ajout des utilisateurs, nous créeons une « route » `addusers` :
+Et pour déclencher l’ajout des utilisateurs, nous créons une « route » `addusers` :
 
 ```javascript
 app.get('/addusers', function(req, res) {
@@ -998,7 +998,7 @@ app.get('/addusers', function(req, res) {
 
 Qu’il suffira d’appeler comme ceci dans le navigateur : [http://localhost:3000/addusers/](http://localhost:3000/addusers/)
 
->>**Remarque** : notez bien que mon système d’authentification est très « léger ». En production, il vous faudrait quelque chose de plus abouti, mais ce n’est pas le propos de cet ouvrage. Nous avions besoin de quelque chose de simple.
+>>**Remarque** : notez bien que mon système d’authentification est très « léger ». En production, il vous faudrait quelque chose de plus abouti, mais ce n’est pas le propos de cet ouvrage, nous avions besoin de quelque chose de simple.
 
 ###S’authentifier – Se déconnecter
 
@@ -1072,7 +1072,7 @@ app.post('/authenticate', function(req, res) {
 });
 ```
 
->>**Remarque** : La « bienséance » (d’un point de vue architecture) voudrait que ne mette pas tout ce code au niveau de la route mais dans la méthode d’un contrôleur qui serait appelée par la route. Une fois de plus je vais au plus court, mais gardez à l’esprit : toujours un code lisible et maintenable.
+>>**Remarque** : La « bienséance » (d’un point de vue architecture) voudrait qu'on ne mette pas tout ce code au niveau de la route mais dans la méthode d’un contrôleur qui serait appelée par la route. Une fois de plus je vais au plus court, mais gardez à l’esprit qu'il faut toujours un code lisible et maintenable.
 
 Il faudra aussi pouvoir se déconnecter. Nous ajoutons donc une route `logoff` qui nous permettra de déconnecter l’utilisateur.
 
@@ -1207,7 +1207,7 @@ function addUsers() {
     lastName: "Le Pirate"
   });
 
-  //etc. ...
+  //etc.
 }
 
 function findUserBySession(sessionID) {
@@ -1475,7 +1475,7 @@ function Routes() {
 
 ##Authentification (côté client)
 
-Nous repassons enfin au code client et nous allons pouvoir vérifier comment sont gérés les évènements dans une vue en implémentant l’authentification côté client.
+Nous repassons enfin au code client et nous allons pouvoir vérifier comment sont gérés les événements dans une vue en implémentant l’authentification côté client.
 
 ###Formulaire d’authentification
 
@@ -1503,7 +1503,7 @@ Nous allons donc commencer par créer le template du formulaire d’authentifica
 
 ###L’objet Backbone.View : Login.View
 
-Notre composant d’authentification aura 2 zones de saisie (email et mot de passe), un bouton de login, un bouton pour se déconnecter, une zone pour afficher un message (bienvenue, erreur, …).
+Notre composant d’authentification aura 2 zones de saisie (email et mot de passe), un bouton de login, un bouton pour se déconnecter, une zone pour afficher un message (bienvenue, erreur,…).
 Le composant devra aussi pouvoir vérifier si l’utilisateur est toujours connecté en cas de rafraîchissement de la page.
 
 ```javascript
@@ -1555,9 +1555,9 @@ window.loginView = new LoginView();
 
 A l’initialisation (`initialize`) la vue va vérifier si l’utilisateur en cours est déjà authentifié (par exemple vous vous êtes signé, mais vous avez rafraîchi la page), en appelant la route `/alreadyauthenticated`, si l’utilisateur est déjà authentifié, la méthode `render` de la vue est appelée avec un message de bienvenue et les informations de l’utilisateur ( `that.render("Bienvenue",dataFromServer);` ) dans le cas contraire la méthode `render` est aussi appelée mais avec un message signifiant que l’utilisateur n’est pas connecté ( `that.render("???",{firstName:"John", lastName:"Doe"});` ).
 
-###Ajoutons une gestion des évènements
+###Ajoutons une gestion des événements
 
-Une propriété de l’objet `Backbone.View` permet de gérer les évènements spécifiques à la vue. Si vous vous souvenez, notre template de formulaire ressemble à ceci :
+Une propriété de l’objet `Backbone.View` permet de gérer les événements spécifiques à la vue. Si vous vous souvenez, notre template de formulaire ressemble à ceci :
 
 ```html
 <!-- /*======= Formulaire d'authentification =======*/ -->
@@ -1571,7 +1571,7 @@ Une propriété de l’objet `Backbone.View` permet de gérer les évènements s
 </script>
 ```
 
-Je souhaite pouvoir déclencher des évènements lorsque je clique sur les boutons du formulaire. Pour cela il suffit d’ajouter à l’objet `Backbone.View` la propriété events :
+Je souhaite pouvoir déclencher des événements lorsque je clique sur les boutons du formulaire. Pour cela il suffit d’ajouter à l’objet `Backbone.View` la propriété `events` :
 
 ```javascript
 events: {
@@ -1580,7 +1580,7 @@ events: {
 },
 ```
 
-En fait je demande à mon objet `Backbone.View` d’intercepter tous les évènements de type click sur les éléments html (de la vue considérée) dont la classe `css` est `.btn-primary` ou `.btn-inverse` et de déclencher respectivement les méthodes `onClickBtnLogin` ou `onClickBtnLogoff`.
+En fait je demande à mon objet `Backbone.View` d’intercepter tous les événements de type click sur les éléments html (de la vue considérée) dont la classe `css` est `.btn-primary` ou `.btn-inverse` et de déclencher respectivement les méthodes `onClickBtnLogin` ou `onClickBtnLogoff`.
 
 >>**Remarque** : nous aurions très bien pu affecter des id aux boutons :
 
@@ -1589,7 +1589,7 @@ En fait je demande à mon objet `Backbone.View` d’intercepter tous les évène
 <a href="#" id="btnLogOff" class="btn btn-inverse">Logoff</a><br>
 ```
 
-et relier les évènements aux ids :
+et relier les événements aux ids :
 
 ```javascript
 events: {
@@ -1598,7 +1598,7 @@ events: {
 },
 ```
 
-Il ne nous reste plus qu’à écrire les méthodes `onClickBtnLogin` ou `onClickBtnLogoff` au sein de notre objet de type `Backbone.View` qui vont respectivement appeler les routes que nous avions définies précédement :
+Il ne nous reste plus qu’à écrire les méthodes `onClickBtnLogin` ou `onClickBtnLogoff` au sein de notre objet de type `Backbone.View` qui vont respectivement appeler les routes que nous avions définies précédemment :
 
 ```javascript
 onClickBtnLogin: function(domEvent) {
@@ -1673,43 +1673,43 @@ function addUsers() {
     lastName  : "Le Pirate"
   });
 
-  //etc. ...
+  //etc.
 }
 ```javascript
 
 Lançons donc notre page web :
 
-![BB](RSRC/07_08_VIEWS.png)\
+![BB](RSRC/07_08_VIEWS.png)
 
 
-Authentifiez vous en tapant n’importe quoi :
+Authentifiez-vous en tapant n’importe quoi :
 
-![BB](RSRC/07_09_VIEWS.png)\
+![BB](RSRC/07_09_VIEWS.png)
 
 
 Vous obtenez le message **"Ouups loupé !!!"**
 
-Authentifiez vous en utilisant un des utilisateurs existant :
+Authentifiez-vous en utilisant un des utilisateurs existant :
 
-![BB](RSRC/07_10_VIEWS.png)\
+![BB](RSRC/07_10_VIEWS.png)
 
 
 Vous obtenez un message de bienvenue.
 
-Vous pouvez essayer de raffraîchir la page, vous restez connecté.
+Vous pouvez essayer de rafraîchir la page, vous restez connecté.
 
 Si vous ouvrez un autre navigateur (une autre marque de navigateur pour être sûr de ne pas partager la session), vous vous apercevez qu’il ne considère pas que vous êtes authentifié :
 
-![BB](RSRC/07_11_VIEWS.png)\
+![BB](RSRC/07_11_VIEWS.png)
 
 
 Essayez de vous connecter avec un utilisateur déjà loggé sur une autre session :
 
-![BB](RSRC/07_12_VIEWS.png)\
+![BB](RSRC/07_12_VIEWS.png)
 
 
 Vous obtenez le message **"Utilisateur déjà connecté"**
 
-Vous disposez maintenant de suffisament d'élément pour jouer avec les vues. Nous allons pouvoir passer au composant `Backbone.Router`. Nous reviendrons ensuite sur la sécurisation de notre application dans le chapitre sur l'organisation du code.
+Vous disposez maintenant de suffisament d'éléments pour jouer avec les vues. Nous allons pouvoir passer au composant `Backbone.Router`. Nous reviendrons ensuite sur la sécurisation de notre application dans le chapitre sur l'organisation du code.
 
 

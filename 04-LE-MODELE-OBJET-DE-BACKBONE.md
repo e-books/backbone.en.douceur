@@ -7,7 +7,7 @@
 >>- *Héritage*
 
 
->*Ce qui est souvent déstabilisant pour le développeur Java (PHP, .Net, etc. ....) c’est le modèle objet de javascript qui diffère du classique modèle orienté « classes » que nous connaissons tous (normalement). De nombreux ouvrages, articles, … se sont attaqués au sujet, mais ce n’est pas l’objet de ce chapitre.*
+>*Ce qui est souvent déstabilisant pour le développeur Java (PHP, .Net, etc.) c’est le modèle objet de javascript qui diffère du classique modèle orienté « classes » que nous connaissons tous (normalement). De nombreux ouvrages, articles,… se sont attaqués au sujet, mais ce n’est pas l’objet de ce chapitre.*
 
 Je vais vous présenter de quelle façon Backbone gère son « Orientation objet » et comment réutiliser cette fonctionnalité. L’objectif est double : mieux comprendre le fonctionnement de Backbone et vous donner un moyen de faire de l’objet en javascript sans être dépaysé (quelque chose qui ressemble dans sa logique, à ce que vous connaissez déjà).
 
@@ -48,7 +48,7 @@ Kind.extend = Backbone.Model.extend;
 
 >>**Remarque 1** : J’ai utilisé « Kind » pour ne pas utiliser « Class » ou « class » qui est un terme réservé pour les futures versions de javascript.
 
->>**Remarque 2** : Je vais utiliser du français dans mon code. Je sais c’est moche, promis j’essaye de ne plus le faire (à part dans les commentaires)
+>>**Remarque 2** : Je vais utiliser du français dans mon code. Je sais que c’est moche, promis j’essaye de ne plus le faire (à part dans les commentaires)
 
 Nous pouvons donc maintenant écrire :
 
@@ -64,7 +64,7 @@ Voyons donc ce que nous apporte le modèle objet de Backbone.
 
 La déclaration d’un constructeur se fait avec le mot clé `constructor` :
 
-<u>Utilisation de `Kind.extend()` et définition de `constructor()`</u>
+Utilisation de `Kind.extend()` et définition de `constructor()`
 
 ```javascript
 var Personne = Kind.extend({
@@ -76,7 +76,7 @@ var Personne = Kind.extend({
 var bob = new Personne();
 ```
 
-Nous obtiendrons à l’éxécution :
+Nous obtiendrons à l’exécution :
 
   Bonjour, je suis le constructeur de Personne
 
@@ -84,7 +84,7 @@ Nous obtiendrons à l’éxécution :
 
 Les propriétés se déclarent dans le constructeur (elles sont générées à l’exécution), et vous pouvez déclarer les valeurs par défaut à l’extérieur du constructeur :
 
-<u>Ajout de propriétés</u>
+Ajout de propriétés
 
 ```javascript
 var Personne = Kind.extend({
@@ -112,7 +112,7 @@ Nous obtiendrons à l’éxécution :
 
 Les méthodes se déclarent de la même façon que le constructeur, ajoutons une méthode `bonjour()` :
 
-<u>Ajout d’une méthode</u>
+Ajout d’une méthode
 
 ```javascript
 var Personne = Kind.extend({
@@ -135,7 +135,7 @@ john.bonjour();
 bob.bonjour();
 ```
 
-Nous obtiendrons à l’éxécution :
+Nous obtiendrons à l’exécution :
 
   Bonjour, je suis  John Doe
   Bonjour, je suis  Bob Morane
@@ -144,7 +144,7 @@ Nous obtiendrons à l’éxécution :
 
 La méthode `extend` accepte un deuxième paramètre qui permet de déclarer des membres statiques :
 
-<u>Ajout & utilisation de membres statiques</u>
+Ajout & utilisation de membres statiques
 
 ```javascript
 var Personne = Kind.extend({
@@ -225,9 +225,9 @@ Voyons maintenant, comment surcharger les méthodes du parent et continuer à ap
 
 ##Surcharge & super
 
-Modifions le code des “pseudo classes” de la façon suivante :
+Modifions le code des “pseudo-classes” de la façon suivante :
 
-<u>Surcharge et utilisation de `super()`</u>
+Surcharge et utilisation de `super()`
 
 ```javascript
 var Homme = Personne.extend({
