@@ -29,6 +29,7 @@ Remerciements aussi pour :
 - [FlorianBruniaux ](https://github.com/FlorianBruniaux) : update versions, twitter bootstrap etc ...
 - [htulipe](https://github.com/htulipe) : correctifs
 - [cedricmessiant](https://github.com/cedricmessiant) : routeur et fixes
+- [AlainGourves](https://github.com/AlainGourves) : correctifs
 
 
 ##Avertissement
