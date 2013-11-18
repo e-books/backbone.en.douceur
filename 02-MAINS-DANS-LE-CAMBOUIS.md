@@ -77,6 +77,7 @@ A la racine de votre répertoire de travail, créez une page index.html avec le 
   <head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 		<title>Backbone</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 		<!-- === Styles Twitter Bootstrap -->
 		<!--V 3.0.1 ...-->
@@ -119,6 +120,7 @@ Dans notre toute nouvelle page `index.html`, préparons un peu notre bac à sabl
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 		<title>Backbone</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 		<!-- === Styles Twitter Bootstrap -->
 		<!--V 3.0.1 ...-->

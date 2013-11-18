@@ -25,6 +25,7 @@ Nous allons utiliser notre même page `index.html`, mais faisons un peu de ména
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Backbone</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!--V 3.0.1 ...-->
     <link href="libs/vendors/bootstrap/css/bootstrap.css" rel="stylesheet">
     <link href="libs/vendors/css/bootstrap-theme.css" rel="stylesheet">
@@ -358,6 +359,7 @@ Le code final de votre page devrait ressembler à ceci :
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Backbone</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!--V 3.0.1 ...-->
     <link href="libs/vendors/bootstrap/css/bootstrap.css" rel="stylesheet">
     <link href="libs/vendors/css/bootstrap-theme.css" rel="stylesheet">

@@ -65,6 +65,7 @@ Dans notre répertoire public (à la racine), créez une page `index.canjs.html`
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <title>CanJS</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!--V 3.0.1 ...-->
   <link href="libs/vendors/bootstrap/css/bootstrap.css" rel="stylesheet">
   <link href="libs/vendors/css/bootstrap-theme.css" rel="stylesheet">
@@ -88,9 +89,9 @@ Dans notre répertoire public (à la racine), créez une page `index.canjs.html`
     </div>
   </div>
 
-  <div class="container-fluid">
+  <div class="container">
 
-    <div class="row-fluid">
+    <div class="row">
 
       <script type="text/ejs" id="myposts_template">
         <% for( var i = 0; i < this.length; i++ ) { %>
@@ -237,6 +238,7 @@ A nouveau, dans notre répertoire `public` (à la racine), créez une page `inde
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Spine</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!--V 3.0.1 ...-->
     <link href="libs/vendors/bootstrap/css/bootstrap.css" rel="stylesheet">
     <link href="libs/vendors/css/bootstrap-theme.css" rel="stylesheet">
@@ -260,9 +262,9 @@ A nouveau, dans notre répertoire `public` (à la racine), créez une page `inde
         </div>
     </div>
 
-    <div class="container-fluid">
+    <div class="container">
 
-      <div class="row-fluid">
+      <div class="row">
 
         <script type="text/template" id="myposts_template">
           {{#posts}}

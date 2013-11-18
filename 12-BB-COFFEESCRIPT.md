@@ -550,7 +550,7 @@ render: (message, user) ->
 
 events:
   "click  .btn-primary": "onClickBtnLogin"
-  "click  .btn-inverse": "onClickBtnLogoff"
+  "click  .btn-default": "onClickBtnLogoff"
   "click #adminbtn": "displayAdminPanel"
 
 displayAdminPanel: ->

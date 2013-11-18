@@ -236,7 +236,7 @@ Nous allons modifier `LoginView.js` pour prendre en compte l’ajout de notre fo
   <input name="email" type="text" placeholder="email"/><br>
   <input name="password" type="password" placeholder="password"/><br>
   <a href="#" class="btn btn-primary">Login</a>
-  <a href="#" class="btn btn-inverse">Logoff</a><br>
+  <a href="#" class="btn btn-default">Logoff</a><br>
   <b>{{message}} {{firstName}} {{lastName}} </b>
   <br><a id="adminbtn" href="#">{{adminLinkLabel}}</a>
 </script>
@@ -297,7 +297,7 @@ var Blog = (function(blog) {
     },
     events: {
       "click  .btn-primary": "onClickBtnLogin",
-      "click  .btn-inverse": "onClickBtnLogoff",
+      "click  .btn-default": "onClickBtnLogoff",
       "click #adminbtn": "displayAdminPanel"
     },
 
