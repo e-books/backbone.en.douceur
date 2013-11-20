@@ -18,7 +18,7 @@ Je retourne donc dans le code html de ma page `index.html`. Ajoutons ceci juste 
 *Template de l’écran d’administration :*
 
 ```html
-<div class="span9">
+<div class="col-md-9">
   <div class="jumbotron">
       <h1>Backbone rocks !!!</h1>
   </div>

@@ -68,7 +68,7 @@ Dans notre répertoire public (à la racine), créez une page `index.canjs.html`
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!--V 3.0.1 ...-->
   <link href="libs/vendors/bootstrap/css/bootstrap.css" rel="stylesheet">
-  <link href="libs/vendors/css/bootstrap-theme.css" rel="stylesheet">
+  <link href="libs/vendors/bootstrap/css/bootstrap-theme.css" rel="stylesheet">
   
   <style>
     body {
@@ -241,7 +241,7 @@ A nouveau, dans notre répertoire `public` (à la racine), créez une page `inde
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!--V 3.0.1 ...-->
     <link href="libs/vendors/bootstrap/css/bootstrap.css" rel="stylesheet">
-    <link href="libs/vendors/css/bootstrap-theme.css" rel="stylesheet">
+    <link href="libs/vendors/bootstrap/css/bootstrap-theme.css" rel="stylesheet">
     
     <style>
       body {

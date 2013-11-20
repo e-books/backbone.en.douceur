@@ -82,7 +82,7 @@ A la racine de votre répertoire de travail, créez une page index.html avec le 
 		<!-- === Styles Twitter Bootstrap -->
 		<!--V 3.0.1 ...-->
 		<link href="libs/vendors/bootstrap/css/bootstrap.css" rel="stylesheet">
-        	<link href="libs/vendors/css/bootstrap-theme.css" rel="stylesheet">
+		<link href="libs/vendors/bootstrap/css/bootstrap-theme.css" rel="stylesheet">
   </head>
 
   <!-- === ici votre IHM === -->
@@ -125,7 +125,7 @@ Dans notre toute nouvelle page `index.html`, préparons un peu notre bac à sabl
 		<!-- === Styles Twitter Bootstrap -->
 		<!--V 3.0.1 ...-->
 		<link href="libs/vendors/bootstrap/css/bootstrap.css" rel="stylesheet">
-		<link href="libs/vendors/css/bootstrap-theme.css" rel="stylesheet">
+		<link href="libs/vendors/bootstrap/css/bootstrap-theme.css" rel="stylesheet">
 		
 		<!-- === à insérer entre les 2 <link> === -->
 		<style>
