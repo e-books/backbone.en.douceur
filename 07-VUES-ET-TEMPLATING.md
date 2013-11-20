@@ -1503,7 +1503,7 @@ Nous allons donc commencer par créer le template du formulaire d’authentifica
 
 ###L’objet Backbone.View : Login.View
 
-Notre composant d’authentification aura 2 zones de saisie (email et mot de passe), un bouton de login, un bouton pour se déconnecter, une zone pour afficher un message (bienvenue, erreur,…).
+Notre composant d’authentification aura 2 zones de saisie (email et mot de passe), un bouton de login, un bouton pour se déconnecter, une zone pour afficher un message (bienvenue, erreur…).
 Le composant devra aussi pouvoir vérifier si l’utilisateur est toujours connecté en cas de rafraîchissement de la page.
 
 ```javascript
