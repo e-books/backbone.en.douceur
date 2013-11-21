@@ -18,11 +18,11 @@ Un modèle Backbone (`Backbone.Model`) représente une entité unique (une insta
 
 >>**Remarque** : l’acronyme CRUD signifie Create, Read, Update, Delete (Créer, Lire, Mettre à jour, Supprimer). Si vous faites le lien avec le chapitre précédent, lorsque nous allons sauvegarder un nouveau modèle, ce sera une création et une requête de type POST sera envoyée au serveur, dans le cas de la lecture ce sera une requête de type GET, PUT pour les mises à jour de modèles et enfin DELETE pour la suppression. Et c’est la méthode `Backbone.sync()` qui va se charger de faire la bonne requête au serveur en fonction de l’action du modèle.
 
-La collection Backbone (`Backbone.Collection`) sert à stocker (en mémoire) un ensemble de modèles de même type. Elle permettra de les trier par exemple, les filtrer, etc. Elle est aussi généralement liée à une vue et permet de « récupérer » un ensemble de modèles en provenance du serveur. Là aussi, c’est `Backbone.sync()` qui s’occupe de faire le travail.
+La collection Backbone (`Backbone.Collection`) sert à stocker (en mémoire) un ensemble de modèles de même type. Elle permettra de les trier par exemple, les filtrer, etc. Elle est aussi généralement liée à une vue et permet de « récupérer » un ensemble de modèles en provenance du serveur. Là encore, c’est `Backbone.sync()` qui s’occupe de faire le travail.
 
 ##Modèles
 
-Si vous avez bien suivi les chapitres précédents vous devez disposer d’un squelette d’application et « client » et « serveur ». Nous allons donc, dans un premier temps définir notre modèle en javascript, puis nous le manipulerons directement dans la console du navigateur. Vous pouvez d’ores et déjà lancer la partie serveur avec la commande `node app.js` (ou `nodemon app.js`).
+Si vous avez bien suivi les chapitres précédents vous devez disposer d’un squelette d’application à la fois « client » et « serveur ». Nous allons donc dans un premier temps définir notre modèle en javascript, puis nous le manipulerons directement dans la console du navigateur. Vous pouvez d’ores et déjà lancer la partie serveur avec la commande `node app.js` (ou `nodemon app.js`).
 
 ###Définition du modèle
 
@@ -62,7 +62,7 @@ Nous avons maintenant une instance d’un modèle, jouons avec. Vous avez noté 
 
 ###Getters et Setters
 
-Pour lire ou modifier les valeurs des propriétés de notre message, le réflexe serait, par exemple pour obtenir la valeur du titre, de taper la commande `message.title`, et bien cela ne fonctionne pas ! Backbone a une mécanique différente, si vous souhaitez obtenir la valeur du titre il faudra taper la commande `message.get("title")` et pour la modifier `message.set("title", "mon nouveau titre")` ou `message.set({title : "mon nouveau titre"})`, cette dernière notation permet de changer plusieurs propriétés en une seule passe. Cela peut surprendre mais cela a beaucoup d’avantages d’utiliser des méthodes plutôt qu’une simple affectation, on peut ainsi s’abonner aux changements des valeurs pour déclencher automatiquement un traitement (comme le rafraîchissement d’une vue par exemple). Faites donc l’exercice dans la console :
+Pour lire ou modifier les valeurs des propriétés de notre message, le réflexe serait, par exemple pour obtenir la valeur du titre, de taper la commande `message.title`, et bien cela ne fonctionne pas ! Backbone a une mécanique différente, si vous souhaitez obtenir la valeur du titre il faudra taper la commande `message.get("title")` et pour la modifier `message.set("title", "mon nouveau titre")` ou `message.set({title : "mon nouveau titre"})`, cette dernière notation permet de changer plusieurs propriétés en une seule passe. Cela peut surprendre mais l’utilisation de méthodes plutôt qu’une simple affectation offre beaucoup d’avantages : on peut ainsi s’abonner aux changements des valeurs pour déclencher automatiquement un traitement (comme le rafraîchissement d’une vue par exemple). Faites donc l’exercice dans la console :
 
 
 ![BB](RSRC/06_01_MODS.png)
@@ -154,7 +154,7 @@ Et vous obtiendrez :
 ![BB](RSRC/06_06_MODS.png)
 
 
-Cette fois ci, côté serveur, la requête ajax a été détectée comme une requête de type `PUT`, donc une requête de mise à jour du modèle.
+Cette fois ci, côté serveur, la requête Ajax a été détectée comme une requête de type `PUT`, donc une requête de mise à jour du modèle.
 
 
 ![BB](RSRC/06_07_MODS.png)
@@ -358,7 +358,7 @@ Que nous pouvons utiliser de la manière suivante :
 
 ###Comment détecter qu’un modèle a été changé par quelqu’un d’autre ?
 
-Dans la “rubrique trucs & astuces”, il est possible de détecter un changement effectué côté serveur (cet exemple est à titre démonstratif et mérite d’être optimisé ou d’utiliser d’autres moyens tels les websockets par exemple).Tapez ceci dans la console de votre navigateur :
+Dans la “rubrique trucs & astuces”, il est possible de détecter un changement effectué côté serveur (cet exemple est à titre démonstratif et mérite d’être optimisé ou d’utiliser d’autres moyens tels les websockets par exemple). Tapez ceci dans la console de votre navigateur :
 
 *Appel de la méthode fetch() à intervalles réguliers :*
 
@@ -372,7 +372,7 @@ setInterval(function() {
 }, 1000)
 ```
 
-Nous venons de créer un nouveau `Post`, en renseignant son id (car nous savons qu’il existe côté serveur) et demandons à javascript d’aller chercher les données toutes les 1000 millisecondes (donc toutes les 1 secondes).
+Nous venons de créer un nouveau `Post`, en renseignant son id (car nous savons qu’il existe côté serveur) et demandons à javascript d’aller chercher les données toutes les 1000 millisecondes (donc toutes les secondes).
 
 Ensuite, ouvrez un autre navigateur (par exemple FireFox) et connectez-vous sur [http://localhost:3000](http://localhost:3000), puis dans la console de ce navigateur tapez ceci :
 
@@ -694,7 +694,7 @@ Ensuite si vous souhaitez charger tous les modèles (toujours dans la console de
 ![BB](RSRC/06_24_MODS.png)
 
 
->>**A Noter** : il se trouve que les collections dans Backbone ont une méthode `url()` qui est appelée si la propriété `url` n’existe pas, cela peut être un autre moyen d’adresser la problématique de changement d’url. De même si les modèles ajoutés à une collection n’ont pas de propriété `url` (ni `urlRoot`), ils héritent de celle de la collection (mais cela demande à revoir la politique de « routage » utilisée côté serveur ou de modifier `Backbone.sync()` qui construira les requêtes http en fonction du type d’objet faisant une requête (modèle ou collection)). Pour plus d’informations sur le sujet, aller voir : [http://backbonejs.org/#Model-url](http://backbonejs.org/#Model-url) ainsi que [http://backbonejs.org/#Collection-url](http://backbonejs.org/#Collection-url).
+>>**À Noter** : il se trouve que les collections dans Backbone ont une méthode `url()` qui est appelée si la propriété `url` n’existe pas, cela peut être un autre moyen d’adresser la problématique de changement d’url. De même si les modèles ajoutés à une collection n’ont pas de propriété `url` (ni `urlRoot`), ils héritent de celle de la collection (mais cela demande à revoir la politique de « routage » utilisée côté serveur ou de modifier `Backbone.sync()` qui construira les requêtes http en fonction du type d’objet faisant une requête (modèle ou collection)). Pour plus d’informations sur le sujet, aller voir : [http://backbonejs.org/#Model-url](http://backbonejs.org/#Model-url) ainsi que [http://backbonejs.org/#Collection-url](http://backbonejs.org/#Collection-url).
 
 ##Événements
 

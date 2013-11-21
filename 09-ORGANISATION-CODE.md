@@ -16,7 +16,7 @@ Il y a de nombreuses querelles de chapelles autour du sujet de l’organisation 
 
 ###Namespace
 
-Créer une application Backbone, c’est écrire des modèles, des vues, des templates, etc. Et une des bonnes pratiques pour parvenir à garder ceci bien organisé est d’utiliser le **namespacing** (comme en .Net, Java,…) de la façon suivante :
+Créer une application Backbone, c’est écrire des modèles, des vues, des templates, etc. Et une des bonnes pratiques pour parvenir à garder ceci bien organisé est d’utiliser le **namespacing** (comme en .Net, Java…) de la façon suivante :
 
 *Namespace Blog :*
 
@@ -497,7 +497,7 @@ Pour répondre à ces types de problématiques, il existe ce que l’on appelle 
 - YepNope [http://yepnopejs.com/](http://yepnopejs.com/) d'Alex Sexton
 - Etc.
 
-Il y a beaucoup de débats autour des « javascript resources loaders », « est-ce bien ou mal ? », « cela ralentit le chargement de la page web », « c’est génial il faut généraliser son utilisation »,... Mon propos n’est pas de participer au débat mais de vous montrer « rapidement » de quelle façon on peut les utiliser. (Cependant si votre application est simple, cela ne vaut pas la peine d’en utiliser, si ce n’est à titre éducatif ou pour le plaisir).
+Il y a beaucoup de débats autour des « javascript resources loaders », « est-ce bien ou mal ? », « cela ralentit le chargement de la page web », « c’est génial il faut généraliser son utilisation »… Mon propos n’est pas de participer au débat mais de vous montrer « rapidement » de quelle façon on peut les utiliser. (Cependant si votre application est simple, cela ne vaut pas la peine d’en utiliser, si ce n’est à titre éducatif ou pour le plaisir).
 
 >>**Remarque** : si vous souhaitez creuser le sujet je vous engage à lire « Non-onload-blocking async JS » de  Stoyan Stefanov : [http://www.phpied.com/non-onload-blocking-async-js/](http://www.phpied.com/non-onload-blocking-async-js/).
 
@@ -650,7 +650,7 @@ yepnope({
 });
 ```
 
-Et voilà ! Vous disposez maintenant d’un code structuré, d’un outil de chargement de script facile à utiliser et modifier : désactivation ou changement provisoire de librairie pour tests par exemple mais aussi chargement conditionnel de script en fonction du contexte,… Je ne vous ai dévoilé qu’une infime partie de YepNope qui, en dépit de sa taille, est très puissant. Lisez la documentation, vous verrez…
+Et voilà ! Vous disposez maintenant d’un code structuré, d’un outil de chargement de script facile à utiliser et modifier : désactivation ou changement provisoire de librairie pour tests par exemple mais aussi chargement conditionnel de script en fonction du contexte… Je ne vous ai dévoilé qu’une infime partie de YepNope qui, en dépit de sa taille, est très puissant. Lisez la documentation, vous verrez…
 
 Maintenant que notre projet est "propre", nous allons dans le chapitre suivant en profiter pour sécuriser un peu plus notre application.
 
