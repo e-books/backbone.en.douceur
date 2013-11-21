@@ -1146,14 +1146,15 @@ Nous somme maintenant prêts à utiliser tout cela côté client. Le code défin
 --------------------------------------------*/
 var express = require('express'),
   nStore = require('nstore'),
-  app = module.exports = express.createServer();
+  app = module.exports = express();
 
 nStore = nStore.extend(require('nstore/query')());
 
 /*--------------------------------------------
   Paramétrages de fonctionnement d'Express
 --------------------------------------------*/
-app.use(express.bodyParser());
+app.use(express.json());
+app.use(express.urlencoded());
 app.use(express.methodOverride());
 app.use(express.static(__dirname + '/public'));
 app.use(express.cookieParser('ilovebackbone'));
