@@ -7,7 +7,7 @@
 >>- *Construction et test de notre serveur d’application*
 
 
->*Faisons un dernier détour avant de revenir à Backbone. Pour bien en comprendre le fonctionnement, nous allons nous mettre en situation réelle. Ne laissons pas notre future webapp toute seule. Généralement une application web comporte une partie serveur qui sert à distribuer des données vers l’IHM client (dans le navigateur). Pour que le tour de Backbone.js soit complet, il serait impensable de ne pas étudier les interaction avec un serveur (interrogation de données, ajax…)*
+>*Faisons un dernier détour avant de revenir à Backbone. Pour bien en comprendre le fonctionnement, nous allons nous mettre en situation réelle. Ne laissons pas notre future webapp toute seule. Généralement une application web comporte une partie serveur qui sert à distribuer des données vers l’IHM client (dans le navigateur). Pour que le tour de Backbone.js soit complet, il serait impensable de ne pas étudier les interaction avec un serveur (interrogation de données, Ajax…)*
 
 Pour ce chapitre, je me suis longuement posé la question : «  quelle technologie serveur utiliser ? ». PHP, Ruby, Java, .Net… ? C’était aussi prendre le risque de vous désintéresser complètement. D’un autre côté, je souhaitais que vous puissiez rapidement entrer dans le vif du sujet. J’ai donc finalement choisi de vous faire utiliser Node.js puisque c’est aussi du Javascript et que sa mise en œuvre est rapide sans pour autant être obligé de connaître Node.js dans son ensemble. **Objectif : disposer d’un serveur d’application fournissant des services JSON en moins d’une demi-heure !**
 
