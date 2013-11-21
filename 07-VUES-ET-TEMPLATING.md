@@ -259,7 +259,7 @@ Et là, l’affichage s’actualise automatiquement :
 
 ###S'abonner aux événements
 
-Modifions une nouvelle fois notre vue en ajoutans le code suivant à la méthode `initialize` :
+Modifions une nouvelle fois notre vue en ajoutant le code suivant à la méthode `initialize` :
 
 ```javascript
 _.bindAll(this, 'render');
@@ -335,7 +335,7 @@ blogPosts.query('{"author" : "sam"}')
 ```
 
 Vous remarquez que votre vue se met à jour automatiquement à chaque changement, sans avoir à rappeler la méthode render de la vue.
-Mais il est possible de faire ceci aussi avec les changements sur les modèles.
+Mais il est aussi possible de le faire avec les changements sur les modèles.
 
 ###S’abonner à d’autres évènements (modèles)
 
@@ -544,7 +544,7 @@ Dans la partie HTML de notre page, juste avant  `<div id="posts_list"></div>`, a
 
 >>**Remarque** : le fait de définir le template à l'intérieur de `<script type="text/template"></script>` fait que le modèle de template ne sera pas affiché dans la page.
 
-En fait (grace à Underscore), nous venons de définir le template dont la vue Backbone va se servir pour afficher les données. Il faudra lui passer pour cela un **tableau** de posts.
+En fait (grâce à Underscore), nous venons de définir le template dont la vue Backbone va se servir pour afficher les données. Il faudra lui passer pour cela un **tableau** de posts.
 Modifions donc notre vue de la façon suivante :
 
 ```javascript
@@ -1675,7 +1675,7 @@ function addUsers() {
 
   //etc.
 }
-```javascript
+```
 
 Lançons donc notre page web :
 
