@@ -598,11 +598,11 @@ Modifions notre code html de la manière suivante :
     </div>
 </div>
 
-<div class="container-fluid">
+<div class="container">
 
-  <div class="row-fluid">
+  <div class="row">
 
-    <div class="span3">
+    <div class="col-md-3">
       <script type="text/template" id="blog_sidebar_template">
         <h2>Les 3 derniers :</h2>
         <ul>
@@ -616,7 +616,7 @@ Modifions notre code html de la manière suivante :
       </div>
     </div>
 
-    <div class="span9">
+    <div class="col-md-9">
       <div class="jumbotron">
         <h1>Backbone rocks !!!</h1>
       </div>
@@ -631,7 +631,7 @@ Modifions notre code html de la manière suivante :
         <% }); %>
 
       </script>
-      <div class="row-fluid" id="posts_list"></div>
+      <div id="posts_list"></div>
     </div>
   </div>
 </div>
@@ -1492,7 +1492,7 @@ Nous allons donc commencer par créer le template du formulaire d’authentifica
   <input name="email" type="text" placeholder="email"/><br>
   <input name="password" type="password" placeholder="password"/><br>
   <a href="#" class="btn btn-primary">Login</a>
-  <a href="#" class="btn btn-inverse">Logoff</a><br>
+  <a href="#" class="btn btn-default">Logoff</a><br>
   <b>{{message}} {{firstName}} {{lastName}}</b>
 
 </script>
@@ -1566,7 +1566,7 @@ Une propriété de l’objet `Backbone.View` permet de gérer les événements s
   <input name="email" type="text" placeholder="email"/><br>
   <input name="password" type="password" placeholder="password"/><br>
   <a href="#" class="btn btn-primary">Login</a>
-  <a href="#" class="btn btn-inverse">Logoff</a><br>
+  <a href="#" class="btn btn-default">Logoff</a><br>
   <b>{{message}} {{firstName}} {{lastName}}</b>
 </script>
 ```
@@ -1576,17 +1576,17 @@ Je souhaite pouvoir déclencher des événements lorsque je clique sur les bouto
 ```javascript
 events: {
   "click  .btn-primary": "onClickBtnLogin",
-  "click  .btn-inverse": "onClickBtnLogoff"
+  "click  .btn-default": "onClickBtnLogoff"
 },
 ```
 
-En fait je demande à mon objet `Backbone.View` d’intercepter tous les événements de type click sur les éléments html (de la vue considérée) dont la classe `css` est `.btn-primary` ou `.btn-inverse` et de déclencher respectivement les méthodes `onClickBtnLogin` ou `onClickBtnLogoff`.
+En fait je demande à mon objet `Backbone.View` d’intercepter tous les événements de type click sur les éléments html (de la vue considérée) dont la classe `css` est `.btn-primary` ou `.btn-default` et de déclencher respectivement les méthodes `onClickBtnLogin` ou `onClickBtnLogoff`.
 
 >>**Remarque** : nous aurions très bien pu affecter des id aux boutons :
 
 ```html
 <a href="#" id="btnLogIn" class="btn btn-primary">Login</a>
-<a href="#" id="btnLogOff" class="btn btn-inverse">Logoff</a><br>
+<a href="#" id="btnLogOff" class="btn btn-default">Logoff</a><br>
 ```
 
 et relier les événements aux ids :
