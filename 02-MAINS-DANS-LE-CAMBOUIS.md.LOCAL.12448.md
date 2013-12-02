@@ -77,12 +77,11 @@ Nous allons aussi récupérer le framework CSS **Twitter Bootstrap** qui nous pe
   <head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 		<title>Backbone</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 		<!-- === Styles Twitter Bootstrap -->
 		<!--V 3.0.1 ...-->
 		<link href="libs/vendors/bootstrap/css/bootstrap.css" rel="stylesheet">
-		<link href="libs/vendors/bootstrap/css/bootstrap-theme.css" rel="stylesheet">
+        	<link href="libs/vendors/css/bootstrap-theme.css" rel="stylesheet">
   </head>
 
   <!-- === ici votre IHM === -->
@@ -120,12 +119,11 @@ Dans notre toute nouvelle page `index.html`, préparons un peu notre bac à sabl
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 		<title>Backbone</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 		<!-- === Styles Twitter Bootstrap -->
 		<!--V 3.0.1 ...-->
 		<link href="libs/vendors/bootstrap/css/bootstrap.css" rel="stylesheet">
-		<link href="libs/vendors/bootstrap/css/bootstrap-theme.css" rel="stylesheet">
+        	<link href="libs/vendors/css/bootstrap-theme.css" rel="stylesheet">
 		
 		<!-- === à insérer entre les 2 <link> === -->
 		<style>

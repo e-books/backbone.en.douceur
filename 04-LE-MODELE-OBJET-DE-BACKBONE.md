@@ -82,17 +82,22 @@ Nous obtiendrons à l’exécution :
 
 ###Des propriétés
 
-Les propriétés se déclarent dans le constructeur (elles sont générées à l’exécution), et vous pouvez déclarer les valeurs par défaut à l’extérieur du constructeur :
+Les propriétés se déclarent dans le constructeur (elles sont générées à l’exécution)
 
 Ajout de propriétés
 
 ```javascript
 var Personne = Kind.extend({
-  prenom: "John",
-  nom: "Doe",
+
   constructor: function(prenom, nom) {
-    if (prenom) this.prenom = prenom;
-    if (nom) this.nom = nom;
+  	this.prenom = "John";
+  	this.nom = "Doe";
+    if (prenom) { 
+    	this.prenom = prenom; 
+    } 
+    if (nom) {
+    	this.nom = nom;
+    }
 
     console.log("Bonjour, je suis ", this.prenom, this.nom);
   }
@@ -101,6 +106,9 @@ var Personne = Kind.extend({
 var john = new Personne();
 var bob = new Personne("Bob", "Morane");
 ```
+
+**Warning:** ne jamais définir les propriétés en dehors du `constructor`
+
 
 Nous obtiendrons à l’éxécution :
 
@@ -116,11 +124,16 @@ Ajout d’une méthode
 
 ```javascript
 var Personne = Kind.extend({
-  prenom: "John",
-  nom: "Doe",
+
   constructor: function(prenom, nom) {
-    if (prenom) this.prenom = prenom;
-    if (nom) this.nom = nom;
+  	this.prenom = "John";
+  	this.nom = "Doe";
+    if (prenom) { 
+    	this.prenom = prenom; 
+    } 
+    if (nom) {
+    	this.nom = nom;
+    }
   },
   bonjour: function() {
     console.log("Bonjour, je suis ", this.prenom, this.nom);
@@ -148,11 +161,16 @@ Ajout & utilisation de membres statiques
 
 ```javascript
 var Personne = Kind.extend({
-  prenom: "John",
-  nom: "Doe",
+
   constructor: function(prenom, nom) {
-    if (prenom) this.prenom = prenom;
-    if (nom) this.nom = nom;
+  	this.prenom = "John";
+  	this.nom = "Doe";
+    if (prenom) { 
+    	this.prenom = prenom; 
+    } 
+    if (nom) {
+    	this.nom = nom;
+    }
 
     //Utilisation de la propriété statique
     Personne.compteur += 1;
@@ -188,22 +206,15 @@ Donc `Personne` hérite de `Kind`. Mais essayons un exemple plus complet pour bi
 
 ```javascript
 var Homme = Personne.extend({
-  sexe: "male"
+  getSexe: function() { return "male"; }
 });
 
 var Femme = Personne.extend({
-  prenom: "Jane",
-  sexe: "femelle"
+  getSexe: function() { return "femelle"; }
 });
-
-var jane = new Femme();
-var john = new Homme();
 
 var angelina = new Femme("Angelina", "Jolie");
 var bob = new Homme("Bob", "Morane");
-
-jane.bonjour();
-john.bonjour();
 
 angelina.bonjour();
 bob.bonjour();
@@ -213,11 +224,9 @@ console.log("Il y a ", Personne.combien(), " personnes");
 
 A l’exécution nous obtiendrons ceci :
 
-  Bonjour, je suis  Jane Doe
-  Bonjour, je suis  John Doe
   Bonjour, je suis  Angelina Jolie
   Bonjour, je suis  Bob Morane
-  Il y a  4  personnes
+  Il y a  2  personnes
 
 Nous pouvons donc vérifier que l’on a bien hérité de la méthode `bonjour()`, du constructeur `constructor()` et de `nom` et `prenom` (ainsi que de leurs valeurs par défaut). Nous remarquons aussi que l’incrémentation des “personnes” continue puisque `Homme` et `Femme` héritent de `Personne`.
 Voyons maintenant, comment surcharger les méthodes du parent et continuer à appeler les méthodes du parent.
@@ -231,12 +240,12 @@ Surcharge et utilisation de `super()`
 
 ```javascript
 var Homme = Personne.extend({
-  sexe: "male",
+    getSexe: function() { return "male"; },
   //surcharge du constructeur
   constructor: function(prenom, nom) {
     //appeler le constructeur de Personne
     Homme.__super__.constructor.call(this, prenom, nom);
-    console.log("Hello, je suis un ", this.sexe);
+    console.log("Hello, je suis un ", this.getSexe());
   },
   bonjour: function() {
     //appeler la methode bonjour() du parent
@@ -246,13 +255,12 @@ var Homme = Personne.extend({
 });
 
 var Femme = Personne.extend({
-  prenom: "Jane",
-  sexe: "femelle",
+  getSexe: function() { return "femelle"; },
   //surcharge du constructeur
   constructor: function(prenom, nom) {
     //appeler le constructeur de Personne
     Femme.__super__.constructor.call(this, prenom, nom);
-    console.log("Hello, je suis une ", this.sexe);
+    console.log("Hello, je suis une ", this.getSexe());
   },
   bonjour: function() {
     //appeler la methode bonjour() du parent

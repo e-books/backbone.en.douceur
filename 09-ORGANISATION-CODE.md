@@ -403,7 +403,7 @@ var Blog = (function(blog) {
     },
     events: {
       "click  .btn-primary": "onClickBtnLogin",
-      "click  .btn-inverse": "onClickBtnLogoff"
+      "click  .btn-default": "onClickBtnLogoff"
     },
     onClickBtnLogin: function(domEvent) {
 
