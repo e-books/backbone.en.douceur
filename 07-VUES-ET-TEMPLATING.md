@@ -133,6 +133,7 @@ Pour vérifier que la sauvegarde a bien fonctionné, rafraîchissez votre page e
 ```javascript
 blogPosts.all()
   .fetch({
+  reset : true,
   success: function(result) {
   console.log(result);
   }
@@ -315,6 +316,7 @@ Puis essayez ceci :
 ```javascript
 blogPosts.all()
   .fetch({
+  reset : true,
   success: function(result) {
   console.log(result);
   }
@@ -328,6 +330,7 @@ et cela :
 ```javascript
 blogPosts.query('{"author" : "sam"}')
   .fetch({
+  reset : true,
   success: function(result) {
   console.log(result);
   }
@@ -355,6 +358,7 @@ Sauvegardez la page, puis retournez dans le navigateur, rafraîchissez la page e
 postsListView = new PostsListView(blogPosts)
 blogPosts.all()
   .fetch({
+  reset : true,
   success: function(result) {
   console.log(result);
   }
@@ -443,6 +447,7 @@ window.postsListView = new PostsListView({
 })
 
 blogPosts.all().fetch({
+  reset : true,
   success: function(result) {
   console.log(result);
   }
@@ -511,6 +516,7 @@ $(function() {
   })
 
   blogPosts.all().fetch({
+  reset : true,
   success: function(result) {
     //ça marche !!!
   }
