@@ -30,6 +30,7 @@ Remerciements aussi pour :
 - [htulipe](https://github.com/htulipe) : correctifs
 - [cedricmessiant](https://github.com/cedricmessiant) : routeur et fixes
 - [AlainGourves](https://github.com/AlainGourves) : correctifs
+- [jcsuzanne](https://github.com/jcsuzanne) : correctifs
 
 
 ##Avertissement
