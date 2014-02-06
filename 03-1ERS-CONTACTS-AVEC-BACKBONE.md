@@ -9,7 +9,7 @@
 
 >*Nous allons faire un premier exemple Backbone pas à pas, même sans connaître le framework. Cela va permettre de « désacraliser » la bête et de mettre un peu de liant avec tout ce que nous avons vu précédemment. Puis nous passerons dans le détail tous les composants de Backbone dans les chapitres qui suivront.*
 
-Voilà, il est temps de s'y mettre. L'application que nous allons réaliser avec Backbone tout au long de cet ouvrage va être un Blog, auquel nous ajouterons au fur et à mesure des fonctionnalités pour finalement le transformer en CMS (Content Management System). Je vous l'accorde ce n'est pas très original, mais cela répond à des problématiques classiques (récurrentes ?) dans notre vie "d'informaticien" et cela a le mérite d'avoir un aspect pratique et utile. Notre point de départ va être un blog que nous agrémenterons de fonctionnalités au fil des chapitres.
+Voilà, il est temps de s'y mettre. L'application que nous allons réaliser avec Backbone tout au long de cet ouvrage va être un Blog, auquel nous ajouterons au fur et à mesure des fonctionnalités pour finalement le transformer en CMS (*Content Management System*). Je vous l'accorde ce n'est pas très original, mais cela répond à des problématiques classiques (récurrentes ?) dans notre vie "d'informaticien" et cela a le mérite d'avoir un aspect pratique et utile. Notre point de départ va être un blog que nous agrémenterons de fonctionnalités au fil des chapitres.
 
 ##1ère application Backbone
 
@@ -74,9 +74,9 @@ Nous allons utiliser notre même page `index.html`, mais faisons un peu de ména
 L'essentiel de notre travail va se passer dans la balise `<script></script>` en bas de page. De quoi avons-nous besoin dans un blog ?
 
 - Des articles : un ensemble d'articles (ou "posts"), généralement écrits par une seule personne (le blog est personnel, c'est en lui donnant des fonctionnalités multi-utilisateurs que nous nous dirigerons doucement vers un CMS).
-- Des commentaires : Il est de bon ton de permettre aux lecteurs du blog de pouvoir commenter les articles.
+- Des commentaires : il est de bon ton de permettre aux lecteurs du blog de pouvoir commenter les articles.
 
-Pour le moment nous allons nous concentrer uniquement sur les articles, notre objectif sera le suivant : "Afficher une liste d'articles sur la page principale".
+Pour le moment, nous allons nous concentrer uniquement sur les articles, notre objectif sera le suivant : "Afficher une liste d'articles sur la page principale".
 
 
 ##Le Modèle “Article”
@@ -115,20 +115,20 @@ $(function() {
 
 Sauvegardez, relancez dans le navigateur et allez dans la console :
 
-- Pour créer un nouvel article : tapez la commande `myFirstArticle = new blog.Article()`
-- Pour "voir" le titre de l'article : tapez la commande `myFirstArticle.get("title")`
-- Pour "voir" le contenu de l'article : tapez la commande `myFirstArticle.get("content")`
-- Pour changer le titre de l'article : tapez la commande `myFirstArticle.set("title","MON TITRE")` ou `myFirstArticle.set({title : "MON TITRE"})`
-- Pour changer simultanément le titre et le contenu : tapez la commande `myFirstArticle.set({title : "MON TITRE...", content : "blablabla"})`
-- Pour créer un article directement avec un titre et du contenu : tapez la commande `mySecondArticle = new blog.Article({title : "MON AUTRE ARTICLE", content : "lorem ipsum..."})`
+- pour créer un nouvel article : tapez la commande `myFirstArticle = new blog.Article()`,
+- pour "voir" le titre de l'article : tapez la commande `myFirstArticle.get("title")`,
+- pour "voir" le contenu de l'article : tapez la commande `myFirstArticle.get("content")`,
+- pour changer le titre de l'article : tapez la commande `myFirstArticle.set("title","MON TITRE")` ou `myFirstArticle.set({title : "MON TITRE"})`,
+- pour changer simultanément le titre et le contenu : tapez la commande `myFirstArticle.set({title : "MON TITRE...", content : "blablabla"})`,
+- pour créer un article directement avec un titre et du contenu : tapez la commande `mySecondArticle = new blog.Article({title : "MON AUTRE ARTICLE", content : "lorem ipsum..."}).`
 
 
 ![BB](RSRC/03_01_BB.png)
 
 
-Vous venez donc de voir que nous avons défini le modèle article “un peu” comme une classe qui hériterait (`extend`) de la classe `Backbone.Model`, que nous lui avons défini des valeurs par défauts (`defaults`), et affecté une méthode d’initialisation (`initialize`). Et qu’il existe un système de getter et de setter un peu particulier (`model.get(property_name)`, `model.set(property_name, value)`), mais nous verrons ultérieurement dans le détail comment fonctionnent les modèles.
+Vous venez donc de voir que nous avons défini le modèle article “un peu” comme une classe qui hériterait (`extend`) de la classe `Backbone.Model`, que nous lui avons défini des valeurs par défauts (`defaults`), et affecté une méthode d’initialisation (`initialize`). Et qu’il existe un système d'accesseurs et de manipulateurs un peu particulier (`model.get(property_name)`, `model.set(property_name, value)`), mais nous verrons ultérieurement dans le détail comment fonctionnent les modèles.
 
->>**Remarque** *: le modèle de programmation de Javascript est bien orienté objet, mais n’est pas orienté “classe” comme peut l’être par exemple Java. Cela peut déstabiliser au départ, mais je vous engage à lire [REF VERS ARTICLE] à ce propos.*
+>>**Remarque** *: le modèle de programmation de JavaScript est bien orienté objet, mais n’est pas orienté “classe” comme peut l’être par exemple Java. Cela peut déstabiliser au départ, mais je vous engage à lire [REF VERS ARTICLE] à ce propos.*
 
 ##La Collection d’Articles
 
@@ -149,15 +149,15 @@ blog.ArticlesCollection = Backbone.Collection.extend({
 
 >>**Notez** *qu'il faut bien préciser le type de modèle associé à la collection (on pourrait dire que la collection est typée).*
 
-Sauvegarder, relancer dans le navigateur, retournez à nouveau dans la console et saisissez les commandes suivantes :
+Sauvegardez, relancez dans le navigateur, retournez à nouveau dans la console et saisissez les commandes suivantes :
 
-- Création de la collection :
+- création de la collection :
 
 ```javascript
 listeArticles = new blog.ArticlesCollection()
 ```
 
-- Ajout d’articles à la collection :
+- ajout d’articles à la collection :
 
 ```javascript
 listeArticles.add(new blog.Article({ title : "titre1", content : "contenu1" }))
@@ -166,8 +166,8 @@ listeArticles.add(new blog.Article({ title : "titre3", content : "contenu3" }))
 ```
 Nous venons donc d'ajouter 3 articles à notre collection,
 
-- Si vous tapez la commande `listeArticles.models` vous obtiendrez un tableau de modèles
-- Si vous souhaitez obtenir le titre du 2ème article de la collection, tapez :
+- si vous tapez la commande `listeArticles.models` vous obtiendrez un tableau de modèles,
+- si vous souhaitez obtenir le titre du 2ème article de la collection, tapez :
 
   `listeArticles.models[1].get("title")`
 
@@ -185,7 +185,7 @@ Nous venons donc d'ajouter 3 articles à notre collection,
 
 ##Vue et Template
 
-Avant toute chose, allons ajouter dans notre code javascript (en bas de la page HTML) le bout de code qui va créer les articles et la collection d'articles pour nous éviter de tout re-saisir à chaque fois. Donc après le code de la collection, ajoutez ceci :
+Avant toute chose, allons ajouter dans notre code Javascript (en bas de la page HTML) le bout de code qui va créer les articles et la collection d'articles pour nous éviter de tout re-saisir à chaque fois. Donc après le code de la collection, ajoutez ceci :
 
 ```javascript
 /*--- bootstrap ---*/
@@ -198,7 +198,7 @@ blog.listeArticles.add(new blog.Article({ title : "titre4", content : "contenu4"
 blog.listeArticles.add(new blog.Article({ title : "titre5", content : "contenu5" }));
 ```
 
-Ensuite dans le code html, ajoutons le template de notre vue et le div dans lequel les données seront affichées :
+Ensuite dans le code HTML, ajoutons le template de notre vue et le `<div>` dans lequel les données seront affichées :
 
 ```html
 <% _.each(articles, function(article) { %>
@@ -245,7 +245,7 @@ donc :
 </body>
 ```
 
-Puis dans le code javascript, à la suite du code de la collection et avant le code de chargement des données (bootstrap), ajoutez le code de la vue Backbone :
+Puis dans le code JavaScript, à la suite du code de la collection et avant le code de chargement des données (bootstrap), ajoutez le code de la vue Backbone :
 
 ```javascript
 /*--- Vues ---*/
@@ -270,15 +270,15 @@ blog.ArticlesView = Backbone.View.extend({
 
 Eh bien, nous avons défini une vue avec :
 
-- Une propriété `el` (pour élément) à laquelle on “attache” le `<div>` dont l’id est : `“articles-collection-container”`. C’est dans ce `<div>` que seront affichés les articles
+- une propriété `el` (pour élément) à laquelle on “attache” le `<div>` dont l’id est : `“articles-collection-container”`. C’est dans ce `<div>` que seront affichés les articles,
 
-- Une méthode `initialize`, qui affecte une méthode `template()` à l’instance de la vue en lui précisant que nous utiliserons le modèle de code html définit dans le `<div>` dont l’id est `“articles-collection-template”`
-- Une méthode `render`, qui va passer les données en paramètre à la méthode `template()` puis les afficher dans la page
+- une méthode `initialize`, qui affecte une méthode `template()` à l’instance de la vue en lui précisant que nous utiliserons le modèle de code HTML définit dans le `<div>` dont l’id est `“articles-collection-template”`,
+- une méthode `render`, qui va passer les données en paramètre à la méthode `template()` puis les afficher dans la page.
 
-Sauvegarder, relancer dans le navigateur et retournez encore dans la console pour saisir les commandes suivantes :
+Sauvegardez, relancez dans le navigateur et retournez encore dans la console pour saisir les commandes suivantes :
 
-- Pour instancier une vue : `articlesView = new blog.ArticlesView({ collection : blog.listeArticles })` à laquelle nous passons la collection d’articles en paramètre
-- Pour afficher les données : `articlesView.render()`
+- pour instancier une vue : `articlesView = new blog.ArticlesView({ collection : blog.listeArticles })` à laquelle nous passons la collection d’articles en paramètre,
+- pour afficher les données : `articlesView.render()`.
 
 **Et là, la "magie" de Backbone opère, vos articles s'affichent instantanément dans votre page :** :)
 
@@ -308,7 +308,7 @@ Nous venons "d'expliquer" à Backbone, qu'à chaque changement dans la collectio
 
   //TODO: à expliquer plus simplement
 
-Une dernière fois, sauvegarder, relancer le navigateur et retournez encore dans la console pour saisir les commandes suivantes :
+Une dernière fois, sauvegardez, relancez le navigateur et retournez encore dans la console pour saisir les commandes suivantes :
 
 - Création de la vue : `articlesView = new blog.ArticlesView({ collection : blog.listeArticles })`
 - Afficher les données : `articlesView.render()`
