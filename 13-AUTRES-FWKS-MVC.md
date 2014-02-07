@@ -8,11 +8,11 @@
 >>- *Les autres ...*
 
 
->*Il faut aller voir ailleurs !!! Backbone peut ne pas correspondre à vos attentes, à votre façon de coder, ... Je vous engage à tester d'autres frameworks.*
+>*Il faut aller voir ailleurs !!! Backbone peut ne pas correspondre à vos attentes, à votre façon de coder… Je vous engage à tester d'autres frameworks.*
 
->*Il existe aujourd’hui de TRES nombreux frameworks MVC en javascript “côté navigateur”. Certains fournissent beaucoup plus de services que Backbone, d’autres vont même plus loin, puisqu’ils vont jusqu’à fournir un framework associé côté serveur (en javascript avec du nodejs). Ils sont plus ou moins complexes, plus ou moins bien documentés.*
+>*Il existe aujourd’hui de TRÈS nombreux frameworks MVC en JavaScript “côté navigateur”. Certains fournissent beaucoup plus de services que Backbone, d’autres vont même plus loin, puisqu’ils vont jusqu’à fournir un framework associé côté serveur (en JavaScript avec du nodejs). Ils sont plus ou moins complexes, plus ou moins bien documentés.*
 
-L'objectif de ce chapitre n'est pas de faire un cours sur tous les frameworks javascript existants (chacun mériterait un ouvrage), mais de lever un coin de voile sur eux, et montrer que chacun possède ses spécificités. J'en ai sélectionné 2, sur un seul critère de sélection (qui me tient à coeur) : **LA SIMPLICITE** (après la notion de simplicité d'un dev à l'autre, est relative ...), il faut que le framework soit simple à mettre en oeuvre, sans pour autant être obligé de le connaître par coeur avant de pouvoir l'utiliser. Autrement dit, si au bout d’un quart d’heure de lecture, vous avez compris les principes de bases, le framework que vous étudiez est susceptible d’être facilement compréhensible par le reste de votre équipe (par exemple) et donc vous ne devriez pas avoir de frein à l’adoption. Si au bout d’une demi-heure, vous n’êtes pas arrivé à l’installé correctement, vous pouvez commencer à avoir des doutes (c’est une méthode très personnelle, si elle ne garantit pas les fonctionnalités du framework, elle vous assure au moins sa simplicité). La qualité de la documentation peut avoir un impact fort dans vos choix.
+L'objectif de ce chapitre n'est pas de faire un cours sur tous les frameworks JavaScript existants (chacun mériterait un ouvrage), mais de lever un coin de voile sur eux, et montrer que chacun possède ses spécificités. J'en ai sélectionné 2, sur un seul critère de sélection (qui me tient à coeur) : **LA SIMPLICITE** (après la notion de simplicité d'un dev à l'autre, est relative…), il faut que le framework soit simple à mettre en oeuvre, sans pour autant être obligé de le connaître par coeur avant de pouvoir l'utiliser. Autrement dit, si au bout d’un quart d’heure de lecture, vous avez compris les principes de bases, le framework que vous étudiez est susceptible d’être facilement compréhensible par le reste de votre équipe (par exemple) et donc vous ne devriez pas avoir de frein à l’adoption. Si au bout d’une demi-heure, vous n’êtes pas arrivé à l’installé correctement, vous pouvez commencer à avoir des doutes (c’est une méthode très personnelle, si elle ne garantit pas les fonctionnalités du framework, elle vous assure au moins sa simplicité). La qualité de la documentation peut avoir un impact fort dans vos choix.
 
 ##CanJS
 
@@ -44,16 +44,16 @@ Puis, si je veux tous les modèles :
 Blog.Post.findAll({}, function(posts){ console.log(posts);});
 ```
 
-... qui me retournera un tableau de modèles.
+… qui me retournera un tableau de modèles.
 
-Vous remarquerez que l'on définit toutes les routes au niveau du modèle, et non pas une seule url comme dans Backbone.
+Vous remarquerez que l'on définit toutes les routes au niveau du modèle, et non pas une seule URL comme dans Backbone.
 
 Question templating, **CanJS** embarque son propre langage de template qui ressemble fortement à celui d'Underscore (mais rien ne vous empêche d'utiliser autre chose). Côté "DOM", **CanJS** sait travailler avec jQuery, Zepto, Dojo, Mootools et YUI, à vous de faire votre choix et de télécharger la version adaptée.
 
 
 ###Mise en oeuvre rapide
 
-Pour notre exemple, j’ai utilisez la version de CanJS adaptée pour jQuery, que vous pouvez télécharger ici : [https://github.com/downloads/jupiterjs/canjs/can.jquery-1.0.7.js](https://github.com/downloads/jupiterjs/canjs/can.jquery-1.0.7.js) et que vous copierez  ensuite dans `public/libs/vendors` (nous utilisons notre application pour pouvoir se connecter à la partie serveur).
+Pour notre exemple, j’ai utilisez la version de CanJS adaptée pour jQuery, que vous pouvez télécharger ici : [https://github.com/downloads/jupiterjs/canjs/can.jquery-1.0.7.js](https://github.com/downloads/jupiterjs/canjs/can.jquery-1.0.7.js) et que vous copierez ensuite dans `public/libs/vendors` (nous utilisons notre application pour pouvoir se connecter à la partie serveur).
 
 Dans notre répertoire public (à la racine), créez une page `index.canjs.html` avec le code suivant :
 
@@ -145,9 +145,9 @@ yepnope({
 </html>
 ```
 
-Nous avons conservé le mécanisme de chargement de yepnope et jQuery, donc une fois le chargement de la page terminé, nous avons défini notre modèle avec les routes nécessaires pour accéder aux services de données, puis nous exécutons un `findAll` pour obtenir la liste des posts sur le serveur et l’affichons dans la page une fois les données récupérées grâce à l’objet `can.view`.
+Nous avons conservé le mécanisme de chargement de yepnope et jQuery, donc une fois le chargement de la page terminé, nous avons défini notre modèle avec les routes nécessaires pour accéder aux services de données, puis nous exécutons un `findAll` pour obtenir la liste des articles sur le serveur et l’affichons dans la page une fois les données récupérées grâce à l’objet `can.view`.
 
-Vous n’avez plus qu’à enregistrer et relancer votre application et ouvrir l’url :
+Vous n’avez plus qu’à enregistrer et relancer votre application et ouvrir l’URL :
 
 `http://localhost:3000/index.canjs.html` dans votre navigateur, pour obtenir la liste des posts :
 
@@ -169,11 +169,11 @@ Un autre avantage non négligeable est la documentation qui est claire, bien fai
 
 **Spine** est très très inspiré de Backbone avec les spécificités suivantes (entre autres) :
 
-- il est écrit en Coffeescript (mais vous pouvez bien sûr l'utiliser en pur javascript)
-- Spine propose des Contrôleurs ! ... qui ne sont ni plus ni moins l'équivalent des Backbones.Views
-- ... et considère que les vues sont représentée par les templates. A ce sujet Spine propose tout un mécanisme évolué mais nous n'utiliserons que Mustache de la même façon qu'avec Backbone.
+- il est écrit en CoffeeScript (mais vous pouvez bien sûr l'utiliser en pur JavaScript),
+- Spine propose des Contrôleurs ! … qui ne sont ni plus ni moins l'équivalent des Backbones.Views,
+- … et considère que les vues sont représentée par les templates. À ce sujet Spine propose tout un mécanisme évolué mais nous n'utiliserons que Mustache de la même façon qu'avec Backbone.
 
-Spine peut s'installer avec **npm** (node package manager) et ainsi proposer des outils supplémentaires permettant de générer un squelette de projet, de gérer les dépendances, ... Mais pour notre exemple, nous allons le faire "à l'ancienne", l'objectif étant de ne modifier en rien la stack serveur existante. Vous pouvez donc vous préparer un environnement identique à celui du chapitre sur Coffeescript ave un répertoire `public.coffee` pour votre code coffeescript et n’oubliez pas le fichier de build `Cakefile`.
+Spine peut s'installer avec **npm** (node package manager) et ainsi proposer des outils supplémentaires permettant de générer un squelette de projet, de gérer les dépendances… Mais pour notre exemple, nous allons le faire "à l'ancienne", l'objectif étant de ne modifier en rien la stack serveur existante. Vous pouvez donc vous préparer un environnement identique à celui du chapitre sur Coffeescript ave un répertoire `public.coffee` pour votre code coffeescript et n’oubliez pas le fichier de build `Cakefile`.
 
 
 Un modèle Spine se décrit de la manière suivante :
@@ -199,7 +199,7 @@ class Post extends Spine.Model
   "#{@title} : #{@message} / #{@author}"
 ```
 
-Vous remarquerez que l'on ne définit qu'une seule url. Par contre le système de getter et de setter de Backbone disparaît (à vous de les écrire).
+Vous remarquerez que l'on ne définit qu'une seule URL. Par contre le système d'accesseurs et mutateurs de Backbone disparaît (à vous de les écrire).
 
 En ce qui concerne le contrôleur, il prend la forme suivante :
 
@@ -228,7 +228,7 @@ Téléchargez la distribution [http://spinejs.com/pages/download](http://spinejs
 
 Cette fois-ci, nous allons utiliser 2 fichiers : une page `index.spine.html` qui affichera nos données et un fichier de script coffeescript `main.spine.coffee` qui contiendra notre code applicatif.
 
-A nouveau, dans notre répertoire `public` (à la racine), créez une page `index.spine.html` avec le code suivant :
+À nouveau, dans notre répertoire `public` (à la racine), créez une page `index.spine.html` avec le code suivant :
 
 *Index.spine.html :*
 
@@ -352,9 +352,9 @@ Maintenant positionnez vous au même endroit que le fichier `Cakefile`, lancez l
 
 ###Conclusion sur Spine
 
-Spine est moins simple que Backbone, mais s'en inspire énormément tout en restant facile d'accès (je fais abstraction de Coffeescript en faisant cette remarque). Il est possible d'utiliser Spine directement en javascript, mais le “style” de code ne prend vraiment de l'intérêt que dans un “mode Coffeescript” grace à la notion de classe. De la même façon que CanJS, Spine apporte plus de services “clés en main” que Backbone, comme par exemple la gestion du localstorage. Spine propose aussi un volet “développement mobile” : [http://spinejs.com/mobile/index](http://spinejs.com/mobile/index). Si vous n’êtes pas effrayé par Coffeescript, c’est un framework à suivre et à adopter.
+Spine est moins simple que Backbone, mais s'en inspire énormément tout en restant facile d'accès (je fais abstraction de CoffeeScript en faisant cette remarque). Il est possible d'utiliser Spine directement en JavaScript, mais le “style” de code ne prend vraiment de l'intérêt que dans un “mode CoffeeScript” grâce à la notion de classe. De la même façon que CanJS, Spine apporte plus de services “clés en main” que Backbone, comme par exemple la gestion du *localStorage*. Spine propose aussi un volet “développement mobile” : [http://spinejs.com/mobile/index](http://spinejs.com/mobile/index). Si vous n’êtes pas effrayé par CoffeeScript, c’est un framework à suivre et à adopter.
 
-Globalement, ce qui m'a intéressé tant dans CanJS que dans Spine, c'est leur simplicité de mise en oeuvre. Il est possible en quelques minutes d'écrire quelques premières lignes opérationnelles, ce qui n'est pas forcément le cas avec d'autres frameworks beaucoup plus (ou trop?) complets.
+Globalement, ce qui m'a intéressé tant dans CanJS que dans Spine, c'est leur simplicité de mise en oeuvre. Il est possible en quelques minutes d'écrire quelques premières lignes opérationnelles, ce qui n'est pas forcément le cas avec d'autres frameworks beaucoup plus (ou trop ?) complets.
 
 
 ##Knockout
@@ -367,13 +367,13 @@ Donc vous l'aurez compris, **Knockout** met en oeuvre le pattern **Observer** :
 
 [http://en.wikipedia.org/wiki/Observer_pattern](http://en.wikipedia.org/wiki/Observer_pattern)
 
-Ou encore mieux, la version "javascript" par Addy Osmani :
+Ou encore mieux, la version "JavaScript" par Addy Osmani :
 
 [http://addyosmani.com/resources/essentialjsdesignpatterns/book/#observerpatternjavascript](http://addyosmani.com/resources/essentialjsdesignpatterns/book/#observerpatternjavascript).
 
-###Mise en oeuvre très très rapide ... Mais suffisante
+###Mise en oeuvre très très rapide… mais suffisante
 
-Récupérez donc la librairie Knockout.js par ici :
+Récupérez donc la bibliothèque Knockout.js par ici :
 
 [http://cloud.github.com/downloads/SteveSanderson/knockout/knockout-2.2.0.js](http://cloud.github.com/downloads/SteveSanderson/knockout/knockout-2.2.0.js)
 
@@ -404,7 +404,7 @@ Avec **Knockout**, pour définir qu'une propriété est "observable", on utilise
 
   ko.observable(nom_de_la_propriété)
 
- Définissons donc notre 1er modèle :
+ Définissons donc notre premier modèle :
 
 ```javascript
 var Message = function (from, subject, body) {
@@ -412,7 +412,7 @@ var Message = function (from, subject, body) {
   this.subject = ko.observable(subject);
   this.body = ko.observable(body);
 
-  //je m'abonne aux modification de from
+  //je m'abonne aux modifications de from
   this.from.subscribe(function(value){console.log("value : ", value);});
 }
 ```
@@ -429,21 +429,21 @@ Simple, non ?
 
 ###Collections ?
 
-La notion de collection de Backbone n'existe plus, nous travaillons simplement avec des tableaux (`Array`). Je souhaite donc un tablea u "observable" de messages, je vais procéder comme ceci (en utilisant `ko.observableArray`):
+La notion de collection de Backbone n'existe plus, nous travaillons simplement avec des tableaux (`Array`). Je souhaite donc un tableau "observable" d'articles, je vais procéder comme ceci (en utilisant `ko.observableArray`):
 
 ```javascript
 var Messages = ko.observableArray([
-  new Message("John Doe", "First Message", "Hello World"),
+  new Message("John Doe", "First post", "Hello World"),
   new Message("Bob Morane", "hello", "hello world"),
   new Message("Sam Le Pirate", "Salut", "Salut à Tous")
 ]);
 ```
 
-Donc encore plus simple que pour les modèles !!! *(donc j'ai un tableau observable de modèles observables ...)*
+Donc encore plus simple que pour les modèles !!! *(donc j'ai un tableau observable de modèles observables…)*
 
 ###Attachons notre modèle à des vues !
 
-Imaginons, que j'ai une portion de mon code html qui est dédiée à affiché un message bien précis :
+Imaginons, que j'ai une portion de mon code HTML qui est dédiée à affiché un message bien précis :
 
 ```html
 <div id="messageView">
@@ -453,7 +453,7 @@ Imaginons, que j'ai une portion de mon code html qui est dédiée à affiché un
 </div>
 ```
 
-Le code javascript pour attacher le message à `messageView` sera le suivant :
+Le code JavaScript pour attacher le message à `messageView` sera le suivant :
 
 ```javascript
 msg = new Message("bob", "hello", "hello world");
@@ -461,7 +461,7 @@ msg = new Message("bob", "hello", "hello world");
 ko.applyBindings(msg, document.querySelector("#messageView"));
 ```
 
->>Le lien sera fait avec les attributs html `data-bind`. Toute modification de notre modèle sera reflétée instantanément dans le code html (mais nous y reviendrons plus tard dans la démonstration).
+>>Le lien sera fait avec les attributs HTML `data-bind`. Toute modification de notre modèle sera reflétée instantanément dans le code HTML (mais nous y reviendrons plus tard dans la démonstration).
 
 De la même façon, si je souhaite faire un formulaire de saisie lié à mon message :
 
@@ -473,7 +473,7 @@ De la même façon, si je souhaite faire un formulaire de saisie lié à mon mes
 
 >>Notez cette fois `data-bind="value: from"` au lieu de `data-bind="text: from"`, `value` exprime le "binding à double sens" (là aussi nous y reviendrons plus tard).
 
-Et le code javascript pour attacher le message au formulaire sera le suivant :
+Et le code JavaScript pour attacher le message au formulaire sera le suivant :
 
 ```javascript
 ko.applyBindings(msg, document.querySelector("form"));
@@ -504,7 +504,7 @@ En ce qui concerne notre tableau "observable", cela reste aussi simple :
 </div>
 ```
 
-Pour exprimer à **Knockout** que l'on veut afficher une liste d'éléments, on utilise l'attribut `data-bind="foreach: messages"`. Et en javascript, nous devrons écrire ceci :
+Pour exprimer à **Knockout** que l'on veut afficher une liste d'éléments, on utilise l'attribut `data-bind="foreach: messages"`. Et en JavaScript, nous devrons écrire ceci :
 
 ```javascript
 ko.applyBindings({messages:Messages}, document.querySelector("#messagesList"));
@@ -614,7 +614,7 @@ Et enfin, si vous modifiez les données dans les zones de saisie, vous pouvez vo
 
 "Je ne sais pas vous", mais je trouve **Knockout** particulièrement intéressant :). Si vous souhaitez aller plus loin, faites un tour dans la documentation et tout particulièrement ceci :
 
-- Pour les interaction avec le serveur (ajax & jQuery) :
+- Pour les interaction avec le serveur (Ajax & jQuery) :
 
   [http://knockoutjs.com/documentation/json-data.html](http://knockoutjs.com/documentation/json-data.html)
 
@@ -628,26 +628,26 @@ Et si vous rêvez de combiner Backbone et Knockout, à voir : **Knockback** :
 
 qui fera certainement l'objet d'un chapitre de cet "ouvrage".
 
-##Encore d’autres frameworks MVC (javascript)
+##Encore d’autres frameworks MVC (JavaScript)
 
-ils sont nombreux, mais les "ténors" connus, reconnus et utilisés sont les suivants :
+Ils sont nombreux, mais les "ténors" connus, reconnus et utilisés sont les suivants :
 
 - **Ember.js** [http://emberjs.com](http://emberjs.com ) : le concurrent direct “officiel” de Backbone, très très complet, puissant, mais avec une dépendance forte avec le moteur de template Handelbar (un Mustache survitaminé), à suivre de très près. Il est cependant dommage que la gestion des modèles ne soit pas encore en mode stable (c'est un module à part), mais le modèle objet d’Ember.js est évolué, plus strict que celui de Backbone, donc à mon sens plus contraignant, mais cela peut en rassurer d'autres, car il propose un cadre “plus normatif” et permet donc de “forcer” à respecter les normes de développement sur un projet.
-- **AngularJS** [http://angularjs.org](http://angularjs.org) : le framework pour Webapp de Google, mais pas complètement MVC (les modèles de sont pas traités) qui met essentiellement l'accent sur le binding des données avec le DOM
-- **JavaScriptMVC** [http://javascriptmvc.com](http://javascriptmvc.com) : intéressant (peut-être un des plus anciens), car il essaye de coller le plus possible à ce que des développeurs java connaissent de MVC, mais la mécanique de mise en oeuvre est un peu lourde. Cependant le code est très lisible.
+- **AngularJS** [http://angularjs.org](http://angularjs.org) : le framework pour WebApp de Google, mais pas complètement MVC (les modèles de sont pas traités) qui met essentiellement l'accent sur le binding des données avec le DOM
+- **JavaScriptMVC** [http://javascriptmvc.com](http://javascriptmvc.com) : intéressant (peut-être un des plus anciens), car il essaye de coller le plus possible à ce que des développeurs Java connaissent de MVC, mais la mécanique de mise en oeuvre est un peu lourde. Cependant le code est très lisible.
 
-Vous trouverez aussi des frameworks javascript MVC “Client et Serveur”, tels :
+Vous trouverez aussi des frameworks JavaScript MVC “Client et Serveur”, tels :
 
-- **Batman** [http://batmanjs.org/](http://batmanjs.org/) : plutôt destiné aux développeurs Coffeescript. Il fournit son propre serveur mais peut être utilisé avec d’autres technologies serveur notamment le Ruby ou même “seul” dans le navigateur. Je trouve la documentation insuffisante, vous êtes parfois obligés d’aller dans le code du framework pour en comprendre le fonctionnement.
-- **Matador** [http://obvious.github.com/matador](http://obvious.github.com/matador) : celui-ci est essentiellement un framework MVC côté serveur en javascript s’appuyant sur express, il servirait donc plutôt à, par exemple, re-écrire la partie serveur de notre blog. Mais il est intéressant de voir de quelle manière il utilise des frameworks javascript initialement développés pour le navigateur, côté serveur, tel le modèle objet Klass (https://github.com/ded/klass).
-- **Chaplin** [https://github.com/chaplinjs/chaplin](https://github.com/chaplinjs/chaplin) : qui est une architecture complète autour de Backbone, une fois de plus “programmable” en coffeescript.
-- et beaucoup d'autres ...
+- **Batman** [http://batmanjs.org/](http://batmanjs.org/) : plutôt destiné aux développeurs CoffeeScript. Il fournit son propre serveur mais peut être utilisé avec d’autres technologies serveur notamment le Ruby ou même “seul” dans le navigateur. Je trouve la documentation insuffisante, vous êtes parfois obligés d’aller dans le code du framework pour en comprendre le fonctionnement.
+- **Matador** [http://obvious.github.com/matador](http://obvious.github.com/matador) : celui-ci est essentiellement un framework MVC côté serveur en JjavaScript s’appuyant sur Express.js, il servirait donc plutôt à, par exemple, re-écrire la partie serveur de notre blog. Mais il est intéressant de voir de quelle manière il utilise des frameworks JavaScript initialement développés pour le navigateur, côté serveur, tel le modèle objet Klass (https://github.com/ded/klass).
+- **Chaplin** [https://github.com/chaplinjs/chaplin](https://github.com/chaplinjs/chaplin) : qui est une architecture complète autour de Backbone, une fois de plus “programmable” en CoffeeScript.
+- Et beaucoup d'autres…
 
->>**Remarque** : Pour en savoir plus, vous pouvez aller lire cet article [http://coding.smashingmagazine.com/2012/07/27/journey-through-the-javascript-mvc-jungle](http://coding.smashingmagazine.com/2012/07/27/journey-through-the-javascript-mvc-jungle/) : Comparatif très complet des fwk MVC JavaScript réalisé par les développeurs de Smashing Magazine. 
+>>**Remarque** : Pour en savoir plus, vous pouvez aller lire cet article [http://coding.smashingmagazine.com/2012/07/27/journey-through-the-javascript-mvc-jungle](http://coding.smashingmagazine.com/2012/07/27/journey-through-the-javascript-mvc-jungle/) : comparatif très complet des frameworks MVC JavaScript réalisé par les développeurs de Smashing Magazine. 
 
 ##Conclusion
 
-L’éco-système des framworks MVC javascript est vaste et il est difficile de faire un choix. L'important est de vous faire votre propre avis, d'utiliser les outils avec vous êtes le plus à l'aise, mais tout en étant sûr que vous avez chosi un framework largement utilisé par d'autres, avec une communauté active. Un dernier petit conseil : le plus souvent les frameworks javascript affiche leur repository sur GitHub (“the place to be”), alors tout le monde peut y être (j’y suis), mais c’est un 1er critère, ensuite un des gros avantage de Github, c’est que vous pouvez voir facilement l’activité autour du framework :
+L’éco-système des framworks MVC JavaScript est vaste et il est difficile de faire un choix. L'important est de vous faire votre propre avis, d'utiliser les outils avec vous êtes le plus à l'aise, mais tout en étant sûr que vous avez chosi un framework largement utilisé par d'autres, avec une communauté active. Un dernier petit conseil : le plus souvent les frameworks JavaScript affiche leur repository sur GitHub (“the place to be”), alors tout le monde peut y être (j’y suis), mais c’est un 1er critère, ensuite un des gros avantage de GitHub, c’est que vous pouvez voir facilement l’activité autour du framework :
 
 - Qui sont les contributeurs (et à quels autres projets il participent) ?
 - Depuis combien de temps le code n’a pas été mis à jour ?
@@ -656,7 +656,7 @@ L’éco-système des framworks MVC javascript est vaste et il est difficile de 
 - Dans le bug tracker, quelle est la qualité des réponses ?
 - …
 
->>Par exemple pour Backbone, plus de 10 000 “abonnés”, plus de 1 700 “forks”, c’est peu de dire que mon “jouet préféré” suscite de l’intérêt. Vous pouvez même comparer par rapport à d’autres frameworks java connus pour vous faire une idée. Ayez donc ce réflexe pour tout framework que vous souhaitez utiliser, cela peut vous éviter quelques soucis.
+>>Par exemple pour Backbone, plus de 10 000 “abonnés”, plus de 1 700 “forks”, c’est peu de dire que mon “jouet préféré” suscite de l’intérêt. Vous pouvez même comparer par rapport à d’autres frameworks Java connus pour vous faire une idée. Ayez donc ce réflexe pour tout framework que vous souhaitez utiliser, cela peut vous éviter quelques soucis.
 
 
 

@@ -16,13 +16,13 @@ Dans une application « de gestion », les modèles sont le cœur de l’applica
 Un modèle Backbone (`Backbone.Model`) représente une entité unique (une instance du modèle), par exemple nous avons la définition du modèle « Client », et si Bob est un client, alors c’est une instance de client. En général, il est lié à une vue (un composant d’affichage) qui changera (modifiera son affichage) lorsque que le modèle changera. Mais les changements du modèle sont aussi synchronisés avec le serveur. La synchronisation avec le serveur se fait avec la méthode `Backbone.sync()`, à chaque fois qu’un modèle fait une opération « CRUD », `Backbone.sync()` est appelée pour « discuter » avec le serveur (pour le moment cela va fonctionner tout seul, mais nous reviendrons plus tard à `Backbone.sync()` pour comprendre son fonctionnement et même modifier celui-ci).
 
 
->>**Remarque** : l’acronyme CRUD signifie Create, Read, Update, Delete (Créer, Lire, Mettre à jour, Supprimer). Si vous faites le lien avec le chapitre précédent, lorsque nous allons sauvegarder un nouveau modèle, ce sera une création et une requête de type POST sera envoyée au serveur, dans le cas de la lecture ce sera une requête de type GET, PUT pour les mises à jour de modèles et enfin DELETE pour la suppression. Et c’est la méthode `Backbone.sync()` qui va se charger de faire la bonne requête au serveur en fonction de l’action du modèle.
+>>**Remarque** : l’acronyme CRUD signifie *Create, Read, Update, Delete* (Créer, Lire, Mettre à jour, Supprimer). Si vous faites le lien avec le chapitre précédent, lorsque nous allons sauvegarder un nouveau modèle, ce sera une création et une requête de type POST sera envoyée au serveur, dans le cas de la lecture ce sera une requête de type GET, PUT pour les mises à jour de modèles et enfin DELETE pour la suppression. Et c’est la méthode `Backbone.sync()` qui va se charger de faire la bonne requête au serveur en fonction de l’action du modèle.
 
 La collection Backbone (`Backbone.Collection`) sert à stocker (en mémoire) un ensemble de modèles de même type. Elle permettra de les trier par exemple, les filtrer, etc. Elle est aussi généralement liée à une vue et permet de « récupérer » un ensemble de modèles en provenance du serveur. Là aussi, c’est `Backbone.sync()` qui s’occupe de faire le travail.
 
 ##Modèles
 
-Si vous avez bien suivi les chapitres précédents vous devez disposer d’un squelette d’application et « client » et « serveur ». Nous allons donc, dans un premier temps définir notre modèle en javascript, puis nous le manipulerons directement dans la console du navigateur. Vous pouvez d’ores et déjà lancer la partie serveur avec la commande `node app.js` (ou `nodemon app.js`).
+Si vous avez bien suivi les chapitres précédents vous devez disposer d’un squelette d’application et « client » et « serveur ». Nous allons donc, dans un premier temps définir notre modèle en JavaScript, puis nous le manipulerons directement dans la console du navigateur. Vous pouvez d’ores et déjà lancer la partie serveur avec la commande `node app.js` (ou `nodemon app.js`).
 
 ###Définition du modèle
 
@@ -50,7 +50,7 @@ Puis saisissez ceci dans la console (et validez) :
 
 ```javascript
 var message = new Post({
-  title: "Premier Message",
+  title: "Premier article",
   message: "Apprendre Backbone, c'est facile",
   author: "@K33G_ORG"
 });
@@ -84,7 +84,7 @@ Vous notez que les propriétés de notre modèle sont contenues dans un objet `a
 
 ####Méthode save() : création & mise à jour
 
-Saisissez le code javascript ci-dessous dans la console du navigateur. Cela va déclencher une requête ajax vers le serveur pour sauvegarder votre modèle (instance de modèle). Si tout se passe bien, c’est la méthode `success()` qui est appelée.
+Saisissez le code JavaScript ci-dessous dans la console du navigateur. Cela va déclencher une requête Ajax vers le serveur pour sauvegarder votre modèle (instance de modèle). Si tout se passe bien, c’est la méthode `success()` qui est appelée.
 
 *Appel de la méthode save() du modèle :*
 
@@ -299,7 +299,7 @@ Mais vous pouvez essayer avec un nouveau Post :
 
 ###“Augmenter” le modèle : ajouter des valeurs par défaut et des méthodes au modèle
 
-Vous pouvez éprouver le besoin de coder de manière plus classique (à la java), nous allons en profiter pour ajouter des getters et des setters “à l’ancienne” ainsi que des valeurs par défaut au modèle :
+Vous pouvez éprouver le besoin de coder de manière plus classique (à la Java), nous allons en profiter pour ajouter des getters et des setters “à l’ancienne” ainsi que des valeurs par défaut au modèle :
 
 *Ajouts de propriétés et de méthodes au model :*
 
@@ -358,7 +358,7 @@ Que nous pouvons utiliser de la manière suivante :
 
 ###Comment détecter qu’un modèle a été changé par quelqu’un d’autre ?
 
-Dans la “rubrique trucs & astuces”, il est possible de détecter un changement effectué côté serveur (cet exemple est à titre démonstratif et mérite d’être optimisé ou d’utiliser d’autres moyens tels les websockets par exemple).Tapez ceci dans la console de votre navigateur :
+Dans la “rubrique trucs & astuces”, il est possible de détecter un changement effectué côté serveur (cet exemple est à titre démonstratif et mérite d’être optimisé ou d’utiliser d’autres moyens tels les websockets par exemple). Tapez ceci dans la console de votre navigateur :
 
 *Appel de la méthode fetch() à intervalles réguliers :*
 
@@ -372,9 +372,9 @@ setInterval(function() {
 }, 1000)
 ```
 
-Nous venons de créer un nouveau `Post`, en renseignant son id (car nous savons qu’il existe côté serveur) et demandons à javascript d’aller chercher les données toutes les 1000 millisecondes (donc toutes les 1 secondes).
+Nous venons de créer un nouveau `Post`, en renseignant son id (car nous savons qu’il existe côté serveur) et demandons à Javascript d’aller chercher les données toutes les 1000 millisecondes (donc toutes les 1 secondes).
 
-Ensuite, ouvrez un autre navigateur (par exemple FireFox) et connectez-vous sur [http://localhost:3000](http://localhost:3000), puis dans la console de ce navigateur tapez ceci :
+Ensuite, ouvrez un autre navigateur (par exemple Firefox) et connectez-vous sur [http://localhost:3000](http://localhost:3000), puis dans la console de ce navigateur tapez ceci :
 
 ```javascript
 var message = new Post({
@@ -422,7 +422,7 @@ window.Posts = Backbone.Collection.extend({
 ```
 
 
-Nous avons précisé une url pour les collections (c’est ce qui sera utilisé lorsque nous ferons des requêtes au serveur), et le type de modèle de la collection.
+Nous avons précisé une URL pour les collections (c’est ce qui sera utilisé lorsque nous ferons des requêtes au serveur), et le type de modèle de la collection.
 Et rechargeons notre page, pour une nouvelle fois passer en mode commande (et donc ouvrir la console du navigateur).
 
 ###Comment ajouter des modèles à une collection
@@ -694,7 +694,7 @@ Ensuite si vous souhaitez charger tous les modèles (toujours dans la console de
 ![BB](RSRC/06_24_MODS.png)
 
 
->>**A Noter** : il se trouve que les collections dans Backbone ont une méthode `url()` qui est appelée si la propriété `url` n’existe pas, cela peut être un autre moyen d’adresser la problématique de changement d’url. De même si les modèles ajoutés à une collection n’ont pas de propriété `url` (ni `urlRoot`), ils héritent de celle de la collection (mais cela demande à revoir la politique de « routage » utilisée côté serveur ou de modifier `Backbone.sync()` qui construira les requêtes http en fonction du type d’objet faisant une requête (modèle ou collection)). Pour plus d’informations sur le sujet, aller voir : [http://backbonejs.org/#Model-url](http://backbonejs.org/#Model-url) ainsi que [http://backbonejs.org/#Collection-url](http://backbonejs.org/#Collection-url).
+>>**A Noter** : il se trouve que les collections dans Backbone ont une méthode `url()` qui est appelée si la propriété `url` n’existe pas, cela peut être un autre moyen d’adresser la problématique de changement d’URL. De même si les modèles ajoutés à une collection n’ont pas de propriété `url` (ni `urlRoot`), ils héritent de celle de la collection (mais cela demande à revoir la politique de « routage » utilisée côté serveur ou de modifier `Backbone.sync()` qui construira les requêtes HTTP en fonction du type d’objet faisant une requête (modèle ou collection)). Pour plus d’informations sur le sujet, aller voir : [http://backbonejs.org/#Model-url](http://backbonejs.org/#Model-url) ainsi que [http://backbonejs.org/#Collection-url](http://backbonejs.org/#Collection-url).
 
 ##Événements
 

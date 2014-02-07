@@ -10,7 +10,7 @@
 
 ##RESThub Backbone Stack : mais qu'est-ce donc ?
 
-Pour faire court, RestHub est une stack technique Java orientée MVC et services REST, c'est un framework opensource (Lyonnais :) ) [http://resthub.org/](http://resthub.org/). Il se trouve que l'équipe projet est aussi friande de javascript et a livré il y a peu une stack javascript pour RESThub à base de Backbone pour la partie cliente [http://resthub.org/backbone-stack.html](http://resthub.org/backbone-stack.html). Comme l'équipe est sympa, ils ont fait une stack js indépendante de la stack serveur, ce qui permet de l'utiliser avec n'importe quelle autre stack serveur quelle que soit la technologie utilisée.
+Pour faire court, RestHub est une stack technique Java orientée MVC et services REST, c'est un framework opensource (Lyonnais :) ) [http://resthub.org/](http://resthub.org/). Il se trouve que l'équipe projet est aussi friande de JavaScript et a livré il y a peu une stack JavaScript pour RESThub à base de Backbone pour la partie cliente [http://resthub.org/backbone-stack.html](http://resthub.org/backbone-stack.html). Comme l'équipe est sympa, ils ont fait une stack JavaScript indépendante de la stack serveur, ce qui permet de l'utiliser avec n'importe quelle autre stack serveur quelle que soit la technologie utilisée.
 
 Alors, RBS (je lui donne ce petit nom pour aller plus vite) ne vient pas seule, mais est bien accompagnée, puisqu'elle embarque :
 
@@ -42,7 +42,7 @@ dans `rbs`, créez un répertoire `public`, puis toujours dans `rbs`, créez un 
 
 ```javascript
 /*--------------------------------------------
-  Déclaration des librairies
+  Déclaration des bibliothèques
 --------------------------------------------*/
 var express = require('express'),
   nStore = require('nstore'),
@@ -75,7 +75,7 @@ models = nStore.new("models.db", function() {
 
 function Routes() {
   /*
-    Obtenir la liste de tous les models lorsque
+    Obtenir la liste de tous les modèles lorsque
     l'on appelle http://localhost:3000/models
     en mode GET
   */
@@ -97,7 +97,7 @@ function Routes() {
   });
 
   /*
-    Obtenir la liste de tous les models correspondant à un critère
+    Obtenir la liste de tous les modèles correspondant à un critère
     lorsque l'on appelle http://localhost:3000/models/ en
     mode GET avec une requête en paramètre
     ex : query : { "kind" : "message"} }
@@ -121,8 +121,8 @@ function Routes() {
   });
 
   /*
-    Retrouver un model par sa clé unique lorsque
-    l'on appelle http://localhost:3000/models/identifiant_du_model
+    Retrouver un modèle par sa clé unique lorsque
+    l'on appelle http://localhost:3000/models/identifiant_du_modele
     en mode GET
   */
 
@@ -139,9 +139,9 @@ function Routes() {
   });
 
   /*
-    Créer un nouveau model lorsque
+    Créer un nouveau modèle lorsque
     l'on appelle http://localhost:3000/models
-    avec en paramètre le post au format JSON
+    avec en paramètre le modèle au format JSON
     en mode POST
   */
   app.post('/models', function(req, res) {
@@ -162,9 +162,9 @@ function Routes() {
 
 
   /*
-    Mettre à jour un model lorsque
+    Mettre à jour un modèle lorsque
     l'on appelle http://localhost:3000/blogpost
-    avec en paramètre le post au format JSON
+    avec en paramètre le modèle au format JSON
     en mode PUT
   */
   app.put('/models/:id', function(req, res) {
@@ -183,8 +183,8 @@ function Routes() {
   });
 
   /*
-    supprimer un model par sa clé unique lorsque
-    l'on appelle http://localhost:3000/blogpost/identifiant_du_post
+    supprimer un modèle par sa clé unique lorsque
+    l'on appelle http://localhost:3000/blogpost/identifiant_du_modele
     en mode DELETE
   */
   app.delete('/models/:id', function(req, res) {
@@ -228,7 +228,7 @@ Vous devriez avoir une arborescence de ce type :
     |       |-main.js
     |-index.html
 
-Le script `public/js/app.js` contiendra votre code applicatif (ou partie de code), le script `public/js/main.js` permet de "charger" l'ensemble des scripts nécessaires (par exemple, ceux qui sont dans `public/js/lib` comme Backbone, Underscore, jQuery, etc. ...), puis de lancer le code contenu dans `app.js`.
+Le script `public/js/app.js` contiendra votre code applicatif (ou partie de code), le script `public/js/main.js` permet de "charger" l'ensemble des scripts nécessaires (par exemple, ceux qui sont dans `public/js/lib` comme Backbone, Underscore, jQuery, etc.), puis de lancer le code contenu dans `app.js`.
 
 La déclaration dans la page `index.html` se fait de la manière suivante `<script data-main="js/main" src="js/lib/require.js"></script>`.
 
@@ -288,7 +288,7 @@ define([
 });
 ```
 
->>**Premières remarques :** vous pouvez voir que dans chacun des fichiers, on déclare les dépendances nécessaires (un peu comme le `import` en java) à Backbone et aux modèles.
+>>**Premières remarques :** vous pouvez voir que dans chacun des fichiers, on déclare les dépendances nécessaires (un peu comme le `import` en Java) à Backbone et aux modèles.
 
 
 ##Templates
@@ -327,7 +327,7 @@ Dans `public/templates` créez un fichier `message.hbs` avec le code suivant :
 
 ##Vues associées aux templates
 
-Nous allons créer dans `public/js/views` 2 vues backbone associées à chacun des templates.
+Nous allons créer dans `public/js/views` 2 vues Backbone associées à chacun des templates.
 
 ###messages-view.js
 
@@ -352,7 +352,7 @@ function(Resthub, messagesTemplate) {
 });
 ```
 
->>*Notez l'utilisation de Resthub.View qui est une version améliorée de Backbone.View fournissant notamment une implémentation par défaut du render() ainsi que la gestion de l'élément $root sur lequel est attaché la vue ($el représentant l'élément DOM de la vue elle même) ainsi que tout un tas de fonctionnalités très pratiques*
+>>*Notez l'utilisation de Resthub.View qui est une version améliorée de Backbone.View fournissant notamment une implémentation par défaut du `render()` ainsi que la gestion de l'élément $root sur lequel est attaché la vue ($el représentant l'élément DOM de la vue elle même) ainsi que tout un tas de fonctionnalités très pratiques*
 
 >>*Remarquez ceci : `'hbs!templates/messages'` pour référencer les template*
 
@@ -448,4 +448,4 @@ Vous pouvez maintenant lancer votre application : `node app.js` et vérifier que
 
 ##Conclusion
 
-Voilà, il existe dans la stack RESThub Backbone, de nombreux autres composants que je n'ai pas encore eu le temps d'étudier et qui certainement permettent de faire du code plus simple que celui que je vous montre, mais je tenais à vous parler de cette stack car l'organisation des différents fichiers de scripts, templates, ... ainsi que la gestion des dépendance me plaît beaucoup, et est sans nul doute un critère de réussite sur un projet en équipe. Ce côté structurant peut paraître fastidieux au départ, mais au bout de quelques heures de code intensif, vous vous apercevrez que vous retrouvez beaucoup plus facilement vos petits.
+Voilà, il existe dans la stack RESThub Backbone, de nombreux autres composants que je n'ai pas encore eu le temps d'étudier et qui certainement permettent de faire du code plus simple que celui que je vous montre, mais je tenais à vous parler de cette stack car l'organisation des différents fichiers de scripts, templates… ainsi que la gestion des dépendance me plaît beaucoup, et est sans nul doute un critère de réussite sur un projet en équipe. Ce côté structurant peut paraître fastidieux au départ, mais au bout de quelques heures de code intensif, vous vous apercevrez que vous retrouvez beaucoup plus facilement vos petits.

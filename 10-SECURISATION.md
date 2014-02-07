@@ -1,4 +1,4 @@
-#Securisation
+#Sécurisation
 
 >*Sommaire*
 
@@ -6,14 +6,14 @@
 >>- *Une "vraie" sécurisation des routes côté serveur*
 
 
->*Profitons-en pour terminer (presque) notre application et la sécuriser. Je dis “presque”, car il y aura toujours des fonctionnalités à ajouter, des contrôles de saisie à faire, des codes à optimiser (vous verrez dans ce qui va suivre que ma façon d’accéder au DOM n’est pas forcément la plus élégante à défaut d’être la plus lisible), la gestion des commentaires, refaire l’authentification ...*
+>*Profitons-en pour terminer (presque) notre application et la sécuriser. Je dis “presque”, car il y aura toujours des fonctionnalités à ajouter, des contrôles de saisie à faire, des codes à optimiser (vous verrez dans ce qui va suivre que ma façon d’accéder au DOM n’est pas forcément la plus élégante à défaut d’être la plus lisible), la gestion des commentaires, refaire l’authentification…*
 
-Je souhaite cependant pouvoir modifier et ajouter des messages (post). C’est un exercice pour démontrer l’utilité de l’organisation du code en modules pour mieux s’y retrouver.
+Je souhaite cependant pouvoir modifier et ajouter des articles (`Post`). C’est un exercice pour démontrer l’utilité de l’organisation du code en modules pour mieux s’y retrouver.
 
 
 ##Il nous faut un "écran d’administration"
 
-Je retourne donc dans le code html de ma page `index.html`. Ajoutons ceci juste après le “grand titre” de notre blog :
+Je retourne donc dans le code HTML de ma page `index.html`. Ajoutons ceci juste après le “grand titre” de notre blog :
 
 *Template de l’écran d’administration :*
 
@@ -31,8 +31,8 @@ Je retourne donc dans le code html de ma page `index.html`. Ajoutons ceci juste 
     <select id="post_choice">{{#posts}}
         <option value="{{id}}">{{title}}</option>
     {{/posts}}</select>
-    <a href="#" id="btn_update" class="btn btn-primary">Modifier Post</a>
-    <a href="#" id="btn_create" class="btn btn-primary">Ré-initialiser / Ajouter Post</a>
+    <a href="#" id="btn_update" class="btn btn-primary">Modifier l'article</a>
+    <a href="#" id="btn_create" class="btn btn-primary">Ré-initialiser / Ajouter un article</a>
     <hr>
       id : <span name="id"></span><br>
       <input name="author" type="text" placeholder="author"/><br>
@@ -53,7 +53,7 @@ J’aurais donc un écran qui va ressembler à ceci :
 ![BB](RSRC/10_01_ORGA.png)\
 
 
-Pour gérer cet écran je vais avoir besoin d’un objet de type `Backbone.View`, que nous allons créer dans le répertoire `/views` sous le nom d’`AdminView.js`.
+Pour gérer cet écran, je vais avoir besoin d’un objet de type `Backbone.View`, que nous allons créer dans le répertoire `/views` sous le nom d’`AdminView.js`.
 Avant de “coder” `AdminView`, nous allons le déclarer et l’instancier dans `main.js` :
 
 *main.js : :*
@@ -127,7 +127,7 @@ yepnope({
 
 ```
 
->>**Remarque** : Je passe la vue adminView à la vue loginView pour que cette dernière puisse déclencher le rendue de la première si nécessaire.
+>>**Remarque** : je passe la vue `adminView` à la vue `loginView` pour que cette dernière puisse déclencher le rendu de la première si nécessaire.
 
 
 ###Création d'AdminView
@@ -179,8 +179,7 @@ var Blog = (function(blog) {
       $("#admin > [name='message']").val("");
     },
     sendPost: function() { //Sauvegarde
-      var that = this //pour conserver le contexte
-      ,
+      var that = this, //pour conserver le contexte
         id = $("#admin > [name='id']").html(),
         post;
 
@@ -199,8 +198,7 @@ var Blog = (function(blog) {
         date: new Date()
       }, {
         success: function() {
-          //Si la transaction côté serveur a fonctionné
-
+          //Si la transaction côté serveur a fonctionné,
           //je recharge ma collection
           that.collection.fetch({
             success: function() {
@@ -221,7 +219,7 @@ var Blog = (function(blog) {
 
 ```
 
->>**Remarque** : je n’abonne pas la vue aux changement de la collection pour pouvoir maîtriser le moment où je déclenche la méthode render() de celle-ci.
+>>**Remarque** : je n’abonne pas la vue aux changements de la collection pour pouvoir maîtriser le moment où je déclenche la méthode `render()` de celle-ci.
 
 ###Modification de LoginView
 
@@ -323,9 +321,9 @@ Maintenant que nous avons fait nos modifications côté client, allons sécurise
 
 ##Sécurisation côté serveur
 
-Vous pouvez tester les modifications dès maintenant, cela va fonctionner, mais il est de bon ton de sécuriser côté serveur les actions de création, modification, suppression, etc. …
+Vous pouvez tester les modifications dès maintenant, cela va fonctionner, mais il est de bon ton de sécuriser côté serveur les actions de création, modification, suppression, etc.
 
->>**Remarque** : La gestion des session avec express.js ainsi que la sécurisation des routes peut être prise en compte de manière plus « professionnel ». Gardez à l’esprit que les exemples donnés le sont à titre « didactique » et que certains points sont perfectibles.
+>>**Remarque** : la gestion des session avec express.js ainsi que la sécurisation des routes peut être prise en compte de manière plus « professionnelle ». Gardez à l’esprit que les exemples donnés le sont à titre « didactique » et que certains points sont perfectibles.
 
 Nous allons retourner dans le code de `app.js` (vous vous souvenez : notre application express.js) et créer une fonction qui permet de vérifier si l’utilisateur est connecté et est administrateur et cette fonction servira à sécuriser les routes :
 
@@ -431,23 +429,23 @@ app.delete('/blogposts/:id', [haveToBeAdmin], function(req, res, next) {
 
 Cela va faire apparaître l’écran d’administration alors que vous n’êtes pas administrateur (vous faites une tentativve de hacking sur vous même) !
 
-Sélectionnez un Post dans la liste, et cliquez sur “modifer Post” pour charger le formulaire :
+Sélectionnez un article dans la liste, et cliquez sur « Modifier article » pour charger le formulaire :
 
 ![BB](RSRC/10_02_ORGA.png)\
 
 
-Saissez quelques modifications, cliquez sur le bouton “Sauvegarder” . Vous obtiendrez un message d’erreur dans la console :
+Saissez quelques modifications, cliquez sur le bouton « Sauvegarder » . Vous obtiendrez un message d’erreur dans la console :
 
 ![BB](RSRC/10_03_ORGA.png)\
 
 
-A vous de gérer les message côté client (avec le callback “error” lors du `save()`)
+À vous de gérer les message côté client (avec le callback “error” lors du `save()`)
 Et côté serveur cela vous affiche que vous devez être connecté :
 
 ![BB](RSRC/10_04_ORGA.png)\
 
 
-Donc notre blog est bien "sécurisé". Maintenant rafraichissez votre page et connectez vous en tant qu’administrateur. Vous obtiendrez un lien “Administration” au niveau du message de bienvenue qui vous permettra de déclencher l’affichage de l’écran d’administration :
+Donc notre blog est bien "sécurisé". Maintenant rafraichissez votre page et connectez vous en tant qu’administrateur. Vous obtiendrez un lien « Administration » au niveau du message de bienvenue qui vous permettra de déclencher l’affichage de l’écran d’administration :
 
 ![BB](RSRC/10_05_ORGA.png)\
 
@@ -464,7 +462,7 @@ Vous pouvez ensuite vérifiez qu’elles ont bien été prises en compte :
 
 Voilà. Notre application est "terminée". Je sais il faut le dire vite ;) mais vous avez une base, que vous pouvez faire évoluer (il faudrait ajouter les commentaires par exemple) ou améliorer, ou mieux, cassez tout et faites votre propre application avec votre "propre style".
 
-Par contre, l'ouvrage n'est pas fini, j'ai encore 2,3 petites choses dont j'aimerais vous parlez.
+Par contre, l'ouvrage n'est pas fini, j'ai encore 2, 3 petites choses dont j'aimerais vous parlez.
 
 
 

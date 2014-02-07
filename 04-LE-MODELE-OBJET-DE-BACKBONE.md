@@ -7,9 +7,9 @@
 >>- *Héritage*
 
 
->*Ce qui est souvent déstabilisant pour le développeur Java (PHP, .Net, etc.) c’est le modèle objet de javascript qui diffère du classique modèle orienté « classes » que nous connaissons tous (normalement). De nombreux ouvrages, articles,… se sont attaqués au sujet, mais ce n’est pas l’objet de ce chapitre.*
+>*Ce qui est souvent déstabilisant pour le développeur Java (PHP, .Net, etc.) c’est le modèle objet de JavaScript qui diffère du classique modèle orienté « classes » que nous connaissons tous (normalement). De nombreux ouvrages, articles… se sont attaqués au sujet, mais ce n’est pas l’objet de ce chapitre.*
 
-Je vais vous présenter de quelle façon Backbone gère son « Orientation objet » et comment réutiliser cette fonctionnalité. L’objectif est double : mieux comprendre le fonctionnement de Backbone et vous donner un moyen de faire de l’objet en javascript sans être dépaysé (quelque chose qui ressemble dans sa logique, à ce que vous connaissez déjà).
+Je vais vous présenter de quelle façon Backbone gère son « Orientation objet » et comment réutiliser cette fonctionnalité. L’objectif est double : mieux comprendre le fonctionnement de Backbone et vous donner un moyen de faire de l’objet en JavaScript sans être dépaysé (quelque chose qui ressemble dans sa logique, à ce que vous connaissez déjà).
 
 ##Un petit tour dans le code
 
@@ -46,9 +46,9 @@ var Kind = function() {};
 Kind.extend = Backbone.Model.extend;
 ```
 
->>**Remarque 1** : J’ai utilisé « Kind » pour ne pas utiliser « Class » ou « class » qui est un terme réservé pour les futures versions de javascript.
+>>**Remarque 1** : j’ai utilisé « Kind » pour ne pas utiliser « Class » ou « class » qui est un terme réservé pour les futures versions de JavaScript.
 
->>**Remarque 2** : Je vais utiliser du français dans mon code. Je sais que c’est moche, promis j’essaye de ne plus le faire (à part dans les commentaires)
+>>**Remarque 2** : je vais utiliser du français dans mon code. Je sais que c’est moche, promis j’essaye de ne plus le faire (à part dans les commentaires)
 
 Nous pouvons donc maintenant écrire :
 
@@ -82,9 +82,9 @@ Nous obtiendrons à l’exécution :
 
 ###Des propriétés
 
-Les propriétés se déclarent dans le constructeur (elles sont générées à l’exécution)
+Les propriétés se déclarent dans le constructeur (elles sont générées à l’exécution).
 
-Ajout de propriétés
+Ajout de propriétés :
 
 ```javascript
 var Personne = Kind.extend({
@@ -107,7 +107,7 @@ var john = new Personne();
 var bob = new Personne("Bob", "Morane");
 ```
 
-**Warning:** ne jamais définir les propriétés en dehors du `constructor`
+**Warning:** ne jamais définir les propriétés en dehors du `constructor` !
 
 
 Nous obtiendrons à l’éxécution :
@@ -120,7 +120,7 @@ Nous obtiendrons à l’éxécution :
 
 Les méthodes se déclarent de la même façon que le constructeur, ajoutons une méthode `bonjour()` :
 
-Ajout d’une méthode
+Ajout d’une méthode :
 
 ```javascript
 var Personne = Kind.extend({
@@ -157,7 +157,7 @@ Nous obtiendrons à l’exécution :
 
 La méthode `extend` accepte un deuxième paramètre qui permet de déclarer des membres statiques :
 
-Ajout & utilisation de membres statiques
+Ajout et utilisation de membres statiques :
 
 ```javascript
 var Personne = Kind.extend({
@@ -206,7 +206,7 @@ Donc `Personne` hérite de `Kind`. Mais essayons un exemple plus complet pour bi
 
 ```javascript
 var Homme = Personne.extend({
-  getSexe: function() { return "male"; }
+  getSexe: function() { return "mâle"; }
 });
 
 var Femme = Personne.extend({
@@ -222,7 +222,7 @@ bob.bonjour();
 console.log("Il y a ", Personne.combien(), " personnes");
 ```
 
-A l’exécution nous obtiendrons ceci :
+À l’exécution nous obtiendrons ceci :
 
   Bonjour, je suis  Angelina Jolie
   Bonjour, je suis  Bob Morane
@@ -240,7 +240,7 @@ Surcharge et utilisation de `super()`
 
 ```javascript
 var Homme = Personne.extend({
-    getSexe: function() { return "male"; },
+    getSexe: function() { return "mâle"; },
   //surcharge du constructeur
   constructor: function(prenom, nom) {
     //appeler le constructeur de Personne
@@ -281,7 +281,7 @@ Nous avons surchargé les constructeurs pour pouvoir afficher un message au mome
 A l’exécution nous obtiendrons donc :
 
   Hello, je suis une  femelle
-  Hello, je suis un  male
+  Hello, je suis un  mâle
   Bonjour, je suis  Angelina Jolie
   Bonjour, je suis une fille
   Bonjour, je suis  Bob Morane
@@ -289,6 +289,6 @@ A l’exécution nous obtiendrons donc :
 
 ##Conclusion
 
-Nous venons de voir comment continuer à programmer objet sans trop boulverser vos habitudes (cela ne doit pas vous empêcher d’étudier le modèle objet de javascript plus en profondeur). Cela va vous permettre de mieux structurer votre code (et en javascript, c’est important) mais aussi vos idées, de comprendre le fonctionnement de Backbone, mais de pouvoir aussi écrire des extensions à Backbone plus facilement.
+Nous venons de voir comment continuer à programmer objet sans trop bouleverser vos habitudes (cela ne doit pas vous empêcher d’étudier le modèle objet de JavaScript plus en profondeur). Cela va vous permettre de mieux structurer votre code (et en JavaScript, c’est important) mais aussi vos idées, de comprendre le fonctionnement de Backbone, mais de pouvoir aussi écrire des extensions à Backbone plus facilement.
 
 

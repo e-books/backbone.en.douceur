@@ -1,28 +1,28 @@
-#Backbone <3 Coffeescript
+#Backbone <3 CoffeeScript
 
 >*Sommaire*
 
->>- *Coffeescript*
+>>- *CoffeeScript*
 >>- *On s'outille*
 >>- *Traduction*
 
 
->*Depuis longtemps, les développeurs “serveur” ont de nombreux a priori vis-à-vis de Javascript : un modèle objet “particulier” difficile à comprendre après des années de programmation orientée classes,  un système d’héritage par prototype générant beaucoup d’effets de bord s’il n’est pas maîtrisé (sans compter la maintenabilité du code) et justement pas de classes en javascript, ce qui rend difficile l’organisation du code (toujours d’un point de vue approche “classique”).*
+>*Depuis longtemps, les développeurs “serveur” ont de nombreux a priori vis-à-vis de JavaScript : un modèle objet “particulier” difficile à comprendre après des années de programmation orientée classes, un système d’héritage par prototype générant beaucoup d’effets de bord s’il n’est pas maîtrisé (sans compter la maintenabilité du code) et justement pas de classes en JavaScript, ce qui rend difficile l’organisation du code (toujours d’un point de vue approche “classique”).*
 
-L’arrivée de CoffeeScript tend aujourd’hui à gommer ces problématiques et tout particulièrement par l’introduction d’un système de classes qui prend en charge (pour/à la place du développeur) toutes les problématiques liées au modèle objet Javascript, garantissant ainsi la réduction de l’apparition de bugs dus à la méconnaissance de javascript. Gardez cependant une chose à l’esprit : Coffeescript, cela reste du Javascript, mais avec une manière différente de l’écrire, plus simple, plus efficace et (à mon avis) avec moins d’erreurs. Coffeescript, vous aidera aussi à comprendre et mieux écrire le Javascript.
+L’arrivée de CoffeeScript tend aujourd’hui à gommer ces problématiques et tout particulièrement par l’introduction d’un système de classes qui prend en charge (pour/à la place du développeur) toutes les problématiques liées au modèle objet JavaScript, garantissant ainsi la réduction de l’apparition de bugs dus à la méconnaissance de JavaScript. Gardez cependant une chose à l’esprit : CoffeeScript, cela reste du JavaScript, mais avec une manière différente de l’écrire, plus simple, plus efficace et (à mon avis) avec moins d’erreurs. CoffeeScript, vous aidera aussi à comprendre et mieux écrire le JavaScript.
 
-##Coffeescript qu’est-ce que c’est ?
+##CoffeeScript qu’est-ce que c’est ?
 
-Coffeescript est un langage de script qui ressemble beaucoup au Python. Il a été créé par Jeremy Ashkenas, vous savez, le brillant développeur aussi à l’origine de frameworks connus tels Backbone.js et Underscore.js. Coffeescript, c’est aussi un “Transpiler” Javascript. C’est-à-dire, qu’au lieu de compiler pour obtenir un binaire, on “compile” le code Coffeescript en Javascript directement exécutable dans un navigateur (ou côté serveur avec Node.js). Classiquement, le transpiler Coffeescript s’exécute sous Node.js, mais vous pouvez très bien l’utiliser en mode “run-time” et insérer du code Coffeescript directement (inline) dans vos pages HTML. C’est moins performant, mais cela peut être utile pour debugger.
-L’objet de ce chapitre n’est pas de vous apprendre Coffeescript, mais de vous le présenter rapidement et vous montrer à quoi pourrait ressembler le code de la partie cliente de notre blog traduite en Coffeescript. Vous trouverez les informations complémentaire ici : [http://coffeescript.org/](http://coffeescript.org/).
+CoffeeScript est un langage de script qui ressemble beaucoup au Python. Il a été créé par Jeremy Ashkenas, vous savez, le brillant développeur aussi à l’origine de frameworks connus tels Backbone.js et Underscore.js. CoffeeScript, c’est aussi un “Transpiler” JavaScript. C’est-à-dire, qu’au lieu de compiler pour obtenir un binaire, on “compile” le code CoffeeScript en JavaScript directement exécutable dans un navigateur (ou côté serveur avec Node.js). Classiquement, le transpiler CoffeeScript s’exécute sous Node.js, mais vous pouvez très bien l’utiliser en mode “run-time” et insérer du code CoffeeScript directement (inline) dans vos pages HTML. C’est moins performant, mais cela peut être utile pour debugger.
+L’objet de ce chapitre n’est pas de vous apprendre CoffeeScript, mais de vous le présenter rapidement et vous montrer à quoi pourrait ressembler le code de la partie cliente de notre blog traduite en CoffeeScript. Vous trouverez les informations complémentaire ici : [http://coffeescript.org/](http://coffeescript.org/).
 
 ##Un code plus lisible ?
 
-Donc, selon moi (et d’autres), Coffeescript permet de simplifier le javascript, générer du javascript « propre » et apporte des évolutions de langage qui vont simplifier et rendre le code plus lisible. Nous allons tenter de voir ça par le biais de quelques exemples.
+Donc, selon moi (et d’autres), CoffeeScript permet de simplifier le JavaScript, générer du JavaScript « propre » et apporte des évolutions de langage qui vont simplifier et rendre le code plus lisible. Nous allons tenter de voir ça par le biais de quelques exemples.
 
 ###Les fonctions
 
-Le terme `function` disparaît au profit d’une « flèche » ! `return` disparaît complètement !!! (par défaut c'est la dernière ligne qui fait office de return) et les parenthèses ne sont pas partout obligatoires (ce qui facilite l’écriture de DSL) ... Et plus de point-virgule.
+Le terme `function` disparaît au profit d’une « flèche » ! `return` disparaît complètement !!! (par défaut c'est la dernière ligne qui fait office de return) et les parenthèses ne sont pas partout obligatoires (ce qui facilite l’écriture de DSL) … et plus de point-virgule.
 
 *Fonction d’addition en javascript :*
 
@@ -51,7 +51,7 @@ Deviendra :
 
 ###Interopérabilité
 
-Coffeescript reste compatible avec les librairies existantes (pas besoin de ré-écrire jQuery ... ouf !)
+CoffeeScript reste compatible avec les bibliothèques existantes (pas besoin de ré-écrire jQuery … ouf !)
 
 *Attendre le chargement de la page pour lancer les commandes :*
 
@@ -63,7 +63,7 @@ $(function() {
 });
 ```
 
-*La même chose en Coffeescript :*
+*La même chose en CoffeeScript :*
 
 ```python
 $ ->
@@ -76,7 +76,7 @@ $ ->
 
 Imaginons un objet bob :
 
-*En Javascript :*
+*En JavaScript :*
 
 ```javascript
 var bob = {
@@ -90,7 +90,7 @@ var bob = {
 
 Nous voulons afficher un message à partir des propriétés de Bob, aujourd’hui nous faisons comme ceci :
 
-*En Javascript :*
+*En JavaScript :*
 
 ```javascript
 console.log(
@@ -101,9 +101,9 @@ console.log(
 ) ;
 ```
 
-Coffeescript introduit des nouveaux concepts à propos des chaînes de caractères et particulièrement `#{variable}` qui permet d’insérer la valeur de variable dans une chaîne. Nous aurons donc ceci :
+CoffeeScript introduit des nouveaux concepts à propos des chaînes de caractères et particulièrement `#{variable}` qui permet d’insérer la valeur de variable dans une chaîne. Nous aurons donc ceci :
 
-*Version Coffeescript :*
+*Version CoffeeScript :*
 
 ```python
 bob =
@@ -119,11 +119,11 @@ console.log "
 "
 ```
 
->>**Remarquez au passage**, la possibilité d’écrire vos chaînes de caractères sur plusieurs lignes (dans ce cas les saut de lignes ne sont pas pris en comptes, pour les prendre en comptes utilisez des triples « doubles-quotes » : """)
+>>**Remarquez au passage**, la possibilité d’écrire vos chaînes de caractères sur plusieurs lignes (dans ce cas les sauts de lignes ne sont pas pris en compte, pour les prendre en comptes utilisez des triples « doubles-quotes » : """)
 
 ###Jouez un peu avec les tableaux
 
-Nous avons le tableau suivant (en Coffeescript) :
+Nous avons le tableau suivant (en CoffeeScript) :
 
 *Copains :*
 
@@ -145,9 +145,9 @@ Nous voudrions obtenir tous les copains de moins de 50 ans :
 
 ##Et enfin (et surtout ?) les classes
 
-Maintenant, grâce à Coffeescript, nous pouvons écrire des classes. Il faut aussi savoir ceci : le mot clé `this` devient `@`, les « champs » (propriétés) de la classes sont déclarés dans le constructeur. Mais un exemple est souvent plus parlant que trop d’explications :
+Maintenant, grâce à CoffeeScript, nous pouvons écrire des classes. Il faut aussi savoir ceci : le mot clé `this` devient `@`, les « champs » (propriétés) de la classe sont déclarés dans le constructeur. Mais un exemple est souvent plus parlant que trop d’explications :
 
-###Notre 1ère classe
+###Notre première classe
 
 *Classe “Human” :*
 
@@ -183,7 +183,7 @@ class Human
 
 ###Comme en Java : Composition, Association, Encapsulation
 
-La notion de classe apportée par Coffeescript (même s’il existe en javascript, comme nous avons pu le voir par exemple avec le modèle objet de Backbone) permet facilement de mettre en œuvre les différents concepts habituels en programmation « orientée classes » et plus facilement encore décliner les « design patterns ».
+La notion de classe apportée par CoffeeScript (même s’il existe en JavaScript, comme nous avons pu le voir par exemple avec le modèle objet de Backbone) permet facilement de mettre en œuvre les différents concepts habituels en programmation « orientée classes » et plus facilement encore décliner les « design patterns ».
 
 *Composition de classes :*
 
@@ -235,7 +235,7 @@ console.log "Human.counter #{Human.howMany()}"
 
 ###Mais aussi (comme en Java) : l’héritage !
 
-Coffeescript introduit le mot clé `extends` pour permettre à une classe d’hériter d’une autre classe, et cela s’utilise de façon très intuitive :
+CoffeeScript introduit le mot clé `extends` pour permettre à une classe d’hériter d’une autre classe, et cela s’utilise de façon très intuitive :
 
 *Un humain, et un super héros qui hérite d’humain … :*
 
@@ -258,32 +258,32 @@ console.log SuperMan.hello()
 
 >>**Notez au passage** l’apparition du mot-clé super qui permet « d’appeler » la méthode du « parent ».
 
-Une première conclusion s’impose : Maintenant vous pouvez faire du javascript « orienté classes » tout en conservant les possibilités actuelles de javascript.
+Une première conclusion s’impose : maintenant vous pouvez faire du JavaScript « orienté classes » tout en conservant les possibilités actuelles de JavaScript.
 
 
 ##J’aime / Je n’aime pas
 
-Coffeescript fait beaucoup de bruit dans la communauté javascript, mais aussi du côtés des développeurs java, .Net, etc. ... Il a été assez bien adopté par les développeurs Ruby car il a une syntaxe assez proche.
+CoffeeScript fait beaucoup de bruit dans la communauté JavaScript, mais aussi du côtés des développeurs Java, .Net, etc. Il a été assez bien adopté par les développeurs Ruby car il a une syntaxe assez proche.
 
-Ce qui plaît beaucoup, plus particulièrement aux développeurs « non javascript », c’est le concept de classes, mais les développeurs javascript « puristes » ne voient pas l’intérêt d’utiliser des classes, les concepts objet de javascript apparaîssant largement suffisants.
-
-
->>Personnellement, si l’aspect classe doit contribuer à l’adoption de javascript, laissons les classes ! Il y a encore trop de développeurs rebutés par javascript pour de fausses raisons. Ce n’est probablement pas pour rien si le concept de classe apparaît dans la future version de javascript ES6.
-
-Ce qui plaît beaucoup moins, et là les développeurs javascripts et java se rejoignent, c’est l’abscence de points virgule, d’accolades, et la notion d’indentation « significative » comme en python, rendant le code difficilement lisible s’il est trop long.
-
->>D’autres vous diront que la simplification du code grâce à Coffeescript contribue à sa lisibilité. Comme quoi, les goûts et les couleurs ...
+Ce qui plaît beaucoup, plus particulièrement aux développeurs « non JavaScript », c’est le concept de classes, mais les développeurs JavaScript « puristes » ne voient pas l’intérêt d’utiliser des classes, les concepts objet de JavaScript apparaîssant largement suffisants.
 
 
-Le plus gros défaut de Coffeescript, reste la difficulté à debbuger du code coffeescript, l’impossibilité de l’utiliser directement dans la console du navigateur. Cependant le projet **Source Map** devrait régler ce type de problème à l’avenir (et pour d’autres transpilers aussi) : [http://www.coffeescriptlove.com/2012/04/source-maps-for-coffeescript.html](http://www.coffeescriptlove.com/2012/04/source-maps-for-coffeescript.html).
+>>Personnellement, si l’aspect classe doit contribuer à l’adoption de JavaScript, laissons les classes ! Il y a encore trop de développeurs rebutés par JavaScript pour de fausses raisons. Ce n’est probablement pas pour rien si le concept de classe apparaît dans la future version de JavaScript ES6.
 
-On pourrait ensuite se demander, mais que va devenir Coffeescript dans le futur avec l’apparition de la nouvelle version de javascript ? Je vous répondrais, qu’avant que cette version soit déployée sur tous les postes de travail (donc que tout le monde dispose d’un navigateur de dernière génération) il va se passer plusieurs années et que Coffeescript génère du code javascript  qui fonctionne sur la majorité des navigateurs existants.
+Ce qui plaît beaucoup moins, et là les développeurs JavaScript et Java se rejoignent, c’est l’abscence de points virgule, d’accolades, et la notion d’indentation « significative » comme en python, rendant le code difficilement lisible s’il est trop long.
 
-Brendan Heich (le papa de javascript) a officiellement donné sa bénédiction « publique » à Coffeescript, nul doute que Jeremy Ashkenas ne fasse évoluer Coffeescript en fonction des spécifications javascript pour garder une compatibilté ascendante et descendante. Pour rappel, en début de page du site de Coffeescript, il est écrit : **« The golden rule of CoffeeScript is: "It's just JavaScript" »**.
+>>D’autres vous diront que la simplification du code grâce à CoffeeScript contribue à sa lisibilité. Comme quoi, les goûts et les couleurs…
 
->>Pour ma part, je pense que c’est un excellent outil d’apprentissage (il génère du code javascript « propre ») mais sur un projet de réalisation professionnel, il est à réserver aux « gurus » qui maîtrise déjà javascript.
 
-Attention, un challenger de poids vient de naître dans le monde des transpilers javascript : **TypeScript**, porté par Microsoft, développé entre autre par le papa de l’ancêtre du Turbo Pascal mais aussi du C# et qui tend à gommer une grande partie des défauts reprochés à Coffeescript. Cela fera l’objet d’un prochain chapitre, mais avant cela, passons à la ré-écriture de notre Blog en Coffeescript.
+Le plus gros défaut de CoffeeScript, reste la difficulté à debbuger du code CoffeeScript, l’impossibilité de l’utiliser directement dans la console du navigateur. Cependant le projet **Source Map** devrait régler ce type de problème à l’avenir (et pour d’autres transpilers aussi) : [http://www.coffeescriptlove.com/2012/04/source-maps-for-coffeescript.html](http://www.coffeescriptlove.com/2012/04/source-maps-for-coffeescript.html).
+
+On pourrait ensuite se demander, mais que va devenir CoffeeScript dans le futur avec l’apparition de la nouvelle version de JavaScript ? Je vous répondrais, qu’avant que cette version soit déployée sur tous les postes de travail (donc que tout le monde dispose d’un navigateur de dernière génération) il va se passer plusieurs années et que CoffeeScript génère du code JavaScript qui fonctionne sur la majorité des navigateurs existants.
+
+Brendan Heich (le papa de JavaScript) a officiellement donné sa bénédiction « publique » à CoffeeScript, nul doute que Jeremy Ashkenas ne fasse évoluer CoffeeScript en fonction des spécifications javascript pour garder une compatibilté ascendante et descendante. Pour rappel, en début de page du site de CoffeeScript, il est écrit : **« The golden rule of CoffeeScript is: "It's just JavaScript" »**.
+
+>>Pour ma part, je pense que c’est un excellent outil d’apprentissage (il génère du code JavaScript « propre ») mais sur un projet de réalisation professionnel, il est à réserver aux « gurus » qui maîtrise déjà JavaScript.
+
+Attention, un challenger de poids vient de naître dans le monde des transpilers JavaScript : **TypeScript**, porté par Microsoft, développé entre autre par le papa de l’ancêtre du Turbo Pascal mais aussi du C# et qui tend à gommer une grande partie des défauts reprochés à CoffeeScript. Cela fera l’objet d’un prochain chapitre, mais avant cela, passons à la ré-écriture de notre Blog en CoffeeScript.
 
 ##Ré-écriture de notre blog ?! S'outiller
 
@@ -291,23 +291,23 @@ Avant toute chose, sauvegardez votre arborescence applicative à un autre emplac
 
 ###Installation de Coffeescript
 
-L’installation de Coffeescript est très simple, elle s’effectue en mode commande avec npm (installé en même temps que Node.js) :
+L’installation de CoffeeScript est très simple, elle s’effectue en mode commande avec `npm` (installé en même temps que Node.js) :
 
   npm install –g coffee-script
 
 >>**Remarque :** pour les utilisateurs sous OSX, vous devez normalement utiliser la commande `sudo npm install –g coffee-script`
 
-A partir de maintenant, vous pouvez compiler/transpiler du code Coffeescript en javascript avec la commande suivante :
+A partir de maintenant, vous pouvez compiler/transpiler du code CoffeeScript en JavaScript avec la commande suivante :
 
   coffee –compile Human.coffee
 
-qui produira un fichier javascript `Human.js`.
+qui produira un fichier JavaScript `Human.js`.
 
 Pour plus d’informations : [http://jashkenas.github.com/coffee-script/#usage](http://jashkenas.github.com/coffee-script/#usage).
 
 ###“Industrialisation” de la transpilation
 
-Nous avons donc décidé de re-écrire la partie javascript cliente de notre blog. Pour cela dans le répertoire de notre application, créez un répertoire `public.coffee` avec un sous-répertoire `models` et un sous répertoire `views`. Ce répertoire et ces deux sous-répertoires contiendrons les fichiers source coffeescript (que vous pouvez d’ores et déjà créer “vides” dans les répertoires correspondants) :
+Nous avons donc décidé de re-écrire la partie JavaScript cliente de notre blog. Pour cela dans le répertoire de notre application, créez un répertoire `public.coffee` avec un sous-répertoire `models` et un sous répertoire `views`. Ce répertoire et ces deux sous-répertoires contiendrons les fichiers source coffeescript (que vous pouvez d’ores et déjà créer “vides” dans les répertoires correspondants) :
 
   public.coffee\
       |-models\
@@ -324,8 +324,8 @@ Nous avons donc décidé de re-écrire la partie javascript cliente de notre blo
       |-main.coffee
       |-routes.coffee
 
-Le “but du jeu” étant de transpiler tous les fichiers `.coffee` en fichier javascript `.js` dans le répertoire `public` (et ses sous-répertoire).
-Faire ceci “à la main” en prenant les fichiers un par un peut devenir très rapidement fastidieux. Mais heureusement, l’installation de Coffeescript inclut un système simple de “build” qui s’appelle **Cake**, qui est capable d’effectuer des tâches simples décrites dans un fichier `Cakefile`. Plus d’information ici : [http://jashkenas.github.com/coffee-script/#cake](http://jashkenas.github.com/coffee-script/#cake).
+Le “but du jeu” étant de transpiler tous les fichiers `.coffee` en fichier JavaScript `.js` dans le répertoire `public` (et ses sous-répertoire).
+Faire ceci “à la main” en prenant les fichiers un par un peut devenir très rapidement fastidieux. Mais heureusement, l’installation de CoffeeScript inclut un système simple de “build” qui s’appelle **Cake**, qui est capable d’effectuer des tâches simples décrites dans un fichier `Cakefile`. Plus d’information ici : [http://jashkenas.github.com/coffee-script/#cake](http://jashkenas.github.com/coffee-script/#cake).
 
 Donc à la racine de votre application, créez un fichier `Cakefile` avec le contenu suivant :
 
@@ -349,11 +349,11 @@ task 'build', 'Build public/ from public.coffee/', ->
 build()
 ```
 
-En fait nous expliquons à Cake que nous souhaitons transpiler en javascript tous les fichiers du répertoire source `public.coffee` vers le répertoire cible `public`. Et pour cela, il suffira, dans un terminal (ou une console) de lancer la commande : `cake build` (à la racine de notre application, là où est situé le fichier `Cakefile`).
+En fait nous expliquons à Cake que nous souhaitons transpiler en JavaScript tous les fichiers du répertoire source `public.coffee` vers le répertoire cible `public`. Et pour cela, il suffira, dans un terminal (ou une console) de lancer la commande : `cake build` (à la racine de notre application, là où est situé le fichier `Cakefile`).
 
 ##Ré-écriture / Traductions
 
-Alors, l’objectif n’est pas d’apprendre Coffeescript (cela pourrait donner lieu à un ouvrage entier), mais de montrer comment il est possible d’écrire notre blog “autrement”, donc je vous livre ici la traduction en Coffeescript (pas forcément dans les règles de l’art) qui fonctionnera et assortie de quelques remarques.
+Alors, l’objectif n’est pas d’apprendre CoffeeScript (cela pourrait donner lieu à un ouvrage entier), mais de montrer comment il est possible d’écrire notre blog “autrement”, donc je vous livre ici la traduction en CoffeeScript (pas forcément dans les règles de l’art) qui fonctionnera et assortie de quelques remarques.
 
 ###Blog.coffee
 
@@ -695,11 +695,11 @@ Ouf, c'est fini.
 
 ###Transpilons
 
-Si vous lancez la commande : `cake build` vous obtiendrez de nouveau fichiers javascript dans le répertoire public. Relancez votre application, vous noterez qu’elle fonctionne comme avant.
+Si vous lancez la commande : `cake build` vous obtiendrez de nouveau fichiers JavaScript dans le répertoire `public`. Relancez votre application, vous noterez qu’elle fonctionne comme avant.
 
 ###Conclusion(s)
 
-Les conclusions sont très personnelles. J'aime beaucoup le principe de "classe" et je le trouve très utile pour organiser son code, tout particulièrement en ce qui concerne les modèles et les collections. Au passage, vous avez du remarquer que le modèle objet de Backbone se marie parfaitement avec celui de Coffeescript (on peut hériter directement d'un Backbone.Model par exemple). C'est normal, les 2 outils sont codés par le même auteur.
+Les conclusions sont très personnelles. J'aime beaucoup le principe de "classe" et je le trouve très utile pour organiser son code, tout particulièrement en ce qui concerne les modèles et les collections. Au passage, vous avez du remarquer que le modèle objet de Backbone se marie parfaitement avec celui de CoffeeScript (on peut hériter directement d'un `Backbone.Model` par exemple). C'est normal, les 2 outils sont codés par le même auteur.
 
 Ce que j'aime aussi, c'est les possibilités des chaînes de caractères.
 
@@ -707,7 +707,7 @@ Par contre, je trouve que pour des portions de code très longue, on perd en vis
 
 Cependant, je ne peux m'empêcher d'aimer ce "petit" langage et les concepts qu'il apporte.
 
-... A vous de voir ;)
+... à vous de voir ;)
 
 
 
