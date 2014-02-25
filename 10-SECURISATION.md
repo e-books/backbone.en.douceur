@@ -6,7 +6,7 @@
 >>- *Une "vraie" sécurisation des routes côté serveur*
 
 
->*Profitons-en pour terminer (presque) notre application et la sécuriser. Je dis “presque”, car il y aura toujours des fonctionnalités à ajouter, des contrôles de saisie à faire, des codes à optimiser (vous verrez dans ce qui va suivre que ma façon d’accéder au DOM n’est pas forcément la plus élégante à défaut d’être la plus lisible), la gestion des commentaires, refaire l’authentification ...*
+>*Profitons-en pour terminer (presque) notre application et la sécuriser. Je dis “presque”, car il y aura toujours des fonctionnalités à ajouter, des contrôles de saisie à faire, des codes à optimiser (vous verrez dans ce qui va suivre que ma façon d’accéder au DOM n’est pas forcément la plus élégante à défaut d’être la plus lisible), la gestion des commentaires, refaire l’authentification...*
 
 Je souhaite cependant pouvoir modifier et ajouter des messages (post). C’est un exercice pour démontrer l’utilité de l’organisation du code en modules pour mieux s’y retrouver.
 

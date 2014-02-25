@@ -6,7 +6,7 @@
 >>- *... des Classes, des interfaces, des modules et du typage !!!*
 >>- *La cohabitation avec Backbone*
 
->*A l'heure où j'écris, Microsoft vient, il y a peu, de présenter au monde son nouveau bébé : TypeScript, un transpiler javascript (un autre !) qui préfigure ce que sera la future version de javascript. Sur le même principe que Coffescript, Typescript apporte les concepts qui manquent tant à de nombreux développeurs "allergiques" à javascript. C'est à dire les, les Classes mais aussi les modules (pensez namespaces ou packages), les interfaces, les propriétés, ... Mais il y a un petit plus : on conserve les {}, les (), les ; ... tout ce qui contribue finalement à rendre le code lisible.*
+>*A l'heure où j'écris, Microsoft vient, il y a peu, de présenter au monde son nouveau bébé : TypeScript, un transpiler javascript (un autre !) qui préfigure ce que sera la future version de javascript. Sur le même principe que Coffescript, Typescript apporte les concepts qui manquent tant à de nombreux développeurs "allergiques" à javascript. C'est à dire les, les Classes mais aussi les modules (pensez namespaces ou packages), les interfaces, les propriétés… Mais il y a un petit plus : on conserve les {}, les (), les ; ... tout ce qui contribue finalement à rendre le code lisible.*
 
 L'objectif n'est pas de vous expliquer Typescript de A à Z (ça pourrait faire un autre bouquin, si ça vous intéresse faites moi signe), mais de vous montrer rapidement ce que ça pourrait vous apporter utilisé conjointement avec Backbone.
 

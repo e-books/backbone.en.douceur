@@ -9,7 +9,7 @@
 
 >*Nous allons faire un premier exemple Backbone pas à pas, même sans connaître le framework. Cela va permettre de « désacraliser » la bête et de mettre un peu de liant avec tout ce que nous avons vu précédemment. Puis nous passerons dans le détail tous les composants de Backbone dans les chapitres qui suivront.*
 
-Voilà, il est temps de s'y mettre. L'application que nous allons réaliser avec Backbone tout au long de cet ouvrage va être un Blog, auquel nous ajouterons au fur et à mesure des fonctionnalités pour finalement le transformer en CMS (Content Management System). Je vous l'accorde ce n'est pas très original, mais cela répond à des problématiques classiques (récurrentes ?) dans notre vie "d'informaticien" et cela a le mérite d'avoir un aspect pratique et utile. Notre point de départ va être un blog que nous agrémenterons de fonctionnalités au fil des chapitres.
+Voilà, il est temps de s'y mettre. L'application que nous allons réaliser avec Backbone tout au long de cet ouvrage va être un blog, auquel nous ajouterons au fur et à mesure des fonctionnalités pour finalement le transformer en CMS (Content Management System). Je vous l'accorde ce n'est pas très original, mais cela répond à des problématiques classiques (récurrentes ?) dans notre vie "d'informaticien" et cela a le mérite d'avoir un aspect pratique et utile. Notre point de départ va être un blog que nous agrémenterons de fonctionnalités au fil des chapitres.
 
 ##1ère application Backbone
 
@@ -86,7 +86,7 @@ Dans la balise `<script></script>` saisissez le code suivant :
 *Définition d’un modèle Article :*
 
 ```html
-< script >
+<script>
 
 $(function() {
   //permettra d'accéder à nos variables en mode console
@@ -110,7 +110,7 @@ $(function() {
 
 });
 
-< /script>
+</script>
 ```
 
 Sauvegardez, relancez dans le navigateur et allez dans la console :
@@ -126,7 +126,7 @@ Sauvegardez, relancez dans le navigateur et allez dans la console :
 ![BB](RSRC/03_01_BB.png)
 
 
-Vous venez donc de voir que nous avons défini le modèle article “un peu” comme une classe qui hériterait (`extend`) de la classe `Backbone.Model`, que nous lui avons défini des valeurs par défauts (`defaults`), et affecté une méthode d’initialisation (`initialize`). Et qu’il existe un système de getter et de setter un peu particulier (`model.get(property_name)`, `model.set(property_name, value)`), mais nous verrons ultérieurement dans le détail comment fonctionnent les modèles.
+Vous venez donc de voir que nous avons défini le modèle article “un peu” comme une classe qui hériterait (`extend`) de la classe `Backbone.Model`, que nous lui avons défini des valeurs par défaut (`defaults`), et affecté une méthode d’initialisation (`initialize`). Et qu’il existe un système de getter et de setter un peu particulier (`model.get(property_name)`, `model.set(property_name, value)`), mais nous verrons ultérieurement dans le détail comment fonctionnent les modèles.
 
 >>**Remarque** *: le modèle de programmation de Javascript est bien orienté objet, mais n’est pas orienté “classe” comme peut l’être par exemple Java. Cela peut déstabiliser au départ, mais je vous engage à lire [REF VERS ARTICLE] à ce propos.*
 
@@ -345,7 +345,7 @@ Refaites les manipulations précédentes, et là (si vous avez laissez suffisamm
 ![BB](RSRC/03_05_BB.png)
 
 
->>**Remarque** : la propriété date n’existe plus dans les valeurs par défaut, elle est créée à l’instanciation du modèle lors de l’appel de `this.set("publicationDate",new Date())` dans la méthode `initialize`. De la même manière, vous pouvez créer à la volée des propriétés “a posteriori” pour les instances des modèles.
+>>**Remarque** : la propriété date n’existe plus dans les valeurs par défaut, elle est créée à l’instanciation du modèle lors de l’appel de `this.set("publicationDate",new Date())` dans la méthode `initialize`. De la même manière, vous pouvez créer à la volée des propriétés _a posteriori_ pour les instances des modèles.
 
 **Et voilà, l’initiation est terminée. Nous allons pouvoir passer “aux choses sérieuses” et découvrir jusqu’où nous pouvons “pousser” Backbone.**
 

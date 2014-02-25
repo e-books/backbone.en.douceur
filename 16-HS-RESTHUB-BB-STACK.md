@@ -53,7 +53,8 @@ nStore = nStore.extend(require('nstore/query')());
 /*--------------------------------------------
   Paramétrages de fonctionnement d'Express
 --------------------------------------------*/
-app.use(express.bodyParser());
+app.use(express.json());
+app.use(express.urlencoded());
 app.use(express.methodOverride());
 app.use(express.static(__dirname + '/public'));
 app.use(express.cookieParser('ilovebackbone'));
@@ -448,4 +449,4 @@ Vous pouvez maintenant lancer votre application : `node app.js` et vérifier que
 
 ##Conclusion
 
-Voilà, il existe dans la stack RESThub Backbone, de nombreux autres composants que je n'ai pas encore eu le temps d'étudier et qui certainement permettent de faire du code plus simple que celui que je vous montre, mais je tenais à vous parler de cette stack car l'organisation des différents fichiers de scripts, templates, ... ainsi que la gestion des dépendance me plaît beaucoup, et est sans nul doute un critère de réussite sur un projet en équipe. Ce côté structurant peut paraître fastidieux au départ, mais au bout de quelques heures de code intensif, vous vous apercevrez que vous retrouvez beaucoup plus facilement vos petits.
+Voilà, il existe dans la stack RESThub Backbone, de nombreux autres composants que je n'ai pas encore eu le temps d'étudier et qui certainement permettent de faire du code plus simple que celui que je vous montre, mais je tenais à vous parler de cette stack car l'organisation des différents fichiers de scripts, templates… ainsi que la gestion des dépendance me plaît beaucoup, et est sans nul doute un critère de réussite sur un projet en équipe. Ce côté structurant peut paraître fastidieux au départ, mais au bout de quelques heures de code intensif, vous vous apercevrez que vous retrouvez beaucoup plus facilement vos petits.

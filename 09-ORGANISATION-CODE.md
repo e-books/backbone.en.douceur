@@ -6,17 +6,17 @@
 >>- *"Loader" javascript, comme les vrais*
 
 
->*Notre application (côté client) tient dans une seule page. Elle mélange du code HTML et du code Javascript, et cela dans un seul fichier commence à devenir difficilement lisible, difficilement modifiable et donc difficilement maintenable. J’aimerais ajouter la possibilité d’ajouter ou de modifier des posts, mais … Faisons d’abord le ménage et rangeons notre code..*
+>*Notre application (côté client) tient dans une seule page. Elle mélange en un seul fichier du code HTML et du code Javascript, et cela commence à devenir difficilement lisible, difficilement modifiable et donc difficilement maintenable. J’aimerais ajouter la possibilité d’ajouter ou de modifier des posts, mais… Faisons d’abord le ménage et rangeons notre code.*
 
-Il y a de nombreuses querelles de chapelle autour du sujet de l’organisation du code (des façons de le faire), et je vous avoue que je n’ai pas encore fait complètement mon choix, mais l’essentiel est de produire quelque chose qui fonctionne (correctement) et que vous pourrez facilement faire évoluer. Je vais donc vous présenter 2 méthodes, la méthode « à l’ancienne » qui a le mérite de fonctionner, d’être rapide, et la méthode « hype » pour les champions qui est intéressante à connaître tout particulièrement dans le cadre de gros projets.
+Il y a de nombreuses querelles de chapelles autour du sujet de l’organisation du code (des façons de le faire), et je vous avoue que je n’ai pas encore fait complètement mon choix, mais l’essentiel est de produire quelque chose qui fonctionne (correctement) et que vous pourrez facilement faire évoluer. Je vais donc vous présenter 2 méthodes, la méthode « à l’ancienne » qui a le mérite de fonctionner, d’être rapide, et la méthode « hype » pour les champions qui est intéressante à connaître tout particulièrement dans le cadre de gros projets.
 
->>**Remarque** : pour la méthode "hype", j'utilise le(s) outil(s) (yepnope) que je préfère, il est tout à fait possible de suivre le principe décrit avec d'autres comme require.js et d'autres ... Je n'ai pas la science infuse, je me sens plus à l'aise avec YepNope ... c'est tout, et tant que ça marche ;) ...
+>>**Remarque** : pour la méthode "hype", j'utilise le(s) outil(s) (yepnope) que je préfère, il est tout à fait possible de suivre le principe décrit avec d'autres comme require.js et d'autres... Je n'ai pas la science infuse, je me sens plus à l'aise avec YepNope... c'est tout, et tant que ça marche ;) ...
 
-##"A l'ancienne"
+##"À l'ancienne"
 
 ###Namespace
 
-Créer une application Backbone, c’est écrire des modèles, des vues, des templates, etc. … Et une des bonnes pratiques pour parvenir à garder ceci bien organisé et d’utiliser le **namespacing** (comme en .Net, Java, …) de la façon suivante :
+Créer une application Backbone, c’est écrire des modèles, des vues, des templates, etc. Et une des bonnes pratiques pour parvenir à garder ceci bien organisé est d’utiliser le **namespacing** (comme en .Net, Java…) de la façon suivante :
 
 *Namespace Blog :*
 
@@ -69,7 +69,7 @@ Puis vous pouvez aussi organiser vos fichiers javascript dans des répertoires. 
 
 ![BB](RSRC/09_01_ORGA.png)\
 
-Je crée un répertoire `libs/vendors` pour tous les scripts « qui ne sont pas de moi » (jquery, backbone, etc. …), puis je range mes modèles dans un répertoire `models`, mes vues dans un répertoire `views`. Au même endroit que ma page `index.html`, je positionne le fichier `routes.js `(mon routeur) ainsi que le fichier `Blog.js` qui contient mes **« namspaces »**, et enfin je déclare tout ceci dans ma page `index.html `:
+Je crée un répertoire `libs/vendors` pour tous les scripts « qui ne sont pas de moi » (jQuery, Backbone, etc.), puis je range mes modèles dans un répertoire `models`, mes vues dans un répertoire `views`. Au même endroit que ma page `index.html`, je positionne le fichier `routes.js `(mon routeur) ainsi que le fichier `Blog.js` qui contient mes **« namespaces »**, et enfin je déclare tout ceci dans ma page `index.html `:
 
 
 ```html
@@ -187,7 +187,7 @@ var Blog = (function(blog) {
 }(Blog));
 ```
 
-###Au final, nous aurons ...
+###Au final, nous aurons...
 
 Avec les principes décrits plus haut, nous allons donc pouvoir "découper" notre code afin de bien tout ordonner, et nous obtiendrons les fichiers suivants :
 
@@ -488,16 +488,16 @@ var Blog = (function(blog) {
 
 ##Méthode “hype”, comme les vrais
 
-Plus les fichiers javascript se multiplient, plus la gestion des `<script src=”…”>` devient pénible, sans compter que dans certains cas il est nécessaire de gérer l’ordre d’inclusion, que l’on aimerait pouvoir déclencher un traitement uniquement lorsque l’on est sûr que notre script est chargé, etc. …
+Plus les fichiers javascript se multiplient, plus la gestion des `<script src=”…”>` devient pénible, sans compter que dans certains cas il est nécessaire de gérer l’ordre d’inclusion, que l’on aimerait pouvoir déclencher un traitement uniquement lorsque l’on est sûr que notre script est chargé, etc.
 
-Pour répondre à ces types de problématiques, il existe ce que l’on appelle des “loaders” (chargeurs) de script, tels :
+Pour répondre à ces types de problématiques, il existe ce que l’on appelle des “loaders” (chargeurs) de scripts, tels :
 
 - Require.js (probalement le plus connu et le plus utilisé) [http://requirejs.org/](http://requirejs.org/)
 - Head.js [http://headjs.com/](http://headjs.com/)
 - YepNope [http://yepnopejs.com/](http://yepnopejs.com/) d'Alex Sexton
-- Etc. ...
+- Etc.
 
-Il y a beaucoup de débats autour des « javascript resources loaders », « est-ce bien ou mal ? » « Cela ralentit le chargement de la page web », « c’est génial il faut généraliser son utilisation » , ... Mon propos n’est pas de participer au débat mais de vous montrer « rapidement » de quelle façon on peut les utiliser. (Cependant si votre application est simple, cela ne vaut pas la peine d’en utiliser, si ce n’est à titre éducatif ou pour le plaisir).
+Il y a beaucoup de débats autour des « javascript resources loaders », « est-ce bien ou mal ? », « cela ralentit le chargement de la page web », « c’est génial il faut généraliser son utilisation »… Mon propos n’est pas de participer au débat mais de vous montrer « rapidement » de quelle façon on peut les utiliser. (Cependant si votre application est simple, cela ne vaut pas la peine d’en utiliser, si ce n’est à titre éducatif ou pour le plaisir).
 
 >>**Remarque** : si vous souhaitez creuser le sujet je vous engage à lire « Non-onload-blocking async JS » de  Stoyan Stefanov : [http://www.phpied.com/non-onload-blocking-async-js/](http://www.phpied.com/non-onload-blocking-async-js/).
 
@@ -650,7 +650,7 @@ yepnope({
 });
 ```
 
-Et voilà ! Vous disposez maintenant d’un code structuré, d’un outil de chargement de script facile à utiliser et modifier : désactivation ou changement provisoire de librairie pour tests par exemple mais aussi chargement conditionnel de script en fonction du contexte, … Je ne vous ai dévoilé qu’une infime partie de YepNope qui en dépit de sa taille est très puissant. Lisez la documentation, vous verrez …
+Et voilà ! Vous disposez maintenant d’un code structuré, d’un outil de chargement de script facile à utiliser et modifier : désactivation ou changement provisoire de librairie pour tests par exemple mais aussi chargement conditionnel de script en fonction du contexte… Je ne vous ai dévoilé qu’une infime partie de YepNope qui, en dépit de sa taille, est très puissant. Lisez la documentation, vous verrez…
 
 Maintenant que notre projet est "propre", nous allons dans le chapitre suivant en profiter pour sécuriser un peu plus notre application.
 

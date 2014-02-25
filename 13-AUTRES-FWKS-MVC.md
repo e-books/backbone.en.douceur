@@ -8,7 +8,7 @@
 >>- *Les autres ...*
 
 
->*Il faut aller voir ailleurs !!! Backbone peut ne pas correspondre à vos attentes, à votre façon de coder, ... Je vous engage à tester d'autres frameworks.*
+>*Il faut aller voir ailleurs !!! Backbone peut ne pas correspondre à vos attentes, à votre façon de coder… Je vous engage à tester d'autres frameworks.*
 
 >*Il existe aujourd’hui de TRES nombreux frameworks MVC en javascript “côté navigateur”. Certains fournissent beaucoup plus de services que Backbone, d’autres vont même plus loin, puisqu’ils vont jusqu’à fournir un framework associé côté serveur (en javascript avec du nodejs). Ils sont plus ou moins complexes, plus ou moins bien documentés.*
 
@@ -173,7 +173,7 @@ Un autre avantage non négligeable est la documentation qui est claire, bien fai
 - Spine propose des Contrôleurs ! ... qui ne sont ni plus ni moins l'équivalent des Backbones.Views
 - ... et considère que les vues sont représentée par les templates. A ce sujet Spine propose tout un mécanisme évolué mais nous n'utiliserons que Mustache de la même façon qu'avec Backbone.
 
-Spine peut s'installer avec **npm** (node package manager) et ainsi proposer des outils supplémentaires permettant de générer un squelette de projet, de gérer les dépendances, ... Mais pour notre exemple, nous allons le faire "à l'ancienne", l'objectif étant de ne modifier en rien la stack serveur existante. Vous pouvez donc vous préparer un environnement identique à celui du chapitre sur Coffeescript ave un répertoire `public.coffee` pour votre code coffeescript et n’oubliez pas le fichier de build `Cakefile`.
+Spine peut s'installer avec **npm** (node package manager) et ainsi proposer des outils supplémentaires permettant de générer un squelette de projet, de gérer les dépendances… Mais pour notre exemple, nous allons le faire "à l'ancienne", l'objectif étant de ne modifier en rien la stack serveur existante. Vous pouvez donc vous préparer un environnement identique à celui du chapitre sur Coffeescript ave un répertoire `public.coffee` pour votre code coffeescript et n’oubliez pas le fichier de build `Cakefile`.
 
 
 Un modèle Spine se décrit de la manière suivante :
