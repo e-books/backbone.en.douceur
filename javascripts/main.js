@@ -14,7 +14,8 @@ $(function (){
 */
 
 $(function (){
-	var k33g = new Gh3.User("k33g")
+	//var k33g = new Gh3.User("k33g")
+	var k33g = new Gh3.User("e-books")
 	,   k33gBlog = new Gh3.Repository("backbone.en.douceur", k33g)
 	,   converter = new Showdown.converter();
 
