@@ -31,6 +31,7 @@ Remerciements aussi pour :
 - [cedricmessiant](https://github.com/cedricmessiant) : routeur et fixes
 - [AlainGourves](https://github.com/AlainGourves) : correctifs
 - [jcsuzanne](https://github.com/jcsuzanne) : correctifs
+- [brexis](https://github.com/brexis) : correctifs
 
 
 ##Avertissement
