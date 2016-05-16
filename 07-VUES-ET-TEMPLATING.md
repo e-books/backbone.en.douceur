@@ -263,8 +263,8 @@ Et là, l’affichage s’actualise automatiquement :
 Modifions une nouvelle fois notre vue en ajoutant le code suivant à la méthode `initialize` :
 
 ```javascript
-_.bindAll(this, 'render');
-this.collection.bind('reset', this.render);
+this.listenTo(this.collection, 'all', 'render');
+this.listenTo(this.collection, 'reset', this.render);
 ```
 
 Nous venons d’expliquer que tous les événements déclarés déclencheront la méthode `render` de la vue. Et ensuite nous avons expliqué que la méthode `reset` de la collection déclenchera la méthode `render` de la vue.
@@ -283,8 +283,13 @@ window.PostsListView = Backbone.View.extend({
   initialize: function(data) {
   this.collection = data;
 
-  _.bindAll(this, 'render');
-  this.collection.bind('reset', this.render);
+
+ _.bindAll(this, 'render');
+ this.collection.bind('reset', this.render);
+  
+  // Backbone 1.3.3
+  /*this.listenTo(this.collection, 'all', this.render);
+  this.listenTo(this.collection, 'reset', this.render);*/
 
   },
   render: function() {
@@ -419,6 +424,13 @@ window.PostsListView = Backbone.View.extend({
   this.collection.bind('change', this.render);
   this.collection.bind('add', this.render);
   this.collection.bind('remove', this.render);
+  
+  // Backbone 1.3.3
+  /*this.listenTo(this.collection, 'all', this.render);
+  this.listenTo(this.collection, 'reset', this.render);
+  this.listenTo(this.collection, 'change', this.render);
+  this.listenTo(this.collection, 'add', this.render);
+  this.listenTo(this.collection, 'remove', this.render);*/
 
   },
   render: function() {
@@ -490,6 +502,13 @@ $(function() {
     this.collection.bind('change', this.render);
     this.collection.bind('add', this.render);
     this.collection.bind('remove', this.render);
+  
+  // Backbone 1.3.3
+  /*this.listenTo(this.collection, 'all', this.render);
+  this.listenTo(this.collection, 'reset', this.render);
+  this.listenTo(this.collection, 'change', this.render);
+  this.listenTo(this.collection, 'add', this.render);
+  this.listenTo(this.collection, 'remove', this.render);*/
 
   },
   render: function() {
@@ -564,6 +583,13 @@ window.PostsListView = Backbone.View.extend({
   this.collection.bind('change', this.render);
   this.collection.bind('add', this.render);
   this.collection.bind('remove', this.render);
+  
+  // Backbone 1.3.3
+  /*this.listenTo(this.collection, 'all', this.render);
+  this.listenTo(this.collection, 'reset', this.render);
+  this.listenTo(this.collection, 'change', this.render);
+  this.listenTo(this.collection, 'add', this.render);
+  this.listenTo(this.collection, 'remove', this.render);*/
 
   },
   render: function() {
@@ -694,6 +720,13 @@ window.MainView = Backbone.View.extend({
     this.collection.bind('change', this.render);
     this.collection.bind('add', this.render);
     this.collection.bind('remove', this.render);
+  
+  // Backbone 1.3.3
+  /*this.listenTo(this.collection, 'all', this.render);
+  this.listenTo(this.collection, 'reset', this.render);
+  this.listenTo(this.collection, 'change', this.render);
+  this.listenTo(this.collection, 'add', this.render);
+  this.listenTo(this.collection, 'remove', this.render);*/
 
     this.sidebarView = new SidebarView();
     this.postsListView = new PostsListView({
@@ -771,6 +804,13 @@ window.MainView = Backbone.View.extend({
     this.collection.bind('change', this.render);
     this.collection.bind('add', this.render);
     this.collection.bind('remove', this.render);
+  
+  // Backbone 1.3.3
+  /*this.listenTo(this.collection, 'all', this.render);
+  this.listenTo(this.collection, 'reset', this.render);
+  this.listenTo(this.collection, 'change', this.render);
+  this.listenTo(this.collection, 'add', this.render);
+  this.listenTo(this.collection, 'remove', this.render);*/
 
     this.sidebarView = new SidebarView();
     this.postsListView = new PostsListView({
